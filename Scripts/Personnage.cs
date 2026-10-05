@@ -1,7 +1,11 @@
+using System.Security;
+using System.Threading.Tasks.Dataflow;
 using Godot;
 
 public partial class Personnage : CharacterBody2D
 {
+    public static Personnage Instance { get; private set; }
+
     [Export]
     private AnimatedSprite2D anim;
 
@@ -20,13 +24,15 @@ public partial class Personnage : CharacterBody2D
     private bool isDashing = false;
     private bool canDash = true;
 
+    public bool iSIndoor = false;
+
     private Vector2 mouseDir;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         moveSpeed = startSpeed;
-       // anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        // anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
     }
 
     public override void _Process(double delta)
