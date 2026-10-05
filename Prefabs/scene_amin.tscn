@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bht4lcjhamjlq" path="res://Prefabs/personnage.tscn" id="1_ass5f"]
 [ext_resource type="PackedScene" uid="uid://bri6dr82orwgi" path="res://Prefabs/enemie.tscn" id="2_shgij"]
 [ext_resource type="Script" uid="uid://dce3vcl13iokc" path="res://Scripts/Base.cs" id="3_shgij"]
+[ext_resource type="PackedScene" uid="uid://chhhyq1v22owf" path="res://Prefabs/salt_deposit.tscn" id="4_cdhct"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p18pi"]
 size = Vector2(173, 91)
@@ -24,3 +25,6 @@ shape = SubResource("RectangleShape2D_p18pi")
 [node name="Polygon2D" type="Polygon2D" parent="Base" unique_id=1160566541]
 z_index = -1
 polygon = PackedVector2Array(18, 34, 189, 34, 190, 125, 17, 125)
+
+[node name="SaltDeposit" parent="." unique_id=1691003878 instance=ExtResource("4_cdhct")]
+position = Vector2(-168, -76)

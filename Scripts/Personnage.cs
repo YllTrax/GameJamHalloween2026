@@ -19,6 +19,11 @@ public partial class Personnage : CharacterBody2D
     [Export]
     private float accel = 1500f;
 
+    [Export]
+    public float carriedSalt = 0;
+
+    private float maxCarriedSalt;
+
     private bool isDashing = false;
     private bool canDash = true;
 
@@ -104,4 +109,8 @@ public partial class Personnage : CharacterBody2D
             anim.Modulate = Colors.White;
         }
     }
+
+    private void ToCarrySalt() { }
+
+    private void ToDropSalt() { }
 }

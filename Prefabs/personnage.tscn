@@ -114,3 +114,4 @@ animation = &"Run"
 script = ExtResource("4_xuntq")
 baseHealth = 100.0
 sprite = NodePath("../AnimatorPersonnage")
+IsPlayer = true
