@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://chhhyq1v22owf"]
+
+[ext_resource type="Script" uid="uid://dxkfh7glcjyvr" path="res://Scripts/SaltDeposit.cs" id="1_yunmi"]
+[ext_resource type="Script" uid="uid://bvmd4oammh5b" path="res://Scripts/Interactable.cs" id="2_sed1f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p18pi"]
+
+[node name="SaltDeposit" type="Node2D" unique_id=418339320]
+script = ExtResource("1_yunmi")
+saltAmount = 50.0
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1478869536]
+polygon = PackedVector2Array(1, -13, 18, -7, 11, 15, -9, 13, -16, -4)
+
+[node name="Outline" type="Polygon2D" parent="." unique_id=1411246505]
+visible = false
+z_index = -34
+scale = Vector2(1.12, 1.12)
+color = Color(0.84483373, 0.5213544, 0.850883, 1)
+polygon = PackedVector2Array(1, -13, 18, -7, 11, 15, -9, 13, -16, -4)
+
+[node name="Interactable" type="Area2D" parent="." unique_id=284242960 node_paths=PackedStringArray("polygone2D", "outline")]
+script = ExtResource("2_sed1f")
+polygone2D = NodePath("../Polygon2D")
+outline = NodePath("../Outline")
+range = 50.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable" unique_id=1886151530]
+shape = SubResource("CircleShape2D_p18pi")

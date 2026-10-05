@@ -24,9 +24,9 @@ public partial class Range : Area2D
 
     private void PlayerExitRange(Node2D body)
     {
-        if (body is Personnage player)
-        {
-            interactable.IsPlayerInRange = false;
-        }
+        // if (body is Personnage player)
+        // {
+        //     interactable.IsPlayerInRange = false;
+        // }
     }
 }
