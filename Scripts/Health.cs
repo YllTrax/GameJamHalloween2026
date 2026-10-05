@@ -3,9 +3,10 @@ using Godot;
 
 public partial class Health : Node
 {
-    [Export]
-    private float baseHealth;
+	[Export]
+	private float baseHealth;
 
+<<<<<<< Updated upstream
     [Export]
     private AnimatedSprite2D sprite;
 
@@ -16,14 +17,20 @@ public partial class Health : Node
     public bool IsSaltCircle; // a assigner dans l'inspecteur
 
     public float currentHealth;
+=======
+	[Export]
+	private AnimatedSprite2D sprite;
+	public float currentHealth;
+>>>>>>> Stashed changes
 
-    public override void _Ready()
-    {
-        currentHealth = baseHealth;
-    }
+	public override void _Ready()
+	{
+		currentHealth = baseHealth;
+	}
 
-    public override void _Process(double delta) { }
+	public override void _Process(double delta) { }
 
+<<<<<<< Updated upstream
     /// <summary>
     /// Methode pour infliger des degats du montant "damage"
     /// </summary>
@@ -63,4 +70,15 @@ public partial class Health : Node
     {
         ToHeal(saltAmount);
     }
+=======
+	public void TakeDamage(float damage)
+	{
+		currentHealth -= damage;
+		sprite.Modulate = Colors.Red;
+		CreateTween().TweenProperty(sprite, "modulate", Colors.White, 0.15f);
+
+		if (currentHealth <= 0)
+			GetParent().QueueFree();
+	}
+>>>>>>> Stashed changes
 }

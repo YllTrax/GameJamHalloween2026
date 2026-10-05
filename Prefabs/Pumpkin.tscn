@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://do15h41qr01vx"]
+
+[ext_resource type="Script" uid="uid://bbveukhsk5wtn" path="res://Scripts/Pumpkin.cs" id="1_jxr30"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aluq5"]
+size = Vector2(48, 48)
+
+[node name="Pumpkin" type="CharacterBody2D" unique_id=1184827937]
+collision_layer = 4
+collision_mask = 9
+script = ExtResource("1_jxr30")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=554359095]
+
+[node name="Pumpkin" type="Polygon2D" parent="." unique_id=1245229499]
+color = Color(0.7845131, 0.42027736, 0.14271641, 1)
+polygon = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24)
+
+[node name="PumpkinCollision" type="CollisionShape2D" parent="." unique_id=1484324618]
+shape = SubResource("RectangleShape2D_aluq5")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1993445216]
