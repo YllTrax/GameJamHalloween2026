@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bht4lcjhamjlq" path="res://Prefabs/personnage.tscn" id="1_ass5f"]
 [ext_resource type="PackedScene" uid="uid://bri6dr82orwgi" path="res://Prefabs/enemie.tscn" id="2_shgij"]
+[ext_resource type="Script" uid="uid://dce3vcl13iokc" path="res://Scripts/Base.cs" id="3_shgij"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p18pi"]
 size = Vector2(173, 91)
@@ -11,14 +12,15 @@ size = Vector2(173, 91)
 [node name="Personnage" parent="." unique_id=874529347 instance=ExtResource("1_ass5f")]
 
 [node name="EnemieTest" parent="." unique_id=1313252649 instance=ExtResource("2_shgij")]
-position = Vector2(284, 173)
+position = Vector2(615, 168)
 
-[node name="Area2D" type="Area2D" parent="." unique_id=2123617325]
+[node name="Base" type="Area2D" parent="." unique_id=2123617325]
+script = ExtResource("3_shgij")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1696049264]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Base" unique_id=1696049264]
 position = Vector2(103, 79.5)
 shape = SubResource("RectangleShape2D_p18pi")
 
-[node name="Polygon2D" type="Polygon2D" parent="Area2D" unique_id=1160566541]
+[node name="Polygon2D" type="Polygon2D" parent="Base" unique_id=1160566541]
 z_index = -1
 polygon = PackedVector2Array(18, 34, 189, 34, 190, 125, 17, 125)

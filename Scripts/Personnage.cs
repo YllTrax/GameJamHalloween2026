@@ -1,5 +1,3 @@
-using System.Security;
-using System.Threading.Tasks.Dataflow;
 using Godot;
 
 public partial class Personnage : CharacterBody2D
@@ -28,16 +26,33 @@ public partial class Personnage : CharacterBody2D
 
     private Vector2 mouseDir;
 
-    // Called when the node enters the scene tree for the first time.
+    public override void _EnterTree()
+    {
+        if (Instance != null && Instance != this)
+        {
+            QueueFree();
+            return;
+        }
+        Instance = this;
+    }
+
+    public override void _ExitTree()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
+
     public override void _Ready()
     {
         moveSpeed = startSpeed;
-        // anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
     }
 
     public override void _Process(double delta)
     {
         mouseDir = GetLocalMousePosition();
+        ColorisePlayerInDoor();
     }
 
     public override void _PhysicsProcess(double delta)
@@ -75,6 +90,18 @@ public partial class Personnage : CharacterBody2D
             isDashing = false;
             await ToSignal(GetTree().CreateTimer(1.5f), SceneTreeTimer.SignalName.Timeout);
             canDash = true;
+        }
+    }
+
+    private void ColorisePlayerInDoor()
+    {
+        if (iSIndoor)
+        {
+            anim.Modulate = Colors.Crimson;
+        }
+        else
+        {
+            anim.Modulate = Colors.White;
         }
     }
 }
