@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://clp2b4e8fhj5b"]
+
+[ext_resource type="PackedScene" uid="uid://bht4lcjhamjlq" path="res://Prefabs/personnage.tscn" id="1_ass5f"]
+[ext_resource type="PackedScene" uid="uid://bri6dr82orwgi" path="res://Prefabs/enemie.tscn" id="2_shgij"]
+
+[node name="Scene Amin" type="Node2D" unique_id=1015944476]
+
+[node name="Personnage" parent="." unique_id=874529347 instance=ExtResource("1_ass5f")]
+
+[node name="EnemieTest" parent="." unique_id=1313252649 instance=ExtResource("2_shgij")]
+position = Vector2(284, 173)

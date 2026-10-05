@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bri6dr82orwgi"]
+
+[ext_resource type="Script" uid="uid://5jc7g665kx0p" path="res://Scripts/DamageSource.cs" id="1_op8vy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_clsig"]
+radius = 64.0
+
+[node name="EnemieTest" type="Area2D" unique_id=1313252649]
+script = ExtResource("1_op8vy")
+damage = 50.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2117406332]
+shape = SubResource("CircleShape2D_clsig")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1299517386]
+polygon = PackedVector2Array(0, -64, 32, -56, 56, -32, 64, 0, 56, 32, 32, 56, 0, 64, -32, 56, -56, 32, -64, 0, -56, -32, -32, -56)
