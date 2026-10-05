@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://kntxamw5koqo"]
+
+[ext_resource type="Script" uid="uid://dml0tmi8g5jwu" path="res://Scripts/SaltCircle.cs" id="1_wone6"]
+[ext_resource type="Script" uid="uid://wnlsghc7kp3" path="res://Scripts/Health.cs" id="2_6l6rw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p18pi"]
+
+[node name="SaltCircle" type="Area2D" unique_id=1691003878]
+script = ExtResource("1_wone6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1886151530]
+shape = SubResource("CircleShape2D_p18pi")
+
+[node name="Node" type="Node" parent="." unique_id=1536150567]
+script = ExtResource("2_6l6rw")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1478869536]
