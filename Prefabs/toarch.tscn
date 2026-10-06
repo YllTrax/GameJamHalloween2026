@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://drpaowd2cjjol"]
+
+[ext_resource type="Script" uid="uid://dlwfhym7ilgxj" path="res://Toarch.cs" id="1_6t5l3"]
+[ext_resource type="Script" uid="uid://5jc7g665kx0p" path="res://Scripts/DamageSource.cs" id="2_uud27"]
+[ext_resource type="Texture2D" uid="uid://c5cu5rwynm7te" path="res://Images/Sprites/Torch_Sheet.png" id="2_xwcd1"]
+[ext_resource type="Texture2D" uid="uid://cuymepe2ryunr" path="res://Images/Sprites/TorchBase.png" id="3_uud27"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p18pi"]
+radius = 17.492855
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r88rq"]
+atlas = ExtResource("2_xwcd1")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_345t5"]
+atlas = ExtResource("2_xwcd1")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5q3tl"]
+atlas = ExtResource("2_xwcd1")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y26ym"]
+atlas = ExtResource("2_xwcd1")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2mnl"]
+atlas = ExtResource("2_xwcd1")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_03t5s"]
+atlas = ExtResource("2_xwcd1")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p18pi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r88rq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_345t5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5q3tl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y26ym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2mnl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_03t5s")
+}],
+"loop": 1,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="Toarch" type="Node2D" unique_id=798553879 node_paths=PackedStringArray("areaOfEffect", "anim")]
+script = ExtResource("1_6t5l3")
+areaOfEffect = NodePath("Damage AoE")
+anim = NodePath("AnimatedSprite2D")
+attackCD = 21.68
+
+[node name="Damage AoE" type="Area2D" parent="." unique_id=1052212185]
+script = ExtResource("2_uud27")
+damage = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damage AoE" unique_id=96442283]
+shape = SubResource("CircleShape2D_p18pi")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=731540658]
+y_sort_enabled = true
+scale = Vector2(1.355, 1.355)
+sprite_frames = SubResource("SpriteFrames_p18pi")
+animation = &"Idle"
+frame_progress = 0.26284423
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=586923703]
+y_sort_enabled = true
+position = Vector2(0, 2.54)
+scale = Vector2(1.64, 1.64)
+texture = ExtResource("3_uud27")

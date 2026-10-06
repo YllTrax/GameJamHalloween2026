@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://do15h41qr01vx"]
 
 [ext_resource type="Script" uid="uid://bbveukhsk5wtn" path="res://Scripts/Pumpkin.cs" id="1_jxr30"]
+[ext_resource type="PackedScene" uid="uid://wj1whgh7v5c" path="res://Prefabs/health.tscn" id="2_nf54d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aluq5"]
 size = Vector2(48, 48)
@@ -20,3 +21,5 @@ polygon = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24)
 shape = SubResource("RectangleShape2D_aluq5")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1993445216]
+
+[node name="Health" parent="." unique_id=1039052001 instance=ExtResource("2_nf54d")]

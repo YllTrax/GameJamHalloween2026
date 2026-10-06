@@ -50,39 +50,39 @@ collision_layer = 2
 [node name="Doors" type="Node2D" parent="." unique_id=1977315636]
 position = Vector2(1, 0)
 
-[node name="Door" parent="Doors" unique_id=848685947 instance=ExtResource("4_jx3a8")]
+[node name="NorthDoor" parent="Doors" unique_id=848685947 instance=ExtResource("4_jx3a8")]
 position = Vector2(522, 143)
 collision_mask = 13
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Doors/Door" unique_id=1344683567]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Doors/NorthDoor" unique_id=1344683567]
 light_mask = 0
 visibility_layer = 0
 position = Vector2(-1.5, 0)
 shape = SubResource("RectangleShape2D_ym3qp")
 
-[node name="Door2" parent="Doors" unique_id=135936652 instance=ExtResource("4_jx3a8")]
+[node name="SouthDoor" parent="Doors" unique_id=135936652 instance=ExtResource("4_jx3a8")]
 position = Vector2(541, 536)
 collision_mask = 13
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Doors/Door2" unique_id=2076238574]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Doors/SouthDoor" unique_id=2076238574]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_t58nv")
 
-[node name="Door3" parent="Doors" unique_id=1484871732 instance=ExtResource("4_jx3a8")]
+[node name="WestDoor" parent="Doors" unique_id=1484871732 instance=ExtResource("4_jx3a8")]
 position = Vector2(189, 338)
 rotation = 1.5707964
 collision_mask = 4
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Doors/Door3" unique_id=469578526]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Doors/WestDoor" unique_id=469578526]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_vka07")
 
-[node name="Door4" parent="Doors" unique_id=821704272 instance=ExtResource("4_jx3a8")]
+[node name="EastDoor" parent="Doors" unique_id=821704272 instance=ExtResource("4_jx3a8")]
 position = Vector2(956, 332)
 rotation = 1.5707964
 collision_mask = 4
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Doors/Door4" unique_id=1637000216]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Doors/EastDoor" unique_id=1637000216]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_ngk0e")
 
