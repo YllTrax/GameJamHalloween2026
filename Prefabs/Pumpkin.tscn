@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://do15h41qr01vx"]
 
 [ext_resource type="Script" uid="uid://bbveukhsk5wtn" path="res://Scripts/Pumpkin.cs" id="1_jxr30"]
-[ext_resource type="Script" uid="uid://wnlsghc7kp3" path="res://Scripts/Health.cs" id="2_nf54d"]
+[ext_resource type="PackedScene" uid="uid://wj1whgh7v5c" path="res://Prefabs/health.tscn" id="2_nf54d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aluq5"]
 size = Vector2(48, 48)
@@ -23,6 +23,4 @@ shape = SubResource("RectangleShape2D_aluq5")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1993445216]
 
-[node name="Health" type="Node2D" parent="." unique_id=1779919911]
-script = ExtResource("2_nf54d")
-baseHealth = 50.0
+[node name="Health2" parent="." unique_id=1039052001 instance=ExtResource("2_nf54d")]

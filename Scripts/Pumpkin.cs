@@ -7,6 +7,7 @@ public partial class Pumpkin : CharacterBody2D
 	[Export] public float AttackCooldown = 1f;
 	[Export] public float SaltAttackRange = 50f;   // distance pour taper le cercle de sel
 	[Export] public float PlayerAttackRange = 50f; // distance pour taper le personnage
+	[Export] public float AggroRadius = 300f;      // rayon autour du joueur qui attire les citrouilles
 	[Export] public float PathUpdateInterval = 1f; // secondes entre deux recalculs du chemin
 
 	private NavigationAgent2D _agent;
@@ -14,26 +15,37 @@ public partial class Pumpkin : CharacterBody2D
 	private double _pathTimer;
 	private Node2D _myDoor;
 	private bool _doorAssigned;
+	private bool _wasAggro;
 
 	public override void _Ready()
 	{
 		_agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
-
-		// Décale le premier calcul pour que les citrouilles ne recalculent pas toutes en même temps
 		_pathTimer = GD.Randf() * PathUpdateInterval;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (Personnage.Instance == null) return;
-
 		_cooldown -= delta;
 		_pathTimer -= delta;
-		bool indoor = Personnage.Instance.iSIndoor;
-		Node2D target = Personnage.Instance;
+
+		// Le joueur n'est attaquable que s'il est dehors ET dans le rayon
+		var joueur = Personnage.Instance;
+		bool aggro = joueur != null
+			&& IsInstanceValid(joueur)
+			&& !joueur.iSIndoor
+			&& GlobalPosition.DistanceTo(joueur.GlobalPosition) <= AggroRadius;
+			
+		Node2D target;
 		bool targetingSalt = false;
 
-		if (indoor)
+		if (aggro)
+		{
+			target = joueur;
+			// Elle rechoisira la porte la plus proche quand elle sortira du rayon
+			_doorAssigned = false;
+			_myDoor = null;
+		}
+		else
 		{
 			if (!_doorAssigned)
 			{
@@ -58,13 +70,14 @@ public partial class Pumpkin : CharacterBody2D
 				return;
 			}
 		}
-		else
+
+		// Si on change de mode (joueur <-> porte/sel), on recalcule tout de suite
+		if (aggro != _wasAggro)
 		{
-			_doorAssigned = false;
-			_myDoor = null;
+			_pathTimer = 0;
+			_wasAggro = aggro;
 		}
 
-		// Le chemin n'est recalculé qu'une fois par seconde
 		if (_pathTimer <= 0)
 		{
 			_agent.TargetPosition = target.GlobalPosition;
@@ -85,7 +98,7 @@ public partial class Pumpkin : CharacterBody2D
 
 		if (_cooldown > 0) return;
 
-		if (!indoor)
+		if (aggro)
 		{
 			AttackPlayer();
 		}
@@ -109,6 +122,7 @@ public partial class Pumpkin : CharacterBody2D
 			var health = joueur.GetNodeOrNull<Health>("Health");
 			if (health == null)
 			{
+				GD.Print("Le personnage n'a pas de noeud Health !");
 				return;
 			}
 
@@ -154,9 +168,7 @@ public partial class Pumpkin : CharacterBody2D
 		foreach (Node n in GetTree().GetNodesInGroup("Doors"))
 		{
 			if (n is not Node2D door || !IsInstanceValid(door) || door.IsQueuedForDeletion())
-			{
 				continue;
-			}	
 
 			float d = GlobalPosition.DistanceSquaredTo(door.GlobalPosition);
 			if (d < best)
