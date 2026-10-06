@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://do15h41qr01vx" path="res://Prefabs/Pumpkin.tscn" id="1_b535f"]
 [ext_resource type="PackedScene" uid="uid://bht4lcjhamjlq" path="res://Prefabs/personnage.tscn" id="2_42ube"]
 [ext_resource type="PackedScene" uid="uid://ci4py4rnxkffw" path="res://Prefabs/Door.tscn" id="4_jx3a8"]
+[ext_resource type="PackedScene" uid="uid://kntxamw5koqo" path="res://Prefabs/salt_circle.tscn" id="5_xlicy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aluq5"]
 size = Vector2(774, 398)
@@ -42,6 +43,9 @@ polygon = PackedVector2Array(209, 161, 933, 157, 935, 518, 207, 520)
 
 [node name="Pumpkin" parent="." unique_id=65623466 instance=ExtResource("1_b535f")]
 position = Vector2(1270, 332)
+
+[node name="Pumpkin2" parent="." unique_id=1184827937 instance=ExtResource("1_b535f")]
+position = Vector2(540, -21)
 
 [node name="Personnage" parent="." unique_id=874529347 instance=ExtResource("2_42ube")]
 position = Vector2(1012, 228)
@@ -148,5 +152,8 @@ polygon = PackedVector2Array(171, 395, 207, 391, 205, 520, 472, 521, 472, 549, 1
 
 [node name="Polygon2D4" type="Polygon2D" parent="NavigationRegion2D/Walls" unique_id=1890508372]
 polygon = PackedVector2Array(472, 125, 472, 160, 209, 158, 205, 279, 170, 278, 173, 124)
+
+[node name="SaltCircle" parent="." unique_id=1691003878 instance=ExtResource("5_xlicy")]
+position = Vector2(827, 207)
 
 [editable path="Personnage"]
