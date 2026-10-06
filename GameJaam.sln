@@ -1,10 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-<<<<<<< Updated upstream
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameJaam", "GameJaam.csproj", "{94F88047-10D9-4FCA-B138-7228BE05728D}"
-=======
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameJaam", "GameJaam.csproj", "{00CDDAF4-9034-4EFF-87BB-0BD86A76321F}"
->>>>>>> Stashed changes
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,20 +9,11 @@ Global
 	ExportRelease|Any CPU = ExportRelease|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-<<<<<<< Updated upstream
 		{94F88047-10D9-4FCA-B138-7228BE05728D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{94F88047-10D9-4FCA-B138-7228BE05728D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94F88047-10D9-4FCA-B138-7228BE05728D}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
 		{94F88047-10D9-4FCA-B138-7228BE05728D}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
 		{94F88047-10D9-4FCA-B138-7228BE05728D}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
 		{94F88047-10D9-4FCA-B138-7228BE05728D}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
-=======
-		{00CDDAF4-9034-4EFF-87BB-0BD86A76321F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{00CDDAF4-9034-4EFF-87BB-0BD86A76321F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{00CDDAF4-9034-4EFF-87BB-0BD86A76321F}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
-		{00CDDAF4-9034-4EFF-87BB-0BD86A76321F}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
-		{00CDDAF4-9034-4EFF-87BB-0BD86A76321F}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
-		{00CDDAF4-9034-4EFF-87BB-0BD86A76321F}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
->>>>>>> Stashed changes
 	EndGlobalSection
 EndGlobal
