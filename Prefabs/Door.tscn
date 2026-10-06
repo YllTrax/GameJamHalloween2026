@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ci4py4rnxkffw"]
 
-[ext_resource type="Script" uid="uid://wnlsghc7kp3" path="res://Scripts/Health.cs" id="1_ugn3q"]
+[ext_resource type="PackedScene" uid="uid://wj1whgh7v5c" path="res://Prefabs/health.tscn" id="1_ugn3q"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ugn3q"]
 
@@ -9,11 +9,6 @@
 [node name="Door" type="StaticBody2D" unique_id=848685947 groups=["Doors"]]
 collision_layer = 8
 collision_mask = 0
-
-[node name="Health" type="Node2D" parent="." unique_id=1794320907 node_paths=PackedStringArray("sprite")]
-script = ExtResource("1_ugn3q")
-baseHealth = 1000.0
-sprite = NodePath("../AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1677703996]
 sprite_frames = SubResource("SpriteFrames_ugn3q")
@@ -24,3 +19,8 @@ shape = SubResource("RectangleShape2D_aluq5")
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=1531543225]
 polygon = PackedVector2Array(-97, -10, 95, -10, 96, 11, -95, 11)
+
+[node name="Health" parent="." unique_id=1461079800 node_paths=PackedStringArray("sprite") instance=ExtResource("1_ugn3q")]
+position = Vector2(0, -17)
+baseHealth = 1000.0
+sprite = NodePath("../AnimatedSprite2D")

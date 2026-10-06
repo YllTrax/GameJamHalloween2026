@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b0rl0evdo4tvh" path="res://Scripts/Personnage.cs" id="1_ydahe"]
 [ext_resource type="Texture2D" uid="uid://bsp0jyrn5anhc" path="res://Images/Sprites/Hero_Idle.png" id="2_alkmp"]
 [ext_resource type="Texture2D" uid="uid://cq6ilujnysw8r" path="res://Images/Sprites/Hero_Run.png" id="3_vwe7n"]
-[ext_resource type="Script" uid="uid://wnlsghc7kp3" path="res://Scripts/Health.cs" id="4_xuntq"]
+[ext_resource type="PackedScene" uid="uid://wj1whgh7v5c" path="res://Prefabs/health.tscn" id="4_ydahe"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xqjxd"]
 radius = 3.998806
@@ -111,8 +111,9 @@ shape = SubResource("CapsuleShape2D_xqjxd")
 sprite_frames = SubResource("SpriteFrames_0k2he")
 animation = &"Run"
 
-[node name="Health" type="Node" parent="." unique_id=268874784 node_paths=PackedStringArray("sprite")]
-script = ExtResource("4_xuntq")
-baseHealth = 100.0
+[node name="Health" parent="." unique_id=1039052001 node_paths=PackedStringArray("sprite") instance=ExtResource("4_ydahe")]
+position = Vector2(0.205, -5.995)
+scale = Vector2(0.91812944, 0.40834948)
+baseHealth = 200.0
 sprite = NodePath("../AnimatorPersonnage")
 IsPlayer = true
