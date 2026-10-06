@@ -47,9 +47,6 @@ polygon = PackedVector2Array(209, 161, 933, 157, 935, 518, 207, 520)
 [node name="Pumpkin" parent="." unique_id=65623466 instance=ExtResource("1_b535f")]
 position = Vector2(1270, 332)
 
-[node name="Pumpkin2" parent="." unique_id=1184827937 instance=ExtResource("1_b535f")]
-position = Vector2(540, -21)
-
 [node name="Personnage" parent="." unique_id=874529347 instance=ExtResource("2_42ube")]
 position = Vector2(1012, 228)
 collision_layer = 2

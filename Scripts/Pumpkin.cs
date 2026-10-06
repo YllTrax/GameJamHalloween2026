@@ -5,7 +5,7 @@ public partial class Pumpkin : CharacterBody2D
 	[Export] public float Speed = 120f;
 	[Export] public float Damage = 5f;
 	[Export] public float AttackCooldown = 1f;
-	[Export] public float SaltAttackRange = 60f;   // distance pour taper le cercle de sel
+	[Export] public float SaltAttackRange = 50f;   // distance pour taper le cercle de sel
 	[Export] public float PlayerAttackRange = 50f; // distance pour taper le personnage
 
 	private NavigationAgent2D _agent;
