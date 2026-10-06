@@ -5,11 +5,18 @@ public partial class StageCyrielle : Node2D
 {
 	// --- Spawn des citrouilles ---
 	[Export] public PackedScene PumpkinScene;
+	[Export] public PackedScene PumpkinLv2Scene;  // Lv2
+	[Export] public PackedScene PumpkinLv3Scene;  // Lv3
 	[Export] public float DureeTotale = 180f;        // durée du spawn en secondes
 	[Export] public float IntervalleSpawn = 5f;    // une citrouille toutes les 5 secondes
 	[Export] public Rect2 ZoneJeu = new Rect2(0, 0, 1152, 648); // la zone visible
 	[Export] public float Marge = 100f;              // distance en dehors de la zone
+	// Toutes les X citrouilles Lv1, on crée une Lv2 ; toutes les X Lv2, une Lv3
+	[Export] public int SeuilLv2 = 10;
+	[Export] public int SeuilLv3 = 10;
 
+	private int _compteurLv1 = 0;
+	private int _compteurLv2 = 0;
 	private float _tempsEcoule = 0f;
 	private float _timerSpawn = 0f;
 	private RandomNumberGenerator _rng = new RandomNumberGenerator();
@@ -37,6 +44,7 @@ public partial class StageCyrielle : Node2D
 			GameOver();
 			return;
 		}
+		// Personnage Mort -> défaite
 		if (Personnage.Instance == null || !IsInstanceValid(Personnage.Instance))
 		{
 			GameOver();
@@ -62,10 +70,32 @@ public partial class StageCyrielle : Node2D
 
 	private void SpawnPumpkin()
 	{
-		Node2D pumpkin = PumpkinScene.Instantiate<Node2D>();
+		PackedScene scene;
+
+		if (_compteurLv2 >= SeuilLv3)
+		{
+			scene = PumpkinLv3Scene;
+			_compteurLv2 = 0;          // on vide
+		}
+		else if (_compteurLv1 >= SeuilLv2)
+		{
+			scene = PumpkinLv2Scene;
+			_compteurLv1 = 0;          // on vide
+			_compteurLv2++;            // une Lv2 de plus vers la Lv3
+		}
+		else
+		{
+			scene = PumpkinScene;
+			_compteurLv1++;
+		}
+
+		if (scene == null) return;
+
+		Node2D pumpkin = scene.Instantiate<Node2D>();
 		AddChild(pumpkin);
 		pumpkin.GlobalPosition = PositionHorsZone();
 	}
+
 
 	// Choisit un point aléatoire juste à l'extérieur de la zone, sur un des 4 côtés
 	private Vector2 PositionHorsZone()

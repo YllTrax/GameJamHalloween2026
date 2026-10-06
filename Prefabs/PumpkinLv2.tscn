@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://be75hui1s24ji"]
+
+[ext_resource type="PackedScene" uid="uid://wj1whgh7v5c" path="res://Prefabs/health.tscn" id="1_6xu7i"]
+[ext_resource type="Script" uid="uid://bbveukhsk5wtn" path="res://Scripts/Pumpkin.cs" id="1_b5vig"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aluq5"]
+
+[node name="PumpkinLv2" type="CharacterBody2D" unique_id=1031295454]
+script = ExtResource("1_b5vig")
+Damage = 10.0
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=949483054]
+color = Color(1, 0.45490196, 0.2901961, 1)
+polygon = PackedVector2Array(-16, 0, -16, -8, -8, -16, 0, -16, 8, -16, 16, -8, 16, 0, 16, 8, 8, 16, 0, 16, -8, 16, -16, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1493893514]
+scale = Vector2(1.5564272, 1.5999997)
+shape = SubResource("CircleShape2D_aluq5")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=2145298688]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=577497260]
+
+[node name="Health" parent="." unique_id=1461079800 instance=ExtResource("1_6xu7i")]
+baseHealth = 150.0

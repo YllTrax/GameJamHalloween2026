@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://kntxamw5koqo"]
 
 [ext_resource type="Script" uid="uid://dml0tmi8g5jwu" path="res://Scripts/SaltCircle.cs" id="1_wone6"]
-[ext_resource type="Script" uid="uid://wnlsghc7kp3" path="res://Scripts/Health.cs" id="2_6l6rw"]
+[ext_resource type="PackedScene" uid="uid://wj1whgh7v5c" path="res://Prefabs/health.tscn" id="2_6l6rw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p18pi"]
 
@@ -9,21 +9,16 @@
 
 [node name="SaltCircle" type="Area2D" unique_id=1691003878 node_paths=PackedStringArray("health")]
 script = ExtResource("1_wone6")
-health = NodePath("Health")
+health = NodePath("")
 
 [node name="ShapeDuSel" type="CollisionShape2D" parent="." unique_id=1886151530]
 shape = SubResource("CircleShape2D_p18pi")
 
-[node name="Health" type="Node" parent="." unique_id=1536150567 node_paths=PackedStringArray("sprite") groups=["Salts"]]
-script = ExtResource("2_6l6rw")
-baseHealth = 500.0
-sprite = NodePath("../AnimatedSprite2D")
-IsSaltCircle = true
-
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=1478869536]
 polygon = PackedVector2Array(0, -10, 4, -9, 8, -6, 10, -2, 9, 5, 2, 10, -8, 6, -9, -4, -1, -10)
 
-[node name="Node2" type="Node" parent="." unique_id=1311953530]
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=109317]
 sprite_frames = SubResource("SpriteFrames_p18pi")
+
+[node name="Health" parent="." unique_id=1461079800 instance=ExtResource("2_6l6rw")]
+baseHealth = 100.0

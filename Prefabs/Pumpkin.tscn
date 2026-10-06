@@ -23,4 +23,4 @@ shape = SubResource("RectangleShape2D_aluq5")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1993445216]
 
-[node name="Health2" parent="." unique_id=1039052001 instance=ExtResource("2_nf54d")]
+[node name="Health" parent="." unique_id=1039052001 instance=ExtResource("2_nf54d")]
