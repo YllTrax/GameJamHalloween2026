@@ -26,6 +26,7 @@ public partial class SaltCircle : Area2D, IInteractable
 	public override void _Ready()
 	{
 		InputPickable = true;
+		
 	}
 
 	public override void _ExitTree()
