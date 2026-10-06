@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aluq5"]
 size = Vector2(48, 48)
 
-[node name="Pumpkin" type="CharacterBody2D" unique_id=1184827937]
+[node name="Pumpkin" type="CharacterBody2D" unique_id=1184827937 groups=["Salts"]]
 scale = Vector2(0.43999934, 0.43999934)
 collision_layer = 4
 collision_mask = 9

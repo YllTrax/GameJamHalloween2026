@@ -7,9 +7,11 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p18pi"]
 
-[node name="SaltCircle" type="Area2D" unique_id=1691003878 node_paths=PackedStringArray("health")]
+[node name="SaltCircle" type="Area2D" unique_id=1691003878 node_paths=PackedStringArray("health") groups=["Salts"]]
+collision_layer = 8
+collision_mask = 0
 script = ExtResource("1_wone6")
-health = NodePath("")
+health = NodePath("Health")
 
 [node name="ShapeDuSel" type="CollisionShape2D" parent="." unique_id=1886151530]
 shape = SubResource("CircleShape2D_p18pi")
@@ -20,5 +22,6 @@ polygon = PackedVector2Array(0, -10, 4, -9, 8, -6, 10, -2, 9, 5, 2, 10, -8, 6, -
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=109317]
 sprite_frames = SubResource("SpriteFrames_p18pi")
 
-[node name="Health" parent="." unique_id=1461079800 instance=ExtResource("2_6l6rw")]
+[node name="Health" parent="." unique_id=1461079800 node_paths=PackedStringArray("sprite") instance=ExtResource("2_6l6rw")]
 baseHealth = 100.0
+sprite = NodePath("../AnimatedSprite2D")

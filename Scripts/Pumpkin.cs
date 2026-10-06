@@ -5,8 +5,8 @@ public partial class Pumpkin : CharacterBody2D
 	[Export] public float Speed = 120f;
 	[Export] public float Damage = 5f;
 	[Export] public float AttackCooldown = 1f;
-	[Export] public float SaltAttackRange = 50f;   // distance pour taper le cercle de sel
-	[Export] public float PlayerAttackRange = 50f; // distance pour taper le personnage
+	[Export] public float SaltAttackRange = 200f;   // distance pour taper le cercle de sel
+	[Export] public float PlayerAttackRange = 200f; // distance pour taper le personnage
 	[Export] public float AggroRadius = 300f;      // rayon autour du joueur qui attire les citrouilles
 	[Export] public float PathUpdateInterval = 1f; // secondes entre deux recalculs du chemin
 
@@ -44,6 +44,7 @@ public partial class Pumpkin : CharacterBody2D
 			// Elle rechoisira la porte la plus proche quand elle sortira du rayon
 			_doorAssigned = false;
 			_myDoor = null;
+			// GD.Print("Mode : AGGRO joueur");
 		}
 		else
 		{
@@ -58,15 +59,18 @@ public partial class Pumpkin : CharacterBody2D
 			if (doorAlive)
 			{
 				target = _myDoor;
+				// GD.Print($"Mode : PORTE ({_myDoor.Name})");
 			}
 			else if (SaltCircle.Instance != null && IsInstanceValid(SaltCircle.Instance))
 			{
 				target = SaltCircle.Instance;
 				targetingSalt = true;
+				// GD.Print("Mode : SEL");
 			}
 			else
 			{
 				Velocity = Vector2.Zero;
+				// GD.Print("Mode : RIEN (pas de porte ni de sel)");
 				return;
 			}
 		}
@@ -149,14 +153,33 @@ public partial class Pumpkin : CharacterBody2D
 
 	private void AttackSaltCircle()
 	{
-		var circle = SaltCircle.Instance;
-		if (circle == null || circle.Health == null) return;
+		GD.Print(">>> AttackSaltCircle appelé");
 
-		if (GlobalPosition.DistanceTo(circle.GlobalPosition) <= SaltAttackRange)
+		var circle = SaltCircle.Instance;
+		if (circle == null)
+		{
+			GD.Print("  → SaltCircle.Instance est null");
+			return;
+		}
+
+		if (circle.Health == null)
+		{
+			GD.Print("  → circle.Health est null (nœud Health non assigné dans l’inspecteur !)");
+			return;
+		}
+
+		float dist = GlobalPosition.DistanceTo(circle.GlobalPosition);
+		GD.Print($"  → Distance au sel : {dist:F1} (portée = {SaltAttackRange})");
+
+		if (dist <= SaltAttackRange)
 		{
 			circle.Health.TakeDamage(Damage);
-			GD.Print($"Cercle de sel : {circle.Health.currentHealth} PV");
+			GD.Print($"  → DÉGÂTS ! Sel : {circle.Health.currentHealth} PV");
 			_cooldown = AttackCooldown;
+		}
+		else
+		{
+			GD.Print("  → Trop loin, pas d’attaque");
 		}
 	}
 

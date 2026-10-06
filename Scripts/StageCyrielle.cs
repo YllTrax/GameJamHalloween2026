@@ -29,8 +29,8 @@ public partial class StageCyrielle : Node2D
 	public override void _Ready()
 	{
 		_rng.Randomize();
-		_gameOverUI = GetNode<CanvasLayer>("GameOverUI");
-		_boutonRejouer = GetNode<Button>("GameOverUI/Button");
+		_gameOverUI = GetNode<CanvasLayer>("GameOver");
+		_boutonRejouer = GetNode<Button>("GameOver/Button");
 		_boutonRejouer.Pressed += Rejouer;
 	}
 
