@@ -4,15 +4,7 @@ using Godot;
 public partial class Interactable : Area2D
 {
     [Export]
-    private Polygon2D polygone2D;
-
-    [Export]
     private Polygon2D outline;
-
-    [Export]
-    private Area2D interactionRange;
-
-    //  public bool IsPlayerInRange = false;
 
     [Export]
     private float range;
@@ -39,18 +31,8 @@ public partial class Interactable : Area2D
         }
     }
 
-    private void Colorise()
-    {
-        var c = polygone2D.Color;
-        c.H = (float)GD.RandRange(0d, 1d);
-        c.V = 1;
-        c.S = 1;
-        polygone2D.Color = c;
-    }
-
     private void OnMoueEntered()
     {
-        // Colorise();
         outline.Visible = true;
     }
 
