@@ -12,7 +12,7 @@ public partial class Health : Node
 	[Export]
 	public bool IsPlayer; // a assigner dans l'inspecteur
 
-    [Export]
+	[Export]
 	public bool IsSaltCircle; // a assigner dans l'inspecteur
 
 	public float currentHealth;

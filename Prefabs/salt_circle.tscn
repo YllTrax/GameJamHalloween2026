@@ -14,7 +14,7 @@ health = NodePath("Health")
 [node name="ShapeDuSel" type="CollisionShape2D" parent="." unique_id=1886151530]
 shape = SubResource("CircleShape2D_p18pi")
 
-[node name="Health" type="Node" parent="." unique_id=1536150567 node_paths=PackedStringArray("sprite")]
+[node name="Health" type="Node" parent="." unique_id=1536150567 node_paths=PackedStringArray("sprite") groups=["Salts"]]
 script = ExtResource("2_6l6rw")
 baseHealth = 500.0
 sprite = NodePath("../AnimatedSprite2D")

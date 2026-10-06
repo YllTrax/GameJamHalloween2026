@@ -12,7 +12,7 @@ collision_mask = 0
 
 [node name="Health" type="Node2D" parent="." unique_id=1794320907 node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_ugn3q")
-baseHealth = 15.0
+baseHealth = 1000.0
 sprite = NodePath("../AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1677703996]
