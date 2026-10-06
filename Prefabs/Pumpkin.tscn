@@ -7,6 +7,7 @@
 size = Vector2(48, 48)
 
 [node name="Pumpkin" type="CharacterBody2D" unique_id=1184827937]
+scale = Vector2(0.43999934, 0.43999934)
 collision_layer = 4
 collision_mask = 9
 script = ExtResource("1_jxr30")

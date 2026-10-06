@@ -7,15 +7,20 @@ public partial class Pumpkin : CharacterBody2D
 	[Export] public float AttackCooldown = 1f;
 	[Export] public float SaltAttackRange = 50f;   // distance pour taper le cercle de sel
 	[Export] public float PlayerAttackRange = 50f; // distance pour taper le personnage
+	[Export] public float PathUpdateInterval = 1f; // secondes entre deux recalculs du chemin
 
 	private NavigationAgent2D _agent;
 	private double _cooldown;
+	private double _pathTimer;
 	private Node2D _myDoor;
 	private bool _doorAssigned;
 
 	public override void _Ready()
 	{
 		_agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
+
+		// Décale le premier calcul pour que les citrouilles ne recalculent pas toutes en même temps
+		_pathTimer = GD.Randf() * PathUpdateInterval;
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -23,6 +28,7 @@ public partial class Pumpkin : CharacterBody2D
 		if (Personnage.Instance == null) return;
 
 		_cooldown -= delta;
+		_pathTimer -= delta;
 		bool indoor = Personnage.Instance.iSIndoor;
 		Node2D target = Personnage.Instance;
 		bool targetingSalt = false;
@@ -58,7 +64,12 @@ public partial class Pumpkin : CharacterBody2D
 			_myDoor = null;
 		}
 
-		_agent.TargetPosition = target.GlobalPosition;
+		// Le chemin n'est recalculé qu'une fois par seconde
+		if (_pathTimer <= 0)
+		{
+			_agent.TargetPosition = target.GlobalPosition;
+			_pathTimer = PathUpdateInterval;
+		}
 
 		if (_agent.IsNavigationFinished())
 		{
@@ -98,7 +109,6 @@ public partial class Pumpkin : CharacterBody2D
 			var health = joueur.GetNodeOrNull<Health>("Health");
 			if (health == null)
 			{
-				GD.Print("Le personnage n'a pas de noeud Health !");
 				return;
 			}
 
@@ -144,7 +154,9 @@ public partial class Pumpkin : CharacterBody2D
 		foreach (Node n in GetTree().GetNodesInGroup("Doors"))
 		{
 			if (n is not Node2D door || !IsInstanceValid(door) || door.IsQueuedForDeletion())
+			{
 				continue;
+			}	
 
 			float d = GlobalPosition.DistanceSquaredTo(door.GlobalPosition);
 			if (d < best)
