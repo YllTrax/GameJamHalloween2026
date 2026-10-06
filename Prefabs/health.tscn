@@ -1,12 +1,23 @@
 [gd_scene format=3 uid="uid://wj1whgh7v5c"]
 
 [ext_resource type="Script" uid="uid://wnlsghc7kp3" path="res://Scripts/Health.cs" id="1_bmhts"]
+[ext_resource type="Script" uid="uid://cug1sq371ruvc" path="res://Scripts/HealthBar.cs" id="2_cf1at"]
 
-[node name="Health" type="Node" unique_id=1039052001]
+[node name="Health" type="Node2D" unique_id=1461079800 node_paths=PackedStringArray("healthBar")]
+scale = Vector2(4.062008, 0.30829176)
 script = ExtResource("1_bmhts")
+healthBar = NodePath("HealthBar")
 
-[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1477468549]
-offset_left = -15.0
-offset_right = 14.0
-offset_bottom = 27.0
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=1477468549 node_paths=PackedStringArray("health", "BarreVie")]
+modulate = Color(6.5888658, 10.541534, 0.00022664924, 1)
+anchors_preset = -1
+anchor_right = 0.00086805556
+offset_left = -16.0
+offset_top = -46.0
+offset_right = 13.0
+offset_bottom = -19.0
+show_percentage = false
+script = ExtResource("2_cf1at")
+health = NodePath("..")
+BarreVie = NodePath(".")
 metadata/_edit_use_anchors_ = true

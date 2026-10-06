@@ -1,32 +1,34 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-<<<<<<< Updated upstream
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameJaam", "GameJaam.csproj", "{94F88047-10D9-4FCA-B138-7228BE05728D}"
-=======
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameJaam", "GameJaam.csproj", "{00CDDAF4-9034-4EFF-87BB-0BD86A76321F}"
->>>>>>> Stashed changes
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameJaam", "GameJaam.csproj", "{3E4EC300-0AAD-415A-B4F5-0CE09C90D583}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-	Debug|Any CPU = Debug|Any CPU
-	ExportDebug|Any CPU = ExportDebug|Any CPU
-	ExportRelease|Any CPU = ExportRelease|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-<<<<<<< Updated upstream
-		{94F88047-10D9-4FCA-B138-7228BE05728D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{94F88047-10D9-4FCA-B138-7228BE05728D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{94F88047-10D9-4FCA-B138-7228BE05728D}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
-		{94F88047-10D9-4FCA-B138-7228BE05728D}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
-		{94F88047-10D9-4FCA-B138-7228BE05728D}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
-		{94F88047-10D9-4FCA-B138-7228BE05728D}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
-=======
-		{00CDDAF4-9034-4EFF-87BB-0BD86A76321F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{00CDDAF4-9034-4EFF-87BB-0BD86A76321F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{00CDDAF4-9034-4EFF-87BB-0BD86A76321F}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
-		{00CDDAF4-9034-4EFF-87BB-0BD86A76321F}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
-		{00CDDAF4-9034-4EFF-87BB-0BD86A76321F}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
-		{00CDDAF4-9034-4EFF-87BB-0BD86A76321F}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
->>>>>>> Stashed changes
+		{3E4EC300-0AAD-415A-B4F5-0CE09C90D583}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E4EC300-0AAD-415A-B4F5-0CE09C90D583}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E4EC300-0AAD-415A-B4F5-0CE09C90D583}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3E4EC300-0AAD-415A-B4F5-0CE09C90D583}.Debug|x64.Build.0 = Debug|Any CPU
+		{3E4EC300-0AAD-415A-B4F5-0CE09C90D583}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3E4EC300-0AAD-415A-B4F5-0CE09C90D583}.Debug|x86.Build.0 = Debug|Any CPU
+		{3E4EC300-0AAD-415A-B4F5-0CE09C90D583}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E4EC300-0AAD-415A-B4F5-0CE09C90D583}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{3E4EC300-0AAD-415A-B4F5-0CE09C90D583}.Release|x64.ActiveCfg = Debug|Any CPU
+		{3E4EC300-0AAD-415A-B4F5-0CE09C90D583}.Release|x64.Build.0 = Debug|Any CPU
+		{3E4EC300-0AAD-415A-B4F5-0CE09C90D583}.Release|x86.ActiveCfg = Debug|Any CPU
+		{3E4EC300-0AAD-415A-B4F5-0CE09C90D583}.Release|x86.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
