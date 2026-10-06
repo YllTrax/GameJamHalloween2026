@@ -94,6 +94,7 @@ animations = [{
 
 [node name="Personnage" type="CharacterBody2D" unique_id=874529347 node_paths=PackedStringArray("anim")]
 z_index = 2
+collision_layer = 2
 script = ExtResource("1_ydahe")
 anim = NodePath("AnimatorPersonnage")
 

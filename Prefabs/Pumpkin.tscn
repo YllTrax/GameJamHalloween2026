@@ -2,9 +2,15 @@
 
 [ext_resource type="Script" uid="uid://bbveukhsk5wtn" path="res://Scripts/Pumpkin.cs" id="1_jxr30"]
 [ext_resource type="PackedScene" uid="uid://wj1whgh7v5c" path="res://Prefabs/health.tscn" id="2_nf54d"]
+[ext_resource type="Script" uid="uid://5jc7g665kx0p" path="res://Scripts/DamageSource.cs" id="3_n42on"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aluq5"]
-size = Vector2(48, 48)
+size = Vector2(145.45477, 118.18199)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p18pi"]
+size = Vector2(50.000076, 50.000084)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p18pi"]
 
 [node name="Pumpkin" type="CharacterBody2D" unique_id=1184827937]
 scale = Vector2(0.43999934, 0.43999934)
@@ -19,8 +25,28 @@ color = Color(0.7845131, 0.42027736, 0.14271641, 1)
 polygon = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24)
 
 [node name="PumpkinCollision" type="CollisionShape2D" parent="." unique_id=1484324618]
+position = Vector2(-2.2727304, 4.5454655)
+scale = Vector2(0.9999999, 0.9999999)
 shape = SubResource("RectangleShape2D_aluq5")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1993445216]
+avoidance_enabled = true
 
-[node name="Health2" parent="." unique_id=1039052001 instance=ExtResource("2_nf54d")]
+[node name="Health" parent="." unique_id=1039052001 node_paths=PackedStringArray("sprite") instance=ExtResource("2_nf54d")]
+baseHealth = 10.0
+sprite = NodePath("../AnimatedSprite2D")
+
+[node name="DamageSource" type="Area2D" parent="." unique_id=1814223909]
+scale = Vector2(3.9090984, 3.851421)
+collision_layer = 16
+collision_mask = 10
+script = ExtResource("3_n42on")
+hitCD = 0.675
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageSource" unique_id=920691987]
+position = Vector2(-1.6255831e-06, 1.0837223e-06)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_p18pi")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=942879862]
+sprite_frames = SubResource("SpriteFrames_p18pi")
