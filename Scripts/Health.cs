@@ -3,67 +3,67 @@ using Godot;
 
 public partial class Health : Node2D
 {
-    [Export]
-    public float baseHealth;
+	[Export]
+	public float baseHealth;
 
-    [Export]
-    private HealthBar healthBar;
+	[Export]
+	private HealthBar healthBar;
 
-    [Export]
-    private AnimatedSprite2D sprite;
+	[Export]
+	private AnimatedSprite2D sprite;
 
-    [Export]
-    public bool IsPlayer; // a assigner dans l'inspecteur
+	[Export]
+	public bool IsPlayer; // a assigner dans l'inspecteur
 
-    [Export]
-    public bool IsSaltCircle; // a assigner dans l'inspecteur
+	[Export]
+	public bool IsSaltCircle; // a assigner dans l'inspecteur
 
-    public float currentHealth;
+	public float currentHealth;
 
-    public override void _Ready()
-    {
-        currentHealth = baseHealth;
-    }
+	public override void _Ready()
+	{
+		currentHealth = baseHealth;
+	}
 
-    public override void _Process(double delta) { }
+	public override void _Process(double delta) { }
 
-    /// <summary>
-    /// Methode pour infliger des degats du montant "damage"
-    /// </summary>
-    /// <param name="damage"></param>
-    public void TakeDamage(float damage)
-    {
-        currentHealth -= damage;
-        sprite.Modulate = Colors.Red;
-        CreateTween().TweenProperty(sprite, "modulate", Colors.White, 0.15f);
-        healthBar.OnHealthCHangeDamage(damage);
-        if (currentHealth <= 0)
-            GetParent().QueueFree();
-    }
+	/// <summary>
+	/// Methode pour infliger des degats du montant "damage"
+	/// </summary>
+	/// <param name="damage"></param>
+	public void TakeDamage(float damage)
+	{
+		currentHealth -= damage;
+		sprite.Modulate = Colors.Red;
+		CreateTween().TweenProperty(sprite, "modulate", Colors.White, 0.15f);
+		healthBar.OnHealthCHangeDamage(damage);
+		if (currentHealth <= 0)
+			GetParent().QueueFree();
+	}
 
-    /// <summary>
-    /// Methode pour soigner du montant "heal"
-    /// </summary>
-    public void ToHeal(float heal)
-    {
-        currentHealth += heal;
-        sprite.Modulate = Colors.Green;
-        CreateTween().TweenProperty(sprite, "modulate", Colors.White, 0.15f);
-        healthBar.OnHealthCHangeHeal(heal);
-        if (currentHealth < baseHealth)
-            currentHealth = baseHealth;
-    }
+	/// <summary>
+	/// Methode pour soigner du montant "heal"
+	/// </summary>
+	public void ToHeal(float heal)
+	{
+		currentHealth += heal;
+		sprite.Modulate = Colors.Green;
+		CreateTween().TweenProperty(sprite, "modulate", Colors.White, 0.15f);
+		healthBar.OnHealthCHangeHeal(heal);
+		if (currentHealth < baseHealth)
+		currentHealth = baseHealth;
+	}
 
-    public override void _EnterTree()
-    {
-        // if (IsSaltCircle)
-        // {
-        //     SaltCircle.Instance.SaltRefilled += OnRefill;
-        // }
-    }
+	public override void _EnterTree()
+	{
+		// if (IsSaltCircle)
+		// {
+		//     SaltCircle.Instance.SaltRefilled += OnRefill;
+		// }
+	}
 
-    private void OnRefill(float saltAmount)
-    {
-        ToHeal(saltAmount);
-    }
+	private void OnRefill(float saltAmount)
+	{
+		ToHeal(saltAmount);
+	}
 }
