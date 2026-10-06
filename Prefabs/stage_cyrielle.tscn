@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://oo4k4kxndvmp"]
 
+[ext_resource type="Script" uid="uid://c3uxta4h1y2i1" path="res://Scripts/StageCyrielle.cs" id="1_7ubsy"]
 [ext_resource type="Script" uid="uid://dce3vcl13iokc" path="res://Scripts/Base.cs" id="1_42ube"]
 [ext_resource type="PackedScene" uid="uid://do15h41qr01vx" path="res://Prefabs/Pumpkin.tscn" id="1_b535f"]
 [ext_resource type="PackedScene" uid="uid://bht4lcjhamjlq" path="res://Prefabs/personnage.tscn" id="2_42ube"]
@@ -29,6 +30,7 @@ parsed_geometry_type = 1
 parsed_collision_mask = 4294967046
 
 [node name="Stage_cyrielle" type="Node2D" unique_id=624871530]
+script = ExtResource("1_7ubsy")
 
 [node name="AreaBase" type="Area2D" parent="." unique_id=37137413]
 collision_mask = 2
@@ -155,5 +157,47 @@ polygon = PackedVector2Array(472, 125, 472, 160, 209, 158, 205, 279, 170, 278, 1
 
 [node name="SaltCircle" parent="." unique_id=1691003878 instance=ExtResource("5_xlicy")]
 position = Vector2(827, 207)
+
+[node name="GameOverUI" type="CanvasLayer" parent="." unique_id=559184564]
+process_mode = 2
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="GameOverUI" unique_id=338999997]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="GameOver" type="Label" parent="GameOverUI" unique_id=1486834828]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = -11.0
+offset_right = 44.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="GameOverUI" unique_id=720742146]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = 15.0
+offset_right = 38.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Rejouer"
 
 [editable path="Personnage"]

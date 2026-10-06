@@ -5,7 +5,8 @@ public partial class Pumpkin : CharacterBody2D
 	[Export] public float Speed = 120f;
 	[Export] public float Damage = 5f;
 	[Export] public float AttackCooldown = 1f;
-	[Export] public float SaltAttackRange = 60f; // distance à partir de laquelle elle tape le cercle
+	[Export] public float SaltAttackRange = 60f;   // distance pour taper le cercle de sel
+	[Export] public float PlayerAttackRange = 50f; // distance pour taper le personnage
 
 	private NavigationAgent2D _agent;
 	private double _cooldown;
@@ -28,7 +29,6 @@ public partial class Pumpkin : CharacterBody2D
 
 		if (indoor)
 		{
-			// On choisit la porte une seule fois
 			if (!_doorAssigned)
 			{
 				_myDoor = GetNearestDoor();
@@ -43,7 +43,6 @@ public partial class Pumpkin : CharacterBody2D
 			}
 			else if (SaltCircle.Instance != null && IsInstanceValid(SaltCircle.Instance))
 			{
-				// Sa porte est cassée : direction le cercle de sel
 				target = SaltCircle.Instance;
 				targetingSalt = true;
 			}
@@ -55,7 +54,6 @@ public partial class Pumpkin : CharacterBody2D
 		}
 		else
 		{
-			// Le joueur est ressorti : on réinitialise pour la prochaine fois
 			_doorAssigned = false;
 			_myDoor = null;
 		}
@@ -74,15 +72,39 @@ public partial class Pumpkin : CharacterBody2D
 
 		MoveAndSlide();
 
-		if (!indoor || _cooldown > 0) return;
+		if (_cooldown > 0) return;
 
-		if (targetingSalt)
+		if (!indoor)
+		{
+			AttackPlayer();
+		}
+		else if (targetingSalt)
 		{
 			AttackSaltCircle();
 		}
 		else
 		{
 			AttackDoor();
+		}
+	}
+
+	private void AttackPlayer()
+	{
+		var joueur = Personnage.Instance;
+		if (joueur == null || !IsInstanceValid(joueur)) return;
+
+		if (GlobalPosition.DistanceTo(joueur.GlobalPosition) <= PlayerAttackRange)
+		{
+			var health = joueur.GetNodeOrNull<Health>("Health");
+			if (health == null)
+			{
+				GD.Print("Le personnage n'a pas de noeud Health !");
+				return;
+			}
+
+			health.TakeDamage(Damage);
+			GD.Print($"Personnage : {health.currentHealth} PV");
+			_cooldown = AttackCooldown;
 		}
 	}
 
