@@ -5,11 +5,14 @@ public partial class Pumpkin : CharacterBody2D
 	[Export] public float Speed = 120f;
 	[Export] public float Damage = 5f;
 	[Export] public float AttackCooldown = 1f;
-	[Export] public float SaltAttackRange = 200f;   // distance pour taper le cercle de sel
-	[Export] public float PlayerAttackRange = 200f; // distance pour taper le personnage
+	[Export] public float SaltAttackRange = 50f;   // distance pour taper le cercle de sel
+	[Export] public float PlayerAttackRange = 50f; // distance pour taper le personnage
 	[Export] public float AggroRadius = 300f;      // rayon autour du joueur qui attire les citrouilles
 	[Export] public float PathUpdateInterval = 1f; // secondes entre deux recalculs du chemin
-
+	//Pour les Germs Drop
+	[Export] public float GermsDrop = 2;
+	[Export] public PackedScene GermsScene;
+	
 	private NavigationAgent2D _agent;
 	private double _cooldown;
 	private double _pathTimer;
@@ -17,14 +20,30 @@ public partial class Pumpkin : CharacterBody2D
 	private bool _doorAssigned;
 	private bool _wasAggro;
 
+	//For Germs
+	private Health _health;
+	private bool _dead;
+
 	public override void _Ready()
 	{
 		_agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
 		_pathTimer = GD.Randf() * PathUpdateInterval;
+
+		//Germs
+		_health = GetNodeOrNull<Health>("Health");
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
+		//Germs
+		if (_dead) return;
+		if (_health != null && _health.currentHealth <= 0)
+		{
+			Die();
+			return;
+		}
+
+
 		_cooldown -= delta;
 		_pathTimer -= delta;
 
@@ -201,5 +220,33 @@ public partial class Pumpkin : CharacterBody2D
 			}
 		}
 		return nearest;
+	}
+
+	//Germs
+	public void Die()
+	{
+		if (_dead) return;
+		_dead = true;
+
+		Node parent = GetParent();
+
+		if (GermsScene != null)
+		{
+			for (int i = 0; i < GermsDrop; i++)
+			{
+				var germ = GermsScene.Instantiate<RigidBody2D>();
+
+				// petit décalage aléatoire autour de la citrouille
+				Vector2 offset = new Vector2(GD.Randf() * 20f - 10f, GD.Randf() * 20f - 10f);
+				germ.GlobalPosition = GlobalPosition + offset;
+
+				// petite impulsion pour qu'ils roulent un peu avant de s'arrêter
+				germ.LinearVelocity = Vector2.FromAngle(GD.Randf() * Mathf.Tau) * (40f + GD.Randf() * 60f);
+
+				parent.CallDeferred(Node.MethodName.AddChild, germ);
+			}
+		}
+
+		QueueFree();
 	}
 }

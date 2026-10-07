@@ -22,5 +22,5 @@ polygon = PackedVector2Array(-97, -10, 95, -10, 96, 11, -95, 11)
 
 [node name="Health" parent="." unique_id=1461079800 node_paths=PackedStringArray("sprite") instance=ExtResource("1_ugn3q")]
 position = Vector2(0, -17)
-baseHealth = 30.0
+baseHealth = 1000.0
 sprite = NodePath("../AnimatedSprite2D")

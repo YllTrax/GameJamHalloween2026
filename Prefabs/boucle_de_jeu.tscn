@@ -1,9 +1,13 @@
 [gd_scene format=3 uid="uid://ci4mpugnevp18"]
 
-[ext_resource type="Script" uid="uid://c3uxta4h1y2i1" path="res://Scripts/StageCyrielle.cs" id="1_0vhmx"]
+[ext_resource type="Script" uid="uid://c3uxta4h1y2i1" path="res://Scripts/BoucleDeJeu.cs" id="1_0vhmx"]
 [ext_resource type="PackedScene" uid="uid://do15h41qr01vx" path="res://Prefabs/Pumpkin.tscn" id="2_n0t4e"]
 [ext_resource type="PackedScene" uid="uid://be75hui1s24ji" path="res://Prefabs/PumpkinLv2.tscn" id="3_x56rw"]
 [ext_resource type="PackedScene" uid="uid://bwekhv5wygstw" path="res://Prefabs/pumpkin_lv_3.tscn" id="4_ofaj1"]
+
+[sub_resource type="FontVariation" id="FontVariation_cus6u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0t4e"]
 
 [node name="Boucle de jeu" type="Node2D" unique_id=260320005]
 script = ExtResource("1_0vhmx")
@@ -12,6 +16,7 @@ PumpkinLv2Scene = ExtResource("3_x56rw")
 PumpkinLv3Scene = ExtResource("4_ofaj1")
 
 [node name="GameOver" type="CanvasLayer" parent="." unique_id=1837334137]
+process_mode = 2
 visible = false
 
 [node name="ColorRect" type="ColorRect" parent="GameOver" unique_id=1371650600]
@@ -28,14 +33,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -43.5
-offset_top = -11.5
-offset_right = 43.5
-offset_bottom = 11.5
+offset_left = -227.0
+offset_top = -103.0
+offset_right = 49.0
+offset_bottom = -36.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.5326315, 1.4)
+theme_override_font_sizes/font_size = 48
 text = "Game Over"
+uppercase = true
 
 [node name="Button" type="Button" parent="GameOver" unique_id=729110539]
 anchors_preset = 8
@@ -43,10 +50,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -6.0
-offset_top = 27.0
-offset_right = 59.0
-offset_bottom = 58.0
+offset_left = -65.0
+offset_top = 18.0
+offset_right = 66.0
+offset_bottom = 75.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0.4018607, 0.8309539, 0.9406181, 1)
+theme_override_fonts/font = SubResource("FontVariation_cus6u")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/hover = SubResource("StyleBoxFlat_n0t4e")
 text = "Restart"

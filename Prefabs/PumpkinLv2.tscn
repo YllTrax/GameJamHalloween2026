@@ -8,6 +8,7 @@
 [node name="PumpkinLv2" type="CharacterBody2D" unique_id=1031295454]
 script = ExtResource("1_b5vig")
 Damage = 10.0
+GermsDrop = 4.0
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=949483054]
 color = Color(1, 0.45490196, 0.2901961, 1)

@@ -10,6 +10,7 @@ height = 48.0
 [node name="PumpkinLv3" type="CharacterBody2D" unique_id=241176503]
 script = ExtResource("1_hu2pe")
 Damage = 20.0
+GermsDrop = 8.0
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=447942903]
 color = Color(1, 0.3529412, 0.19215687, 0.6862745)

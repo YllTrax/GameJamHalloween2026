@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class StageCyrielle : Node2D
+public partial class BoucleDeJeu : Node2D
 {
 	// --- Spawn des citrouilles ---
 	[Export] public PackedScene PumpkinScene;
@@ -28,6 +28,7 @@ public partial class StageCyrielle : Node2D
 
 	public override void _Ready()
 	{
+		
 		_rng.Randomize();
 		_gameOverUI = GetNode<CanvasLayer>("GameOver");
 		_boutonRejouer = GetNode<Button>("GameOver/Button");
@@ -114,6 +115,8 @@ public partial class StageCyrielle : Node2D
 		}
 	}
 
+
+//Boucle de jeu
 	private void GameOver()
 	{
 		_fini = true;

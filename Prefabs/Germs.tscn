@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://c1tkwc8qmv001"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ngk0e"]
+height = 33.333355
+
+[node name="Germs" type="RigidBody2D" unique_id=539200772]
+gravity_scale = 0.0
+linear_damp = 6.0
+angular_damp = 6.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=414513924]
+position = Vector2(0, 0.4)
+scale = Vector2(0.576, 0.288)
+shape = SubResource("CapsuleShape2D_ngk0e")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=115497780]
+position = Vector2(-3.2, 2.4)
+scale = Vector2(0.4, 0.4)
+color = Color(0.41846135, 0.0018434078, 0.9714729, 1)
+polygon = PackedVector2Array(-8, -8, 0, -16, 16, -16, 24, -8, 8, 8)
