@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bht4lcjhamjlq" path="res://Prefabs/personnage.tscn" id="3_eofuw"]
 [ext_resource type="Script" uid="uid://dce3vcl13iokc" path="res://Scripts/Base.cs" id="4_7k2vv"]
 [ext_resource type="PackedScene" uid="uid://do15h41qr01vx" path="res://Prefabs/Pumpkin.tscn" id="5_ogrv1"]
+[ext_resource type="PackedScene" uid="uid://crda28r037s82" path="res://Prefabs/tourelle.tscn" id="6_2lsjc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p18pi"]
 
@@ -98,5 +99,8 @@ position = Vector2(430, 739)
 
 [node name="Pumpkin8" parent="." unique_id=1182103345 instance=ExtResource("5_ogrv1")]
 position = Vector2(647, 765)
+
+[node name="Tourelle" parent="." unique_id=2130286474 instance=ExtResource("6_2lsjc")]
+position = Vector2(77, 330)
 
 [editable path="Personnage"]

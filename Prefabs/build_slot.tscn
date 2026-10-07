@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dlmn4cmmmbr10" path="res://Scripts/BuildSlot.cs" id="1_6wcdf"]
 [ext_resource type="Script" uid="uid://bvmd4oammh5b" path="res://Scripts/Interactable.cs" id="2_6l626"]
 [ext_resource type="PackedScene" uid="uid://drpaowd2cjjol" path="res://Prefabs/toarch.tscn" id="2_onnxr"]
+[ext_resource type="PackedScene" uid="uid://crda28r037s82" path="res://Prefabs/tourelle.tscn" id="3_y7flu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p18pi"]
 size = Vector2(16, 16)
@@ -10,6 +11,7 @@ size = Vector2(16, 16)
 [node name="BuildSlot" type="Node2D" unique_id=1274842449]
 script = ExtResource("1_6wcdf")
 toarch = ExtResource("2_onnxr")
+tourelle = ExtResource("3_y7flu")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1315487570]
 

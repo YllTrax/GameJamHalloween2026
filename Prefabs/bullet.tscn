@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dcrdggw6n8n2g"]
+
+[ext_resource type="Script" uid="uid://srrw4lw1xjcn" path="res://Scripts/Bullet.cs" id="1_0oen4"]
+[ext_resource type="Script" uid="uid://5jc7g665kx0p" path="res://Scripts/DamageSource.cs" id="2_m4f65"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p18pi"]
+radius = 37.01351
+
+[node name="Bullet" type="Area2D" unique_id=744168898]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_0oen4")
+moveSpeed = 200.0
+
+[node name="Collider" type="CollisionShape2D" parent="." unique_id=885004324]
+shape = SubResource("CircleShape2D_p18pi")
+
+[node name="RigidBody" type="Polygon2D" parent="." unique_id=1724462170]
+color = Color(1, 0.4862745, 0, 1)
+polygon = PackedVector2Array(0, -10, 7, -7, 10, 0, 7, 7, 0, 10, -8, 6, -10, 0, -7, -6)
+
+[node name="Damage Source" type="Area2D" parent="." unique_id=2061507363]
+collision_mask = 5
+script = ExtResource("2_m4f65")
+targetMode = 1
+damage = 2000.0
+hitCD = 0.001
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damage Source" unique_id=52376558]
+shape = SubResource("CircleShape2D_p18pi")

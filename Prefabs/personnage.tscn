@@ -115,4 +115,10 @@ animation = &"Run"
 [node name="Health" parent="." unique_id=1039052001 instance=ExtResource("4_ydahe")]
 position = Vector2(0.205, -5.995)
 scale = Vector2(0.91812944, 0.40834948)
+<<<<<<< Updated upstream
 baseHealth = 5.0
+=======
+baseHealth = 20000000.0
+sprite = NodePath("../AnimatorPersonnage")
+IsPlayer = true
+>>>>>>> Stashed changes

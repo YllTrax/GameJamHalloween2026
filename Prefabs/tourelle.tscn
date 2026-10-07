@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://crda28r037s82"]
+
+[ext_resource type="Script" uid="uid://cyng3vadk3c4c" path="res://Scripts/Tourelle.cs" id="1_ch13l"]
+[ext_resource type="PackedScene" uid="uid://dcrdggw6n8n2g" path="res://Prefabs/bullet.tscn" id="2_khwrp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p18pi"]
+radius = 277.52118
+
+[node name="Tourelle" type="Area2D" unique_id=2130286474 node_paths=PackedStringArray("firePoint")]
+scale = Vector2(0.5, 0.5)
+collision_mask = 4
+script = ExtResource("1_ch13l")
+attackCD = 1.0
+bulletPrefab = ExtResource("2_khwrp")
+firePoint = NodePath("Tower/Fire Point")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1717542044]
+shape = SubResource("CircleShape2D_p18pi")
+
+[node name="range" type="Polygon2D" parent="." unique_id=749667653]
+color = Color(0.9056563, 0, 0.20320359, 0.2627451)
+polygon = PackedVector2Array(-2, -274, 198, -199, 277, -4, 208, 183, 7, 282, -210, 185, -280, -1, -199, -199)
+
+[node name="Tower" type="Polygon2D" parent="." unique_id=1532867960]
+scale = Vector2(0.47539273, 0.11269228)
+polygon = PackedVector2Array(278, -1, -160, -218, -70, 1, -172, 204)
+
+[node name="Fire Point" type="Node2D" parent="Tower" unique_id=1082514732]
+position = Vector2(309.21802, -17.747444)
+scale = Vector2(2.103524, 8.873723)

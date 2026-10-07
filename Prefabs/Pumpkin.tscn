@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://wj1whgh7v5c" path="res://Prefabs/health.tscn" id="2_nf54d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aluq5"]
-size = Vector2(145.45477, 118.18199)
+size = Vector2(138.6366, 120.45474)
 
 [node name="Pumpkin" type="CharacterBody2D" unique_id=1184827937]
 scale = Vector2(0.43999934, 0.43999934)
@@ -21,8 +21,8 @@ color = Color(0.7845131, 0.42027736, 0.14271641, 1)
 polygon = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24)
 
 [node name="PumpkinCollision" type="CollisionShape2D" parent="." unique_id=1484324618]
-position = Vector2(-2.2727304, 4.5454655)
-scale = Vector2(0.9999999, 0.9999999)
+position = Vector2(-5.681822, 3.4090922)
+scale = Vector2(0.9999998, 0.9999998)
 shape = SubResource("RectangleShape2D_aluq5")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1993445216]

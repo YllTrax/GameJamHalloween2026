@@ -20,12 +20,42 @@ public partial class Interactable : Area2D
     {
         if (@event is InputEventMouseButton mb && mb.Pressed && mb.ButtonIndex == MouseButton.Left)
         {
-            if (GetParent() is IInteractable target) // mettre le inrange une fois le systeme  fait
+            if (GetParent() is IInteractable target)
             {
                 GD.Print("clic detecte");
                 if (DetecteIfPersonnageInRange())
                 {
                     target.Interact();
+                }
+            }
+        }
+        if (
+            @event is InputEventMouseButton mbRight
+            && mbRight.Pressed
+            && mbRight.ButtonIndex == MouseButton.Right
+        )
+        {
+            if (GetParent() is IInteractable target)
+            {
+                GD.Print("clic detecte");
+                if (DetecteIfPersonnageInRange())
+                {
+                    target.InteractRightclick();
+                }
+            }
+        }
+        if (
+            @event is InputEventMouseButton mbMiddle
+            && mbMiddle.Pressed
+            && mbMiddle.ButtonIndex == MouseButton.Middle
+        )
+        {
+            if (GetParent() is IInteractable target)
+            {
+                GD.Print("clic detecte");
+                if (DetecteIfPersonnageInRange())
+                {
+                    target.InteractMiddleButton();
                 }
             }
         }
