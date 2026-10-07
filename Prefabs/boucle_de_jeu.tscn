@@ -93,4 +93,3 @@ theme_override_font_sizes/font_size = 32
 text = "Wave 1"
 
 [node name="Updgrape" parent="." unique_id=387195760 instance=ExtResource("5_x56rw")]
-visible = false

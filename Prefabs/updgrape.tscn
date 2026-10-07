@@ -7,7 +7,6 @@
 script = ExtResource("1_b50kd")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=301717492]
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=510714343]
 anchors_preset = 15

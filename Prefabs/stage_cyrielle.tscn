@@ -167,28 +167,8 @@ position = Vector2(827, 207)
 [node name="Boucle de jeu" parent="." unique_id=260320005 instance=ExtResource("7_h35mc")]
 DureeVague = 2.0
 
-[node name="Toarch" parent="." unique_id=798553879 instance=ExtResource("8_h35mc")]
-position = Vector2(986, 263)
-
-[node name="Toarch2" parent="." unique_id=774456819 instance=ExtResource("8_h35mc")]
-position = Vector2(986, 288)
-
-[node name="Toarch3" parent="." unique_id=2067881966 instance=ExtResource("8_h35mc")]
-position = Vector2(987, 314)
-
-[node name="Toarch4" parent="." unique_id=12705899 instance=ExtResource("8_h35mc")]
-position = Vector2(987, 339)
-
-[node name="Toarch5" parent="." unique_id=1794843302 instance=ExtResource("8_h35mc")]
-position = Vector2(987, 358)
-
 [node name="Toarch6" parent="." unique_id=556032133 instance=ExtResource("8_h35mc")]
 position = Vector2(987, 375)
 
 [editable path="Personnage"]
-[editable path="Toarch"]
-[editable path="Toarch2"]
-[editable path="Toarch3"]
-[editable path="Toarch4"]
-[editable path="Toarch5"]
 [editable path="Toarch6"]
