@@ -9,189 +9,178 @@ public partial class Pumpkin : CharacterBody2D
 	[Export] public float PlayerAttackRange = 50f; // distance pour taper le personnage
 	[Export] public float AggroRadius = 300f;      // rayon autour du joueur qui attire les citrouilles
 	[Export] public float PathUpdateInterval = 1f; // secondes entre deux recalculs du chemin
-	//Pour les Germs Drop
+
+	// Pour les Germs Drop
 	[Export] public float GermsDrop = 2;
 	[Export] public PackedScene GermsScene;
-	
+
 	private NavigationAgent2D _agent;
 	private double _cooldown;
 	private double _pathTimer;
 	private Node2D _myDoor;
 	private bool _doorAssigned;
-	private bool _wasAggro;
 
-	//For Germs
+	// Germs
 	private Health _health;
 	private bool _dead;
 
 	public override void _Ready()
 	{
 		_agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
-		_pathTimer = GD.Randf() * PathUpdateInterval;
+		_pathTimer = GD.Randf() * PathUpdateInterval; // décale les recalculs entre citrouilles
 
-		//Germs
+		// Germs
 		_health = GetNodeOrNull<Health>("Health");
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		//Germs
-		if (_dead) return;
+		// Mort
+		if (_dead)
+			return;
 		if (_health != null && _health.currentHealth <= 0)
 		{
 			Die();
 			return;
 		}
 
+		if (Personnage.Instance == null)
+			return;
 
 		_cooldown -= delta;
 		_pathTimer -= delta;
 
-    [Export]
-    public float PlayerAttackRange = 50f; // distance pour taper le personnage
+		bool indoor = Personnage.Instance.iSIndoor;
+		Node2D target = Personnage.Instance;
+		bool targetingSalt = false;
 
-    private NavigationAgent2D _agent;
-    private double _cooldown;
-    private Node2D _myDoor;
-    private bool _doorAssigned;
+		if (indoor)
+		{
+			if (!_doorAssigned)
+			{
+				_myDoor = GetNearestDoor();
+				_doorAssigned = true;
+			}
 
-    public override void _Ready()
-    {
-        _agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
-    }
+			bool doorAlive =
+				_myDoor != null && IsInstanceValid(_myDoor) && !_myDoor.IsQueuedForDeletion();
 
-    public override void _PhysicsProcess(double delta)
-    {
-        if (Personnage.Instance == null)
-            return;
+			if (doorAlive)
+			{
+				target = _myDoor;
+			}
+			else if (SaltCircle.Instance != null && IsInstanceValid(SaltCircle.Instance))
+			{
+				target = SaltCircle.Instance;
+				targetingSalt = true;
+			}
+			else
+			{
+				Velocity = Vector2.Zero;
+				return;
+			}
+		}
+		else
+		{
+			_doorAssigned = false;
+			_myDoor = null;
+		}
 
-        _cooldown -= delta;
-        bool indoor = Personnage.Instance.iSIndoor;
-        Node2D target = Personnage.Instance;
-        bool targetingSalt = false;
+		// Recalcul du chemin seulement toutes les PathUpdateInterval secondes
+		if (_pathTimer <= 0)
+		{
+			_agent.TargetPosition = target.GlobalPosition;
+			_pathTimer = PathUpdateInterval;
+		}
 
-        if (indoor)
-        {
-            if (!_doorAssigned)
-            {
-                _myDoor = GetNearestDoor();
-                _doorAssigned = true;
-            }
+		if (_agent.IsNavigationFinished())
+		{
+			Velocity = Vector2.Zero;
+		}
+		else
+		{
+			Vector2 nextPoint = _agent.GetNextPathPosition();
+			Velocity = (nextPoint - GlobalPosition).Normalized() * Speed;
+		}
 
-            bool doorAlive =
-                _myDoor != null && IsInstanceValid(_myDoor) && !_myDoor.IsQueuedForDeletion();
+		MoveAndSlide();
 
-            if (doorAlive)
-            {
-                target = _myDoor;
-            }
-            else if (SaltCircle.Instance != null && IsInstanceValid(SaltCircle.Instance))
-            {
-                target = SaltCircle.Instance;
-                targetingSalt = true;
-            }
-            else
-            {
-                Velocity = Vector2.Zero;
-                return;
-            }
-        }
-        else
-        {
-            _doorAssigned = false;
-            _myDoor = null;
-        }
+		if (_cooldown > 0)
+			return;
 
-        _agent.TargetPosition = target.GlobalPosition;
+		if (!indoor)
+		{
+			AttackPlayer();
+		}
+		else if (targetingSalt)
+		{
+			AttackSaltCircle();
+		}
+		else
+		{
+			AttackDoor();
+		}
+	}
 
-        if (_agent.IsNavigationFinished())
-        {
-            Velocity = Vector2.Zero;
-        }
-        else
-        {
-            Vector2 nextPoint = _agent.GetNextPathPosition();
-            Velocity = (nextPoint - GlobalPosition).Normalized() * Speed;
-        }
+	private void AttackPlayer()
+	{
+		var joueur = Personnage.Instance;
+		if (joueur == null || !IsInstanceValid(joueur))
+			return;
 
-        MoveAndSlide();
+		if (GlobalPosition.DistanceTo(joueur.GlobalPosition) <= PlayerAttackRange)
+		{
+			// var health = joueur.GetNodeOrNull<Health>("Health");
+			// if (health == null)
+			// {
+			// 	GD.Print("Le personnage n'a pas de noeud Health !");
+			// 	return;
+			// }
 
-        if (_cooldown > 0)
-            return;
+			// health.TakeDamage(Damage);
+			// GD.Print($"Personnage : {health.currentHealth} PV");
+			// _cooldown = AttackCooldown;
+		}
+	}
 
-        if (!indoor)
-        {
-            AttackPlayer();
-        }
-        else if (targetingSalt)
-        {
-            AttackSaltCircle();
-        }
-        else
-        {
-            AttackDoor();
-        }
-    }
+	private void AttackDoor()
+	{
+		for (int i = 0; i < GetSlideCollisionCount(); i++)
+		{
+			// if (GetSlideCollision(i).GetCollider() is Node2D hit && hit.IsInGroup("Doors"))
+			// {
+			// 	var health = hit.GetNode<Health>("Health");
+			// 	health.TakeDamage(Damage);
+			// 	GD.Print($"{hit.Name} : {health.currentHealth} PV");
+			// 	_cooldown = AttackCooldown;
+			// 	break;
+			// }
+		}
+	}
 
-    private void AttackPlayer()
-    {
-        var joueur = Personnage.Instance;
-        if (joueur == null || !IsInstanceValid(joueur))
-            return;
+	private void AttackSaltCircle()
+	{
+		var circle = SaltCircle.Instance;
+		if (circle == null || circle.Health == null)
+			return;
 
-        if (GlobalPosition.DistanceTo(joueur.GlobalPosition) <= PlayerAttackRange)
-        {
-            // var health = joueur.GetNodeOrNull<Health>("Health");
-            // if (health == null)
-            // {
-            // 	GD.Print("Le personnage n'a pas de noeud Health !");
-            // 	return;
-            // }
+		// if (GlobalPosition.DistanceTo(circle.GlobalPosition) <= SaltAttackRange)
+		// {
+		// 	circle.Health.TakeDamage(Damage);
+		// 	GD.Print($"Cercle de sel : {circle.Health.currentHealth} PV");
+		// 	_cooldown = AttackCooldown;
+		// }
+	}
 
-            // health.TakeDamage(Damage);
-            // GD.Print($"Personnage : {health.currentHealth} PV");
-            // _cooldown = AttackCooldown;
-        }
-    }
+	private Node2D GetNearestDoor()
+	{
+		Node2D nearest = null;
+		float best = float.MaxValue;
 
-    private void AttackDoor()
-    {
-        for (int i = 0; i < GetSlideCollisionCount(); i++)
-        {
-            // if (GetSlideCollision(i).GetCollider() is Node2D hit && hit.IsInGroup("Doors"))
-            // {
-            // 	var health = hit.GetNode<Health>("Health");
-            // 	health.TakeDamage(Damage);
-            // 	GD.Print($"{hit.Name} : {health.currentHealth} PV");
-            // 	_cooldown = AttackCooldown;
-            // 	break;
-            // }
-        }
-    }
-
-    private void AttackSaltCircle()
-    {
-        var circle = SaltCircle.Instance;
-        if (circle == null || circle.Health == null)
-            return;
-
-        // if (GlobalPosition.DistanceTo(circle.GlobalPosition) <= SaltAttackRange)
-        // {
-        // 	circle.Health.TakeDamage(Damage);
-        // 	GD.Print($"Cercle de sel : {circle.Health.currentHealth} PV");
-        // 	_cooldown = AttackCooldown;
-        // }
-    }
-
-    private Node2D GetNearestDoor()
-    {
-        Node2D nearest = null;
-        float best = float.MaxValue;
-
-        foreach (Node n in GetTree().GetNodesInGroup("Doors"))
-        {
-            if (n is not Node2D door || !IsInstanceValid(door) || door.IsQueuedForDeletion())
-                continue;
+		foreach (Node n in GetTree().GetNodesInGroup("Doors"))
+		{
+			if (n is not Node2D door || !IsInstanceValid(door) || door.IsQueuedForDeletion())
+				continue;
 
 			float d = GlobalPosition.DistanceSquaredTo(door.GlobalPosition);
 			if (d < best)
@@ -203,10 +192,11 @@ public partial class Pumpkin : CharacterBody2D
 		return nearest;
 	}
 
-	//Germs
+	// Germs
 	public void Die()
 	{
-		if (_dead) return;
+		if (_dead)
+			return;
 		_dead = true;
 
 		Node parent = GetParent();
