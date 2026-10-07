@@ -112,9 +112,7 @@ shape = SubResource("CapsuleShape2D_xqjxd")
 sprite_frames = SubResource("SpriteFrames_0k2he")
 animation = &"Run"
 
-[node name="Health" parent="." unique_id=1039052001 node_paths=PackedStringArray("sprite") instance=ExtResource("4_ydahe")]
+[node name="Health" parent="." unique_id=1039052001 instance=ExtResource("4_ydahe")]
 position = Vector2(0.205, -5.995)
 scale = Vector2(0.91812944, 0.40834948)
-baseHealth = 200.0
-sprite = NodePath("../AnimatorPersonnage")
-IsPlayer = true
+baseHealth = 5.0

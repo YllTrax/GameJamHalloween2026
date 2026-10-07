@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://drpaowd2cjjol"]
 
-[ext_resource type="Script" uid="uid://dlwfhym7ilgxj" path="res://Toarch.cs" id="1_6t5l3"]
+[ext_resource type="Script" uid="uid://dlwfhym7ilgxj" path="res://Scripts/Toarch.cs" id="1_6t5l3"]
 [ext_resource type="Script" uid="uid://5jc7g665kx0p" path="res://Scripts/DamageSource.cs" id="2_uud27"]
 [ext_resource type="Texture2D" uid="uid://c5cu5rwynm7te" path="res://Images/Sprites/Torch_Sheet.png" id="2_xwcd1"]
 [ext_resource type="Texture2D" uid="uid://cuymepe2ryunr" path="res://Images/Sprites/TorchBase.png" id="3_uud27"]

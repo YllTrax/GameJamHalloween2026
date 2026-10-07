@@ -49,7 +49,6 @@ position = Vector2(1270, 332)
 
 [node name="Personnage" parent="." unique_id=874529347 instance=ExtResource("2_42ube")]
 position = Vector2(1012, 228)
-collision_layer = 2
 
 [node name="Doors" type="Node2D" parent="." unique_id=1977315636]
 position = Vector2(1, 0)
@@ -166,6 +165,7 @@ tile_set = ExtResource("7_uayuw")
 position = Vector2(827, 207)
 
 [node name="Boucle de jeu" parent="." unique_id=260320005 instance=ExtResource("7_h35mc")]
+DureeVague = 2.0
 
 [node name="Toarch" parent="." unique_id=798553879 instance=ExtResource("8_h35mc")]
 position = Vector2(986, 263)

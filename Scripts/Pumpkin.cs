@@ -130,16 +130,16 @@ public partial class Pumpkin : CharacterBody2D
 
 		if (GlobalPosition.DistanceTo(joueur.GlobalPosition) <= PlayerAttackRange)
 		{
-			// var health = joueur.GetNodeOrNull<Health>("Health");
-			// if (health == null)
-			// {
-			// 	GD.Print("Le personnage n'a pas de noeud Health !");
-			// 	return;
-			// }
+			var health = joueur.GetNodeOrNull<Health>("Health");
+			if (health == null)
+			{
+				GD.Print("Le personnage n'a pas de noeud Health !");
+				return;
+			}
 
-			// health.TakeDamage(Damage);
-			// GD.Print($"Personnage : {health.currentHealth} PV");
-			// _cooldown = AttackCooldown;
+			health.TakeDamage(Damage);
+			GD.Print($"Personnage : {health.currentHealth} PV");
+			_cooldown = AttackCooldown;
 		}
 	}
 
@@ -147,14 +147,14 @@ public partial class Pumpkin : CharacterBody2D
 	{
 		for (int i = 0; i < GetSlideCollisionCount(); i++)
 		{
-			// if (GetSlideCollision(i).GetCollider() is Node2D hit && hit.IsInGroup("Doors"))
-			// {
-			// 	var health = hit.GetNode<Health>("Health");
-			// 	health.TakeDamage(Damage);
-			// 	GD.Print($"{hit.Name} : {health.currentHealth} PV");
-			// 	_cooldown = AttackCooldown;
-			// 	break;
-			// }
+			if (GetSlideCollision(i).GetCollider() is Node2D hit && hit.IsInGroup("Doors"))
+			{
+				var health = hit.GetNode<Health>("Health");
+				health.TakeDamage(Damage);
+				GD.Print($"{hit.Name} : {health.currentHealth} PV");
+				_cooldown = AttackCooldown;
+				break;
+			}
 		}
 	}
 
@@ -164,12 +164,12 @@ public partial class Pumpkin : CharacterBody2D
 		if (circle == null || circle.Health == null)
 			return;
 
-		// if (GlobalPosition.DistanceTo(circle.GlobalPosition) <= SaltAttackRange)
-		// {
-		// 	circle.Health.TakeDamage(Damage);
-		// 	GD.Print($"Cercle de sel : {circle.Health.currentHealth} PV");
-		// 	_cooldown = AttackCooldown;
-		// }
+		if (GlobalPosition.DistanceTo(circle.GlobalPosition) <= SaltAttackRange)
+		{
+			circle.Health.TakeDamage(Damage);
+			GD.Print($"Cercle de sel : {circle.Health.currentHealth} PV");
+			_cooldown = AttackCooldown;
+		}
 	}
 
 	private Node2D GetNearestDoor()

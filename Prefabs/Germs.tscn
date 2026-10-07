@@ -4,6 +4,8 @@
 height = 33.333355
 
 [node name="Germs" type="RigidBody2D" unique_id=539200772]
+collision_layer = 32
+collision_mask = 0
 gravity_scale = 0.0
 linear_damp = 6.0
 angular_damp = 6.0

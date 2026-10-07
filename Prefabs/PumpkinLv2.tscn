@@ -2,13 +2,17 @@
 
 [ext_resource type="PackedScene" uid="uid://wj1whgh7v5c" path="res://Prefabs/health.tscn" id="1_6xu7i"]
 [ext_resource type="Script" uid="uid://bbveukhsk5wtn" path="res://Scripts/Pumpkin.cs" id="1_b5vig"]
+[ext_resource type="PackedScene" uid="uid://c1tkwc8qmv001" path="res://Prefabs/Germs.tscn" id="2_jd27u"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aluq5"]
 
 [node name="PumpkinLv2" type="CharacterBody2D" unique_id=1031295454]
+collision_layer = 4
+collision_mask = 11
 script = ExtResource("1_b5vig")
 Damage = 10.0
 GermsDrop = 4.0
+GermsScene = ExtResource("2_jd27u")
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=949483054]
 color = Color(1, 0.45490196, 0.2901961, 1)
