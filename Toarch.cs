@@ -11,7 +11,7 @@ public partial class Toarch : Node2D
 
     [Export]
     private float attackCD;
-
+    private Tween burnTween;
     private Timer _timer;
 
     public override void _Ready()
@@ -25,5 +25,27 @@ public partial class Toarch : Node2D
         _timer.Start(); // bon je pense que c'est explicite XD
     }
 
-    private void Burn() { }
+    private void Burn()
+    {
+        burnTween?.Kill();
+
+        areaOfEffect.Scale = Vector2.One;
+        areaOfEffect.Visible = true;
+        areaOfEffect.ProcessMode = ProcessModeEnum.Inherit;
+
+        burnTween = CreateTween();
+        burnTween
+            .TweenProperty(areaOfEffect, "scale", new Vector2(1.5f, 1.5f), 0.5f)
+            .SetTrans(Tween.TransitionType.Back)
+            .SetEase(Tween.EaseType.Out);
+        burnTween.TweenInterval(1.0);
+        burnTween.TweenProperty(areaOfEffect, "scale", Vector2.One, 0.15f);
+        burnTween.TweenCallback(
+            Callable.From(() =>
+            {
+                areaOfEffect.Visible = false;
+                areaOfEffect.ProcessMode = ProcessModeEnum.Disabled;
+            })
+        );
+    }
 }

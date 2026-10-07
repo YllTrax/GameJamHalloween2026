@@ -3,11 +3,17 @@
 [ext_resource type="Script" uid="uid://bbveukhsk5wtn" path="res://Scripts/Pumpkin.cs" id="1_jxr30"]
 [ext_resource type="PackedScene" uid="uid://c1tkwc8qmv001" path="res://Prefabs/Germs.tscn" id="2_n42on"]
 [ext_resource type="PackedScene" uid="uid://wj1whgh7v5c" path="res://Prefabs/health.tscn" id="2_nf54d"]
+[ext_resource type="Script" uid="uid://5jc7g665kx0p" path="res://Scripts/DamageSource.cs" id="3_n42on"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aluq5"]
-size = Vector2(48, 48)
+size = Vector2(145.45477, 118.18199)
 
-[node name="Pumpkin" type="CharacterBody2D" unique_id=1184827937 groups=["Salts"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p18pi"]
+size = Vector2(50.000076, 50.000084)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p18pi"]
+
+[node name="Pumpkin" type="CharacterBody2D" unique_id=1184827937]
 scale = Vector2(0.43999934, 0.43999934)
 collision_layer = 4
 collision_mask = 9
@@ -21,9 +27,12 @@ color = Color(0.7845131, 0.42027736, 0.14271641, 1)
 polygon = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24)
 
 [node name="PumpkinCollision" type="CollisionShape2D" parent="." unique_id=1484324618]
+position = Vector2(-2.2727304, 4.5454655)
+scale = Vector2(0.9999999, 0.9999999)
 shape = SubResource("RectangleShape2D_aluq5")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1993445216]
+avoidance_enabled = true
 
 [node name="Health" parent="." unique_id=1039052001 instance=ExtResource("2_nf54d")]
 baseHealth = 50.0
