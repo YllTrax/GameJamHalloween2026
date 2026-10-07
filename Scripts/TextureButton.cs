@@ -2,48 +2,54 @@ using Godot;
 
 public partial class TextureButton : Godot.TextureButton
 {
-	[Export] public int Cost = 10;                      // germes pour acheter
-	[Export] public int TestGerms = 25;                 // germes de test
-	[Export] public TextureButton Prerequisite;         // bouton parent (facultatif)
+	[Signal] public delegate void BoughtEventHandler();
+
+	[Export] public int Cost = 10;
+	[Export] public TextureButton Prerequisite;
 
 	private Label _skillLevel;
-	private Line2D _skillBranch;
+	private Updgrape _tree;
 
 	public bool Purchased { get; private set; } = false;
-
 	private bool Unlocked => Prerequisite == null || Prerequisite.Purchased;
-	private bool CanBuy => !Purchased && Unlocked && TestGerms >= Cost;
 
 	public override void _Ready()
 	{
 		_skillLevel = GetNode<Label>("Cost");
-		_skillBranch = GetNode<Line2D>("Line2D");
+		_tree = GetTree().CurrentScene as Updgrape;
 
 		Pressed += OnPressed;
+		_tree.GermsChanged += _ => UpdateVisuals();
+		if (Prerequisite != null)
+			Prerequisite.Bought += UpdateVisuals;
+
 		UpdateVisuals();
 	}
 
 	private void OnPressed()
 	{
-		if (!CanBuy) return;
+		if (Purchased || !Unlocked) return;
+		if (!_tree.TrySpend(Cost)) return;
 
-		TestGerms -= Cost;
 		Purchased = true;
+		EmitSignal(SignalName.Bought);
 		UpdateVisuals();
-		GD.Print($"Acheté ! Germes restants : {TestGerms}");
 	}
 
 	private void UpdateVisuals()
 	{
+		_skillLevel.Text = Purchased ? "Acquis" : $"{Cost} germes";
+
+		bool canAfford = _tree.Germs >= Cost;
 		if (Purchased)
-			_skillLevel.Text = "Acquis";
+			Modulate = Colors.White;
+		else if (!Unlocked)
+			Modulate = new Color(0.3f, 0.3f, 0.3f, 0.5f);
+		else if (!canAfford)
+			Modulate = new Color(1, 0.5f, 0.5f, 0.6f);
 		else
-			_skillLevel.Text = $"{Cost} germes";
+			Modulate = new Color(1, 1, 1, 0.8f);
 
-		// Opaque si acquis, grisé sinon
-		Modulate = Purchased ? Colors.White : new Color(1, 1, 1, 0.5f);
-
-		// Désactive le clic si déjà acheté
 		Disabled = Purchased;
 	}
 }

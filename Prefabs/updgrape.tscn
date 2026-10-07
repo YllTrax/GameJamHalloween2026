@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://clk161d4mukij"]
 
+[ext_resource type="Script" uid="uid://ko7db0f1dvhn" path="res://Scripts/Updgrape.cs" id="1_b50kd"]
 [ext_resource type="PackedScene" uid="uid://f5vvb7nuv6ra" path="res://Prefabs/button_updrage.tscn" id="1_o6p3e"]
 
 [node name="Updgrape" type="Node2D" unique_id=387195760]
+script = ExtResource("1_b50kd")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=301717492]
 
@@ -14,74 +16,80 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.34509805)
 
-[node name="Salt" parent="CanvasLayer" unique_id=671295746 instance=ExtResource("1_o6p3e")]
+[node name="SaltLV1" parent="CanvasLayer" unique_id=671295746 instance=ExtResource("1_o6p3e")]
 offset_left = 111.0
 offset_top = 18.0
 offset_right = 239.0
 offset_bottom = 146.0
 
-[node name="ButtonUpdrage" parent="CanvasLayer/Salt" unique_id=1672204850 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
-layout_mode = 0
-offset_left = -2.0
-offset_top = 147.0
-offset_right = 126.0
-offset_bottom = 275.0
+[node name="SaltLv2" parent="CanvasLayer" unique_id=1672204850 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+offset_left = 109.0
+offset_top = 165.0
+offset_right = 237.0
+offset_bottom = 293.0
 Cost = 20
-Prerequisite = NodePath("..")
+Prerequisite = NodePath("../SaltLV1")
 
-[node name="ButtonUpdrage" parent="CanvasLayer/Salt/ButtonUpdrage" unique_id=1422713667 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
-layout_mode = 0
-offset_left = -2.0
-offset_top = 148.0
-offset_right = 126.0
-offset_bottom = 276.0
+[node name="SaltLV3" parent="CanvasLayer" unique_id=1422713667 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+offset_left = 107.0
+offset_top = 313.0
+offset_right = 235.0
+offset_bottom = 441.0
 Cost = 30
-Prerequisite = NodePath("..")
+Prerequisite = NodePath("../SaltLv2")
 
-[node name="ButtonUpdrage" parent="CanvasLayer/Salt/ButtonUpdrage/ButtonUpdrage" unique_id=1839303887 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 150.0
-offset_right = 130.0
-offset_bottom = 278.0
+[node name="SaltLV4" parent="CanvasLayer" unique_id=1839303887 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+offset_left = 109.0
+offset_top = 463.0
+offset_right = 237.0
+offset_bottom = 591.0
 Cost = 40
-Prerequisite = NodePath(".")
+Prerequisite = NodePath("../SaltLV3")
 
-[node name="Door" parent="CanvasLayer" unique_id=602421811 instance=ExtResource("1_o6p3e")]
+[node name="DoorLV1" parent="CanvasLayer" unique_id=602421811 instance=ExtResource("1_o6p3e")]
 offset_left = 329.0
 offset_top = 14.0
 offset_right = 457.0
 offset_bottom = 142.0
 
-[node name="ButtonUpdrage" parent="CanvasLayer/Door" unique_id=56945982 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
-layout_mode = 0
-offset_left = -2.0
-offset_top = 160.0
-offset_right = 126.0
-offset_bottom = 288.0
+[node name="DoorLV2" parent="CanvasLayer" unique_id=56945982 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+offset_left = 327.0
+offset_top = 174.0
+offset_right = 455.0
+offset_bottom = 302.0
 Cost = 20
-Prerequisite = NodePath("..")
+Prerequisite = NodePath("../DoorLV1")
 
-[node name="ButtonUpdrage2" parent="CanvasLayer/Door/ButtonUpdrage" unique_id=434563538 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
-layout_mode = 0
-offset_left = -3.0
-offset_top = 155.0
-offset_right = 125.0
-offset_bottom = 283.0
+[node name="DoorLV3" parent="CanvasLayer" unique_id=434563538 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+offset_left = 324.0
+offset_top = 329.0
+offset_right = 452.0
+offset_bottom = 457.0
 Cost = 30
-Prerequisite = NodePath("..")
+Prerequisite = NodePath("../DoorLV2")
 
-[node name="tourelle" parent="CanvasLayer" unique_id=1280955673 instance=ExtResource("1_o6p3e")]
+[node name="tourelleLV1" parent="CanvasLayer" unique_id=1280955673 instance=ExtResource("1_o6p3e")]
 offset_left = 555.0
 offset_top = 18.0
 offset_right = 683.0
 offset_bottom = 146.0
 
-[node name="ButtonUpdrage" parent="CanvasLayer/tourelle" unique_id=1579296378 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 157.0
-offset_right = 130.0
-offset_bottom = 285.0
+[node name="tourelleLV2" parent="CanvasLayer" unique_id=1579296378 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+offset_left = 557.0
+offset_top = 175.0
+offset_right = 685.0
+offset_bottom = 303.0
 Cost = 20
-Prerequisite = NodePath("..")
+Prerequisite = NodePath("../tourelleLV1")
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=168818106]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -126.0
+offset_top = 14.0
+offset_right = -9.0
+offset_bottom = 42.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 20
+text = "Germs : 0     "
