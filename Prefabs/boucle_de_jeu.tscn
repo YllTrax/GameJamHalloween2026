@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://do15h41qr01vx" path="res://Prefabs/Pumpkin.tscn" id="2_n0t4e"]
 [ext_resource type="PackedScene" uid="uid://be75hui1s24ji" path="res://Prefabs/PumpkinLv2.tscn" id="3_x56rw"]
 [ext_resource type="PackedScene" uid="uid://bwekhv5wygstw" path="res://Prefabs/pumpkin_lv_3.tscn" id="4_ofaj1"]
+[ext_resource type="PackedScene" uid="uid://clk161d4mukij" path="res://Prefabs/updgrape.tscn" id="5_x56rw"]
 
 [sub_resource type="FontVariation" id="FontVariation_cus6u"]
 
@@ -90,3 +91,6 @@ offset_bottom = 23.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 32
 text = "Wave 1"
+
+[node name="Updgrape" parent="." unique_id=387195760 instance=ExtResource("5_x56rw")]
+visible = false

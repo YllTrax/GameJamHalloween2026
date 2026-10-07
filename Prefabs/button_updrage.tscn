@@ -6,7 +6,9 @@
 [node name="TextureButton" type="TextureButton" unique_id=659913627]
 offset_right = 128.0
 offset_bottom = 128.0
+scale = Vector2(0.59152234, 0.59152234)
 texture_normal = ExtResource("1_6c1vj")
+ignore_texture_size = true
 script = ExtResource("2_xuabt")
 
 [node name="Cost" type="Label" parent="." unique_id=592850777]
