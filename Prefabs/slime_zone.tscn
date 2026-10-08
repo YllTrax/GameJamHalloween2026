@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://b3ljysu34c1i7"]
+
+[ext_resource type="Script" uid="uid://c5if4hmvt8jl" path="res://SlimeZone.cs" id="1_h4oqd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p18pi"]
+radius = 37.01351
+
+[node name="SlimeZone" type="Area2D" unique_id=744168898]
+z_index = -1
+scale = Vector2(0.84000045, 0.8684328)
+collision_layer = 64
+collision_mask = 4
+script = ExtResource("1_h4oqd")
+
+[node name="Collider" type="CollisionShape2D" parent="." unique_id=885004324]
+shape = SubResource("CircleShape2D_p18pi")
+
+[node name="FireZone" type="Polygon2D" parent="." unique_id=1724462170]
+position = Vector2(-0.43055177, -0.5000024)
+scale = Vector2(3.9569442, 3.85)
+color = Color(0.17173502, 0.4968863, 3.85046e-07, 1)
+polygon = PackedVector2Array(0, -10, 7, -7, 9.459459, 4.172325e-07, 7, 7, 0, 10, -8, 6, -10, 0, -7, -6)

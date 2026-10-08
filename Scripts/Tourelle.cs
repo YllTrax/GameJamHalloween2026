@@ -3,8 +3,17 @@ using Godot;
 
 public partial class Tourelle : Area2D
 {
+    public enum TowerType
+    {
+        Slime,
+        Fire,
+    }
+
     [Export]
     private float attackCD = 0.5f;
+
+    [Export]
+    private TowerType towerType;
 
     [Export]
     private PackedScene bulletPrefab;
@@ -59,11 +68,20 @@ public partial class Tourelle : Area2D
             bullet.dir = (target.GlobalPosition - firePoint.GlobalPosition).Normalized();
         }
         else
-        {
-            var zone = bulletPrefab.Instantiate<FireZone>(); //---------------------------ici on tire une une zone j'ai aps encore chnage rle nom
-            GetTree().CurrentScene.AddChild(zone); // d'abord dans l'arbre
-            zone.Launch(firePoint.GlobalPosition, target.GlobalPosition); // puis on lance
-        }
+            switch (towerType)
+            {
+                case TowerType.Fire:
+
+                    var zone = bulletPrefab.Instantiate<FireZone>(); //---------------------------ici on tire une une zone j'ai aps encore chnage rle nom
+                    GetTree().CurrentScene.AddChild(zone); // d'abord dans l'arbre
+                    zone.Launch(firePoint.GlobalPosition, target.GlobalPosition); // puis on lance
+                    return;
+                case TowerType.Slime:
+                    var zoneSlime = bulletPrefab.Instantiate<SlimeZone>(); //---------------------------ici on tire une une zone j'ai aps encore chnage rle nom
+                    GetTree().CurrentScene.AddChild(zoneSlime); // d'abord dans l'arbre
+                    zoneSlime.Launch(firePoint.GlobalPosition, target.GlobalPosition); // puis on lance
+                    return;
+            }
     }
 
     private void OnBodyEnter(Node2D body)
