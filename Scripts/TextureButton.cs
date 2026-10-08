@@ -16,7 +16,7 @@ public partial class TextureButton : Godot.TextureButton
 	public override void _Ready()
 	{
 		_skillLevel = GetNode<Label>("Cost");
-		_tree = GetTree().CurrentScene as Updgrape;
+		_tree = TrouverUpgrade();
 
 		Pressed += OnPressed;
 		_tree.GermsChanged += _ => UpdateVisuals();
@@ -51,5 +51,13 @@ public partial class TextureButton : Godot.TextureButton
 			Modulate = new Color(1, 1, 1, 0.8f);
 
 		Disabled = Purchased;
+	}
+
+	private Updgrape TrouverUpgrade()
+	{
+		Node n = GetParent();
+		while (n != null && n is not Updgrape)
+			n = n.GetParent();
+		return n as Updgrape;
 	}
 }

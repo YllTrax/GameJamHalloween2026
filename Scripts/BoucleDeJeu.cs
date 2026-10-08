@@ -10,6 +10,7 @@ public partial class BoucleDeJeu : Node2D
 	[Export] public float IntervalleSpawn = 5f;    // intervalle de base (vague 1)
 	[Export] public Rect2 ZoneJeu = new Rect2(0, 0, 1152, 648); // la zone visible
 	[Export] public float Marge = 100f;              // distance en dehors de la zone
+	
 	// Toutes les X citrouilles Lv1, on crée une Lv2 ; toutes les X Lv2, une Lv3
 	[Export] public int SeuilLv2 = 10;
 	[Export] public int SeuilLv3 = 10;
@@ -20,6 +21,13 @@ public partial class BoucleDeJeu : Node2D
 	[Export] public float IntervalleMin = 0.8f;       // plancher
 	[Export] public float BonusVitesseParVague = 0.05f; // +5% de vitesse par vague
 	[Export] public Label WaveLabel;                  // Label d'affichage (assigné dans l'inspecteur)
+	
+	//Nombre de Gems
+	[Export] public Label GemsLabel;
+
+	// --- Upgrade ---
+	[Export] public float DistanceInteraction = 60f;  // distance max au cercle de sel pour ouvrir le menu
+
 	
 	
 	//GameOver
@@ -37,6 +45,14 @@ public partial class BoucleDeJeu : Node2D
 	private CanvasLayer _gameOverUI;
 	private Button _boutonRejouer;
 	private bool _fini = false;
+	
+	// --- Gems ---
+	private int _germsAffiches = -1;
+
+	// --- Upgrade ---
+	private CanvasLayer _upgradeUI;
+	private CanvasLayer _hudWaves;
+	private CanvasLayer _hudGems;
 
 	public override void _Ready()
 	{
@@ -45,6 +61,9 @@ public partial class BoucleDeJeu : Node2D
 		_gameOverUI = GetNode<CanvasLayer>("GameOver");
 		_boutonRejouer = GetNode<Button>("GameOver/Button");
 		_boutonRejouer.Pressed += Rejouer;
+		_upgradeUI = GetNodeOrNull<CanvasLayer>("Updgrape");
+		_hudWaves = GetNodeOrNull<CanvasLayer>("Waves");
+		_hudGems = GetNodeOrNull<CanvasLayer>("Gems");
 		MettreAJourLabel();
 	}
 
@@ -64,6 +83,9 @@ public partial class BoucleDeJeu : Node2D
 			GameOver();
 			return;
 		}
+
+		MettreAJourGerms();
+		GererUpgrade();
 
 		GererVagues((float)delta);
 		GererSpawn((float)delta);
@@ -159,6 +181,44 @@ public partial class BoucleDeJeu : Node2D
 		}
 	}
 
+	//Mettre Le gems a jour
+	private void MettreAJourGerms()
+	{
+		if (GemsLabel == null) return;
+
+		int g = Personnage.Instance.germs;
+		if (g == _germsAffiches) return;
+
+		_germsAffiches = g;
+		GemsLabel.Text = $"Gems : {g}";
+	}
+
+	//Fenetre update
+	private void GererUpgrade()
+	{
+		if (_upgradeUI == null) return;
+
+		float distance = Personnage.Instance.GlobalPosition.DistanceTo(SaltCircle.Instance.GlobalPosition);
+		bool proche = distance <= DistanceInteraction;
+
+		// Le joueur s'éloigne du cercle : on ferme le shop
+		if (_upgradeUI.Visible && !proche)
+		{
+			AfficherUpgrade(false);
+			return;
+		}
+
+		// E près du cercle : ouvre / ferme
+		if (proche && Input.IsActionJustPressed("Upgrade"))
+			AfficherUpgrade(!_upgradeUI.Visible);
+	}
+
+	private void AfficherUpgrade(bool afficher)
+	{
+		_upgradeUI.Visible = afficher;
+		if (_hudWaves != null) _hudWaves.Visible = !afficher;
+		if (_hudGems != null) _hudGems.Visible = !afficher;
+	}
 
 	// Boucle de jeu
 	private void GameOver()
