@@ -15,70 +15,253 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.34509805)
 
 [node name="SaltLV1" parent="." unique_id=671295746 instance=ExtResource("1_o6p3e")]
-offset_left = 111.0
-offset_top = 18.0
-offset_right = 239.0
-offset_bottom = 146.0
+offset_left = 152.0
+offset_top = 112.00001
+offset_right = 280.0
+offset_bottom = 240.0
+Description = "+ 10% of salt"
 
 [node name="SaltLv2" parent="." unique_id=1672204850 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
-offset_left = 110.99999
-offset_top = 102.99999
-offset_right = 239.0
-offset_bottom = 231.0
+offset_left = 240.0
+offset_top = 112.00001
+offset_right = 368.0
+offset_bottom = 240.0
 Cost = 20
 Prerequisite = NodePath("../SaltLV1")
+Description = "+ 15% of salt"
 
 [node name="SaltLV3" parent="." unique_id=1422713667 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
-offset_left = 113.99999
-offset_top = 186.0
-offset_right = 242.0
-offset_bottom = 314.0
+offset_left = 328.0
+offset_top = 112.00001
+offset_right = 456.0
+offset_bottom = 240.0
 Cost = 30
 Prerequisite = NodePath("../SaltLv2")
+Description = "+ 20% of salt"
 
 [node name="SaltLV4" parent="." unique_id=1839303887 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
-offset_left = 115.99999
-offset_top = 273.0
-offset_right = 244.0
-offset_bottom = 401.0
+offset_left = 416.0
+offset_top = 112.00001
+offset_right = 544.0
+offset_bottom = 240.0
 Cost = 40
 Prerequisite = NodePath("../SaltLV3")
+Description = "+ 30% of salt"
+
+[node name="SaltLV5" parent="." unique_id=659913627 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+offset_left = 504.0
+offset_top = 112.00001
+offset_right = 632.0
+offset_bottom = 240.0
+Cost = 40
+Prerequisite = NodePath("../SaltLV4")
+Description = "+ 50% of salt"
+
+[node name="SaltLV6" parent="." unique_id=1727829882 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+offset_left = 592.0
+offset_top = 112.0
+offset_right = 720.0
+offset_bottom = 240.0
+Cost = 40
+Prerequisite = NodePath("../SaltLV5")
+Description = "+ 80% of salt"
+
+[node name="SaltLV7" parent="." unique_id=1027207873 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+offset_left = 680.0
+offset_top = 112.00001
+offset_right = 808.0
+offset_bottom = 240.0
+Cost = 40
+Prerequisite = NodePath("../SaltLV6")
+Description = "+ 85% of salt"
+
+[node name="SaltLV8" parent="." unique_id=1675579668 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+offset_left = 768.0
+offset_top = 112.00001
+offset_right = 896.0
+offset_bottom = 240.0
+Cost = 40
+Prerequisite = NodePath("../SaltLV7")
+Description = "+ 90% of salt"
+
+[node name="SaltLV9" parent="." unique_id=1096216664 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+offset_left = 856.0
+offset_top = 112.00001
+offset_right = 984.0
+offset_bottom = 240.0
+Cost = 40
+Prerequisite = NodePath("../SaltLV8")
+Description = "+ 95% of salt"
+
+[node name="SaltLV10" parent="." unique_id=729280575 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+offset_left = 944.0
+offset_top = 112.00001
+offset_right = 1072.0
+offset_bottom = 240.0
+Cost = 40
+Prerequisite = NodePath("../SaltLV9")
+Description = "+ 100% of salt"
 
 [node name="DoorLV1" parent="." unique_id=602421811 instance=ExtResource("1_o6p3e")]
-offset_left = 329.0
-offset_top = 14.0
-offset_right = 457.0
-offset_bottom = 142.0
+offset_left = 152.0
+offset_top = 240.0
+offset_right = 280.0
+offset_bottom = 368.0
+Description = "25% stronger"
 
 [node name="DoorLV2" parent="." unique_id=56945982 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
-offset_left = 333.0
-offset_top = 104.999985
-offset_right = 461.0
-offset_bottom = 232.99998
+offset_left = 240.0
+offset_top = 240.0
+offset_right = 368.0
+offset_bottom = 368.0
 Cost = 20
 Prerequisite = NodePath("../DoorLV1")
+Description = "50% stronger"
 
 [node name="DoorLV3" parent="." unique_id=434563538 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
-offset_left = 333.0
-offset_top = 195.0
-offset_right = 461.0
-offset_bottom = 323.0
+offset_left = 328.0
+offset_top = 240.0
+offset_right = 456.0
+offset_bottom = 368.0
 Cost = 30
 Prerequisite = NodePath("../DoorLV2")
+Description = "75% stronger"
 
-[node name="tourelleLV1" parent="." unique_id=1280955673 instance=ExtResource("1_o6p3e")]
-offset_left = 555.0
-offset_top = 18.0
-offset_right = 683.0
-offset_bottom = 146.0
+[node name="DoorLV4" parent="." unique_id=1412595026 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+offset_left = 416.0
+offset_top = 240.0
+offset_right = 544.0
+offset_bottom = 368.0
+Cost = 30
+Prerequisite = NodePath("../DoorLV3")
+Description = "100% stronger"
 
-[node name="tourelleLV2" parent="." unique_id=1579296378 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
-offset_left = 559.0
-offset_top = 103.999985
-offset_right = 687.0
-offset_bottom = 231.99998
+[node name="tourelledegLV1" parent="." unique_id=1280955673 instance=ExtResource("1_o6p3e")]
+offset_left = 152.0
+offset_top = 360.0
+offset_right = 280.0
+offset_bottom = 488.0
+Description = "+20% damage"
+
+[node name="tourelledegLV2" parent="." unique_id=1579296378 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+offset_left = 240.0
+offset_top = 359.99997
+offset_right = 368.0
+offset_bottom = 487.99997
 Cost = 20
-Prerequisite = NodePath("../tourelleLV1")
+Prerequisite = NodePath("../tourelledegLV1")
+Description = "+25% damage"
+
+[node name="tourelledegLV3" parent="." unique_id=1386406131 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+offset_left = 328.0
+offset_top = 359.99997
+offset_right = 456.0
+offset_bottom = 487.99997
+Cost = 20
+Prerequisite = NodePath("../tourelledegLV2")
+Description = "+40% damage"
+
+[node name="tourelledegLV4" parent="." unique_id=632302163 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+offset_left = 416.0
+offset_top = 359.99997
+offset_right = 544.0
+offset_bottom = 487.99997
+Cost = 20
+Prerequisite = NodePath("../tourelledegLV3")
+Description = "+50% damage"
+
+[node name="tourelledegLV5" parent="." unique_id=830313031 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+offset_left = 504.0
+offset_top = 359.99997
+offset_right = 632.0
+offset_bottom = 487.99997
+Cost = 20
+Prerequisite = NodePath("../tourelledegLV4")
+Description = "+60% damage"
+
+[node name="tourelledegLV6" parent="." unique_id=888279891 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+offset_left = 592.0
+offset_top = 359.99997
+offset_right = 720.0
+offset_bottom = 487.99997
+Cost = 20
+Prerequisite = NodePath("../tourelledegLV5")
+Description = "+70% damage"
+
+[node name="tourelledegLV7" parent="." unique_id=951432166 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+offset_left = 680.0
+offset_top = 359.99997
+offset_right = 808.0
+offset_bottom = 487.99997
+Cost = 20
+Prerequisite = NodePath("../tourelledegLV6")
+Description = "+75% damage"
+
+[node name="tourelledegLV8" parent="." unique_id=494548927 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+offset_left = 768.0
+offset_top = 359.99997
+offset_right = 896.0
+offset_bottom = 487.99997
+Cost = 20
+Prerequisite = NodePath("../tourelledegLV7")
+Description = "+80% damage"
+
+[node name="tourelledegLV9" parent="." unique_id=987959165 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+offset_left = 856.0
+offset_top = 359.99997
+offset_right = 984.0
+offset_bottom = 487.99997
+Cost = 20
+Prerequisite = NodePath("../tourelledegLV8")
+Description = "+90% damage"
+
+[node name="tourelledegLV10" parent="." unique_id=1693703418 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+offset_left = 944.0
+offset_top = 360.0
+offset_right = 1072.0
+offset_bottom = 488.0
+Cost = 20
+Prerequisite = NodePath("../tourelledegLV9")
+Description = "+100% damage"
+
+[node name="tourellemunLV1" parent="." unique_id=1146145132 instance=ExtResource("1_o6p3e")]
+offset_left = 152.0
+offset_top = 447.99997
+offset_right = 280.0
+offset_bottom = 576.0
+Description = "+20% ammunition "
+
+[node name="tourellemunLV2" parent="." unique_id=229946910 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+offset_left = 240.0
+offset_top = 448.0
+offset_right = 368.0
+offset_bottom = 576.0
+Prerequisite = NodePath("../tourellemunLV1")
+Description = "+40% ammunition "
+
+[node name="tourellemunLV3" parent="." unique_id=95481707 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+offset_left = 328.0
+offset_top = 448.0
+offset_right = 456.0
+offset_bottom = 576.0
+Prerequisite = NodePath("../tourellemunLV2")
+Description = "+60% ammunition "
+
+[node name="tourellemunLV4" parent="." unique_id=1136965571 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+offset_left = 416.0
+offset_top = 448.0
+offset_right = 544.0
+offset_bottom = 576.0
+Prerequisite = NodePath("../tourellemunLV3")
+Description = "+80% ammunition "
+
+[node name="tourellemunLV5" parent="." unique_id=1056009201 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+offset_left = 504.0
+offset_top = 448.0
+offset_right = 632.0
+offset_bottom = 576.0
+Prerequisite = NodePath("../tourellemunLV4")
+Description = "+100% ammunition "
 
 [node name="Label" type="Label" parent="." unique_id=168818106]
 anchors_preset = 1

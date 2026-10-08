@@ -65,6 +65,7 @@ public partial class BoucleDeJeu : Node2D
 		_hudWaves = GetNodeOrNull<CanvasLayer>("Waves");
 		_hudGems = GetNodeOrNull<CanvasLayer>("Gems");
 		MettreAJourLabel();
+		GetTree().NodeAdded += OnNodeAdded;
 	}
 
 	public override void _Process(double delta)
@@ -220,9 +221,21 @@ public partial class BoucleDeJeu : Node2D
 		if (_hudGems != null) _hudGems.Visible = !afficher;
 	}
 
+	private void OnNodeAdded(Node n)
+	{
+		if (n.IsInGroup("Doors"))
+			UpgradeStats.ApplyDoorBonus(n);
+	}
+
+	public override void _ExitTree()
+	{
+		GetTree().NodeAdded -= OnNodeAdded;
+	}
+
 	// Boucle de jeu
 	private void GameOver()
 	{
+		if (_upgradeUI != null) AfficherUpgrade(false);
 		ScoreLabel.Text = $"Score : {VagueActuelle}";
 		_fini = true;
 		_gameOverUI.Visible = true;

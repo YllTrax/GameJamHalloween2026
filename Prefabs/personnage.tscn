@@ -171,5 +171,5 @@ animation = &"IdleEast"
 [node name="Health" parent="." unique_id=1039052001 node_paths=PackedStringArray("sprite") instance=ExtResource("4_ydahe")]
 position = Vector2(0.205, -5.995)
 scale = Vector2(0.91812944, 0.40834948)
-baseHealth = 5.0
+baseHealth = 1000.0
 sprite = NodePath("../AnimatorPersonnage")

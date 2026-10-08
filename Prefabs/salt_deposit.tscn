@@ -19,9 +19,8 @@ scale = Vector2(1.12, 1.12)
 color = Color(0.84483373, 0.5213544, 0.850883, 1)
 polygon = PackedVector2Array(1, -13, 18, -7, 11, 15, -9, 13, -16, -4)
 
-[node name="Interactable" type="Area2D" parent="." unique_id=284242960 node_paths=PackedStringArray("polygone2D", "outline")]
+[node name="Interactable" type="Area2D" parent="." unique_id=284242960 node_paths=PackedStringArray("outline")]
 script = ExtResource("2_sed1f")
-polygone2D = NodePath("../Polygon2D")
 outline = NodePath("../Outline")
 range = 50.0
 

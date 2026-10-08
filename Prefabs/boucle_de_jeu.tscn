@@ -5,10 +5,23 @@
 [ext_resource type="PackedScene" uid="uid://be75hui1s24ji" path="res://Prefabs/PumpkinLv2.tscn" id="3_x56rw"]
 [ext_resource type="PackedScene" uid="uid://bwekhv5wygstw" path="res://Prefabs/pumpkin_lv_3.tscn" id="4_ofaj1"]
 [ext_resource type="PackedScene" uid="uid://clk161d4mukij" path="res://Prefabs/updgrape.tscn" id="5_x56rw"]
+[ext_resource type="Shader" uid="uid://bwb07gi4wkwju" path="res://texture/boucle_de_jeu.gdshader" id="6_ofaj1"]
+[ext_resource type="PackedScene" uid="uid://cyp88m5vfn78k" path="res://Prefabs/menu_pause.tscn" id="7_cus6u"]
+[ext_resource type="Script" uid="uid://cf40tm6ubl1qi" path="res://Scripts/MenuPause.cs" id="8_wghvw"]
 
 [sub_resource type="FontVariation" id="FontVariation_cus6u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0t4e"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_536d0"]
+shader = ExtResource("6_ofaj1")
+shader_parameter/blur = 2.0
+shader_parameter/tint = Color(0, 0, 0, 0.35)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wghvw"]
+shader = ExtResource("6_ofaj1")
+shader_parameter/blur = 2.0
+shader_parameter/tint = Color(0, 0, 0, 0.35)
 
 [node name="Boucle de jeu" type="Node2D" unique_id=260320005 node_paths=PackedStringArray("WaveLabel", "GemsLabel", "ScoreLabel")]
 script = ExtResource("1_0vhmx")
@@ -96,15 +109,49 @@ text = "Wave 1"
 [node name="Gems" type="CanvasLayer" parent="." unique_id=577505743]
 
 [node name="Label" type="Label" parent="Gems" unique_id=1155190391]
-offset_left = 994.0
-offset_top = 41.0
-offset_right = 1151.0
-offset_bottom = 83.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -161.0
+offset_top = 53.0
+offset_right = -4.0
+offset_bottom = 95.0
+grow_horizontal = 0
 theme_override_font_sizes/font_size = 30
 text = "Gems : 100"
-horizontal_alignment = 2
 
 [node name="Updgrape" parent="." unique_id=387195760 instance=ExtResource("5_x56rw")]
 visible = false
 
+[node name="ColorRect" parent="Updgrape" index="0" unique_id=510714343]
+material = SubResource("ShaderMaterial_536d0")
+color = Color(0, 0, 0, 0)
+
+[node name="MenuPause" parent="." unique_id=1546097521 instance=ExtResource("7_cus6u")]
+script = ExtResource("8_wghvw")
+ScenePrincipale = "uid://ci4mpugnevp18"
+
+[node name="Play" parent="MenuPause" index="0" unique_id=1705783361]
+z_index = 1
+
+[node name="BtnQuitter" parent="MenuPause" index="1" unique_id=993648113]
+visibility_layer = 3
+z_index = 1
+
+[node name="BtnReglages" parent="MenuPause" index="2" unique_id=1421724480]
+z_index = 1
+
+[node name="BtnLangue" parent="MenuPause" index="3" unique_id=612639627]
+z_index = 1
+
+[node name="ColorRect2" type="ColorRect" parent="MenuPause" unique_id=403508893]
+material = SubResource("ShaderMaterial_wghvw")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
 [editable path="Updgrape"]
+[editable path="MenuPause"]

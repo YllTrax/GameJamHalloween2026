@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://ci4mpugnevp18" path="res://Prefabs/boucle_de_jeu.tscn" id="7_h35mc"]
 [ext_resource type="TileSet" uid="uid://cfq0ohha68bj0" path="res://Images/Misc/new_tile_set.tres" id="7_uayuw"]
 [ext_resource type="PackedScene" uid="uid://drpaowd2cjjol" path="res://Prefabs/toarch.tscn" id="8_h35mc"]
+[ext_resource type="PackedScene" uid="uid://chhhyq1v22owf" path="res://Prefabs/salt_deposit.tscn" id="9_fk0ur"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aluq5"]
 size = Vector2(774, 398)
@@ -49,7 +50,7 @@ position = Vector2(1270, 332)
 
 [node name="Personnage" parent="." unique_id=874529347 instance=ExtResource("2_42ube")]
 position = Vector2(1012, 228)
-germs = 100
+germs = 10000
 
 [node name="Doors" type="Node2D" parent="." unique_id=1977315636]
 position = Vector2(1, 0)
@@ -170,5 +171,9 @@ position = Vector2(827, 207)
 [node name="Toarch6" parent="." unique_id=556032133 instance=ExtResource("8_h35mc")]
 position = Vector2(987, 375)
 
+[node name="SaltDeposit" parent="." unique_id=418339320 instance=ExtResource("9_fk0ur")]
+position = Vector2(1091, 203)
+
 [editable path="Personnage"]
+[editable path="Doors/NorthDoor"]
 [editable path="Toarch6"]

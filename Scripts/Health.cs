@@ -24,6 +24,7 @@ public partial class Health : Node2D
 	private bool isDead;
 
 	private float burningTimer;
+	
 
 	[Export]
 	private float burningDuration;

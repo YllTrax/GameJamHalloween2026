@@ -47,9 +47,6 @@ scale = Vector2(0.44, 1)
 [node name="Personnage" parent="." unique_id=874529347 instance=ExtResource("3_eofuw")]
 dashSpeed = 1000.0
 
-[node name="Health" parent="Personnage" index="3" unique_id=1039052001]
-IsPlayer = false
-
 [node name="Base" type="Area2D" parent="." unique_id=2127739621]
 position = Vector2(342, 168)
 rotation = 1.5707964

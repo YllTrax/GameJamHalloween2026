@@ -1,4 +1,6 @@
 using Godot;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 public partial class TextureButton : Godot.TextureButton
 {
@@ -6,6 +8,7 @@ public partial class TextureButton : Godot.TextureButton
 
 	[Export] public int Cost = 10;
 	[Export] public TextureButton Prerequisite;
+	[Export(PropertyHint.MultilineText)] public string Description = "";
 
 	private Label _skillLevel;
 	private Updgrape _tree;
@@ -16,6 +19,9 @@ public partial class TextureButton : Godot.TextureButton
 	public override void _Ready()
 	{
 		_skillLevel = GetNode<Label>("Cost");
+		TooltipText = string.IsNullOrEmpty(Description)
+		? $"Cost : {Cost} gems"
+		: $"{Description}\nCost : {Cost} gems";
 		_tree = TrouverUpgrade();
 
 		Pressed += OnPressed;
@@ -32,13 +38,14 @@ public partial class TextureButton : Godot.TextureButton
 		if (!_tree.TrySpend(Cost)) return;
 
 		Purchased = true;
+		AppliquerEffet();
 		EmitSignal(SignalName.Bought);
 		UpdateVisuals();
 	}
 
 	private void UpdateVisuals()
 	{
-		_skillLevel.Text = Purchased ? "Acquis" : $"{Cost} germes";
+		_skillLevel.Text = Purchased ? "Acquired" : $"{Cost} gems";
 
 		bool canAfford = _tree.Germs >= Cost;
 		if (Purchased)
@@ -59,5 +66,23 @@ public partial class TextureButton : Godot.TextureButton
 		while (n != null && n is not Updgrape)
 			n = n.GetParent();
 		return n as Updgrape;
+	}
+	private void AppliquerEffet()
+	{
+		var m = Regex.Match(Description, @"\d+(\.\d+)?");
+		if (!m.Success) return;
+
+		float bonus = float.Parse(m.Value, CultureInfo.InvariantCulture) / 100f;
+		string nom = Name.ToString().ToLower();
+
+		if (nom.StartsWith("salt")) UpgradeStats.SaltBonus = bonus;
+		else if (nom.StartsWith("door"))
+		{
+			UpgradeStats.DoorBonus = bonus;
+			foreach (Node porte in GetTree().GetNodesInGroup("Doors"))
+				UpgradeStats.ApplyDoorBonus(porte);
+		}
+		else if (nom.StartsWith("tourelledeg")) UpgradeStats.TurretDamageBonus = bonus;
+		else if (nom.StartsWith("tourellemun")) UpgradeStats.TurretAmmoBonus = bonus;
 	}
 }
