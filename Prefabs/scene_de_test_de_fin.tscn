@@ -5,8 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://bht4lcjhamjlq" path="res://Prefabs/personnage.tscn" id="3_eofuw"]
 [ext_resource type="Script" uid="uid://dce3vcl13iokc" path="res://Scripts/Base.cs" id="4_7k2vv"]
 [ext_resource type="PackedScene" uid="uid://do15h41qr01vx" path="res://Prefabs/Pumpkin.tscn" id="5_ogrv1"]
+<<<<<<< Updated upstream
 [ext_resource type="PackedScene" uid="uid://ci4mpugnevp18" path="res://Prefabs/boucle_de_jeu.tscn" id="6_2lsjc"]
 [ext_resource type="PackedScene" uid="uid://kntxamw5koqo" path="res://Prefabs/salt_circle.tscn" id="7_udtek"]
+=======
+[ext_resource type="PackedScene" uid="uid://dwrjbxva6mfpd" path="res://Prefabs/tourelleDeSlime.tscn" id="6_2lsjc"]
+>>>>>>> Stashed changes
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p18pi"]
 
@@ -92,9 +96,20 @@ position = Vector2(-74.99999, -128.99998)
 [node name="Pumpkin5" parent="." unique_id=717180977 instance=ExtResource("5_ogrv1")]
 position = Vector2(34.999996, -209.99998)
 
+<<<<<<< Updated upstream
 [node name="Boucle de jeu" parent="." unique_id=260320005 instance=ExtResource("6_2lsjc")]
 
 [node name="SaltCircle" parent="." unique_id=1691003878 instance=ExtResource("7_udtek")]
 position = Vector2(577, 87)
+=======
+[node name="TourelleDeSlime" parent="." unique_id=2130286474 instance=ExtResource("6_2lsjc")]
+position = Vector2(185, 53)
+
+[node name="TourelleDeSlime2" parent="." unique_id=891572536 instance=ExtResource("6_2lsjc")]
+position = Vector2(628, -91)
+
+[node name="TourelleDeSlime3" parent="." unique_id=850155874 instance=ExtResource("6_2lsjc")]
+position = Vector2(273, 505)
+>>>>>>> Stashed changes
 
 [editable path="Personnage"]
