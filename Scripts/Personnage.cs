@@ -1,34 +1,53 @@
+using System;
 using Godot;
 
 public partial class Personnage : CharacterBody2D
 {
-    public static Personnage Instance { get; private set; }
+    public enum TempAnim
+    {
+        North,
+        South,
+        West,
+        East,
+    }
 
+    public static Personnage Instance { get; private set; }
+    public event Action<TempAnim> DirectionChange;
+
+    [ExportGroup("Références")]
     [Export]
     private AnimatedSprite2D anim;
 
-    [Export]
-    private float moveSpeed;
-
+    [ExportGroup("Mouvement")]
     [Export]
     private float startSpeed = 200f;
 
     [Export]
-    private float dashSpeed = 2000f;
-
-    [Export]
     private float accel = 1500f;
 
+    [ExportGroup("Dash")]
+    [Export]
+    private float dashSpeed = 2000f;
+
+    [ExportGroup("Inventaire")]
     [Export]
     public float carriedSalt = 0;
 
-    private float maxCarriedSalt;
+    [Export]
+    public int germs = 0;
 
+    [ExportGroup("Debug (runtime)")]
+    [Export]
+    public TempAnim lastAnim;
+
+    [Export]
+    private float moveSpeed;
+
+    [ExportGroup("")] // fin des groupes
+    private float maxCarriedSalt;
     private bool isDashing = false;
     private bool canDash = true;
-
     public bool iSIndoor = false;
-
     private Vector2 mouseDir;
 
     public override void _EnterTree()
@@ -66,19 +85,52 @@ public partial class Personnage : CharacterBody2D
         {
             Dash();
         }
+
         Vector2 dir = Input.GetVector("move_left", "move_right", "move_up", "move_down");
         Velocity = Velocity.MoveToward(dir * moveSpeed, accel * (float)delta);
         MoveAndSlide();
 
-        if (dir == Vector2.Zero)
+        UpdateAnimation(dir);
+    }
+
+    private void UpdateAnimation(Vector2 dir)
+    {
+        // On convertit en -1, 0 ou 1
+        int x = (int)Mathf.Sign(dir.X);
+        int y = (int)Mathf.Sign(dir.Y);
+
+        TempAnim dirAnim = lastAnim;
+
+        switch (x, y)
         {
-            anim.Play("Idle");
+            case (0, -1):
+                dirAnim = TempAnim.North;
+                break;
+            case (0, 1):
+                dirAnim = TempAnim.South;
+                break;
+            case (-1, 0):
+                dirAnim = TempAnim.West;
+                break;
+            case (1, 0):
+                dirAnim = TempAnim.East;
+                break;
+            case (_, -1):
+                dirAnim = TempAnim.North;
+                break;
+            case (_, 1):
+                dirAnim = TempAnim.South;
+                break;
         }
-        else
+
+        if (dirAnim != lastAnim)
         {
-            anim.Play("Run");
+            lastAnim = dirAnim;
+            DirectionChange?.Invoke(dirAnim);
         }
-        anim.FlipH = mouseDir.X < 0f;
+
+        anim.Play(GetAnim(lastAnim));
+        anim.FlipH = lastAnim == TempAnim.East;
     }
 
     public override void _Input(InputEvent @event) { }
@@ -113,4 +165,28 @@ public partial class Personnage : CharacterBody2D
     private void ToCarrySalt() { }
 
     private void ToDropSalt() { }
+
+    internal void OnCollect(int value)
+    {
+        germs += value;
+    }
+
+    private void StoreTempAnim(TempAnim temp)
+    {
+        lastAnim = temp;
+    }
+
+    private string GetAnim(TempAnim temp)
+    {
+        switch (temp)
+        {
+            case TempAnim.North:
+                return "IdleNorth";
+            case TempAnim.West:
+            case TempAnim.East:
+                return "IdleWest";
+            default:
+                return "IdleSouth";
+        }
+    }
 }

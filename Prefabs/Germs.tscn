@@ -1,18 +1,22 @@
 [gd_scene format=3 uid="uid://c1tkwc8qmv001"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ngk0e"]
-height = 33.333355
+[ext_resource type="Script" uid="uid://c2mstkjmrokx3" path="res://Scripts/Germs.cs" id="1_wer7p"]
 
-[node name="Germs" type="RigidBody2D" unique_id=539200772]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ngk0e"]
+radius = 35.812675
+height = 143.2507
+
+[node name="Germs" type="Area2D" unique_id=105507298]
+scale = Vector2(1.91, 1.91)
 collision_layer = 32
-collision_mask = 0
-gravity_scale = 0.0
+collision_mask = 2
 linear_damp = 6.0
 angular_damp = 6.0
+script = ExtResource("1_wer7p")
+duration = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=414513924]
-position = Vector2(0, 0.4)
-scale = Vector2(0.576, 0.288)
+scale = Vector2(0.726, 0.373)
 shape = SubResource("CapsuleShape2D_ngk0e")
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=115497780]

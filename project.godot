@@ -65,6 +65,7 @@ Inventary={
 2d_physics/layer_4="Door"
 2d_physics/layer_5="DamagesSources"
 2d_physics/layer_6="Grems"
+2d_physics/layer_7="Projectiles"
 
 [physics]
 

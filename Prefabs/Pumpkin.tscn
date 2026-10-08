@@ -3,30 +3,82 @@
 [ext_resource type="Script" uid="uid://bbveukhsk5wtn" path="res://Scripts/Pumpkin.cs" id="1_jxr30"]
 [ext_resource type="PackedScene" uid="uid://c1tkwc8qmv001" path="res://Prefabs/Germs.tscn" id="2_n42on"]
 [ext_resource type="PackedScene" uid="uid://wj1whgh7v5c" path="res://Prefabs/health.tscn" id="2_nf54d"]
+[ext_resource type="Texture2D" uid="uid://d2wvdnjb0gspc" path="res://Images/Sprites/pumpkin.png" id="4_jajrq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aluq5"]
-size = Vector2(138.6366, 120.45474)
+size = Vector2(22.727318, 31.81824)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hktuj"]
+atlas = ExtResource("4_jajrq")
+region = Rect2(32, 0, 32, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nsewi"]
+atlas = ExtResource("4_jajrq")
+region = Rect2(64, 0, 32, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gde8n"]
+atlas = ExtResource("4_jajrq")
+region = Rect2(0, 0, 32, 27)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p18pi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hktuj")
+}],
+"loop": 1,
+"name": &"IdleEastWest",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nsewi")
+}],
+"loop": 1,
+"name": &"IdleNorth",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gde8n")
+}],
+"loop": 1,
+"name": &"IdleSouth",
+"speed": 5.0
+}]
 
 [node name="Pumpkin" type="CharacterBody2D" unique_id=1184827937]
-scale = Vector2(0.43999934, 0.43999934)
+scale = Vector2(1.1671478, 0.6820792)
 collision_layer = 4
-collision_mask = 11
+collision_mask = 15
 script = ExtResource("1_jxr30")
 GermsScene = ExtResource("2_n42on")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=554359095]
 
-[node name="Pumpkin" type="Polygon2D" parent="." unique_id=1245229499]
-color = Color(0.7845131, 0.42027736, 0.14271641, 1)
-polygon = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24)
-
 [node name="PumpkinCollision" type="CollisionShape2D" parent="." unique_id=1484324618]
-position = Vector2(-5.681822, 3.4090922)
-scale = Vector2(0.9999998, 0.9999998)
+position = Vector2(1.0837223e-06, -6.773265e-07)
+scale = Vector2(0.9999997, 0.9999997)
 shape = SubResource("RectangleShape2D_aluq5")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1993445216]
 avoidance_enabled = true
 
-[node name="Health" parent="." unique_id=1039052001 instance=ExtResource("2_nf54d")]
+[node name="Health" parent="." unique_id=1039052001 node_paths=PackedStringArray("sprite") instance=ExtResource("2_nf54d")]
+position = Vector2(6.8181915, -18.181845)
+scale = Vector2(1.972, 0.15)
 baseHealth = 50.0
+sprite = NodePath("../PumpkinSprite")
+burningDuration = 3.0
+burnPercentPerSecond = 20.0
+
+[node name="HealthBar" parent="Health" index="0" unique_id=1477468549]
+modulate = Color(11.662025, 6.3731055, 9.857178e-05, 1)
+self_modulate = Color(0.8782145, 0.3353131, 0.12444454, 1)
+scale = Vector2(1, 1.8941096)
+
+[node name="PumpkinSprite" type="AnimatedSprite2D" parent="." unique_id=1687177670]
+sprite_frames = SubResource("SpriteFrames_p18pi")
+animation = &"IdleSouth"
+
+[editable path="Health"]

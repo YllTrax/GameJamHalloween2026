@@ -7,7 +7,7 @@
 radius = 37.01351
 
 [node name="Bullet" type="Area2D" unique_id=744168898]
-collision_layer = 2
+collision_layer = 64
 collision_mask = 4
 script = ExtResource("1_0oen4")
 moveSpeed = 200.0
@@ -23,8 +23,8 @@ polygon = PackedVector2Array(0, -10, 7, -7, 10, 0, 7, 7, 0, 10, -8, 6, -10, 0, -
 collision_mask = 5
 script = ExtResource("2_m4f65")
 targetMode = 1
-damage = 2000.0
-hitCD = 0.001
+damage = 10.0
+shouldSelfDestroy = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Damage Source" unique_id=52376558]
 shape = SubResource("CircleShape2D_p18pi")

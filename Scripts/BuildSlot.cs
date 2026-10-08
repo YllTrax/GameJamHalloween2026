@@ -9,6 +9,9 @@ public partial class BuildSlot : Node2D, IInteractable
     [Export]
     private PackedScene tourelle;
 
+    [Export]
+    private PackedScene tourelleBrulante;
+
     public void Interact()
     {
         var building = toarch.Instantiate<Toarch>();
@@ -16,7 +19,12 @@ public partial class BuildSlot : Node2D, IInteractable
         building.GlobalPosition = GlobalPosition;
     }
 
-    public void InteractMiddleButton() { }
+    public void InteractMiddleButton()
+    {
+        var building = tourelleBrulante.Instantiate<Tourelle>();
+        GetTree().CurrentScene.AddChild(building);
+        building.GlobalPosition = GlobalPosition;
+    }
 
     public void InteractRightclick()
     {

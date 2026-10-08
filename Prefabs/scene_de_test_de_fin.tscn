@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://bht4lcjhamjlq" path="res://Prefabs/personnage.tscn" id="3_eofuw"]
 [ext_resource type="Script" uid="uid://dce3vcl13iokc" path="res://Scripts/Base.cs" id="4_7k2vv"]
 [ext_resource type="PackedScene" uid="uid://do15h41qr01vx" path="res://Prefabs/Pumpkin.tscn" id="5_ogrv1"]
-[ext_resource type="PackedScene" uid="uid://crda28r037s82" path="res://Prefabs/tourelle.tscn" id="6_2lsjc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p18pi"]
 
@@ -50,6 +49,7 @@ dashSpeed = 1000.0
 position = Vector2(342, 168)
 rotation = 1.5707964
 scale = Vector2(0.44, 1)
+collision_mask = 3
 script = ExtResource("4_7k2vv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Base" unique_id=450356860]
@@ -76,31 +76,18 @@ tile_map_data = PackedByteArray("AAAEAAsAAQAAAAAAAQAEAAwAAQAAAAAAAQAEAA0AAQAAAAA
 tile_set = ExtResource("1_vayox")
 
 [node name="Pumpkin" parent="." unique_id=1184827937 instance=ExtResource("5_ogrv1")]
-position = Vector2(-330, 488)
-Damage = 200.0
+position = Vector2(-206.99998, 172.99998)
 
-[node name="Pumpkin2" parent="." unique_id=496545900 instance=ExtResource("5_ogrv1")]
-position = Vector2(-194, 578)
+[node name="Pumpkin2" parent="." unique_id=1807151797 instance=ExtResource("5_ogrv1")]
+position = Vector2(-81.99999, 143.99998)
 
-[node name="Pumpkin3" parent="." unique_id=779196140 instance=ExtResource("5_ogrv1")]
-position = Vector2(-300, 259)
+[node name="Pumpkin3" parent="." unique_id=995618204 instance=ExtResource("5_ogrv1")]
+position = Vector2(-131.99998, -49.999996)
 
-[node name="Pumpkin4" parent="." unique_id=658023199 instance=ExtResource("5_ogrv1")]
-position = Vector2(-329, -45)
+[node name="Pumpkin4" parent="." unique_id=2053112759 instance=ExtResource("5_ogrv1")]
+position = Vector2(-74.99999, -128.99998)
 
-[node name="Pumpkin5" parent="." unique_id=1293159896 instance=ExtResource("5_ogrv1")]
-position = Vector2(13, 681)
-
-[node name="Pumpkin6" parent="." unique_id=1887526815 instance=ExtResource("5_ogrv1")]
-position = Vector2(266, 688)
-
-[node name="Pumpkin7" parent="." unique_id=1939077122 instance=ExtResource("5_ogrv1")]
-position = Vector2(430, 739)
-
-[node name="Pumpkin8" parent="." unique_id=1182103345 instance=ExtResource("5_ogrv1")]
-position = Vector2(647, 765)
-
-[node name="Tourelle" parent="." unique_id=2130286474 instance=ExtResource("6_2lsjc")]
-position = Vector2(77, 330)
+[node name="Pumpkin5" parent="." unique_id=717180977 instance=ExtResource("5_ogrv1")]
+position = Vector2(34.999996, -209.99998)
 
 [editable path="Personnage"]

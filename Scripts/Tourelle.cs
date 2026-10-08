@@ -1,35 +1,37 @@
-using System;
 using System.Collections.Generic;
 using Godot;
 
 public partial class Tourelle : Area2D
 {
-    private List<Node2D> bodies = new();
-
     [Export]
-    private float attackCD;
+    private float attackCD = 0.5f;
 
     [Export]
     private PackedScene bulletPrefab;
 
     [Export]
     private Node2D firePoint;
+
     public Node2D target;
+
+    private List<Node2D> bodies = new();
     private Timer _timerTarget;
     private Timer _timerFire;
+
+    [Export]
+    private bool shouldFireInArc;
 
     public override void _Ready()
     {
         BodyEntered += OnBodyEnter;
-        _timerTarget = new Timer();
-        _timerTarget.WaitTime = 0.5;
-        _timerTarget.OneShot = false;
+        BodyExited += OnBodyExit;
+
+        _timerTarget = new Timer { WaitTime = 0.5, OneShot = false };
         _timerTarget.Timeout += FindTarget;
         AddChild(_timerTarget);
         _timerTarget.Start();
-        _timerFire = new Timer();
-        _timerFire.WaitTime = 0.5;
-        _timerFire.OneShot = false;
+
+        _timerFire = new Timer { WaitTime = attackCD, OneShot = false };
         _timerFire.Timeout += Fire;
         AddChild(_timerFire);
         _timerFire.Start();
@@ -37,7 +39,7 @@ public partial class Tourelle : Area2D
 
     public override void _Process(double delta)
     {
-        if (IsInstanceValid(target))
+        if (!IsInstanceValid(target))
         {
             target = null;
             return;
@@ -47,47 +49,52 @@ public partial class Tourelle : Area2D
 
     private void Fire()
     {
-        if (bodies.Count == 0)
+        if (target == null || !IsInstanceValid(target))
             return;
-        Vector2 dir = (target.GlobalPosition - GlobalPosition).Normalized();
-        var bullet = bulletPrefab.Instantiate<Bullet>();
-        bullet.dir = dir;
-        bullet.GlobalPosition = firePoint.GlobalPosition;
-        GetTree().CurrentScene.AddChild(bullet);
+        if (!shouldFireInArc)
+        {
+            var bullet = bulletPrefab.Instantiate<Bullet>();
+            GetTree().CurrentScene.AddChild(bullet);
+            bullet.GlobalPosition = firePoint.GlobalPosition;
+            bullet.dir = (target.GlobalPosition - firePoint.GlobalPosition).Normalized();
+        }
+        else
+        {
+            var zone = bulletPrefab.Instantiate<FireZone>(); //---------------------------ici on tire une une zone j'ai aps encore chnage rle nom
+            GetTree().CurrentScene.AddChild(zone); // d'abord dans l'arbre
+            zone.Launch(firePoint.GlobalPosition, target.GlobalPosition); // puis on lance
+        }
     }
 
     private void OnBodyEnter(Node2D body)
     {
-        // if (body == GetParent())
-        //     return;
-        // if (body is Personnage || body is Tourelle)
-        //     return;
-        bodies.Add(body);
-    }
-
-    private void FindTarget()
-    {
-        if (bodies.Count == 0)
-            return;
-        float dist;
-        float lastShortestDist = 5000;
-        foreach (Node2D body in bodies)
-        {
-            dist = body.GlobalPosition.DistanceTo(GlobalPosition);
-            if (dist < lastShortestDist)
-            {
-                lastShortestDist = dist;
-                target = body;
-            }
-        }
+        if (!bodies.Contains(body))
+            bodies.Add(body);
     }
 
     private void OnBodyExit(Node2D body)
     {
-        if (body == GetParent())
-            return;
-        if (body is Personnage || body is Tourelle)
-            return;
         bodies.Remove(body);
+        if (body == target)
+            target = null;
+    }
+
+    private void FindTarget()
+    {
+        bodies.RemoveAll(b => !IsInstanceValid(b));
+
+        float bestDist = float.MaxValue;
+        Node2D best = null;
+
+        foreach (Node2D body in bodies)
+        {
+            float dist = body.GlobalPosition.DistanceTo(GlobalPosition);
+            if (dist < bestDist)
+            {
+                bestDist = dist;
+                best = body;
+            }
+        }
+        target = best;
     }
 }
