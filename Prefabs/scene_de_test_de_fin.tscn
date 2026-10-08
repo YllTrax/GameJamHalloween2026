@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://bht4lcjhamjlq" path="res://Prefabs/personnage.tscn" id="3_eofuw"]
 [ext_resource type="Script" uid="uid://dce3vcl13iokc" path="res://Scripts/Base.cs" id="4_7k2vv"]
 [ext_resource type="PackedScene" uid="uid://do15h41qr01vx" path="res://Prefabs/Pumpkin.tscn" id="5_ogrv1"]
+[ext_resource type="PackedScene" uid="uid://ci4mpugnevp18" path="res://Prefabs/boucle_de_jeu.tscn" id="6_2lsjc"]
+[ext_resource type="PackedScene" uid="uid://kntxamw5koqo" path="res://Prefabs/salt_circle.tscn" id="7_udtek"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p18pi"]
 
@@ -44,6 +46,9 @@ scale = Vector2(0.44, 1)
 
 [node name="Personnage" parent="." unique_id=874529347 instance=ExtResource("3_eofuw")]
 dashSpeed = 1000.0
+
+[node name="Health" parent="Personnage" index="3" unique_id=1039052001]
+IsPlayer = false
 
 [node name="Base" type="Area2D" parent="." unique_id=2127739621]
 position = Vector2(342, 168)
@@ -89,5 +94,10 @@ position = Vector2(-74.99999, -128.99998)
 
 [node name="Pumpkin5" parent="." unique_id=717180977 instance=ExtResource("5_ogrv1")]
 position = Vector2(34.999996, -209.99998)
+
+[node name="Boucle de jeu" parent="." unique_id=260320005 instance=ExtResource("6_2lsjc")]
+
+[node name="SaltCircle" parent="." unique_id=1691003878 instance=ExtResource("7_udtek")]
+position = Vector2(577, 87)
 
 [editable path="Personnage"]

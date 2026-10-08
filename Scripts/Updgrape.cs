@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class Updgrape : Node2D
+public partial class Updgrape : CanvasLayer
 {
 	[Signal] public delegate void GermsChangedEventHandler(int germs);
 

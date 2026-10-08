@@ -3,26 +3,16 @@
 [ext_resource type="Script" uid="uid://ko7db0f1dvhn" path="res://Scripts/Updgrape.cs" id="1_b50kd"]
 [ext_resource type="PackedScene" uid="uid://f5vvb7nuv6ra" path="res://Prefabs/button_updrage.tscn" id="1_o6p3e"]
 
-[node name="Updgrape" type="Node2D" unique_id=387195760]
+[node name="Updgrape" type="CanvasLayer" unique_id=868353235]
 script = ExtResource("1_b50kd")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=301717492]
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=510714343]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.34509805)
-
-[node name="SaltLV1" parent="CanvasLayer" unique_id=671295746 instance=ExtResource("1_o6p3e")]
+[node name="SaltLV1" parent="." unique_id=671295746 instance=ExtResource("1_o6p3e")]
 offset_left = 111.0
 offset_top = 18.0
 offset_right = 239.0
 offset_bottom = 146.0
 
-[node name="SaltLv2" parent="CanvasLayer" unique_id=1672204850 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+[node name="SaltLv2" parent="." unique_id=1672204850 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
 offset_left = 110.99999
 offset_top = 102.99999
 offset_right = 239.0
@@ -30,7 +20,7 @@ offset_bottom = 231.0
 Cost = 20
 Prerequisite = NodePath("../SaltLV1")
 
-[node name="SaltLV3" parent="CanvasLayer" unique_id=1422713667 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+[node name="SaltLV3" parent="." unique_id=1422713667 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
 offset_left = 113.99999
 offset_top = 186.0
 offset_right = 242.0
@@ -38,7 +28,7 @@ offset_bottom = 314.0
 Cost = 30
 Prerequisite = NodePath("../SaltLv2")
 
-[node name="SaltLV4" parent="CanvasLayer" unique_id=1839303887 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+[node name="SaltLV4" parent="." unique_id=1839303887 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
 offset_left = 115.99999
 offset_top = 273.0
 offset_right = 244.0
@@ -46,13 +36,13 @@ offset_bottom = 401.0
 Cost = 40
 Prerequisite = NodePath("../SaltLV3")
 
-[node name="DoorLV1" parent="CanvasLayer" unique_id=602421811 instance=ExtResource("1_o6p3e")]
+[node name="DoorLV1" parent="." unique_id=602421811 instance=ExtResource("1_o6p3e")]
 offset_left = 329.0
 offset_top = 14.0
 offset_right = 457.0
 offset_bottom = 142.0
 
-[node name="DoorLV2" parent="CanvasLayer" unique_id=56945982 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+[node name="DoorLV2" parent="." unique_id=56945982 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
 offset_left = 333.0
 offset_top = 104.999985
 offset_right = 461.0
@@ -60,7 +50,7 @@ offset_bottom = 232.99998
 Cost = 20
 Prerequisite = NodePath("../DoorLV1")
 
-[node name="DoorLV3" parent="CanvasLayer" unique_id=434563538 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+[node name="DoorLV3" parent="." unique_id=434563538 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
 offset_left = 333.0
 offset_top = 195.0
 offset_right = 461.0
@@ -68,13 +58,13 @@ offset_bottom = 323.0
 Cost = 30
 Prerequisite = NodePath("../DoorLV2")
 
-[node name="tourelleLV1" parent="CanvasLayer" unique_id=1280955673 instance=ExtResource("1_o6p3e")]
+[node name="tourelleLV1" parent="." unique_id=1280955673 instance=ExtResource("1_o6p3e")]
 offset_left = 555.0
 offset_top = 18.0
 offset_right = 683.0
 offset_bottom = 146.0
 
-[node name="tourelleLV2" parent="CanvasLayer" unique_id=1579296378 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
+[node name="tourelleLV2" parent="." unique_id=1579296378 node_paths=PackedStringArray("Prerequisite") instance=ExtResource("1_o6p3e")]
 offset_left = 559.0
 offset_top = 103.999985
 offset_right = 687.0
@@ -82,7 +72,15 @@ offset_bottom = 231.99998
 Cost = 20
 Prerequisite = NodePath("../tourelleLV1")
 
-[node name="Label" type="Label" parent="CanvasLayer" unique_id=168818106]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=510714343]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.34509805)
+
+[node name="Label" type="Label" parent="." unique_id=168818106]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0

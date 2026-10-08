@@ -3,113 +3,113 @@ using Godot;
 
 public partial class Health : Node2D
 {
-    [Export]
-    public float baseHealth;
+	[Export]
+	public float baseHealth;
+
+	[Export]
+	protected HealthBar healthBar;
+
+	[Export]
+	protected AnimatedSprite2D sprite;
+
+	[Export]
+	public bool IsPlayer; // a assigner dans l'inspecteur
 
     [Export]
-    protected HealthBar healthBar;
+	public bool IsSaltCircle; // a assigner dans l'inspecteur
 
-    [Export]
-    protected AnimatedSprite2D sprite;
+	public float currentHealth;
 
-    [Export]
-    public bool IsPlayer; // a assigner dans l'inspecteur
+	public event Action Died;
+	private bool isDead;
 
-    [Export]
-    public bool IsSaltCircle; // a assigner dans l'inspecteur
+	private float burningTimer;
 
-    public float currentHealth;
+	[Export]
+	private float burningDuration;
 
-    public event Action Died;
-    private bool isDead;
+	[Export]
+	private float burnPercentPerSecond = 10f;
 
-    private float burningTimer;
+	public override void _Ready()
+	{
+		currentHealth = baseHealth;
+		burningTimer = burningDuration;
+	}
 
-    [Export]
-    private float burningDuration;
+	public bool isBurning;
 
-    [Export]
-    private float burnPercentPerSecond = 10f;
+	public override void _Process(double delta)
+	{
+		Burn(delta);
+	}
 
-    public override void _Ready()
-    {
-        currentHealth = baseHealth;
-        burningTimer = burningDuration;
-    }
+	/// <summary>
+	/// Methode pour infliger des degats du montant "damage"
+	/// </summary>
+	/// <param name="damage"></param>
+	public virtual void TakeDamage(float damage)
+	{
+		if (isDead)
+			return;
 
-    public bool isBurning;
+		currentHealth -= damage;
 
-    public override void _Process(double delta)
-    {
-        Burn(delta);
-    }
+		if (sprite != null)
+		{
+			sprite.Modulate = Colors.Red;
+			CreateTween().TweenProperty(sprite, "modulate", Colors.White, 0.15f);
+		}
+		healthBar?.OnHealthCHangeDamage(damage);
 
-    /// <summary>
-    /// Methode pour infliger des degats du montant "damage"
-    /// </summary>
-    /// <param name="damage"></param>
-    public virtual void TakeDamage(float damage)
-    {
-        if (isDead)
-            return;
+		if (currentHealth <= 0)
+		{
+			isDead = true;
+			GD.Print(
+				$"[Health] {GetParent().Name} meurt | script={GetType().Name} | abonnés={(Died != null)}"
+			);
+			Died?.Invoke();
+			GetParent().QueueFree();
+		}
+	}
 
-        currentHealth -= damage;
+	/// <summary>
+	/// Methode pour soigner du montant "heal"
+	/// </summary>
+	public void ToHeal(float heal)
+	{
+		currentHealth += heal;
+		sprite.Modulate = Colors.Green;
+		CreateTween().TweenProperty(sprite, "modulate", Colors.White, 0.15f);
+		healthBar.OnHealthCHangeHeal(heal);
+		if (currentHealth > baseHealth)
+			currentHealth = baseHealth;
+	}
 
-        if (sprite != null)
-        {
-            sprite.Modulate = Colors.Red;
-            CreateTween().TweenProperty(sprite, "modulate", Colors.White, 0.15f);
-        }
-        healthBar?.OnHealthCHangeDamage(damage);
+	public override void _EnterTree()
+	{
+		// if (IsSaltCircle)
+		// {
+		//     SaltCircle.Instance.SaltRefilled += OnRefill;
+		// }
+	}
 
-        if (currentHealth <= 0)
-        {
-            isDead = true;
-            GD.Print(
-                $"[Health] {GetParent().Name} meurt | script={GetType().Name} | abonnés={(Died != null)}"
-            );
-            Died?.Invoke();
-            GetParent().QueueFree();
-        }
-    }
+	private void OnRefill(float saltAmount)
+	{
+		ToHeal(saltAmount);
+	}
 
-    /// <summary>
-    /// Methode pour soigner du montant "heal"
-    /// </summary>
-    public void ToHeal(float heal)
-    {
-        currentHealth += heal;
-        sprite.Modulate = Colors.Green;
-        CreateTween().TweenProperty(sprite, "modulate", Colors.White, 0.15f);
-        healthBar.OnHealthCHangeHeal(heal);
-        if (currentHealth > baseHealth)
-            currentHealth = baseHealth;
-    }
-
-    public override void _EnterTree()
-    {
-        // if (IsSaltCircle)
-        // {
-        //     SaltCircle.Instance.SaltRefilled += OnRefill;
-        // }
-    }
-
-    private void OnRefill(float saltAmount)
-    {
-        ToHeal(saltAmount);
-    }
-
-    public void Burn(double delta)
-    {
-        if (isBurning)
-        {
-            TakeDamage((baseHealth * burnPercentPerSecond / 100) * (float)delta);
-            burningTimer -= (float)delta;
-            if (burningTimer <= 0)
-            {
-                isBurning = false;
-                burningTimer = burningDuration;
-            }
-        }
-    }
+	public void Burn(double delta)
+	{
+		if (isBurning)
+		{
+			TakeDamage((baseHealth * burnPercentPerSecond / 100) * (float)delta);
+			burningTimer -= (float)delta;
+			if (burningTimer <= 0)
+			{
+				isBurning = false;
+				burningTimer = burningDuration;
+			}
+		}
+	}
 }
