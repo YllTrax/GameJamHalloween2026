@@ -15,6 +15,8 @@ public partial class SlimeZone : Area2D
     [Export]
     private float lifeTime = 2f;
 
+    [Export]
+    private PackedScene munition;
     private List<CharacterBody2D> targets = new List<CharacterBody2D>();
 
     /// <summary>
@@ -60,6 +62,18 @@ public partial class SlimeZone : Area2D
 
         if (lifeTime > 0)
         {
+            if (munition != null)
+            {
+                Vector2 pos = GlobalPosition;
+                var ammo = munition.Instantiate<Munition>();
+                ammo.Position = pos;
+                ammo.SetDrop(
+                    pos + Vector2.FromAngle(GD.Randf() * Mathf.Tau) * (40f + GD.Randf() * 60f)
+                );
+
+                GetTree().CurrentScene.CallDeferred(Node.MethodName.AddChild, ammo);
+            }
+
             tween.TweenInterval(lifeTime);
             tween.TweenCallback(Callable.From(ToReleaseAll));
             tween.TweenProperty(this, "scale", Vector2.Zero, 0.2f).SetEase(Tween.EaseType.In);

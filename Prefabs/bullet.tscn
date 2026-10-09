@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://srrw4lw1xjcn" path="res://Scripts/Bullet.cs" id="1_0oen4"]
 [ext_resource type="Script" uid="uid://5jc7g665kx0p" path="res://Scripts/DamageSource.cs" id="2_m4f65"]
+[ext_resource type="PackedScene" uid="uid://ud26c53gxr53" path="res://Prefabs/Munition.tscn" id="3_tuf4i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p18pi"]
 radius = 37.01351
@@ -11,7 +12,9 @@ collision_layer = 64
 collision_mask = 4
 script = ExtResource("1_0oen4")
 moveSpeed = 200.0
+munition = ExtResource("3_tuf4i")
 damageSource = NodePath("Damage Source")
+lifeTime = 1.0
 
 [node name="Collider" type="CollisionShape2D" parent="." unique_id=885004324]
 shape = SubResource("CircleShape2D_p18pi")

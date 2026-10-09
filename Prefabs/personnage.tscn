@@ -154,6 +154,7 @@ collision_layer = 2
 script = ExtResource("1_ydahe")
 anim = NodePath("AnimatorPersonnage")
 germs = 40
+munitions = 10
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1401489096]
 zoom = Vector2(2, 2)

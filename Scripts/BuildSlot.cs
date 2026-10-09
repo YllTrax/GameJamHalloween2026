@@ -7,8 +7,14 @@ public partial class BuildSlot : Node2D, IInteractable
     [Export]
     private Godot.Collections.Array<BuildData> buildables;
 
+    private IBuildable build;
+
+    private bool isBuilt;
+
     public void Interact()
     {
+        if (isBuilt)
+            return;
         int selection = (int)Personnage.Instance.selectTower;
         var cost = buildables[selection].Cost;
         if (!CheckCost(cost))
@@ -18,15 +24,19 @@ public partial class BuildSlot : Node2D, IInteractable
         if (selection == 0)
         {
             var building = buildables[0].Scene.Instantiate<Toarch>();
+            build = building;
             GetTree().CurrentScene.AddChild(building);
             building.GlobalPosition = GlobalPosition;
             PayTheCost(cost);
+            isBuilt = true;
         }
         else
         {
             var building = buildables[selection].Scene.Instantiate<Tourelle>();
+            build = building;
             GetTree().CurrentScene.AddChild(building);
             building.GlobalPosition = GlobalPosition;
+            isBuilt = true;
             PayTheCost(cost);
         }
     }
@@ -38,7 +48,9 @@ public partial class BuildSlot : Node2D, IInteractable
 
     public void InteractRightclick()
     {
-        throw new NotImplementedException();
+        if (build == null)
+            return;
+        build.Reload();
     }
 
     private bool CheckCost(int cost)

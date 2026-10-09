@@ -14,6 +14,18 @@ public partial class Tourelle : Area2D, IBuildable
     private float attackCD = 0.5f;
 
     [Export]
+    private int munitions = 10;
+
+    [Export]
+    private Label ammo;
+
+    [Export]
+    private int munitionMax;
+
+    [Export]
+    private Polygon2D tourelleBody;
+
+    [Export]
     private TowerType towerType;
 
     [Export]
@@ -57,12 +69,17 @@ public partial class Tourelle : Area2D, IBuildable
             target = null;
             return;
         }
-        LookAt(target.GlobalPosition);
+        tourelleBody.LookAt(target.GlobalPosition);
+
+        ammo.Text = munitions.ToString();
     }
 
     private void Fire()
     {
         if (target == null || !IsInstanceValid(target))
+            return;
+
+        if (munitions == 0)
             return;
 
         float dmgMult = UpgradeStats.TurretDamageMult;
@@ -75,6 +92,7 @@ public partial class Tourelle : Area2D, IBuildable
             GetTree().CurrentScene.AddChild(bullet);
             bullet.GlobalPosition = firePoint.GlobalPosition;
             bullet.dir = (target.GlobalPosition - firePoint.GlobalPosition).Normalized();
+            munitions--;
         }
         else
         {
@@ -86,13 +104,15 @@ public partial class Tourelle : Area2D, IBuildable
                     GD.Print($"[Tourelle] FireZone : x{dmgMult:0.00} -> dégâts {zone.Damage}");
                     GetTree().CurrentScene.AddChild(zone);
                     zone.Launch(firePoint.GlobalPosition, target.GlobalPosition);
+                    munitions--;
                     break;
                 case TowerType.Slime:
                     var zoneSlime = bulletPrefab.Instantiate<SlimeZone>();
                     GetTree().CurrentScene.AddChild(zoneSlime);
                     zoneSlime.Launch(firePoint.GlobalPosition, target.GlobalPosition);
+                    munitions--;
                     break;
-                            }
+            }
         }
     }
 
@@ -126,5 +146,22 @@ public partial class Tourelle : Area2D, IBuildable
             }
         }
         target = best;
+    }
+
+    public void Reload()
+    {
+        int diff = Personnage.Instance.munitions - munitionMax;
+        if (diff <= 0)
+        {
+            munitions += Personnage.Instance.munitions;
+            Personnage.Instance.munitions = 0;
+            ammo.Text = munitions.ToString();
+        }
+        else
+        {
+            munitions = munitionMax;
+            Personnage.Instance.munitions -= diff;
+            ammo.Text = munitions.ToString();
+        }
     }
 }

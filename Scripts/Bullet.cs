@@ -8,7 +8,11 @@ public partial class Bullet : Area2D
     [Export]
     public float moveSpeed;
 
-    [Export] private DamageSource damageSource;
+    [Export]
+    public PackedScene munition;
+
+    [Export]
+    private DamageSource damageSource;
     public float Damage
     {
         get => damageSource.Damage;
@@ -22,8 +26,6 @@ public partial class Bullet : Area2D
 
     public override void _Ready()
     {
-        //        dir = target.GlobalPosition;
-
         lifeTimer = new Timer();
         lifeTimer.WaitTime = lifeTime;
         lifeTimer.Timeout += SelfDestroy;
@@ -33,6 +35,17 @@ public partial class Bullet : Area2D
 
     private void SelfDestroy()
     {
+        if (munition != null)
+        {
+            Vector2 pos = GlobalPosition;
+            var ammo = munition.Instantiate<Munition>();
+            ammo.Position = pos;
+            ammo.SetDrop(
+                pos + Vector2.FromAngle(GD.Randf() * Mathf.Tau) * (40f + GD.Randf() * 60f)
+            );
+
+            GetTree().CurrentScene.CallDeferred(Node.MethodName.AddChild, ammo);
+        }
         QueueFree();
     }
 

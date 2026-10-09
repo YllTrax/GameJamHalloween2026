@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://ud26c53gxr53"]
+
+[ext_resource type="Script" uid="uid://c1gps46of4u80" path="res://Scripts/Munition.cs" id="1_o5qqn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ngk0e"]
+radius = 35.812675
+height = 143.2507
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wer7p"]
+load_path = "res://.godot/imported/gems.png-af72bbf4a82776733bb492f7c5728509.ctex"
+
+[node name="Ammo" type="Area2D" unique_id=105507298]
+scale = Vector2(1.91, 1.91)
+collision_layer = 32
+collision_mask = 2
+linear_damp = 6.0
+angular_damp = 6.0
+script = ExtResource("1_o5qqn")
+dropDuration = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=414513924]
+scale = Vector2(0.726, 0.373)
+shape = SubResource("CapsuleShape2D_ngk0e")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=115497780]
+position = Vector2(-3.1413603, -2.6177998)
+scale = Vector2(0.1081118, 0.1081118)
+color = Color(0, 0, 0, 1)
+texture = SubResource("CompressedTexture2D_wer7p")
+polygon = PackedVector2Array(-1.6972198, 24.335342, 13.416077, 6.4461355, 47.652313, 5.520832, 63.99936, 23.41004, 31.305283, 60.422195)
