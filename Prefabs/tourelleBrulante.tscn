@@ -17,10 +17,12 @@ firePoint = NodePath("Tower/Fire Point")
 shouldFireInArc = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1717542044]
+visible = false
 scale = Vector2(2.155, 2.155)
 shape = SubResource("CircleShape2D_p18pi")
 
 [node name="range" type="Polygon2D" parent="." unique_id=749667653]
+visible = false
 scale = Vector2(2.155, 2.155)
 color = Color(0.9056563, 0, 0.20320359, 0.2627451)
 polygon = PackedVector2Array(-2, -274, 198, -199, 277, -4, 208, 183, 7, 282, -210, 185, -280, -1, -199, -199)

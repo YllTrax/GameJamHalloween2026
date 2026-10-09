@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BuildData" format=3 uid="uid://bkqqq0fejp77h"]
+
+[ext_resource type="Script" uid="uid://bkvkrin7i42hp" path="res://Scripts/BuildData.cs" id="1_i4f73"]
+[ext_resource type="Texture2D" uid="uid://cj4gvuqg2vd3h" path="res://Images/Misc/Capture d'écran Tourelle.png" id="1_pecbt"]
+[ext_resource type="PackedScene" uid="uid://crda28r037s82" path="res://Prefabs/tourelle.tscn" id="2_nn5vc"]
+
+[resource]
+script = ExtResource("1_i4f73")
+Name = "Tourelle"
+Cost = 10
+Icon = ExtResource("1_pecbt")
+Scene = ExtResource("2_nn5vc")
+metadata/_custom_type_script = "uid://bkvkrin7i42hp"

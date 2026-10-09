@@ -2,10 +2,14 @@
 
 [ext_resource type="Script" uid="uid://dml0tmi8g5jwu" path="res://Scripts/SaltCircle.cs" id="1_wone6"]
 [ext_resource type="PackedScene" uid="uid://wj1whgh7v5c" path="res://Prefabs/health.tscn" id="2_6l6rw"]
+[ext_resource type="Script" uid="uid://bvmd4oammh5b" path="res://Scripts/Interactable.cs" id="3_q1oiw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p18pi"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p18pi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gyekt"]
+radius = 13.038404
 
 [node name="SaltCircle" type="Area2D" unique_id=1691003878 node_paths=PackedStringArray("health") groups=["Salts"]]
 collision_layer = 8
@@ -23,5 +27,27 @@ polygon = PackedVector2Array(0, -10, 4, -9, 8, -6, 10, -2, 9, 5, 2, 10, -8, 6, -
 sprite_frames = SubResource("SpriteFrames_p18pi")
 
 [node name="Health" parent="." unique_id=1461079800 node_paths=PackedStringArray("sprite") instance=ExtResource("2_6l6rw")]
+position = Vector2(20, 36)
 baseHealth = 100.0
 sprite = NodePath("../AnimatedSprite2D")
+IsSaltCircle = true
+
+[node name="TextureProgressBar" parent="Health" index="0" unique_id=1667778802]
+tint_progress = Color(0.5815931, 0.07355989, 0.4195765, 1)
+
+[node name="Interactable" type="Area2D" parent="." unique_id=703811567 node_paths=PackedStringArray("outline")]
+script = ExtResource("3_q1oiw")
+outline = NodePath("../Outline")
+range = 50.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable" unique_id=1318684797]
+shape = SubResource("CircleShape2D_gyekt")
+
+[node name="Outline" type="Polygon2D" parent="." unique_id=591998334]
+visible = false
+z_index = -34
+scale = Vector2(1.12, 1.12)
+color = Color(0.84483373, 0.5213544, 0.850883, 1)
+polygon = PackedVector2Array(1, -13, 18, -7, 11, 15, -9, 13, -16, -4)
+
+[editable path="Health"]

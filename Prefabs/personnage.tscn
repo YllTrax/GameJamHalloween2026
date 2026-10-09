@@ -153,6 +153,7 @@ z_index = 2
 collision_layer = 2
 script = ExtResource("1_ydahe")
 anim = NodePath("AnimatorPersonnage")
+germs = 20
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1401489096]
 zoom = Vector2(2, 2)
@@ -169,7 +170,7 @@ sprite_frames = SubResource("SpriteFrames_0k2he")
 animation = &"IdleEast"
 
 [node name="Health" parent="." unique_id=1039052001 node_paths=PackedStringArray("sprite") instance=ExtResource("4_ydahe")]
-position = Vector2(0.205, -5.995)
-scale = Vector2(0.91812944, 0.40834948)
-baseHealth = 5.0
+position = Vector2(6, -8)
+scale = Vector2(0.613637, 0.0813039)
+baseHealth = 60.0
 sprite = NodePath("../AnimatorPersonnage")

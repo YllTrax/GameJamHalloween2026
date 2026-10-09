@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BuildData" format=3 uid="uid://blmc4pktfjegt"]
+
+[ext_resource type="Script" uid="uid://bkvkrin7i42hp" path="res://Scripts/BuildData.cs" id="1_02iq8"]
+[ext_resource type="Texture2D" uid="uid://bebn1omcioej8" path="res://Images/Misc/CaptureTorche.png" id="1_cxrgp"]
+[ext_resource type="PackedScene" uid="uid://drpaowd2cjjol" path="res://Prefabs/toarch.tscn" id="2_5evbh"]
+
+[resource]
+script = ExtResource("1_02iq8")
+Name = "Torche"
+Cost = 10
+Icon = ExtResource("1_cxrgp")
+Scene = ExtResource("2_5evbh")
+metadata/_custom_type_script = "uid://bkvkrin7i42hp"

@@ -1,35 +1,96 @@
 using System;
+using System.ComponentModel.Design.Serialization;
 using Godot;
 
 public partial class BuildSlot : Node2D, IInteractable
 {
     [Export]
-    private PackedScene toarch;
-
-    [Export]
-    private PackedScene tourelle;
-
-    [Export]
-    private PackedScene tourelleBrulante;
+    private Godot.Collections.Array<BuildData> buildables;
 
     public void Interact()
     {
-        var building = toarch.Instantiate<Toarch>();
-        GetTree().CurrentScene.AddChild(building);
-        building.GlobalPosition = GlobalPosition;
+        int selection = (int)Personnage.Instance.selectTower;
+        var cost = buildables[selection].Cost;
+        if (!CheckCost(cost))
+        {
+            return;
+        }
+        if (selection == 0)
+        {
+            var building = buildables[0].Scene.Instantiate<Toarch>();
+            GetTree().CurrentScene.AddChild(building);
+            building.GlobalPosition = GlobalPosition;
+            PayTheCost(cost);
+        }
+        else
+        {
+            var building = buildables[selection].Scene.Instantiate<Tourelle>();
+            GetTree().CurrentScene.AddChild(building);
+            building.GlobalPosition = GlobalPosition;
+            PayTheCost(cost);
+        }
     }
 
     public void InteractMiddleButton()
     {
-        var building = tourelleBrulante.Instantiate<Tourelle>();
-        GetTree().CurrentScene.AddChild(building);
-        building.GlobalPosition = GlobalPosition;
+        throw new NotImplementedException();
     }
 
     public void InteractRightclick()
     {
-        var building = tourelle.Instantiate<Tourelle>();
-        GetTree().CurrentScene.AddChild(building);
-        building.GlobalPosition = GlobalPosition;
+        throw new NotImplementedException();
+    }
+
+    private bool CheckCost(int cost)
+    {
+        if (cost > Personnage.Instance.germs)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    private void PayTheCost(int cost)
+    {
+        Personnage.Instance.germs -= cost;
     }
 }
+
+
+//-------------------- Je savais pas ou garder ca donc je le laisse ici  ----------------------
+
+// public void Interact()
+// {
+//     var cost = buildables[0].Cost;
+//     if (!CheckCost(cost))
+//         return;
+
+//     var building = buildables[0].Scene.Instantiate<Toarch>();
+//     GetTree().CurrentScene.AddChild(building);
+//     building.GlobalPosition = GlobalPosition;
+//     PayTheCost(cost);
+// }
+
+// public void InteractMiddleButton()
+// {
+//     var cost = buildables[1].Cost;
+//     if (!CheckCost(cost))
+//         return;
+
+//     var building = buildables[1].Scene.Instantiate<Tourelle>();
+//     GetTree().CurrentScene.AddChild(building);
+//     building.GlobalPosition = GlobalPosition;
+//     PayTheCost(cost);
+// }
+
+// public void InteractRightclick()
+// {
+//     var cost = buildables[2].Cost;
+//     if (!CheckCost(cost))
+//         return;
+
+//     var building = buildables[2].Scene.Instantiate<Tourelle>();
+//     GetTree().CurrentScene.AddChild(building);
+//     building.GlobalPosition = GlobalPosition;
+//     PayTheCost(cost);
+// }

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BuildData" format=3 uid="uid://b33uwcl1v4wxe"]
+
+[ext_resource type="Script" uid="uid://bkvkrin7i42hp" path="res://Scripts/BuildData.cs" id="1_rvc7q"]
+[ext_resource type="Texture2D" uid="uid://c84b8vq1l0e5y" path="res://Images/Misc/Capture d'écran Slime.png" id="1_vc2vg"]
+[ext_resource type="PackedScene" uid="uid://dwrjbxva6mfpd" path="res://Prefabs/tourelleDeSlime.tscn" id="2_sknca"]
+
+[resource]
+script = ExtResource("1_rvc7q")
+Name = "TourelleSlime"
+Cost = 10
+Icon = ExtResource("1_vc2vg")
+Scene = ExtResource("2_sknca")
+metadata/_custom_type_script = "uid://bkvkrin7i42hp"
