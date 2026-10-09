@@ -1,0 +1,12 @@
+keys,fr,en
+HUD_WAVES,Vague {0},Wave {0}
+HUD_PAUSE,Pause {0},Pause {0}
+HUD_SCORE,Score : {0},Score: {0}
+SHOP_GEMS,Gemmes : {0},Gems: {0}
+SHOP_COST,Coût : {0} gemmes,Cost: {0} gems
+SHOP_PRICE,{0} gemmes,{0} gems
+SHOP_ACQUIRED,Acquis,Acquired
+BUILD_TORCH,Torche,Torch
+BUILD_TURRET,Tourelle,Turret
+BUILD_TURRET_FIRE,Tourelle de feu,Fire turret
+BUILD_TURRET_SLIME,Tourelle de slime,Slime turret

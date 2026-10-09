@@ -21,8 +21,14 @@ public partial class Updgrape : CanvasLayer
 		if (g == _dernier) return;
 
 		_dernier = g;
-		if (_label != null) _label.Text = $"Gems : {g}";
+		if (_label != null) _label.Text = string.Format(Tr("SHOP_GEMS"), g);
 		EmitSignal(SignalName.GermsChanged, g);
+	}
+
+	public override void _Notification(int what)
+	{
+		if (what == NotificationTranslationChanged)
+			_dernier = -1; // force la réécriture du label au prochain _Process
 	}
 
 	public bool TrySpend(int amount)

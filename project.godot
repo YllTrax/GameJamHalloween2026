@@ -61,6 +61,10 @@ Upgrade={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://Scripts/textes.en.translation", "res://Scripts/textes.fr.translation")
+
 [layer_names]
 
 2d_physics/layer_1="Walls"

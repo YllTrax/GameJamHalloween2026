@@ -113,12 +113,18 @@ public partial class SceneDeTestDeFin : Node2D
         return Mathf.Max(intervalle, IntervalleMin);
     }
 
+    public override void _Notification(int what)
+    {
+        if (what == NotificationTranslationChanged && IsNodeReady())
+            MettreAJourLabel();
+    }
+
     private void MettreAJourLabel()
     {
         if (WaveLabel == null)
             return;
 
-        WaveLabel.Text = $"Waves  {VagueActuelle}";
+        WaveLabel.Text = string.Format(Tr("HUD_WAVES"), VagueActuelle);
     }
 
     private void GererSpawn(float delta)
@@ -193,7 +199,7 @@ public partial class SceneDeTestDeFin : Node2D
     // // Boucle de jeu
     // private void GameOver()
     // {
-    //     ScoreLabel.Text = $"Score : {VagueActuelle}";
+    //     ScoreLabel.Text = string.Format(Tr("HUD_SCORE"), VagueActuelle);
     //     _fini = true;
     //     _gameOverUI.Visible = true;
     //     GetTree().Paused = true;
