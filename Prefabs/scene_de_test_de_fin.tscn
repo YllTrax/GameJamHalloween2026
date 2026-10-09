@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bht4lcjhamjlq" path="res://Prefabs/personnage.tscn" id="3_eofuw"]
 [ext_resource type="Script" uid="uid://dce3vcl13iokc" path="res://Scripts/Base.cs" id="4_7k2vv"]
 [ext_resource type="PackedScene" uid="uid://ci4mpugnevp18" path="res://Prefabs/boucle_de_jeu.tscn" id="6_2lsjc"]
+[ext_resource type="Texture2D" uid="uid://bv808ix3v4r7" path="res://Images/IU/salt.png" id="6_fpy4b"]
 [ext_resource type="Script" uid="uid://bihfqj1k8j847" path="res://Scripts/SelectBuilding.cs" id="7_iyehk"]
 [ext_resource type="Texture2D" uid="uid://bebn1omcioej8" path="res://Images/Misc/CaptureTorche.png" id="7_mhhgw"]
 [ext_resource type="PackedScene" uid="uid://kntxamw5koqo" path="res://Prefabs/salt_circle.tscn" id="7_udtek"]
@@ -14,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://13ep4mxrmluj" path="res://Images/Misc/Capture d'écran TourelleBrulante.png" id="9_iyehk"]
 [ext_resource type="Texture2D" uid="uid://c84b8vq1l0e5y" path="res://Images/Misc/Capture d'écran Slime.png" id="10_bc020"]
 [ext_resource type="PackedScene" uid="uid://chhhyq1v22owf" path="res://Prefabs/salt_deposit.tscn" id="15_fpy4b"]
+[ext_resource type="AudioStream" uid="uid://cfau4a8eibq73" path="res://Sounds/ambiance.mp3" id="16_vi60e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p18pi"]
 
@@ -94,14 +96,21 @@ refillCD = 10.0
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -161.0
+offset_left = -193.0
 offset_top = 86.0
-offset_right = -4.0
+offset_right = -36.0
 offset_bottom = 128.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 30
-text = "Salt : 100"
+text = "100"
 horizontal_alignment = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="Boucle de jeu/Gems/labelSel" unique_id=1615535638]
+position = Vector2(166, 9)
+scale = Vector2(0.40750694, 0.40750694)
+texture = ExtResource("6_fpy4b")
+polygon = PackedVector2Array(-20, 6.800003, 12.799988, -5.199997, 56.799988, -2.7999954, 66.400024, 31.599998, 75.20001, 64.4, 28.799988, 66.799995, -17.599976, 56.4, -0.7999878, 24.400002)
+uv = PackedVector2Array(-20, 6.800003, 12.799988, -5.199997, 56.799988, -2.7999954, 66.400024, 31.599998, 75.20001, 64.4, 28.799988, 66.799995, -17.599976, 56.4, -0.7999878, 24.400002)
 
 [node name="Anonces" type="CanvasLayer" parent="Boucle de jeu" unique_id=1545708900]
 
@@ -227,6 +236,10 @@ position = Vector2(464, -272)
 
 [node name="SaltDeposit5" parent="." unique_id=401300947 instance=ExtResource("15_fpy4b")]
 position = Vector2(1312, 520)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1940593975]
+stream = ExtResource("16_vi60e")
+volume_db = -10.602
 
 [editable path="Doors/Door"]
 [editable path="Doors/Door2"]

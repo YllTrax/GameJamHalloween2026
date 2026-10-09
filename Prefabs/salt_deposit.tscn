@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://chhhyq1v22owf"]
 
 [ext_resource type="Script" uid="uid://dxkfh7glcjyvr" path="res://Scripts/SaltDeposit.cs" id="1_yunmi"]
+[ext_resource type="Texture2D" uid="uid://bv808ix3v4r7" path="res://Images/IU/salt.png" id="2_536d0"]
 [ext_resource type="Script" uid="uid://bvmd4oammh5b" path="res://Scripts/Interactable.cs" id="2_sed1f"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p18pi"]
@@ -10,7 +11,10 @@ script = ExtResource("1_yunmi")
 baseSaltAmount = 50.0
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=1478869536]
-polygon = PackedVector2Array(1, -13, 18, -7, 11, 15, -9, 13, -16, -4)
+position = Vector2(-9.999999, -10.999999)
+scale = Vector2(0.32824594, 0.32824594)
+texture = ExtResource("2_536d0")
+polygon = PackedVector2Array(20.199999, 0.5999994, 53.599976, 13.200005, 65.599976, 63.6, -4.799988, 63.6, 3.1999998, 9.599999)
 
 [node name="Outline" type="Polygon2D" parent="." unique_id=1411246505]
 visible = false
