@@ -2,16 +2,16 @@ using Godot;
 
 public partial class SaltDeposit : Node2D, IInteractable
 {
-    [Export]
-    private float baseSaltAmount = 10f;
+	[Export]
+	private float baseSaltAmount = 10f;
 
-    private float saltAmount;
-    private Tween _pulseTween;
-    private Vector2 _baseScale;
+	private float saltAmount;
+	private Tween _pulseTween;
+	private Vector2 _baseScale;
 
-    public override void _Ready()
-    {
-        _baseScale = Scale; // indispensable pour le Pulse sinon ca disparait c'est relou
+	public override void _Ready()
+	{
+		_baseScale = Scale; // indispensable pour le Pulse sinon ca disparait c'est relou
         saltAmount = 0;
     }
 
