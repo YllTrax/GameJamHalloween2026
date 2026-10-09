@@ -69,7 +69,7 @@ collision_layer = 16
 collision_mask = 4
 script = ExtResource("2_uud27")
 targetMode = 1
-damage = 50.0
+Damage = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Damage AoE" unique_id=96442283]
 visible = false

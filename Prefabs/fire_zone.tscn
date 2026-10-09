@@ -1,16 +1,18 @@
 [gd_scene format=3 uid="uid://dtmrmglybhfdq"]
 
 [ext_resource type="Script" uid="uid://cmxuwdqywcyyp" path="res://Scripts/FireZone.cs" id="1_fdq8s"]
+[ext_resource type="Script" uid="uid://5jc7g665kx0p" path="res://Scripts/DamageSource.cs" id="2_fdq8s"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p18pi"]
 radius = 37.01351
 
-[node name="FireZone" type="Area2D" unique_id=744168898]
+[node name="FireZone" type="Area2D" unique_id=744168898 node_paths=PackedStringArray("damageSource")]
 z_index = -1
 scale = Vector2(0.84000045, 0.8684328)
 collision_layer = 64
 collision_mask = 4
 script = ExtResource("1_fdq8s")
+damageSource = NodePath("Area2D")
 
 [node name="Collider" type="CollisionShape2D" parent="." unique_id=885004324]
 shape = SubResource("CircleShape2D_p18pi")
@@ -20,3 +22,10 @@ position = Vector2(-0.43055177, -0.5000024)
 scale = Vector2(3.9569442, 3.85)
 color = Color(0.7583462, 0.046795122, 0.33979514, 1)
 polygon = PackedVector2Array(0, -10, 7, -7, 9.459459, 4.172325e-07, 7, 7, 0, 10, -8, 6, -10, 0, -7, -6)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=12619871]
+script = ExtResource("2_fdq8s")
+Damage = 10.0
+
+[node name="Collider" type="CollisionShape2D" parent="Area2D" unique_id=1104177834]
+shape = SubResource("CircleShape2D_p18pi")

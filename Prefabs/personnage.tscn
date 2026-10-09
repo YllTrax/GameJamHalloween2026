@@ -170,7 +170,7 @@ sprite_frames = SubResource("SpriteFrames_0k2he")
 animation = &"IdleEast"
 
 [node name="Health" parent="." unique_id=1039052001 node_paths=PackedStringArray("sprite") instance=ExtResource("4_ydahe")]
-position = Vector2(0.205, -5.995)
-scale = Vector2(0.91812944, 0.40834948)
+position = Vector2(12, 26.000004)
+scale = Vector2(3.2592623, 0.1881498)
 baseHealth = 1000.0
 sprite = NodePath("../AnimatorPersonnage")
