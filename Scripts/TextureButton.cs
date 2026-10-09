@@ -19,9 +19,7 @@ public partial class TextureButton : Godot.TextureButton
 	public override void _Ready()
 	{
 		_skillLevel = GetNode<Label>("Cost");
-		TooltipText = string.IsNullOrEmpty(Description)
-		? $"Cost : {Cost} gems"
-		: $"{Description}\nCost : {Cost} gems";
+		MettreAJourTooltip();
 		_tree = TrouverUpgrade();
 
 		Pressed += OnPressed;
@@ -45,7 +43,7 @@ public partial class TextureButton : Godot.TextureButton
 
 	private void UpdateVisuals()
 	{
-		_skillLevel.Text = Purchased ? "Acquired" : $"{Cost} gems";
+		_skillLevel.Text = Purchased ? Tr("SHOP_ACQUIRED") : string.Format(Tr("SHOP_PRICE"), Cost);
 
 		bool canAfford = _tree.Germs >= Cost;
 		if (Purchased)
@@ -58,6 +56,24 @@ public partial class TextureButton : Godot.TextureButton
 			Modulate = new Color(1, 1, 1, 0.8f);
 
 		Disabled = Purchased;
+	}
+
+	// Tr(Description) renvoie la Description telle quelle si ce n'est pas une clé
+	private void MettreAJourTooltip()
+	{
+		string cout = string.Format(Tr("SHOP_COST"), Cost);
+		TooltipText = string.IsNullOrEmpty(Description)
+		? cout
+		: $"{Tr(Description)}\n{cout}";
+	}
+
+	public override void _Notification(int what)
+	{
+		if (what != NotificationTranslationChanged || !IsNodeReady())
+			return;
+
+		MettreAJourTooltip();
+		UpdateVisuals();
 	}
 
 	private Updgrape TrouverUpgrade()

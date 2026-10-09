@@ -132,6 +132,10 @@ uv = PackedVector2Array(-20, 6.800003, 12.799988, -5.199997, 56.799988, -2.79999
 
 [node name="AudioStreamPlayer2D" parent="Boucle de jeu" index="6" unique_id=332105144]
 volume_db = -12.621
+bus = &"Master"
+
+[node name="Ambiant" parent="Boucle de jeu" index="7" unique_id=988011409]
+bus = &"Master"
 
 [node name="Anonces" type="CanvasLayer" parent="Boucle de jeu" unique_id=1545708900]
 
