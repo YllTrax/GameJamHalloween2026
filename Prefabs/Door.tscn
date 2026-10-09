@@ -24,6 +24,7 @@ shape = SubResource("RectangleShape2D_aluq5")
 polygon = PackedVector2Array(-97, -10, 95, -10, 96, 11, -95, 11)
 
 [node name="Health" parent="." unique_id=1461079800 node_paths=PackedStringArray("sprite") instance=ExtResource("1_ugn3q")]
-position = Vector2(0, -17)
+position = Vector2(47, 29.949368)
+scale = Vector2(4.062008, 0.7229754)
 baseHealth = 1000.0
 sprite = NodePath("../AnimatedSprite2D")

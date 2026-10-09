@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BuildData" format=3 uid="uid://bsnn5we0grkqr"]
+
+[ext_resource type="Texture2D" uid="uid://cj4gvuqg2vd3h" path="res://Images/Misc/Capture d'écran Tourelle.png" id="1_511kn"]
+[ext_resource type="Script" uid="uid://bkvkrin7i42hp" path="res://Scripts/BuildData.cs" id="1_f7btd"]
+[ext_resource type="PackedScene" uid="uid://cxx1r0boc7hqf" path="res://Prefabs/tourelleBrulante.tscn" id="2_duch3"]
+
+[resource]
+script = ExtResource("1_f7btd")
+Name = "TourelledeFeu"
+Cost = 10
+Icon = ExtResource("1_511kn")
+Scene = ExtResource("2_duch3")
+metadata/_custom_type_script = "uid://bkvkrin7i42hp"

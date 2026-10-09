@@ -1,23 +1,23 @@
 [gd_scene format=3 uid="uid://wj1whgh7v5c"]
 
 [ext_resource type="Script" uid="uid://wnlsghc7kp3" path="res://Scripts/Health.cs" id="1_bmhts"]
+[ext_resource type="Texture2D" uid="uid://bc6tocouc4urm" path="res://Images/Misc/progress_green.png" id="2_6ff2j"]
 [ext_resource type="Script" uid="uid://cug1sq371ruvc" path="res://Scripts/HealthBar.cs" id="2_cf1at"]
 
-[node name="Health" type="Node2D" unique_id=1461079800 node_paths=PackedStringArray("healthBar")]
+[node name="Health" type="Node2D" unique_id=1461079800]
+rotation = 1.5707964
 scale = Vector2(4.062008, 0.30829176)
 script = ExtResource("1_bmhts")
-healthBar = NodePath("HealthBar")
 
-[node name="HealthBar" type="ProgressBar" parent="." unique_id=1477468549 node_paths=PackedStringArray("health", "BarreVie")]
-modulate = Color(6.5888658, 10.541534, 0.00022664924, 1)
-anchors_preset = -1
-anchor_right = 0.00086805556
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=1667778802 node_paths=PackedStringArray("health")]
 offset_left = -16.0
-offset_top = -46.0
-offset_right = 13.0
-offset_bottom = -19.0
-show_percentage = false
+offset_top = -46.000004
+offset_right = 24.0
+offset_bottom = -6.000004
+scale = Vector2(0.10845214, 3.5842392)
+value = 100.0
+fill_mode = 3
+texture_progress = ExtResource("2_6ff2j")
+tint_progress = Color(1, 0.06999999, 0.06999999, 1)
 script = ExtResource("2_cf1at")
 health = NodePath("..")
-BarreVie = NodePath(".")
-metadata/_edit_use_anchors_ = true

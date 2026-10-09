@@ -3,14 +3,19 @@
 [ext_resource type="Script" uid="uid://dlmn4cmmmbr10" path="res://Scripts/BuildSlot.cs" id="1_6wcdf"]
 [ext_resource type="Script" uid="uid://bvmd4oammh5b" path="res://Scripts/Interactable.cs" id="2_6l626"]
 [ext_resource type="PackedScene" uid="uid://drpaowd2cjjol" path="res://Prefabs/toarch.tscn" id="2_onnxr"]
+[ext_resource type="Resource" uid="uid://blmc4pktfjegt" path="res://Scripts/Toarch.tres" id="2_tvrq5"]
+[ext_resource type="Resource" uid="uid://bkqqq0fejp77h" path="res://Scripts/Tourelle.tres" id="3_v5epc"]
 [ext_resource type="PackedScene" uid="uid://crda28r037s82" path="res://Prefabs/tourelle.tscn" id="3_y7flu"]
 [ext_resource type="PackedScene" uid="uid://cxx1r0boc7hqf" path="res://Prefabs/tourelleBrulante.tscn" id="4_dr0uq"]
+[ext_resource type="Resource" uid="uid://bsnn5we0grkqr" path="res://Scripts/TourelleFeu.tres" id="4_qfiv2"]
+[ext_resource type="Resource" uid="uid://b33uwcl1v4wxe" path="res://Scripts/TourelleSlime.tres" id="5_wlpnf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p18pi"]
 size = Vector2(16, 16)
 
 [node name="BuildSlot" type="Node2D" unique_id=1274842449]
 script = ExtResource("1_6wcdf")
+buildables = Array[Object]([ExtResource("2_tvrq5"), ExtResource("3_v5epc"), ExtResource("4_qfiv2"), ExtResource("5_wlpnf")])
 toarch = ExtResource("2_onnxr")
 tourelle = ExtResource("3_y7flu")
 tourelleBrulante = ExtResource("4_dr0uq")

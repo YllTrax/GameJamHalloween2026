@@ -3,114 +3,122 @@ using Godot;
 
 public partial class Health : Node2D
 {
-	[Export]
-	public float baseHealth;
-
-	[Export]
-	protected HealthBar healthBar;
-
-	[Export]
-	protected AnimatedSprite2D sprite;
-
-	[Export]
-	public bool IsPlayer; // a assigner dans l'inspecteur
+    [Export]
+    public float baseHealth;
 
     [Export]
-	public bool IsSaltCircle; // a assigner dans l'inspecteur
+    protected AnimatedSprite2D sprite;
 
-	public float currentHealth;
+    [Export]
+    public bool IsPlayer;
 
-	public event Action Died;
-	private bool isDead;
+    [Export]
+    public bool IsSaltCircle;
 
 	private float burningTimer;
 	
 
-	[Export]
-	private float burningDuration;
+    [Export]
+    private float burnPercentPerSecond = 10f;
 
-	[Export]
-	private float burnPercentPerSecond = 10f;
+    [Export]
+    private float deltaWitch = 10f;
 
-	public override void _Ready()
-	{
-		currentHealth = baseHealth;
-		burningTimer = burningDuration;
-	}
+    [Export]
+    private float witchDamage = 10f;
 
-	public bool isBurning;
+    [Export]
+    private float witchTimer = 10f;
 
-	public override void _Process(double delta)
-	{
-		Burn(delta);
-	}
+    public float currentHealth;
+    public bool isBurning;
 
-	/// <summary>
-	/// Methode pour infliger des degats du montant "damage"
-	/// </summary>
-	/// <param name="damage"></param>
-	public virtual void TakeDamage(float damage)
-	{
-		if (isDead)
-			return;
+    public event Action Died;
+    public event Action<float, float> HealthChanged; // (vie actuelle, vie max)
 
-		currentHealth -= damage;
+    private bool isDead;
+    private float burningTimer;
 
-		if (sprite != null)
-		{
-			sprite.Modulate = Colors.Red;
-			CreateTween().TweenProperty(sprite, "modulate", Colors.White, 0.15f);
-		}
-		healthBar?.OnHealthCHangeDamage(damage);
+    public override void _Ready()
+    {
+        currentHealth = baseHealth;
+        burningTimer = burningDuration;
+        HealthChanged?.Invoke(currentHealth, baseHealth);
+    }
 
-		if (currentHealth <= 0)
-		{
-			isDead = true;
-			GD.Print(
-				$"[Health] {GetParent().Name} meurt | script={GetType().Name} | abonnés={(Died != null)}"
-			);
-			Died?.Invoke();
-			GetParent().QueueFree();
-		}
-	}
+    public override void _Process(double delta)
+    {
+        Burn(delta);
+        if (IsSaltCircle)
+        {
+            WitchAttack((float)delta);
+        }
+    }
 
-	/// <summary>
-	/// Methode pour soigner du montant "heal"
-	/// </summary>
-	public void ToHeal(float heal)
-	{
-		currentHealth += heal;
-		sprite.Modulate = Colors.Green;
-		CreateTween().TweenProperty(sprite, "modulate", Colors.White, 0.15f);
-		healthBar.OnHealthCHangeHeal(heal);
-		if (currentHealth > baseHealth)
-			currentHealth = baseHealth;
-	}
+    public virtual void TakeDamage(float damage)
+    {
+        if (isDead)
+            return;
 
-	public override void _EnterTree()
-	{
-		// if (IsSaltCircle)
-		// {
-		//     SaltCircle.Instance.SaltRefilled += OnRefill;
-		// }
-	}
+        currentHealth = Mathf.Max(currentHealth - damage, 0);
+        Flash(Colors.Red);
+        HealthChanged?.Invoke(currentHealth, baseHealth);
 
-	private void OnRefill(float saltAmount)
-	{
-		ToHeal(saltAmount);
-	}
+        if (currentHealth <= 0)
+        {
+            isDead = true;
+            Died?.Invoke();
+            GetParent().QueueFree();
+        }
+    }
 
-	public void Burn(double delta)
-	{
-		if (isBurning)
-		{
-			TakeDamage((baseHealth * burnPercentPerSecond / 100) * (float)delta);
-			burningTimer -= (float)delta;
-			if (burningTimer <= 0)
-			{
-				isBurning = false;
-				burningTimer = burningDuration;
-			}
-		}
-	}
+    public void ToHeal(float heal)
+    {
+        if (isDead)
+            return;
+
+        currentHealth = Mathf.Min(currentHealth + heal, baseHealth);
+        Flash(Colors.Green);
+        HealthChanged?.Invoke(currentHealth, baseHealth);
+    }
+
+    public void StartBurn()
+    {
+        isBurning = true;
+        burningTimer = burningDuration;
+    }
+
+    public void Burn(double delta)
+    {
+        if (!isBurning)
+            return;
+
+        TakeDamage(baseHealth * burnPercentPerSecond / 100f * (float)delta);
+        burningTimer -= (float)delta;
+        if (burningTimer <= 0)
+            isBurning = false;
+    }
+
+    private void Flash(Color color)
+    {
+        if (sprite == null)
+            return;
+        sprite.Modulate = color;
+        CreateTween().TweenProperty(sprite, "modulate", Colors.White, 0.15f);
+    }
+
+    private void OnRefill(float saltAmount)
+    {
+        ToHeal(saltAmount);
+    }
+
+    private void WitchAttack(float delta)
+    {
+        deltaWitch -= delta;
+        if (deltaWitch <= 0)
+        {
+            TakeDamage(witchDamage);
+            deltaWitch = witchTimer;
+        }
+    }
 }

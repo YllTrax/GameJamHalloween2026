@@ -7,14 +7,14 @@
 
 [node name="SaltDeposit" type="Node2D" unique_id=418339320]
 script = ExtResource("1_yunmi")
-saltAmount = 50.0
+baseSaltAmount = 50.0
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=1478869536]
 polygon = PackedVector2Array(1, -13, 18, -7, 11, 15, -9, 13, -16, -4)
 
 [node name="Outline" type="Polygon2D" parent="." unique_id=1411246505]
 visible = false
-z_index = -34
+z_index = -1
 scale = Vector2(1.12, 1.12)
 color = Color(0.84483373, 0.5213544, 0.850883, 1)
 polygon = PackedVector2Array(1, -13, 18, -7, 11, 15, -9, 13, -16, -4)

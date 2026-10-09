@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using Godot;
 
-public partial class Tourelle : Area2D
+public partial class Tourelle : Area2D, IBuildable
 {
     public enum TowerType
     {
         Slime,
         Fire,
+        Bullet,
     }
 
     [Export]
@@ -29,6 +30,9 @@ public partial class Tourelle : Area2D
 
     [Export]
     private bool shouldFireInArc;
+
+    [Export]
+    public int Cost { get; set; } = 10;
 
     public override void _Ready()
     {

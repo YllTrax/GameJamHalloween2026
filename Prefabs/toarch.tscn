@@ -70,12 +70,13 @@ collision_mask = 4
 script = ExtResource("2_uud27")
 targetMode = 1
 damage = 50.0
-hitCD = 0.165
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Damage AoE" unique_id=96442283]
+visible = false
 shape = SubResource("CircleShape2D_p18pi")
 
 [node name="Polygon2D" type="Polygon2D" parent="Damage AoE" unique_id=1812124692]
+visible = false
 color = Color(0.8646886, 0.34557757, 0.27964398, 1)
 polygon = PackedVector2Array(0, -18, 9, -15, 15, -8, 17, 0, 15, 9, 9, 15, 0, 17, -10, 14, -16, 7, -18, 0, -15, -9, -7, -16)
 

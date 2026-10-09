@@ -69,13 +69,7 @@ position = Vector2(6.8181915, -18.181845)
 scale = Vector2(1.972, 0.15)
 baseHealth = 50.0
 sprite = NodePath("../PumpkinSprite")
-burningDuration = 3.0
 burnPercentPerSecond = 20.0
-
-[node name="HealthBar" parent="Health" index="0" unique_id=1477468549]
-modulate = Color(11.662025, 6.3731055, 9.857178e-05, 1)
-self_modulate = Color(0.8782145, 0.3353131, 0.12444454, 1)
-scale = Vector2(1, 1.8941096)
 
 [node name="PumpkinSprite" type="AnimatedSprite2D" parent="." unique_id=1687177670]
 sprite_frames = SubResource("SpriteFrames_p18pi")

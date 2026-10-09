@@ -1,27 +1,31 @@
 using Godot;
 
-public partial class HealthBar : ProgressBar
+public partial class HealthBar : TextureProgressBar
 {
-	[Export]
-	private Health health;
+    [Export]
+    private Health health;
 
-	[Export]
-	public ProgressBar BarreVie;
+    public override void _Ready()
+    {
+        if (health == null)
+        {
+            GD.PushWarning($"{Name} : Health non assigné");
+            return;
+        }
 
-	[Export]
-	public float VieMax;
-	private float vie;
+        health.HealthChanged += OnHealthChanged;
+        OnHealthChanged(health.currentHealth, health.baseHealth); // état initial
+    }
 
-	public void OnHealthCHangeHeal(float value)
-	{
-		vie = Mathf.Min(vie + value, VieMax);
-		BarreVie.Value = vie;
-	}
+    public override void _ExitTree()
+    {
+        if (health != null && IsInstanceValid(health))
+            health.HealthChanged -= OnHealthChanged;
+    }
 
-	public void OnHealthCHangeDamage(float value)
-	{
-		vie = Mathf.Max(vie - value, 0);
-
-		BarreVie.Value = vie;
-	}
+    private void OnHealthChanged(float current, float max)
+    {
+        MaxValue = max;
+        Value = current;
+    }
 }
