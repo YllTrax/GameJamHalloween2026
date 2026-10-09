@@ -240,6 +240,7 @@ position = Vector2(1312, 520)
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1940593975]
 stream = ExtResource("16_vi60e")
 volume_db = -10.602
+autoplay = true
 
 [editable path="Doors/Door"]
 [editable path="Doors/Door2"]
