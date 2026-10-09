@@ -60,6 +60,10 @@ public partial class BoucleDeJeu : Node2D
 	[Export]
 	public Label ScoreLabel;
 
+	//Sound Waves
+	[Export]
+	public AudioStreamPlayer2D SonVague;
+
 	public int VagueActuelle { get; private set; } = 1;
 
 	private int _compteurLv1 = 0;
@@ -142,6 +146,7 @@ public partial class BoucleDeJeu : Node2D
 		{
 			VagueActuelle++;
 			_timerVague = DureeVague;
+			SonVague?.Play();
 			GD.Print($"Waves {VagueActuelle} ! Intervalle : {IntervalleActuel():0.00}s");
 		}
 		MettreAJourLabel();
@@ -241,7 +246,7 @@ public partial class BoucleDeJeu : Node2D
 			return;
 
 		_germsAffiches = g;
-		GemsLabel.Text = $"Gems : {g}";
+		GemsLabel.Text = $" {g}";
 	}
 
 	private void MettreAJourSalt()
@@ -254,7 +259,7 @@ public partial class BoucleDeJeu : Node2D
 			return;
 
 		_saltAffiches = g;
-		SaltLabel.Text = $"Salt : {g}";
+		SaltLabel.Text = $" {g}";
 	}
 
 	//Fenetre update

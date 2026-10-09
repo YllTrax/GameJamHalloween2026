@@ -9,6 +9,7 @@
 [ext_resource type="TileSet" uid="uid://cfq0ohha68bj0" path="res://Images/Misc/new_tile_set.tres" id="7_uayuw"]
 [ext_resource type="PackedScene" uid="uid://drpaowd2cjjol" path="res://Prefabs/toarch.tscn" id="8_h35mc"]
 [ext_resource type="PackedScene" uid="uid://chhhyq1v22owf" path="res://Prefabs/salt_deposit.tscn" id="9_fk0ur"]
+[ext_resource type="AudioStream" uid="uid://cfau4a8eibq73" path="res://Sounds/ambiance.mp3" id="10_nnwed"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aluq5"]
 size = Vector2(774, 398)
@@ -173,6 +174,12 @@ position = Vector2(987, 375)
 
 [node name="SaltDeposit" parent="." unique_id=418339320 instance=ExtResource("9_fk0ur")]
 position = Vector2(1091, 203)
+baseSaltAmount = 10.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1710431772]
+stream = ExtResource("10_nnwed")
+volume_db = -11.612
+autoplay = true
 
 [editable path="Personnage"]
 [editable path="Doors/NorthDoor"]

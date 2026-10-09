@@ -1,44 +1,42 @@
 [gd_scene format=3 uid="uid://cyp88m5vfn78k"]
 
 [ext_resource type="Texture2D" uid="uid://1x1u8eqilkab" path="res://Images/IU/exit.png" id="1_ipq4j"]
+[ext_resource type="Texture2D" uid="uid://bx1obxnlekj23" path="res://Images/IU/play.png" id="1_jheqj"]
 [ext_resource type="Texture2D" uid="uid://cds0rucqtt6y5" path="res://Images/IU/setting.png" id="2_jheqj"]
 [ext_resource type="Texture2D" uid="uid://brnfopyu10edb" path="res://Images/IU/translate.png" id="3_2heew"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lgpmi"]
-load_path = "res://.godot/imported/play.png-9a0945d08f25cb39790fcd937234ddd0.ctex"
-
 [node name="MenuPause" type="CanvasLayer" unique_id=1546097521]
 process_mode = 3
-visible = false
 
 [node name="Play" type="TextureButton" parent="." unique_id=1705783361]
-offset_left = 376.0
-offset_top = -88.0
-offset_right = 2424.0
-offset_bottom = 1960.0
+offset_left = 383.99997
+offset_top = 32.0
+offset_right = 2432.0
+offset_bottom = 635.0
 scale = Vector2(0.19358686, 0.19358686)
-texture_normal = SubResource("CompressedTexture2D_lgpmi")
+texture_normal = ExtResource("1_jheqj")
+stretch_mode = 5
 
 [node name="BtnQuitter" type="TextureButton" parent="." unique_id=993648113]
-offset_left = 368.00003
-offset_top = 320.0
+offset_left = 368.0
+offset_top = 488.0
 offset_right = 2416.0
-offset_bottom = 2368.0
+offset_bottom = 1488.0
 scale = Vector2(0.20062631, 0.20062631)
 texture_normal = ExtResource("1_ipq4j")
 
 [node name="BtnReglages" type="TextureButton" parent="." unique_id=1421724480]
-offset_left = 568.0
-offset_top = 104.000015
-offset_right = 2616.0
+offset_left = 720.0
+offset_top = 104.00003
+offset_right = 1474.0
 offset_bottom = 2152.0
 scale = Vector2(0.21205501, 0.21205501)
 texture_normal = ExtResource("2_jheqj")
 
 [node name="BtnLangue" type="TextureButton" parent="." unique_id=612639627]
-offset_left = 120.0
-offset_top = 104.000015
-offset_right = 2168.0
+offset_left = 272.0
+offset_top = 104.00003
+offset_right = 1019.0
 offset_bottom = 2152.0
 scale = Vector2(0.21548852, 0.21548852)
 texture_normal = ExtResource("3_2heew")

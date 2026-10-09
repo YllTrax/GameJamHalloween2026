@@ -6,6 +6,9 @@
 radius = 35.812675
 height = 143.2507
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wer7p"]
+load_path = "res://.godot/imported/gems.png-af72bbf4a82776733bb492f7c5728509.ctex"
+
 [node name="Germs" type="Area2D" unique_id=105507298]
 scale = Vector2(1.91, 1.91)
 collision_layer = 32
@@ -20,7 +23,8 @@ scale = Vector2(0.726, 0.373)
 shape = SubResource("CapsuleShape2D_ngk0e")
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=115497780]
-position = Vector2(-3.2, 2.4)
-scale = Vector2(0.4, 0.4)
-color = Color(0.41846135, 0.0018434078, 0.9714729, 1)
-polygon = PackedVector2Array(-8, -8, 0, -16, 16, -16, 24, -8, 8, 8)
+position = Vector2(-3.1413603, -2.6177998)
+scale = Vector2(0.1081118, 0.1081118)
+color = Color(0.55107576, 0.23165588, 1.208705, 1)
+texture = SubResource("CompressedTexture2D_wer7p")
+polygon = PackedVector2Array(-1.6972198, 24.335342, 13.416077, 6.4461355, 47.652313, 5.520832, 63.99936, 23.41004, 31.305283, 60.422195)

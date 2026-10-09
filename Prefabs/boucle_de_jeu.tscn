@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://do15h41qr01vx" path="res://Prefabs/Pumpkin.tscn" id="2_n0t4e"]
 [ext_resource type="PackedScene" uid="uid://be75hui1s24ji" path="res://Prefabs/PumpkinLv2.tscn" id="3_x56rw"]
 [ext_resource type="PackedScene" uid="uid://bwekhv5wygstw" path="res://Prefabs/pumpkin_lv_3.tscn" id="4_ofaj1"]
+[ext_resource type="Texture2D" uid="uid://c3knd1tnwnxu" path="res://Images/IU/gems.png" id="5_bx1aj"]
 [ext_resource type="PackedScene" uid="uid://clk161d4mukij" path="res://Prefabs/updgrape.tscn" id="5_x56rw"]
 [ext_resource type="Shader" uid="uid://bwb07gi4wkwju" path="res://texture/boucle_de_jeu.gdshader" id="6_ofaj1"]
 [ext_resource type="Texture2D" uid="uid://bv808ix3v4r7" path="res://Images/IU/salt.png" id="7_adu7k"]
@@ -11,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://c2jes3ly67w3g" path="res://Images/IU/door.png" id="8_krvl4"]
 [ext_resource type="Script" uid="uid://cf40tm6ubl1qi" path="res://Scripts/MenuPause.cs" id="8_wghvw"]
 [ext_resource type="Texture2D" uid="uid://bebn1omcioej8" path="res://Images/Misc/CaptureTorche.png" id="9_krvl4"]
+[ext_resource type="Texture2D" uid="uid://c6gj22as73wi4" path="res://Images/IU/Set 24x24.png" id="10_js7qi"]
+[ext_resource type="AudioStream" uid="uid://pj2gjfbaiiso" path="res://Sounds/waves_sound.mp3" id="13_6c308"]
 
 [sub_resource type="FontVariation" id="FontVariation_cus6u"]
 
@@ -51,12 +54,15 @@ load_path = "res://.godot/imported/salt.png-1548369cb4dce661b64008c127291cdb.cte
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lxxk2"]
 load_path = "res://.godot/imported/door.png-92b4ce5176833e1460cab139519ea6af.ctex"
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_meu2g"]
+load_path = "res://.godot/imported/Set 24x24.png-725c76adde3c7644bc2ef8db14135f62.ctex"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wghvw"]
 shader = ExtResource("6_ofaj1")
 shader_parameter/blur = 2.0
 shader_parameter/tint = Color(0, 0, 0, 0.35)
 
-[node name="Boucle de jeu" type="Node2D" unique_id=260320005 node_paths=PackedStringArray("WaveLabel", "GemsLabel", "ScoreLabel", "depots")]
+[node name="Boucle de jeu" type="Node2D" unique_id=260320005 node_paths=PackedStringArray("WaveLabel", "GemsLabel", "ScoreLabel", "SonVague", "depots")]
 script = ExtResource("1_0vhmx")
 PumpkinScene = ExtResource("2_n0t4e")
 PumpkinLv2Scene = ExtResource("3_x56rw")
@@ -64,6 +70,7 @@ PumpkinLv3Scene = ExtResource("4_ofaj1")
 WaveLabel = NodePath("Waves/Label")
 GemsLabel = NodePath("Gems/Label")
 ScoreLabel = NodePath("GameOver/Score")
+SonVague = NodePath("AudioStreamPlayer2D")
 depots = []
 
 [node name="GameOver" type="CanvasLayer" parent="." unique_id=1837334137]
@@ -146,13 +153,22 @@ text = "Wave 1"
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -161.0
-offset_top = 53.0
-offset_right = -4.0
-offset_bottom = 95.0
+offset_left = -194.0
+offset_top = 47.0
+offset_right = -37.0
+offset_bottom = 89.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 30
-text = "Gems : 100"
+text = " 100"
+horizontal_alignment = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="Gems" unique_id=742555328]
+position = Vector2(1121.0001, 58)
+scale = Vector2(0.4173388, 0.4173388)
+color = Color(0.7247748, 0.011716183, 1.3620833, 1)
+texture = ExtResource("5_bx1aj")
+polygon = PackedVector2Array(35.200012, 0.40000153, 0, 8.400002, 0, 31.599998, 11.200012, 45.200005, 28, 62.799995, 45.599976, 53.999992, 61.599976, 33.999992, 63.200012, 18)
+uv = PackedVector2Array(35.200012, 0.40000153, 0, 8.400002, 0, 31.599998, 11.200012, 45.200005, 28, 62.799995, 45.599976, 53.999992, 61.599976, 33.999992, 63.200012, 18)
 
 [node name="Updgrape" parent="." unique_id=387195760 instance=ExtResource("5_x56rw")]
 visible = false
@@ -258,24 +274,49 @@ texture_normal = ExtResource("9_krvl4")
 stretch_mode = 0
 
 [node name="tourellemunLV1" parent="Updgrape" index="25" unique_id=1146145132]
+texture_normal = SubResource("CompressedTexture2D_meu2g")
+stretch_mode = 0
+
+[node name="tourellemunLV2" parent="Updgrape" index="26" unique_id=229946910]
+texture_normal = ExtResource("10_js7qi")
+stretch_mode = 0
+
+[node name="tourellemunLV3" parent="Updgrape" index="27" unique_id=95481707]
+texture_normal = ExtResource("10_js7qi")
+stretch_mode = 0
+
+[node name="tourellemunLV4" parent="Updgrape" index="28" unique_id=1136965571]
+texture_normal = ExtResource("10_js7qi")
+stretch_mode = 0
+
+[node name="tourellemunLV5" parent="Updgrape" index="29" unique_id=1056009201]
+texture_normal = ExtResource("10_js7qi")
 stretch_mode = 0
 
 [node name="MenuPause" parent="." unique_id=1546097521 instance=ExtResource("7_cus6u")]
+visible = false
 script = ExtResource("8_wghvw")
-ScenePrincipale = "uid://ci4mpugnevp18"
 
 [node name="Play" parent="MenuPause" index="0" unique_id=1705783361]
 z_index = 1
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="BtnQuitter" parent="MenuPause" index="1" unique_id=993648113]
 visibility_layer = 3
 z_index = 1
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="BtnReglages" parent="MenuPause" index="2" unique_id=1421724480]
 z_index = 1
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="BtnLangue" parent="MenuPause" index="3" unique_id=612639627]
 z_index = 1
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="ColorRect2" type="ColorRect" parent="MenuPause" unique_id=403508893]
 material = SubResource("ShaderMaterial_wghvw")
@@ -284,7 +325,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 0)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=332105144]
+stream = ExtResource("13_6c308")
 
 [editable path="Updgrape"]
 [editable path="MenuPause"]
