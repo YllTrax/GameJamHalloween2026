@@ -15,7 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://13ep4mxrmluj" path="res://Images/Misc/Capture d'écran TourelleBrulante.png" id="9_iyehk"]
 [ext_resource type="Texture2D" uid="uid://c84b8vq1l0e5y" path="res://Images/Misc/Capture d'écran Slime.png" id="10_bc020"]
 [ext_resource type="PackedScene" uid="uid://chhhyq1v22owf" path="res://Prefabs/salt_deposit.tscn" id="15_fpy4b"]
-[ext_resource type="AudioStream" uid="uid://cfau4a8eibq73" path="res://Sounds/ambiance.mp3" id="16_vi60e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p18pi"]
 
@@ -96,10 +95,10 @@ refillCD = 10.0
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -193.0
-offset_top = 86.0
-offset_right = -36.0
-offset_bottom = 128.0
+offset_left = -198.0
+offset_top = 603.0
+offset_right = -41.0
+offset_bottom = 645.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 30
 text = "100"
@@ -198,6 +197,9 @@ Description = ""
 
 [node name="tourellemunLV5" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="29" unique_id=1056009201]
 Description = ""
+
+[node name="AudioStreamPlayer2D" parent="Boucle de jeu" index="6" unique_id=332105144]
+volume_db = -12.621
 
 [node name="Anonces" type="CanvasLayer" parent="Boucle de jeu" unique_id=1545708900]
 
@@ -323,11 +325,6 @@ position = Vector2(464, -272)
 
 [node name="SaltDeposit5" parent="." unique_id=401300947 instance=ExtResource("15_fpy4b")]
 position = Vector2(1312, 520)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1940593975]
-stream = ExtResource("16_vi60e")
-volume_db = -10.602
-autoplay = true
 
 [editable path="Doors/Door"]
 [editable path="Doors/Door2"]

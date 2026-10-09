@@ -1,21 +1,30 @@
-using Godot;
 using System;
+using Godot;
 
 public partial class MenuPause : CanvasLayer
 {
 	// Scène du menu principal (laisser vide = le bouton quitte le jeu)
-	[Export(PropertyHint.File, "*.tscn")] 
+	[Export(PropertyHint.File, "*.tscn")]
 	public string ScenePrincipale = "";
 
-	// Langues proposées par le bouton "traduction" (codes de locale) avoir si on peut
-	[Export] public string[] Langues = { "fr", "en" };
+	// Langues proposées par le bouton "traduction" (codes de locale)
+	[Export]
+	public string[] Langues = { "fr", "en" };
 
 	private bool _ouvert = false;
+	private MenuSetting _menuSetting;
 
 	public override void _Ready()
 	{
 		ProcessMode = ProcessModeEnum.Always;
 		Visible = false;
+
+		// MenuSetting est le nœud voisin de MenuPause dans la scène
+		_menuSetting = GetNodeOrNull<MenuSetting>("../MenuSetting");
+		if (_menuSetting == null)
+			GD.PushError("[MenuPause] MenuSetting introuvable (../MenuSetting)");
+		else
+			_menuSetting.Ferme += OnReglagesFermes;
 
 		Connecter("Play", Reprendre);
 		Connecter("BtnQuitter", Quitter);
@@ -37,11 +46,16 @@ public partial class MenuPause : CanvasLayer
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		if (!@event.IsActionPressed("ui_cancel")) return; // Échap par défaut
-		GD.Print("[MenuPause] Échap détecté");
+		if (!@event.IsActionPressed("ui_cancel"))
+			return; // Échap par défaut
+
+		// Les réglages sont ouverts : c'est eux qui gèrent Échap
+		if (_menuSetting != null && _menuSetting.Visible)
+			return;
+
 		if (_ouvert)
 			Reprendre();
-		else if (!GetTree().Paused) // évite d'ouvrir le menu sur l'écran Game Over (déjà en pause)
+		else if (!GetTree().Paused) // évite d'ouvrir le menu sur l'écran Game Over
 			MettreEnPause();
 		else
 			return;
@@ -58,7 +72,6 @@ public partial class MenuPause : CanvasLayer
 
 	private void Reprendre()
 	{
-		GD.Print("Play cliqué");
 		_ouvert = false;
 		Visible = false;
 		GetTree().Paused = false;
@@ -75,7 +88,17 @@ public partial class MenuPause : CanvasLayer
 
 	private void OuvrirReglages()
 	{
-		GD.Print("Réglages : à brancher"); // TODO : ouvrir votre scène de réglages
+		if (_menuSetting == null)
+			return;
+
+		Visible = false; // on cache le menu pause (le jeu reste en pause)
+		_menuSetting.Ouvrir();
+	}
+
+	private void OnReglagesFermes()
+	{
+		if (_ouvert)
+			Visible = true; // retour au menu pause
 	}
 
 	private void ChangerLangue()
@@ -83,29 +106,5 @@ public partial class MenuPause : CanvasLayer
 		string actuelle = TranslationServer.GetLocale();
 		int i = Array.FindIndex(Langues, l => actuelle.StartsWith(l));
 		TranslationServer.SetLocale(Langues[(i + 1) % Langues.Length]);
-	}
-
-	public override void _Input(InputEvent @event)
-	{
-		if (Visible && @event is InputEventMouseButton mb && mb.Pressed)
-			GD.Print($"[MenuPause] Clic reçu par : {GetViewport().GuiGetHoveredControl()?.GetPath()}");
-	}
-
-	private void MasqueDeClic(string nom)
-	{
-		var bouton = GetNode<TextureButton>(nom);
-		var image = bouton.TextureNormal?.GetImage();
-		if (image == null)
-			return;
-
-		var masque = ClassDB.Instantiate("BitMap").AsGodotObject();
-		if (masque == null)
-		{
-			GD.Print("[MenuPause] BitMap indisponible dans cette version");
-			return;
-		}
-
-		masque.Call("create_from_image_alpha", image);
-		bouton.Set("texture_click_mask", masque);
 	}
 }

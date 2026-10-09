@@ -180,6 +180,7 @@ baseSaltAmount = 10.0
 stream = ExtResource("10_nnwed")
 volume_db = -11.612
 autoplay = true
+bus = &"Volume"
 
 [editable path="Personnage"]
 [editable path="Doors/NorthDoor"]

@@ -45,6 +45,17 @@ public partial class BoucleDeJeu : Node2D
 	[Export]
 	public Label WaveLabel; // Label d'affichage (assigné dans l'inspecteur)
 
+	[Export]
+	public float DureePause = 60f; // secondes de pause entre deux vagues
+
+	[Export]
+	public Label TimerLabel; // affiche le compte à rebours
+
+	[Export]
+	public float DureePauseDebut = 30f; // pause avant la toute première vague
+
+	private bool _premierePause = true;
+
 	//Nombre de Gems
 	[Export]
 	public Label GemsLabel;
@@ -63,6 +74,11 @@ public partial class BoucleDeJeu : Node2D
 	//Sound Waves
 	[Export]
 	public AudioStreamPlayer2D SonVague;
+	[Export]
+	public AudioStreamPlayer2D Musique;
+
+
+	private bool _musiqueActive = true;
 
 	public int VagueActuelle { get; private set; } = 1;
 
@@ -70,6 +86,8 @@ public partial class BoucleDeJeu : Node2D
 	private int _compteurLv2 = 0;
 	private float _timerVague = 0f;
 	private float _timerSpawn = 0f;
+	private bool _enPause = false;
+	private int _secondeAffichee = -1;
 	private RandomNumberGenerator _rng = new RandomNumberGenerator();
 
 	// --- Game over ---
@@ -103,7 +121,8 @@ public partial class BoucleDeJeu : Node2D
 		_timerFill.Start();
 
 		_rng.Randomize();
-		_timerVague = DureeVague;
+		_enPause = true;
+		_timerVague = DureePauseDebut;
 		_gameOverUI = GetNode<CanvasLayer>("GameOver");
 		_boutonRejouer = GetNode<Button>("GameOver/Button");
 		_boutonRejouer.Pressed += Rejouer;
@@ -111,6 +130,20 @@ public partial class BoucleDeJeu : Node2D
 		_hudWaves = GetNodeOrNull<CanvasLayer>("Waves");
 		_hudGems = GetNodeOrNull<CanvasLayer>("Gems");
 		MettreAJourLabel();
+
+		if (Musique != null)
+		{
+			Musique.Finished += () =>
+			{
+				if (_musiqueActive)
+					Musique.Play();
+			};
+			Musique.Play();
+		}
+
+		// Quand l'annonce de vague est finie, la musique reprend
+		if (SonVague != null)
+			SonVague.Finished += OnSonVagueFini;
 	}
 
 	public override void _Process(double delta)
@@ -136,20 +169,45 @@ public partial class BoucleDeJeu : Node2D
 		GererUpgrade();
 
 		GererVagues((float)delta);
-		GererSpawn((float)delta);
+
+		if (!_enPause)
+			GererSpawn((float)delta);
 	}
 
 	private void GererVagues(float delta)
 	{
 		_timerVague -= delta;
+
 		if (_timerVague <= 0f)
 		{
-			VagueActuelle++;
-			_timerVague = DureeVague;
-			SonVague?.Play();
-			GD.Print($"Waves {VagueActuelle} ! Intervalle : {IntervalleActuel():0.00}s");
+			if (!_enPause)
+			{
+				// Fin de la vague -> début de la pause
+				_enPause = true;
+				_timerVague = DureePause;
+				GD.Print($"Pause de {DureePause}s avant la vague {VagueActuelle + 1}");
+			}
+			else
+			{
+				// Fin de la pause -> nouvelle vague
+				_enPause = false;
+
+				if (_premierePause)
+					_premierePause = false; // la vague 1 commence, on n'incrémente pas
+				else
+					VagueActuelle++;
+
+				_timerVague = DureeVague;
+				_musiqueActive = false;
+				Musique?.Stop();
+				SonVague?.Play();
+				GD.Print($"Waves {VagueActuelle} ! Intervalle : {IntervalleActuel():0.00}s");
+			}
+			_secondeAffichee = -1; // force la mise à jour du texte
 		}
+
 		MettreAJourLabel();
+		MettreAJourTimer();
 	}
 
 	// Intervalle qui diminue à chaque vague, jamais sous IntervalleMin
@@ -296,6 +354,35 @@ public partial class BoucleDeJeu : Node2D
 			_hudGems.Visible = !afficher;
 	}
 
+	private void MettreAJourTimer()
+	{
+		if (TimerLabel == null)
+			return;
+
+		int secondes = Mathf.CeilToInt(_timerVague);
+		if (secondes == _secondeAffichee)
+			return; // le texte ne change qu'une fois par seconde
+
+		_secondeAffichee = secondes;
+		string temps = FormatTemps(secondes);
+		TimerLabel.Text = _enPause ? $"Pause  {temps}" : temps;
+	}
+
+	private static string FormatTemps(int secondes)
+	{
+		return $"{secondes / 60}:{secondes % 60:00}";
+	}
+
+	private void OnSonVagueFini()
+	{
+		_musiqueActive = true;
+		Musique?.Play();
+	}
+
+	/// <summary>
+	/// 
+	/// Boucle reset and Game Over
+	/// </summary>
 	// Boucle de jeu
 	private void GameOver()
 	{
