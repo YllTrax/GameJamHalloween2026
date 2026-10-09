@@ -14,7 +14,8 @@ public partial class FireZone : Area2D
     [Export]
     private float lifeTime = 3f;
 
-    [Export] private DamageSource damageSource;
+    [Export]
+    private DamageSource damageSource;
 
     public float Damage
     {
@@ -80,9 +81,6 @@ public partial class FireZone : Area2D
     private void OnBodyEntered(Node2D body)
     {
         if (body is Pumpkin)
-        {
-            Health health = body.GetNodeOrNull<Health>("Health");
-            health.isBurning = true;
-        }
+            body.GetNodeOrNull<Health>("Health")?.StartBurn();
     }
 }
