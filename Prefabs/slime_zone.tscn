@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b3ljysu34c1i7"]
 
 [ext_resource type="Script" uid="uid://c5if4hmvt8jl" path="res://SlimeZone.cs" id="1_h4oqd"]
+[ext_resource type="PackedScene" uid="uid://ud26c53gxr53" path="res://Prefabs/Munition.tscn" id="2_dwnsy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p18pi"]
 radius = 37.01351
@@ -11,6 +12,7 @@ scale = Vector2(0.84000045, 0.8684328)
 collision_layer = 64
 collision_mask = 4
 script = ExtResource("1_h4oqd")
+munition = ExtResource("2_dwnsy")
 
 [node name="Collider" type="CollisionShape2D" parent="." unique_id=885004324]
 shape = SubResource("CircleShape2D_p18pi")

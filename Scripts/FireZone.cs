@@ -14,7 +14,11 @@ public partial class FireZone : Area2D
     [Export]
     private float lifeTime = 3f;
 
-    [Export] private DamageSource damageSource;
+    [Export]
+    private DamageSource damageSource;
+
+    [Export]
+    private PackedScene munition;
 
     public float Damage
     {
@@ -65,6 +69,18 @@ public partial class FireZone : Area2D
 
         if (lifeTime > 0)
         {
+            if (munition != null)
+            {
+                Vector2 pos = GlobalPosition;
+                var ammo = munition.Instantiate<Munition>();
+                ammo.Position = pos;
+                ammo.SetDrop(
+                    pos + Vector2.FromAngle(GD.Randf() * Mathf.Tau) * (40f + GD.Randf() * 60f)
+                );
+
+                GetTree().CurrentScene.CallDeferred(Node.MethodName.AddChild, ammo);
+            }
+
             tween.TweenInterval(lifeTime);
             tween.TweenProperty(this, "scale", Vector2.Zero, 0.2f).SetEase(Tween.EaseType.In);
             tween.TweenCallback(Callable.From(QueueFree));
@@ -80,9 +96,6 @@ public partial class FireZone : Area2D
     private void OnBodyEntered(Node2D body)
     {
         if (body is Pumpkin)
-        {
-            Health health = body.GetNodeOrNull<Health>("Health");
-            health.isBurning = true;
-        }
+            body.GetNodeOrNull<Health>("Health")?.StartBurn();
     }
 }

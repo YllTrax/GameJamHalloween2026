@@ -3,18 +3,161 @@
 [ext_resource type="PackedScene" uid="uid://wj1whgh7v5c" path="res://Prefabs/health.tscn" id="1_6xu7i"]
 [ext_resource type="Script" uid="uid://bbveukhsk5wtn" path="res://Scripts/Pumpkin.cs" id="1_b5vig"]
 [ext_resource type="PackedScene" uid="uid://c1tkwc8qmv001" path="res://Prefabs/Germs.tscn" id="2_jd27u"]
+[ext_resource type="Texture2D" uid="uid://d2wvdnjb0gspc" path="res://Images/Sprites/pumpkin.png" id="4_ab2pg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aluq5"]
 
-[node name="PumpkinLv2" type="CharacterBody2D" unique_id=1031295454]
+[sub_resource type="AtlasTexture" id="AtlasTexture_jajrq"]
+atlas = ExtResource("4_ab2pg")
+region = Rect2(0, 22, 30, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4mdcm"]
+atlas = ExtResource("4_ab2pg")
+region = Rect2(30, 22, 30, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ka3p"]
+atlas = ExtResource("4_ab2pg")
+region = Rect2(60, 22, 30, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqdot"]
+atlas = ExtResource("4_ab2pg")
+region = Rect2(90, 22, 30, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hktuj"]
+atlas = ExtResource("4_ab2pg")
+region = Rect2(32, 0, 32, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nsewi"]
+atlas = ExtResource("4_ab2pg")
+region = Rect2(64, 0, 32, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gde8n"]
+atlas = ExtResource("4_ab2pg")
+region = Rect2(0, 0, 32, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyt5u"]
+atlas = ExtResource("4_ab2pg")
+region = Rect2(0, 44, 30, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyl0r"]
+atlas = ExtResource("4_ab2pg")
+region = Rect2(30, 44, 30, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2nri"]
+atlas = ExtResource("4_ab2pg")
+region = Rect2(60, 44, 30, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mx30j"]
+atlas = ExtResource("4_ab2pg")
+region = Rect2(90, 44, 30, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cnubi"]
+atlas = ExtResource("4_ab2pg")
+region = Rect2(0, 0, 30, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gybwj"]
+atlas = ExtResource("4_ab2pg")
+region = Rect2(30, 0, 30, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_prfym"]
+atlas = ExtResource("4_ab2pg")
+region = Rect2(60, 0, 30, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6iwuq"]
+atlas = ExtResource("4_ab2pg")
+region = Rect2(90, 0, 30, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g8p14"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jajrq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4mdcm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ka3p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqdot")
+}],
+"loop": 1,
+"name": &"EastWest",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hktuj")
+}],
+"loop": 1,
+"name": &"IdleEastWest",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nsewi")
+}],
+"loop": 1,
+"name": &"IdleNorth",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gde8n")
+}],
+"loop": 1,
+"name": &"IdleSouth",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eyt5u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eyl0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2nri")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mx30j")
+}],
+"loop": 1,
+"name": &"North",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cnubi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gybwj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_prfym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6iwuq")
+}],
+"loop": 1,
+"name": &"South",
+"speed": 5.0
+}]
+
+[node name="PumpkinLv2" type="CharacterBody2D" unique_id=1031295454 node_paths=PackedStringArray("anim")]
+scale = Vector2(1.482152, 1.2298197)
 collision_layer = 4
 collision_mask = 11
 script = ExtResource("1_b5vig")
 Damage = 10.0
 GermsDrop = 4.0
 GermsScene = ExtResource("2_jd27u")
+anim = NodePath("PumpkinSprite")
+isEastOriented = true
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=949483054]
+visible = false
 color = Color(1, 0.45490196, 0.2901961, 1)
 polygon = PackedVector2Array(-16, 0, -16, -8, -8, -16, 0, -16, 8, -16, 16, -8, 16, 0, 16, 8, 8, 16, 0, 16, -8, 16, -16, 8)
 
@@ -27,4 +170,11 @@ shape = SubResource("CircleShape2D_aluq5")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=577497260]
 
 [node name="Health" parent="." unique_id=1461079800 instance=ExtResource("1_6xu7i")]
+position = Vector2(12.144504, 30.085712)
+scale = Vector2(4.104753, 0.1986599)
 baseHealth = 150.0
+
+[node name="PumpkinSprite" type="AnimatedSprite2D" parent="." unique_id=1768532746]
+scale = Vector2(1.7552629, 1.1813754)
+sprite_frames = SubResource("SpriteFrames_g8p14")
+animation = &"EastWest"

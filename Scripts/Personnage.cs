@@ -3,235 +3,243 @@ using Godot;
 
 public partial class Personnage : CharacterBody2D
 {
-	public enum TempAnim
-	{
-		North,
-		South,
-		West,
-		East,
-	}
+    public enum TempAnim
+    {
+        North,
+        South,
+        West,
+        East,
+    }
 
-	public enum SelectTower
-	{
-		Torch = 0,
-		Tourelle = 1,
-		TourelleFeu = 2,
-		TourelleSlime = 3,
-	}
+    public enum SelectTower
+    {
+        Torch = 0,
+        Tourelle = 1,
+        TourelleFeu = 2,
+        TourelleSlime = 3,
+    }
 
-	public SelectTower selectTower;
+    public SelectTower selectTower;
 
-	public static Personnage Instance { get; private set; }
-	public event Action<TempAnim> DirectionChange;
+    public static Personnage Instance { get; private set; }
+    public event Action<TempAnim> DirectionChange;
 
-	[ExportGroup("Références")]
-	[Export]
-	private AnimatedSprite2D anim;
+    [ExportGroup("Références")]
+    [Export]
+    private AnimatedSprite2D anim;
 
-	[ExportGroup("Mouvement")]
-	[Export]
-	private float startSpeed = 200f;
+    [ExportGroup("Mouvement")]
+    [Export]
+    private float startSpeed = 200f;
 
-	[Export]
-	private float accel = 1500f;
+    [Export]
+    private float accel = 1500f;
 
-	[ExportGroup("Dash")]
-	[Export]
-	private float dashSpeed = 2000f;
+    [ExportGroup("Dash")]
+    [Export]
+    private float dashSpeed = 2000f;
 
-	[ExportGroup("Inventaire")]
-	[Export]
-	public float carriedSalt = 0;
+    [ExportGroup("Inventaire")]
+    [Export]
+    public float carriedSalt = 0;
 
-	[Export]
-	public int germs = 0;
+    [Export]
+    public int germs = 0;
 
-	[ExportGroup("Debug (runtime)")]
-	[Export]
-	public TempAnim lastAnim;
+    [Export]
+    public int munitions = 0;
 
-	[Export]
-	private float moveSpeed;
+    [ExportGroup("Debug (runtime)")]
+    [Export]
+    public TempAnim lastAnim;
 
-	[ExportGroup("")] // fin des groupes
-	private float maxCarriedSalt;
-	private bool isDashing = false;
-	private bool canDash = true;
-	public bool iSIndoor = false;
-	private Vector2 mouseDir;
+    [Export]
+    private float moveSpeed;
 
-	public override void _EnterTree()
-	{
-		if (Instance != null && Instance != this)
-		{
-			QueueFree();
-			return;
-		}
-		Instance = this;
-	}
+    [ExportGroup("")] // fin des groupes
+    private float maxCarriedSalt;
+    private bool isDashing = false;
+    private bool canDash = true;
+    public bool iSIndoor = false;
+    private Vector2 mouseDir;
 
-	public override void _ExitTree()
-	{
-		if (Instance == this)
-		{
-			Instance = null;
-		}
-	}
+    public override void _EnterTree()
+    {
+        if (Instance != null && Instance != this)
+        {
+            QueueFree();
+            return;
+        }
+        Instance = this;
+    }
 
-	public override void _Ready()
-	{
-		moveSpeed = startSpeed;
-	}
+    public override void _ExitTree()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
 
-	public override void _UnhandledInput(InputEvent @event)
-	{
-		if (@event is not InputEventMouseButton mb || !mb.Pressed)
-			return;
+    public override void _Ready()
+    {
+        moveSpeed = startSpeed;
+    }
 
-		int index = (int)selectTower;
-		int count = 4;
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        if (@event is not InputEventMouseButton mb || !mb.Pressed)
+            return;
 
-		if (mb.ButtonIndex == MouseButton.WheelUp)
-		{
-			index += 1;
-			if (index >= count)
-				index = 0;
-		}
-		else if (mb.ButtonIndex == MouseButton.WheelDown)
-		{
-			index -= 1;
-			if (index < 0)
-				index = count - 1;
-		}
-		else
-		{
-			return;
-		}
+        int index = (int)selectTower;
+        int count = 4;
 
-		selectTower = (SelectTower)index;
-	}
+        if (mb.ButtonIndex == MouseButton.WheelUp)
+        {
+            index += 1;
+            if (index >= count)
+                index = 0;
+        }
+        else if (mb.ButtonIndex == MouseButton.WheelDown)
+        {
+            index -= 1;
+            if (index < 0)
+                index = count - 1;
+        }
+        else
+        {
+            return;
+        }
 
-	public override void _Process(double delta)
-	{
-		mouseDir = GetLocalMousePosition();
-		ColorisePlayerInDoor();
-	}
+        selectTower = (SelectTower)index;
+    }
 
-	public override void _PhysicsProcess(double delta)
-	{
-		if (Input.IsActionJustPressed("dash"))
-		{
-			Dash();
-		}
+    public override void _Process(double delta)
+    {
+        mouseDir = GetLocalMousePosition();
+        ColorisePlayerInDoor();
+    }
 
-		Vector2 dir = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-		Velocity = Velocity.MoveToward(dir * moveSpeed, accel * (float)delta);
-		MoveAndSlide();
+    public override void _PhysicsProcess(double delta)
+    {
+        if (Input.IsActionJustPressed("dash"))
+        {
+            Dash();
+        }
 
-		UpdateAnimation(dir);
-	}
+        Vector2 dir = Input.GetVector("move_left", "move_right", "move_up", "move_down");
+        Velocity = Velocity.MoveToward(dir * moveSpeed, accel * (float)delta);
+        MoveAndSlide();
 
-	private void UpdateAnimation(Vector2 dir)
-	{
-		// On convertit en -1, 0 ou 1
-		int x = (int)Mathf.Sign(dir.X);
-		int y = (int)Mathf.Sign(dir.Y);
+        UpdateAnimation(dir);
+    }
 
-		TempAnim dirAnim = lastAnim;
+    private void UpdateAnimation(Vector2 dir)
+    {
+        // On convertit en -1, 0 ou 1
+        int x = (int)Mathf.Sign(dir.X);
+        int y = (int)Mathf.Sign(dir.Y);
 
-		switch (x, y)
-		{
-			case (0, -1):
-				dirAnim = TempAnim.North;
-				break;
-			case (0, 1):
-				dirAnim = TempAnim.South;
-				break;
-			case (-1, 0):
-				dirAnim = TempAnim.West;
-				break;
-			case (1, 0):
-				dirAnim = TempAnim.East;
-				break;
-			case (_, -1):
-				dirAnim = TempAnim.North;
-				break;
-			case (_, 1):
-				dirAnim = TempAnim.South;
-				break;
-		}
+        TempAnim dirAnim = lastAnim;
 
-		if (dirAnim != lastAnim)
-		{
-			lastAnim = dirAnim;
-			DirectionChange?.Invoke(dirAnim);
-		}
+        switch (x, y)
+        {
+            case (0, -1):
+                dirAnim = TempAnim.North;
+                break;
+            case (0, 1):
+                dirAnim = TempAnim.South;
+                break;
+            case (-1, 0):
+                dirAnim = TempAnim.West;
+                break;
+            case (1, 0):
+                dirAnim = TempAnim.East;
+                break;
+            case (_, -1):
+                dirAnim = TempAnim.North;
+                break;
+            case (_, 1):
+                dirAnim = TempAnim.South;
+                break;
+        }
 
-		anim.Play(GetAnim(lastAnim));
-		anim.FlipH = lastAnim == TempAnim.East;
-	}
+        if (dirAnim != lastAnim)
+        {
+            lastAnim = dirAnim;
+            DirectionChange?.Invoke(dirAnim);
+        }
 
-	public override void _Input(InputEvent @event) { }
+        anim.Play(GetAnim(lastAnim));
+        anim.FlipH = lastAnim == TempAnim.East;
+    }
 
-	private async void Dash()
-	{
-		if (!isDashing && canDash)
-		{
-			isDashing = true;
-			canDash = false;
-			moveSpeed = dashSpeed;
-			await ToSignal(GetTree().CreateTimer(0.5), SceneTreeTimer.SignalName.Timeout);
-			moveSpeed = startSpeed;
-			isDashing = false;
-			await ToSignal(GetTree().CreateTimer(1.5f), SceneTreeTimer.SignalName.Timeout);
-			canDash = true;
-		}
-	}
+    public override void _Input(InputEvent @event) { }
 
-	private void ColorisePlayerInDoor()
-	{
-		if (iSIndoor)
-		{
-			anim.Modulate = Colors.Crimson;
-		}
-		else
-		{
-			anim.Modulate = Colors.White;
-		}
-	}
+    private async void Dash()
+    {
+        if (!isDashing && canDash)
+        {
+            isDashing = true;
+            canDash = false;
+            moveSpeed = dashSpeed;
+            await ToSignal(GetTree().CreateTimer(0.5), SceneTreeTimer.SignalName.Timeout);
+            moveSpeed = startSpeed;
+            isDashing = false;
+            await ToSignal(GetTree().CreateTimer(1.5f), SceneTreeTimer.SignalName.Timeout);
+            canDash = true;
+        }
+    }
 
-	private void ToCarrySalt() { }
+    private void ColorisePlayerInDoor()
+    {
+        if (iSIndoor)
+        {
+            anim.Modulate = Colors.Crimson;
+        }
+        else
+        {
+            anim.Modulate = Colors.White;
+        }
+    }
 
-	private void ToDropSalt() { }
+    private void ToCarrySalt() { }
 
-	internal void OnCollect(int value)
-	{
-		germs += value;
-	}
+    private void ToDropSalt() { }
 
-	private void StoreTempAnim(TempAnim temp)
-	{
-		lastAnim = temp;
-	}
+    internal void OnCollect(int value)
+    {
+        germs += value;
+    }
 
-	private string GetAnim(TempAnim temp)
-	{
-		switch (temp)
-		{
-			case TempAnim.North:
-				return "IdleNorth";
-			case TempAnim.West:
-			case TempAnim.East:
-				return "IdleWest";
-			default:
-				return "IdleSouth";
-		}
-	}
+    internal void OnCollectMunition(int value)
+    {
+        munitions += value;
+    }
 
-	public void BuyBulding(int cost)
-	{
-		if (germs < cost)
-			return;
-		germs -= cost;
-	}
+    private void StoreTempAnim(TempAnim temp)
+    {
+        lastAnim = temp;
+    }
+
+    private string GetAnim(TempAnim temp)
+    {
+        switch (temp)
+        {
+            case TempAnim.North:
+                return "IdleNorth";
+            case TempAnim.West:
+            case TempAnim.East:
+                return "IdleWest";
+            default:
+                return "IdleSouth";
+        }
+    }
+
+    public void BuyBulding(int cost)
+    {
+        if (germs < cost)
+            return;
+        germs -= cost;
+    }
 }

@@ -3,56 +3,60 @@ using Godot;
 
 public partial class Toarch : Node2D, IBuildable
 {
-	[Export]
-	private DamageSource areaOfEffect;
+    [Export]
+    private DamageSource areaOfEffect;
 
-	[Export]
-	private AnimatedSprite2D anim;
+    [Export]
+    private AnimatedSprite2D anim;
 
-	[Export]
-	private float attackCD;
-	private Tween burnTween;
-	private Timer _timer;
+    [Export]
+    private float attackCD;
+    private Tween burnTween;
+    private Timer _timer;
 
-	[Export]
-	public int Cost { get; set; } = 10;
-	private float _baseDamage;
+    [Export]
+    public int Cost { get; set; } = 10;
+    private float _baseDamage;
 
-	public override void _Ready()
-	{
-		_baseDamage = areaOfEffect.Damage;
-		anim.Play();
-		_timer = new Timer();
-		_timer.WaitTime = attackCD; // Ca repete toutes les attackCD secondes
-		_timer.OneShot = false; // pour faire la repetition
-		_timer.Timeout += Burn; // on abone la bonne fonction
-		AddChild(_timer); // on ajoute le timer de facon dynamique
-		_timer.Start(); // bon je pense que c'est explicite XD
-	}
+    public override void _Ready()
+    {
+        _baseDamage = areaOfEffect.Damage;
+        anim.Play();
+        _timer = new Timer();
+        _timer.WaitTime = attackCD; // Ca repete toutes les attackCD secondes
+        _timer.OneShot = false; // pour faire la repetition
+        _timer.Timeout += Burn; // on abone la bonne fonction
+        AddChild(_timer); // on ajoute le timer de facon dynamique
+        _timer.Start(); // bon je pense que c'est explicite XD
+    }
 
-	private void Burn()
-	{
-		areaOfEffect.Damage = _baseDamage * UpgradeStats.TurretDamageMult;
-		GD.Print($"[Torche] base {_baseDamage} x{UpgradeStats.TurretDamageMult:0.00} = {areaOfEffect.Damage}");
-		burnTween?.Kill();
+    private void Burn()
+    {
+        areaOfEffect.Damage = _baseDamage * UpgradeStats.TurretDamageMult;
+        GD.Print(
+            $"[Torche] base {_baseDamage} x{UpgradeStats.TurretDamageMult:0.00} = {areaOfEffect.Damage}"
+        );
+        burnTween?.Kill();
 
-		areaOfEffect.Scale = Vector2.One;
-		areaOfEffect.Visible = true;
-		areaOfEffect.ProcessMode = ProcessModeEnum.Inherit;
+        areaOfEffect.Scale = Vector2.One;
+        areaOfEffect.Visible = true;
+        areaOfEffect.ProcessMode = ProcessModeEnum.Inherit;
 
-		burnTween = CreateTween();
-		burnTween
-			.TweenProperty(areaOfEffect, "scale", new Vector2(1.5f, 1.5f), 0.5f)
-			.SetTrans(Tween.TransitionType.Back)
-			.SetEase(Tween.EaseType.Out);
-		burnTween.TweenInterval(1.0);
-		burnTween.TweenProperty(areaOfEffect, "scale", Vector2.One, 0.15f);
-		burnTween.TweenCallback(
-			Callable.From(() =>
-			{
-				areaOfEffect.Visible = false;
-				areaOfEffect.ProcessMode = ProcessModeEnum.Disabled;
-			})
-		);
-	}
+        burnTween = CreateTween();
+        burnTween
+            .TweenProperty(areaOfEffect, "scale", new Vector2(1.5f, 1.5f), 0.5f)
+            .SetTrans(Tween.TransitionType.Back)
+            .SetEase(Tween.EaseType.Out);
+        burnTween.TweenInterval(1.0);
+        burnTween.TweenProperty(areaOfEffect, "scale", Vector2.One, 0.15f);
+        burnTween.TweenCallback(
+            Callable.From(() =>
+            {
+                areaOfEffect.Visible = false;
+                areaOfEffect.ProcessMode = ProcessModeEnum.Disabled;
+            })
+        );
+    }
+
+    public void Reload() { }
 }

@@ -3,271 +3,306 @@ using Godot;
 
 public partial class Pumpkin : CharacterBody2D
 {
-	[Export]
-	public float Speed = 120f;
+    [Export]
+    public float Speed = 120f;
 
-	[Export]
-	public float Damage = 5f;
+    [Export]
+    public float Damage = 5f;
 
-	[Export]
-	public float AttackCooldown = 1f;
+    [Export]
+    public float AttackCooldown = 1f;
 
-	[Export]
-	public float SaltAttackRange = 50f; // distance pour taper le cercle de sel
+    [Export]
+    public float SaltAttackRange = 50f; // distance pour taper le cercle de sel
 
-	[Export]
-	public float PlayerAttackRange = 50f; // distance pour taper le personnage
+    [Export]
+    public float PlayerAttackRange = 50f; // distance pour taper le personnage
 
-	[Export]
-	public float AggroRadius = 300f; // rayon autour du joueur qui attire les citrouilles
+    [Export]
+    public float AggroRadius = 300f; // rayon autour du joueur qui attire les citrouilles
 
-	[Export]
-	public float PathUpdateInterval = 1f; // secondes entre deux recalculs du chemin
+    [Export]
+    public float PathUpdateInterval = 1f; // secondes entre deux recalculs du chemin
 
-	// Pour les Germs Drop
-	[Export]
-	public float GermsDrop = 2;
+    // Pour les Germs Drop
+    [Export]
+    public float GermsDrop = 2;
 
-	[Export]
-	public PackedScene GermsScene;
+    [Export]
+    public PackedScene GermsScene;
 
-	//-------Animation-----
-	[Export]
-	private AnimatedSprite2D anim;
+    //-------Animation-----
+    [Export]
+    private AnimatedSprite2D anim;
 
-	//----------navigation
+    [Export]
+    private bool isEastOriented;
 
-	private NavigationAgent2D _agent;
-	private double _cooldown;
-	private double _pathTimer;
-	private Node2D _myDoor;
-	private bool _doorAssigned;
+    //----------navigation
 
-	// Germs
-	private Health _health;
-	private bool _dead;
-	private Timer _timerFire;
+    private NavigationAgent2D _agent;
+    private double _cooldown;
+    private double _pathTimer;
+    private Node2D _myDoor;
+    private bool _doorAssigned;
 
-	public override void _Ready()
-	{
-		_agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
-		_pathTimer = GD.Randf() * PathUpdateInterval; // décale les recalculs entre citrouilles
+    // Germs
+    private Health _health;
+    private bool _dead;
+    private Timer _timerFire;
 
-		// Germs
-		_health = GetNodeOrNull<Health>("Health");
-		if (_health != null)
-			_health.Died += Die;
+    public override void _Ready()
+    {
+        _agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
+        _pathTimer = GD.Randf() * PathUpdateInterval; // décale les recalculs entre citrouilles
 
-		_timerFire = new Timer { WaitTime = 1.1f, OneShot = false };
-		_timerFire.Timeout += ToUpAndDown;
-		AddChild(_timerFire);
-		_timerFire.Start();
-		if (IsInstanceValid(anim))
-			anim.Play("IdleSouth");
-	}
+        // Germs
+        _health = GetNodeOrNull<Health>("Health");
+        if (_health != null)
+            _health.Died += Die;
 
-	public override void _PhysicsProcess(double delta)
-	{
-		// Mort
-		if (_dead)
-			return;
-		if (_health != null && _health.currentHealth <= 0)
-		{
-			//  Die();
-			return;
-		}
+        _timerFire = new Timer { WaitTime = 1.1f, OneShot = false };
+        _timerFire.Timeout += ToUpAndDown;
+        AddChild(_timerFire);
+        _timerFire.Start();
+        if (IsInstanceValid(anim))
+            anim.Play("South");
+    }
 
-		if (Personnage.Instance == null)
-			return;
+    public override void _PhysicsProcess(double delta)
+    {
+        // Mort
+        if (_dead)
+            return;
+        if (_health != null && _health.currentHealth <= 0)
+        {
+            //  Die();
+            return;
+        }
 
-		_cooldown -= delta;
-		_pathTimer -= delta;
+        if (Personnage.Instance == null)
+            return;
 
-		bool indoor = Personnage.Instance.iSIndoor;
-		Node2D target = Personnage.Instance;
-		bool targetingSalt = false;
+        _cooldown -= delta;
+        _pathTimer -= delta;
 
-		if (indoor)
-		{
-			if (!_doorAssigned)
-			{
-				_myDoor = GetNearestDoor();
-				_doorAssigned = true;
-			}
+        bool indoor = Personnage.Instance.iSIndoor;
+        Node2D target = Personnage.Instance;
+        bool targetingSalt = false;
 
-			bool doorAlive =
-				_myDoor != null && IsInstanceValid(_myDoor) && !_myDoor.IsQueuedForDeletion();
+        if (indoor)
+        {
+            if (!_doorAssigned)
+            {
+                _myDoor = GetNearestDoor();
+                _doorAssigned = true;
+            }
 
-			if (doorAlive)
-			{
-				target = _myDoor;
-			}
-			else if (SaltCircle.Instance != null && IsInstanceValid(SaltCircle.Instance))
-			{
-				target = SaltCircle.Instance;
-				targetingSalt = true;
-			}
-			else
-			{
-				Velocity = Vector2.Zero;
-				return;
-			}
-		}
-		else
-		{
-			_doorAssigned = false;
-			_myDoor = null;
-		}
+            bool doorAlive =
+                _myDoor != null && IsInstanceValid(_myDoor) && !_myDoor.IsQueuedForDeletion();
 
-		// Recalcul du chemin seulement toutes les PathUpdateInterval secondes
-		if (_pathTimer <= 0)
-		{
-			_agent.TargetPosition = target.GlobalPosition;
-			_pathTimer = PathUpdateInterval;
-		}
+            if (doorAlive)
+            {
+                target = _myDoor;
+            }
+            else if (SaltCircle.Instance != null && IsInstanceValid(SaltCircle.Instance))
+            {
+                target = SaltCircle.Instance;
+                targetingSalt = true;
+            }
+            else
+            {
+                Velocity = Vector2.Zero;
+                return;
+            }
+        }
+        else
+        {
+            _doorAssigned = false;
+            _myDoor = null;
+        }
 
-		if (_agent.IsNavigationFinished())
-		{
-			Velocity = Vector2.Zero;
-		}
-		else
-		{
-			Vector2 nextPoint = _agent.GetNextPathPosition();
-			Velocity = (nextPoint - GlobalPosition).Normalized() * Speed;
-		}
+        // Recalcul du chemin seulement toutes les PathUpdateInterval secondes
+        if (_pathTimer <= 0)
+        {
+            _agent.TargetPosition = target.GlobalPosition;
+            _pathTimer = PathUpdateInterval;
+        }
 
-		MoveAndSlide();
+        if (_agent.IsNavigationFinished())
+        {
+            Velocity = Vector2.Zero;
+        }
+        else
+        {
+            Vector2 nextPoint = _agent.GetNextPathPosition();
+            Velocity = (nextPoint - GlobalPosition).Normalized() * Speed;
+        }
 
-		if (_cooldown > 0)
-			return;
+        MoveAndSlide();
+        MettreAJourAnimation();
 
-		if (!indoor)
-		{
-			AttackPlayer();
-		}
-		else if (targetingSalt)
-		{
-			AttackSaltCircle();
-		}
-		else
-		{
-			AttackDoor();
-		}
-	}
+        if (_cooldown > 0)
+            return;
 
-	private void AttackPlayer()
-	{
-		var joueur = Personnage.Instance;
-		if (joueur == null || !IsInstanceValid(joueur))
-			return;
+        if (!indoor)
+        {
+            AttackPlayer();
+        }
+        else if (targetingSalt)
+        {
+            AttackSaltCircle();
+        }
+        else
+        {
+            AttackDoor();
+        }
+    }
 
-		if (GlobalPosition.DistanceTo(joueur.GlobalPosition) <= PlayerAttackRange)
-		{
-			var health = joueur.GetNodeOrNull<Health>("Health");
-			if (health == null)
-			{
-				// GD.Print("Le personnage n'a pas de noeud Health !");
-				return;
-			}
+    private void AttackPlayer()
+    {
+        var joueur = Personnage.Instance;
+        if (joueur == null || !IsInstanceValid(joueur))
+            return;
 
-			health.TakeDamage(Damage);
-			// GD.Print($"Personnage : {health.currentHealth} PV");
-			_cooldown = AttackCooldown;
-		}
-	}
+        if (GlobalPosition.DistanceTo(joueur.GlobalPosition) <= PlayerAttackRange)
+        {
+            var health = joueur.GetNodeOrNull<Health>("Health");
+            if (health == null)
+            {
+                // GD.Print("Le personnage n'a pas de noeud Health !");
+                return;
+            }
 
-	private void AttackDoor()
-	{
-		for (int i = 0; i < GetSlideCollisionCount(); i++)
-		{
-			if (GetSlideCollision(i).GetCollider() is Node2D hit && hit.IsInGroup("Doors"))
-			{
-				var health = hit.GetNode<Health>("Health");
-				health.TakeDamage(Damage);
-				// GD.Print($"{hit.Name} : {health.currentHealth} PV");
-				_cooldown = AttackCooldown;
-				break;
-			}
-		}
-	}
+            health.TakeDamage(Damage);
+            // GD.Print($"Personnage : {health.currentHealth} PV");
+            _cooldown = AttackCooldown;
+        }
+    }
 
-	private void AttackSaltCircle()
-	{
-		var circle = SaltCircle.Instance;
-		if (circle == null || circle.Health == null)
-			return;
+    private void AttackDoor()
+    {
+        for (int i = 0; i < GetSlideCollisionCount(); i++)
+        {
+            if (GetSlideCollision(i).GetCollider() is Node2D hit && hit.IsInGroup("Doors"))
+            {
+                var health = hit.GetNode<Health>("Health");
+                health.TakeDamage(Damage);
+                // GD.Print($"{hit.Name} : {health.currentHealth} PV");
+                _cooldown = AttackCooldown;
+                break;
+            }
+        }
+    }
 
-		if (GlobalPosition.DistanceTo(circle.GlobalPosition) <= SaltAttackRange)
-		{
-			circle.Health.TakeDamage(Damage);
-			// GD.Print($"Cercle de sel : {circle.Health.currentHealth} PV");
-			_cooldown = AttackCooldown;
-		}
-	}
+    private void AttackSaltCircle()
+    {
+        var circle = SaltCircle.Instance;
+        if (circle == null || circle.Health == null)
+            return;
 
-	private Node2D GetNearestDoor()
-	{
-		Node2D nearest = null;
-		float best = float.MaxValue;
+        if (GlobalPosition.DistanceTo(circle.GlobalPosition) <= SaltAttackRange)
+        {
+            circle.Health.TakeDamage(Damage);
+            // GD.Print($"Cercle de sel : {circle.Health.currentHealth} PV");
+            _cooldown = AttackCooldown;
+        }
+    }
 
-		foreach (Node n in GetTree().GetNodesInGroup("Doors"))
-		{
-			if (n is not Node2D door || !IsInstanceValid(door) || door.IsQueuedForDeletion())
-				continue;
+    private Node2D GetNearestDoor()
+    {
+        Node2D nearest = null;
+        float best = float.MaxValue;
 
-			float d = GlobalPosition.DistanceSquaredTo(door.GlobalPosition);
-			if (d < best)
-			{
-				best = d;
-				nearest = door;
-			}
-		}
-		return nearest;
-	}
+        foreach (Node n in GetTree().GetNodesInGroup("Doors"))
+        {
+            if (n is not Node2D door || !IsInstanceValid(door) || door.IsQueuedForDeletion())
+                continue;
 
-	// Germs
-	public void Die()
-	{
-		// GD.Print($"[Pumpkin] Die | scene={(GermsScene != null)} | drop={GermsDrop}");
-		if (_dead)
-			return;
-		_dead = true;
+            float d = GlobalPosition.DistanceSquaredTo(door.GlobalPosition);
+            if (d < best)
+            {
+                best = d;
+                nearest = door;
+            }
+        }
+        return nearest;
+    }
 
-		if (GermsScene == null)
-			return;
+    // Germs
+    public void Die()
+    {
+        // GD.Print($"[Pumpkin] Die | scene={(GermsScene != null)} | drop={GermsDrop}");
+        if (_dead)
+            return;
+        _dead = true;
 
-		Node parent = GetParent();
-		for (int i = 0; i < GermsDrop; i++)
-		{
-			var germ = GermsScene.Instantiate<Germs>();
-			germ.Position = Position; // part de la citrouille
-			germ.SetDrop(
-				Position + Vector2.FromAngle(GD.Randf() * Mathf.Tau) * (40f + GD.Randf() * 60f)
-			);
-			parent.CallDeferred(Node.MethodName.AddChild, germ);
-		}
-	}
+        if (GermsScene == null)
+            return;
 
-	private void ToUpAndDown()
-	{
-		Vector2 from = GlobalPosition;
-		Vector2 to = new Vector2(GlobalPosition.X, GlobalPosition.Y - 5);
+        Node parent = GetParent();
+        for (int i = 0; i < GermsDrop; i++)
+        {
+            var germ = GermsScene.Instantiate<Germs>();
+            germ.Position = Position; // part de la citrouille
+            germ.SetDrop(
+                Position + Vector2.FromAngle(GD.Randf() * Mathf.Tau) * (40f + GD.Randf() * 60f)
+            );
+            parent.CallDeferred(Node.MethodName.AddChild, germ);
+        }
+    }
 
-		float duration = from.DistanceTo(to) / Speed;
+    private void ToUpAndDown()
+    {
+        Vector2 from = GlobalPosition;
+        Vector2 to = new Vector2(GlobalPosition.X, GlobalPosition.Y - 5);
 
-		var tween = CreateTween();
-		tween.SetProcessMode(Tween.TweenProcessMode.Physics);
+        float duration = from.DistanceTo(to) / Speed;
 
-		tween.TweenMethod(
-			Callable.From<float>(t =>
-			{
-				Vector2 pos = from.Lerp(to, t);
-				pos.Y -= Mathf.Sin(t * Mathf.Pi); //* arcHeight;
-				GlobalPosition = pos;
-			}),
-			0f,
-			1f,
-			duration
-		);
-	}
+        var tween = CreateTween();
+        tween.SetProcessMode(Tween.TweenProcessMode.Physics);
+
+        tween.TweenMethod(
+            Callable.From<float>(t =>
+            {
+                Vector2 pos = from.Lerp(to, t);
+                pos.Y -= Mathf.Sin(t * Mathf.Pi); //* arcHeight;
+                GlobalPosition = pos;
+            }),
+            0f,
+            1f,
+            duration
+        );
+    }
+
+    private void MettreAJourAnimation()
+    {
+        if (!IsInstanceValid(anim))
+            return;
+
+        if (Velocity.LengthSquared() < 1f)
+            return;
+
+        string nom;
+        if (Mathf.Abs(Velocity.X) > Mathf.Abs(Velocity.Y))
+        {
+            nom = "EastWest";
+            if (!isEastOriented)
+            {
+                anim.FlipH = Velocity.X < 0;
+            }
+            else
+            {
+                anim.FlipH = Velocity.X > 0;
+            }
+        }
+        else
+        {
+            nom = Velocity.Y < 0 ? "North" : "South";
+            anim.FlipH = false;
+        }
+
+        if (anim.Animation != nom)
+            anim.Play(nom);
+    }
 }

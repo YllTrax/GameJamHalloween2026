@@ -3,24 +3,24 @@ using Godot;
 
 public partial class BoucleDeJeu : Node2D
 {
-	// --- Spawn des citrouilles ---
-	[Export]
-	public PackedScene PumpkinScene;
+    // --- Spawn des citrouilles ---
+    [Export]
+    public PackedScene PumpkinScene;
 
-	[Export]
-	public PackedScene PumpkinLv2Scene; // Lv2
+    [Export]
+    public PackedScene PumpkinLv2Scene; // Lv2
 
-	[Export]
-	public PackedScene PumpkinLv3Scene; // Lv3
+    [Export]
+    public PackedScene PumpkinLv3Scene; // Lv3
 
-	[Export]
-	public float IntervalleSpawn = 5f; // intervalle de base (vague 1)
+    [Export]
+    public float IntervalleSpawn = 5f; // intervalle de base (vague 1)
 
-	[Export]
-	public Rect2 ZoneJeu = new Rect2(0, 0, 1152, 648); // la zone visible
+    [Export]
+    public Rect2 ZoneJeu = new Rect2(0, 0, 1152, 648); // la zone visible
 
-	[Export]
-	public float Marge = 100f; // distance en dehors de la zone
+    [Export]
+    public float Marge = 100f; // distance en dehors de la zone
 
 	// Toutes les X citrouilles Lv1, on crée une Lv2 ; toutes les X Lv2, une Lv3
 	[Export]
