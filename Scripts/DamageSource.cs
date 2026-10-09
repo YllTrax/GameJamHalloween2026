@@ -13,7 +13,7 @@ public partial class DamageSource : Area2D
 	private TargetMode targetMode = TargetMode.All;
 
 	[Export]
-	private float damage = 100;
+	public float Damage { get; set; } = 100;
 
 	[Export]
 	private bool shouldSelfDestroy = false;
@@ -51,7 +51,7 @@ public partial class DamageSource : Area2D
 		if (health == null)
 			return;
 
-		health.TakeDamage(damage);
+		health.TakeDamage(Damage);;
 
 		if (shouldSelfDestroy)
 		{

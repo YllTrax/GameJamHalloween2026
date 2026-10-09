@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://bwekhv5wygstw" path="res://Prefabs/pumpkin_lv_3.tscn" id="4_ofaj1"]
 [ext_resource type="PackedScene" uid="uid://clk161d4mukij" path="res://Prefabs/updgrape.tscn" id="5_x56rw"]
 [ext_resource type="Shader" uid="uid://bwb07gi4wkwju" path="res://texture/boucle_de_jeu.gdshader" id="6_ofaj1"]
+[ext_resource type="Texture2D" uid="uid://bv808ix3v4r7" path="res://Images/IU/salt.png" id="7_adu7k"]
 [ext_resource type="PackedScene" uid="uid://cyp88m5vfn78k" path="res://Prefabs/menu_pause.tscn" id="7_cus6u"]
+[ext_resource type="Texture2D" uid="uid://c2jes3ly67w3g" path="res://Images/IU/door.png" id="8_krvl4"]
 [ext_resource type="Script" uid="uid://cf40tm6ubl1qi" path="res://Scripts/MenuPause.cs" id="8_wghvw"]
 
 [sub_resource type="FontVariation" id="FontVariation_cus6u"]
@@ -18,12 +20,42 @@ shader = ExtResource("6_ofaj1")
 shader_parameter/blur = 2.0
 shader_parameter/tint = Color(0, 0, 0, 0.35)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_js7qi"]
+load_path = "res://.godot/imported/salt.png-1548369cb4dce661b64008c127291cdb.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6c308"]
+load_path = "res://.godot/imported/salt.png-1548369cb4dce661b64008c127291cdb.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bx1aj"]
+load_path = "res://.godot/imported/salt.png-1548369cb4dce661b64008c127291cdb.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c0jx8"]
+load_path = "res://.godot/imported/salt.png-1548369cb4dce661b64008c127291cdb.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o5a3p"]
+load_path = "res://.godot/imported/salt.png-1548369cb4dce661b64008c127291cdb.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ayiju"]
+load_path = "res://.godot/imported/salt.png-1548369cb4dce661b64008c127291cdb.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7jmk1"]
+load_path = "res://.godot/imported/salt.png-1548369cb4dce661b64008c127291cdb.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_aqc72"]
+load_path = "res://.godot/imported/salt.png-1548369cb4dce661b64008c127291cdb.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_i3x3h"]
+load_path = "res://.godot/imported/salt.png-1548369cb4dce661b64008c127291cdb.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lxxk2"]
+load_path = "res://.godot/imported/door.png-92b4ce5176833e1460cab139519ea6af.ctex"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wghvw"]
 shader = ExtResource("6_ofaj1")
 shader_parameter/blur = 2.0
 shader_parameter/tint = Color(0, 0, 0, 0.35)
 
-[node name="Boucle de jeu" type="Node2D" unique_id=260320005 node_paths=PackedStringArray("WaveLabel", "GemsLabel", "ScoreLabel")]
+[node name="Boucle de jeu" type="Node2D" unique_id=260320005 node_paths=PackedStringArray("WaveLabel", "GemsLabel", "ScoreLabel", "depots")]
 script = ExtResource("1_0vhmx")
 PumpkinScene = ExtResource("2_n0t4e")
 PumpkinLv2Scene = ExtResource("3_x56rw")
@@ -31,6 +63,7 @@ PumpkinLv3Scene = ExtResource("4_ofaj1")
 WaveLabel = NodePath("Waves/Label")
 GemsLabel = NodePath("Gems/Label")
 ScoreLabel = NodePath("GameOver/Score")
+depots = []
 
 [node name="GameOver" type="CanvasLayer" parent="." unique_id=1837334137]
 process_mode = 2
@@ -126,6 +159,62 @@ visible = false
 [node name="ColorRect" parent="Updgrape" index="0" unique_id=510714343]
 material = SubResource("ShaderMaterial_536d0")
 color = Color(0, 0, 0, 0)
+
+[node name="SaltLV1" parent="Updgrape" index="1" unique_id=671295746]
+texture_normal = SubResource("CompressedTexture2D_js7qi")
+stretch_mode = 0
+
+[node name="SaltLv2" parent="Updgrape" index="2" unique_id=1672204850]
+texture_normal = SubResource("CompressedTexture2D_6c308")
+stretch_mode = 0
+
+[node name="SaltLV3" parent="Updgrape" index="3" unique_id=1422713667]
+texture_normal = SubResource("CompressedTexture2D_bx1aj")
+stretch_mode = 0
+
+[node name="SaltLV4" parent="Updgrape" index="4" unique_id=1839303887]
+texture_normal = SubResource("CompressedTexture2D_c0jx8")
+stretch_mode = 0
+
+[node name="SaltLV5" parent="Updgrape" index="5" unique_id=659913627]
+texture_normal = SubResource("CompressedTexture2D_o5a3p")
+stretch_mode = 0
+
+[node name="SaltLV6" parent="Updgrape" index="6" unique_id=1727829882]
+texture_normal = SubResource("CompressedTexture2D_ayiju")
+stretch_mode = 0
+
+[node name="SaltLV7" parent="Updgrape" index="7" unique_id=1027207873]
+texture_normal = SubResource("CompressedTexture2D_7jmk1")
+stretch_mode = 0
+
+[node name="SaltLV8" parent="Updgrape" index="8" unique_id=1675579668]
+texture_normal = SubResource("CompressedTexture2D_aqc72")
+stretch_mode = 0
+
+[node name="SaltLV9" parent="Updgrape" index="9" unique_id=1096216664]
+texture_normal = SubResource("CompressedTexture2D_i3x3h")
+stretch_mode = 0
+
+[node name="SaltLV10" parent="Updgrape" index="10" unique_id=729280575]
+texture_normal = ExtResource("7_adu7k")
+stretch_mode = 0
+
+[node name="DoorLV1" parent="Updgrape" index="11" unique_id=602421811]
+texture_normal = ExtResource("8_krvl4")
+stretch_mode = 0
+
+[node name="DoorLV2" parent="Updgrape" index="12" unique_id=56945982]
+texture_normal = SubResource("CompressedTexture2D_lxxk2")
+stretch_mode = 0
+
+[node name="DoorLV3" parent="Updgrape" index="13" unique_id=434563538]
+texture_normal = ExtResource("8_krvl4")
+stretch_mode = 0
+
+[node name="DoorLV4" parent="Updgrape" index="14" unique_id=1412595026]
+texture_normal = ExtResource("8_krvl4")
+stretch_mode = 0
 
 [node name="MenuPause" parent="." unique_id=1546097521 instance=ExtResource("7_cus6u")]
 script = ExtResource("8_wghvw")

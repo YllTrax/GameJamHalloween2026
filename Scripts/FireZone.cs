@@ -14,6 +14,14 @@ public partial class FireZone : Area2D
     [Export]
     private float lifeTime = 3f;
 
+    [Export] private DamageSource damageSource;
+
+    public float Damage
+    {
+        get => damageSource.Damage;
+        set => damageSource.Damage = value;
+    }
+
     /// <summary>
     /// Lance la zone de "from" vers "to". À appeler APRÈS AddChild.
     /// </summary>

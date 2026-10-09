@@ -163,17 +163,17 @@ public partial class BoucleDeJeu : Node2D
 	}
 
 	private void GererSpawn(float delta)
-    {
-        if (PumpkinScene == null)
-            return;
+	{
+		if (PumpkinScene == null)
+			return;
 
-        _timerSpawn -= delta;
-        if (_timerSpawn <= 0f)
-        {
-            SpawnPumpkin();
-            _timerSpawn = IntervalleActuel();
-        }
-    }
+		_timerSpawn -= delta;
+		if (_timerSpawn <= 0f)
+		{
+			SpawnPumpkin();
+			_timerSpawn = IntervalleActuel();
+		}
+	}
 
 	private void SpawnPumpkin()
 	{
@@ -282,6 +282,8 @@ public partial class BoucleDeJeu : Node2D
 
 	private void AfficherUpgrade(bool afficher)
 	{
+		if (afficher)
+			UpgradeStats.PrintAll();
 		_upgradeUI.Visible = afficher;
 		if (_hudWaves != null)
 			_hudWaves.Visible = !afficher;
@@ -296,12 +298,14 @@ public partial class BoucleDeJeu : Node2D
 		_fini = true;
 		_gameOverUI.Visible = true;
 		GetTree().Paused = true;
+		UpgradeStats.Reset();
 	}
 
 	private void Rejouer()
 	{
 		GetTree().Paused = false;
 		GetTree().ReloadCurrentScene();
+		
 	}
 
 	private void DepositRandomHandler()

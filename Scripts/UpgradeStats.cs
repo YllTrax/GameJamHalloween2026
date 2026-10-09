@@ -30,4 +30,8 @@ public static class UpgradeStats
 	{
 		SaltBonus = DoorBonus = TurretDamageBonus = TurretAmmoBonus = 0f;
 	}
+	public static void PrintAll()
+	{
+		GD.Print($"[Upgrades] Sel x{SaltMult:0.00} | Portes x{DoorMult:0.00} | Dégâts tourelles x{TurretDamageMult:0.00}");
+	}
 }

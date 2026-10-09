@@ -27,8 +27,8 @@ public partial class Health : Node2D
 	[Export]
 	private float witchTimer = 10f;
 
-    [Export]
-    private float burningDuration = 3f; // durée de la brûlure en secondes
+	[Export]
+	private float burningDuration = 3f; // durée de la brûlure en secondes
 
 	public float currentHealth;
 	public bool isBurning;
@@ -44,7 +44,7 @@ public partial class Health : Node2D
 		currentHealth = baseHealth;
 		burningTimer = burningDuration;
 		HealthChanged?.Invoke(currentHealth, baseHealth);
-        deltaWitch = witchTimer;
+		deltaWitch = witchTimer;
 	}
 
 	public override void _Process(double delta)

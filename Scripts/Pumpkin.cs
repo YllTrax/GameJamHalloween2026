@@ -166,12 +166,12 @@ public partial class Pumpkin : CharacterBody2D
 			var health = joueur.GetNodeOrNull<Health>("Health");
 			if (health == null)
 			{
-				GD.Print("Le personnage n'a pas de noeud Health !");
+				// GD.Print("Le personnage n'a pas de noeud Health !");
 				return;
 			}
 
 			health.TakeDamage(Damage);
-			GD.Print($"Personnage : {health.currentHealth} PV");
+			// GD.Print($"Personnage : {health.currentHealth} PV");
 			_cooldown = AttackCooldown;
 		}
 	}
@@ -184,7 +184,7 @@ public partial class Pumpkin : CharacterBody2D
 			{
 				var health = hit.GetNode<Health>("Health");
 				health.TakeDamage(Damage);
-				GD.Print($"{hit.Name} : {health.currentHealth} PV");
+				// GD.Print($"{hit.Name} : {health.currentHealth} PV");
 				_cooldown = AttackCooldown;
 				break;
 			}
@@ -200,7 +200,7 @@ public partial class Pumpkin : CharacterBody2D
 		if (GlobalPosition.DistanceTo(circle.GlobalPosition) <= SaltAttackRange)
 		{
 			circle.Health.TakeDamage(Damage);
-			GD.Print($"Cercle de sel : {circle.Health.currentHealth} PV");
+			// GD.Print($"Cercle de sel : {circle.Health.currentHealth} PV");
 			_cooldown = AttackCooldown;
 		}
 	}
@@ -228,7 +228,7 @@ public partial class Pumpkin : CharacterBody2D
 	// Germs
 	public void Die()
 	{
-		GD.Print($"[Pumpkin] Die | scene={(GermsScene != null)} | drop={GermsDrop}");
+		// GD.Print($"[Pumpkin] Die | scene={(GermsScene != null)} | drop={GermsDrop}");
 		if (_dead)
 			return;
 		_dead = true;

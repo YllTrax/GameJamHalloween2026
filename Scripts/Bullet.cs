@@ -8,6 +8,13 @@ public partial class Bullet : Area2D
     [Export]
     public float moveSpeed;
 
+    [Export] private DamageSource damageSource;
+    public float Damage
+    {
+        get => damageSource.Damage;
+        set => damageSource.Damage = value;
+    }
+
     [Export]
     private float lifeTime = 2;
     private Timer lifeTimer;

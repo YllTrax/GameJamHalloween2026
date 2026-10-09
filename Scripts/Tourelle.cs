@@ -64,28 +64,36 @@ public partial class Tourelle : Area2D, IBuildable
     {
         if (target == null || !IsInstanceValid(target))
             return;
+
+        float dmgMult = UpgradeStats.TurretDamageMult;
+
         if (!shouldFireInArc)
         {
             var bullet = bulletPrefab.Instantiate<Bullet>();
+            bullet.Damage *= dmgMult;
+            GD.Print($"[Tourelle] Bullet : x{dmgMult:0.00} -> dégâts {bullet.Damage}");
             GetTree().CurrentScene.AddChild(bullet);
             bullet.GlobalPosition = firePoint.GlobalPosition;
             bullet.dir = (target.GlobalPosition - firePoint.GlobalPosition).Normalized();
         }
         else
+        {
             switch (towerType)
             {
                 case TowerType.Fire:
-
-                    var zone = bulletPrefab.Instantiate<FireZone>(); //---------------------------ici on tire une une zone j'ai aps encore chnage rle nom
-                    GetTree().CurrentScene.AddChild(zone); // d'abord dans l'arbre
-                    zone.Launch(firePoint.GlobalPosition, target.GlobalPosition); // puis on lance
-                    return;
+                    var zone = bulletPrefab.Instantiate<FireZone>();
+                    zone.Damage *= dmgMult;
+                    GD.Print($"[Tourelle] FireZone : x{dmgMult:0.00} -> dégâts {zone.Damage}");
+                    GetTree().CurrentScene.AddChild(zone);
+                    zone.Launch(firePoint.GlobalPosition, target.GlobalPosition);
+                    break;
                 case TowerType.Slime:
-                    var zoneSlime = bulletPrefab.Instantiate<SlimeZone>(); //---------------------------ici on tire une une zone j'ai aps encore chnage rle nom
-                    GetTree().CurrentScene.AddChild(zoneSlime); // d'abord dans l'arbre
-                    zoneSlime.Launch(firePoint.GlobalPosition, target.GlobalPosition); // puis on lance
-                    return;
-            }
+                    var zoneSlime = bulletPrefab.Instantiate<SlimeZone>();
+                    GetTree().CurrentScene.AddChild(zoneSlime);
+                    zoneSlime.Launch(firePoint.GlobalPosition, target.GlobalPosition);
+                    break;
+                            }
+        }
     }
 
     private void OnBodyEnter(Node2D body)

@@ -17,7 +17,8 @@ public partial class SaltDeposit : Node2D, IInteractable
 
     public void Refill()
     {
-        saltAmount = baseSaltAmount;
+        saltAmount = baseSaltAmount * UpgradeStats.SaltMult;
+        GD.Print($"[Sel] Dépôt rechargé : base {baseSaltAmount} x{UpgradeStats.SaltMult:0.00} = {saltAmount}");
         Pulse();
     }
 
