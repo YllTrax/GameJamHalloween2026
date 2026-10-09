@@ -92,7 +92,7 @@ position = Vector2(496, -88)
 SaltLabel = NodePath("Gems/labelSel")
 depots = [NodePath("../SaltDeposit"), NodePath("../SaltDeposit2"), NodePath("../SaltDeposit3")]
 refillLabelAnounce = NodePath("Anonces/LabelAnonce")
-refillCD = 5.0
+refillCD = 10.0
 
 [node name="labelSel" type="Label" parent="Boucle de jeu/Gems" parent_id_path=PackedInt32Array(260320005, 577505743) index="1" unique_id=871860546]
 offset_left = 992.0
@@ -111,7 +111,7 @@ offset_top = 208.0
 offset_right = 1512.0
 offset_bottom = 250.0
 theme_override_font_sizes/font_size = 30
-text = "Un Depot a ete recharge"
+text = "UN DEPOT DE SEL A ETE REMPLIT "
 horizontal_alignment = 2
 
 [node name="Select Building" type="CanvasLayer" parent="Boucle de jeu" unique_id=1707435433 node_paths=PackedStringArray("selectedTower")]
