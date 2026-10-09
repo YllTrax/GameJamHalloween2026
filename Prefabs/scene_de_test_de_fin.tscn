@@ -112,6 +112,93 @@ texture = ExtResource("6_fpy4b")
 polygon = PackedVector2Array(-20, 6.800003, 12.799988, -5.199997, 56.799988, -2.7999954, 66.400024, 31.599998, 75.20001, 64.4, 28.799988, 66.799995, -17.599976, 56.4, -0.7999878, 24.400002)
 uv = PackedVector2Array(-20, 6.800003, 12.799988, -5.199997, 56.799988, -2.7999954, 66.400024, 31.599998, 75.20001, 64.4, 28.799988, 66.799995, -17.599976, 56.4, -0.7999878, 24.400002)
 
+[node name="SaltLV1" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="1" unique_id=671295746]
+Description = ""
+
+[node name="SaltLv2" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="2" unique_id=1672204850]
+Description = ""
+
+[node name="SaltLV3" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="3" unique_id=1422713667]
+Description = ""
+
+[node name="SaltLV4" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="4" unique_id=1839303887]
+Description = ""
+
+[node name="SaltLV5" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="5" unique_id=659913627]
+Description = ""
+
+[node name="SaltLV6" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="6" unique_id=1727829882]
+Description = ""
+
+[node name="SaltLV7" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="7" unique_id=1027207873]
+Description = ""
+
+[node name="SaltLV8" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="8" unique_id=1675579668]
+Description = ""
+
+[node name="SaltLV9" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="9" unique_id=1096216664]
+Description = ""
+
+[node name="SaltLV10" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="10" unique_id=729280575]
+Description = ""
+
+[node name="DoorLV1" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="11" unique_id=602421811]
+Description = ""
+
+[node name="DoorLV2" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="12" unique_id=56945982]
+Description = ""
+
+[node name="DoorLV3" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="13" unique_id=434563538]
+Description = ""
+
+[node name="DoorLV4" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="14" unique_id=1412595026]
+Description = ""
+
+[node name="tourelledegLV1" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="15" unique_id=1280955673]
+Description = ""
+
+[node name="tourelledegLV2" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="16" unique_id=1579296378]
+Description = ""
+
+[node name="tourelledegLV3" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="17" unique_id=1386406131]
+Description = ""
+
+[node name="tourelledegLV4" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="18" unique_id=632302163]
+Description = ""
+
+[node name="tourelledegLV5" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="19" unique_id=830313031]
+Description = ""
+
+[node name="tourelledegLV6" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="20" unique_id=888279891]
+Description = ""
+
+[node name="tourelledegLV7" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="21" unique_id=951432166]
+Description = ""
+
+[node name="tourelledegLV8" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="22" unique_id=494548927]
+Description = ""
+
+[node name="tourelledegLV9" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="23" unique_id=987959165]
+Description = ""
+
+[node name="tourelledegLV10" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="24" unique_id=1693703418]
+Description = ""
+
+[node name="tourellemunLV1" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="25" unique_id=1146145132]
+Description = ""
+
+[node name="tourellemunLV2" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="26" unique_id=229946910]
+Description = ""
+
+[node name="tourellemunLV3" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="27" unique_id=95481707]
+Description = ""
+
+[node name="tourellemunLV4" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="28" unique_id=1136965571]
+Description = ""
+
+[node name="tourellemunLV5" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="29" unique_id=1056009201]
+Description = ""
+
 [node name="Anonces" type="CanvasLayer" parent="Boucle de jeu" unique_id=1545708900]
 
 [node name="LabelAnonce" type="Label" parent="Boucle de jeu/Anonces" unique_id=471655658]
