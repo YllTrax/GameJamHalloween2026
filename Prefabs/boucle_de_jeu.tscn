@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cyp88m5vfn78k" path="res://Prefabs/menu_pause.tscn" id="7_cus6u"]
 [ext_resource type="Texture2D" uid="uid://c2jes3ly67w3g" path="res://Images/IU/door.png" id="8_krvl4"]
 [ext_resource type="Script" uid="uid://cf40tm6ubl1qi" path="res://Scripts/MenuPause.cs" id="8_wghvw"]
+[ext_resource type="Texture2D" uid="uid://bebn1omcioej8" path="res://Images/Misc/CaptureTorche.png" id="9_krvl4"]
 
 [sub_resource type="FontVariation" id="FontVariation_cus6u"]
 
@@ -214,6 +215,49 @@ stretch_mode = 0
 
 [node name="DoorLV4" parent="Updgrape" index="14" unique_id=1412595026]
 texture_normal = ExtResource("8_krvl4")
+stretch_mode = 0
+
+[node name="tourelledegLV1" parent="Updgrape" index="15" unique_id=1280955673]
+texture_normal = ExtResource("9_krvl4")
+stretch_mode = 0
+
+[node name="tourelledegLV2" parent="Updgrape" index="16" unique_id=1579296378]
+texture_normal = ExtResource("9_krvl4")
+stretch_mode = 0
+
+[node name="tourelledegLV3" parent="Updgrape" index="17" unique_id=1386406131]
+texture_normal = ExtResource("9_krvl4")
+stretch_mode = 0
+
+[node name="tourelledegLV4" parent="Updgrape" index="18" unique_id=632302163]
+texture_normal = ExtResource("9_krvl4")
+stretch_mode = 0
+
+[node name="tourelledegLV5" parent="Updgrape" index="19" unique_id=830313031]
+texture_normal = ExtResource("9_krvl4")
+stretch_mode = 0
+
+[node name="tourelledegLV6" parent="Updgrape" index="20" unique_id=888279891]
+texture_normal = ExtResource("9_krvl4")
+stretch_mode = 0
+
+[node name="tourelledegLV7" parent="Updgrape" index="21" unique_id=951432166]
+texture_normal = ExtResource("9_krvl4")
+stretch_mode = 0
+
+[node name="tourelledegLV8" parent="Updgrape" index="22" unique_id=494548927]
+texture_normal = ExtResource("9_krvl4")
+stretch_mode = 0
+
+[node name="tourelledegLV9" parent="Updgrape" index="23" unique_id=987959165]
+texture_normal = ExtResource("9_krvl4")
+stretch_mode = 0
+
+[node name="tourelledegLV10" parent="Updgrape" index="24" unique_id=1693703418]
+texture_normal = ExtResource("9_krvl4")
+stretch_mode = 0
+
+[node name="tourellemunLV1" parent="Updgrape" index="25" unique_id=1146145132]
 stretch_mode = 0
 
 [node name="MenuPause" parent="." unique_id=1546097521 instance=ExtResource("7_cus6u")]

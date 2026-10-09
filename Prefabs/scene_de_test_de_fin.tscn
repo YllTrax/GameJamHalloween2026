@@ -91,12 +91,16 @@ refillLabelAnounce = NodePath("Anonces/LabelAnonce")
 refillCD = 10.0
 
 [node name="labelSel" type="Label" parent="Boucle de jeu/Gems" parent_id_path=PackedInt32Array(260320005, 577505743) index="1" unique_id=871860546]
-offset_left = 992.0
-offset_top = 80.0
-offset_right = 1149.0
-offset_bottom = 122.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -161.0
+offset_top = 86.0
+offset_right = -4.0
+offset_bottom = 128.0
+grow_horizontal = 0
 theme_override_font_sizes/font_size = 30
-text = "Sel : 100"
+text = "Salt : 100"
 horizontal_alignment = 2
 
 [node name="Anonces" type="CanvasLayer" parent="Boucle de jeu" unique_id=1545708900]
@@ -107,7 +111,7 @@ offset_top = 208.0
 offset_right = 1512.0
 offset_bottom = 250.0
 theme_override_font_sizes/font_size = 30
-text = "UN DEPOT DE SEL A ETE REMPLIT "
+text = "A SALT BIN HAS BEEN FILLED "
 horizontal_alignment = 2
 
 [node name="Select Building" type="CanvasLayer" parent="Boucle de jeu" unique_id=1707435433 node_paths=PackedStringArray("selectedTower")]
@@ -231,3 +235,4 @@ position = Vector2(1312, 520)
 [editable path="Personnage"]
 [editable path="Boucle de jeu"]
 [editable path="Boucle de jeu/Updgrape"]
+[editable path="Boucle de jeu/MenuPause"]
