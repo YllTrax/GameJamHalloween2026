@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://cf40tm6ubl1qi" path="res://Scripts/MenuPause.cs" id="8_wghvw"]
 [ext_resource type="Texture2D" uid="uid://bebn1omcioej8" path="res://Images/Misc/CaptureTorche.png" id="9_krvl4"]
 [ext_resource type="Texture2D" uid="uid://c6gj22as73wi4" path="res://Images/IU/Set 24x24.png" id="10_js7qi"]
+[ext_resource type="Texture2D" uid="uid://bpn07ae5raser" path="res://Images/IU/Logo.png" id="14_ayiju"]
 [ext_resource type="Script" uid="uid://hxfo2uun6h3x" path="res://Scripts/MenuSetting.cs" id="14_c0jx8"]
 [ext_resource type="Texture2D" uid="uid://ccfvf4klbn5yb" path="res://Images/IU/btn_musique.png" id="15_ayiju"]
 [ext_resource type="AudioStream" uid="uid://cfau4a8eibq73" path="res://Sounds/ambiance.mp3" id="16_o5a3p"]
@@ -432,6 +433,13 @@ grow_horizontal = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 40
 text = "Pause"
+
+[node name="Polygon2D" type="Polygon2D" parent="MenuPause" unique_id=15547792]
+position = Vector2(8, 152.00002)
+scale = Vector2(2.2969167, 2.0880325)
+texture = ExtResource("14_ayiju")
+polygon = PackedVector2Array(177.60004, 45.440002, 211.92001, 31.36, 236.56003, 21.68, 264.72006, 18.16, 273.52005, 32.24, 295.52005, 58.64, 307.84006, 90.32001, 293.76004, 127.280014, 266.48, 143.12001, 216.32004, 145.76001, 182.88004, 107.920006, 180.24002, 72.72)
+uv = PackedVector2Array(177.60004, 45.440002, 211.92001, 31.36, 236.56003, 21.68, 264.72006, 18.16, 273.52005, 32.24, 295.52005, 58.64, 307.84006, 90.32001, 293.76004, 127.280014, 266.48, 143.12001, 216.32004, 145.76001, 182.88004, 107.920006, 180.24002, 72.72)
 
 [node name="MenuSetting" type="CanvasLayer" parent="." unique_id=1542608546 node_paths=PackedStringArray("btnRetour")]
 visible = false
