@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c40lqeao5km2j"
+path="res://.godot/imported/8bit Halloween Music (No Copyright)(1).mp3-9158b82161c41533ec5307a2e9cdc32b.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Musique Peace Moment/8bit Halloween Music (No Copyright)(1).mp3"
+dest_files=["res://.godot/imported/8bit Halloween Music (No Copyright)(1).mp3-9158b82161c41533ec5307a2e9cdc32b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -63,7 +63,6 @@ public partial class BoucleDeJeu : Node2D
 	[Export]
 	public Label SaltLabel;
 	
-
 	[Export]
 	public Label ammoLabel;
 
@@ -74,6 +73,12 @@ public partial class BoucleDeJeu : Node2D
 	//GameOver
 	[Export]
 	public Label ScoreLabel;
+	// Sons de défaite
+	[Export]
+	public AudioStreamPlayer2D SonMortPerso;
+
+	[Export]
+	public AudioStreamPlayer2D SonMortSel;
 
 	//Sound Waves
 	[Export]
@@ -167,13 +172,13 @@ public partial class BoucleDeJeu : Node2D
 		// Cercle de sel détruit -> défaite
 		if (SaltCircle.Instance == null || !IsInstanceValid(SaltCircle.Instance))
 		{
-			GameOver();
+			GameOver(SonMortSel);
 			return;
 		}
 		// Personnage Mort -> défaite
 		if (Personnage.Instance == null || !IsInstanceValid(Personnage.Instance))
-		{
-			GameOver();
+		{	
+			GameOver(SonMortPerso);
 			return;
 		}
 
@@ -425,10 +430,12 @@ public partial class BoucleDeJeu : Node2D
 	/// Boucle reset and Game Over
 	/// </summary>
 	// Boucle de jeu
-	private void GameOver()
+	private void GameOver(AudioStreamPlayer2D Music)
 	{
+		
 		ScoreLabel.Text = string.Format(Tr("HUD_SCORE"), VagueActuelle);
 		_fini = true;
+		
 		_upgradeUI.Visible = false;
 		_hudWaves.Visible = false;
 		_hudGems.Visible = false;
@@ -438,6 +445,7 @@ public partial class BoucleDeJeu : Node2D
 		_hudAnonces.Visible = false;
 		_gameOverUI.Visible = true;
 		GetTree().Paused = true;
+		Music.Play();
 		UpgradeStats.Reset();
 	}
 

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bfvfu70ay7rwu"
+path="res://.godot/imported/Tir_tourelle_classique.mp3-3d0c617980c1ce8f189d3ff25de6c165.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Tourelle/Tourelle classique/Tir_tourelle_classique.mp3"
+dest_files=["res://.godot/imported/Tir_tourelle_classique.mp3-3d0c617980c1ce8f189d3ff25de6c165.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
