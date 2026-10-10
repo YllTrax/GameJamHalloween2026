@@ -7,6 +7,16 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_p18pi"]
 radius = 37.01351
 
+[sub_resource type="Gradient" id="Gradient_hncgi"]
+offsets = PackedFloat32Array(0.036144577, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hpb4c"]
+gradient = SubResource("Gradient_hncgi")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
 [node name="FireZone" type="Area2D" unique_id=744168898 node_paths=PackedStringArray("damageSource")]
 z_index = -1
 scale = Vector2(0.84000045, 0.8684328)
@@ -31,3 +41,7 @@ Damage = 10.0
 
 [node name="Collider" type="CollisionShape2D" parent="Area2D" unique_id=1104177834]
 shape = SubResource("CircleShape2D_p18pi")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1880811879]
+texture = SubResource("GradientTexture2D_hpb4c")
+texture_scale = 3.8

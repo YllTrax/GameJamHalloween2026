@@ -9,6 +9,16 @@
 radius = 16.0
 height = 48.0
 
+[sub_resource type="Gradient" id="Gradient_jajrq"]
+offsets = PackedFloat32Array(0.036144577, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dmhmx"]
+gradient = SubResource("Gradient_jajrq")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_1d6l5"]
 atlas = ExtResource("4_dmhmx")
 region = Rect2(0, 27, 30, 27)
@@ -216,9 +226,19 @@ shape = SubResource("CapsuleShape2D_aluq5")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=803182763]
 
-[node name="Health" parent="." unique_id=1461079800 instance=ExtResource("1_bbe1r")]
+[node name="Health" parent="." unique_id=1461079800 node_paths=PackedStringArray("light", "sprite") instance=ExtResource("1_bbe1r")]
 position = Vector2(20, 22)
 baseHealth = 350.0
+light = NodePath("PointLight2D")
+sprite = NodePath("../AnimatedSprite2D")
+
+[node name="PointLight2D" type="PointLight2D" parent="Health" unique_id=2022788772]
+visible = false
+position = Vector2(-5.169858, 64.87361)
+rotation = -1.5707964
+scale = Vector2(6.6666665, 0.50709945)
+texture = SubResource("GradientTexture2D_dmhmx")
+texture_scale = 0.72
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2090792759]
 sprite_frames = SubResource("SpriteFrames_p18pi")

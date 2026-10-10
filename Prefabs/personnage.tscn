@@ -148,10 +148,21 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Personnage" type="CharacterBody2D" unique_id=874529347 node_paths=PackedStringArray("anim")]
+[sub_resource type="Gradient" id="Gradient_aa5w5"]
+offsets = PackedFloat32Array(0.036144577, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p18pi"]
+gradient = SubResource("Gradient_aa5w5")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[node name="Personnage" type="CharacterBody2D" unique_id=874529347 node_paths=PackedStringArray("light", "anim")]
 z_index = 2
 collision_layer = 2
 script = ExtResource("1_ydahe")
+light = NodePath("PointLight2D")
 anim = NodePath("AnimatorPersonnage")
 germs = 40
 munitions = 10
@@ -175,3 +186,10 @@ position = Vector2(12, 26.000004)
 scale = Vector2(3.2592623, 0.1881498)
 baseHealth = 1000.0
 sprite = NodePath("../AnimatorPersonnage")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=5315970]
+energy = 1.5
+texture = SubResource("GradientTexture2D_p18pi")
+texture_scale = 4.27
+
+[editable path="Health"]

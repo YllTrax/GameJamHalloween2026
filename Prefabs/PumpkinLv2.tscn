@@ -7,6 +7,16 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aluq5"]
 
+[sub_resource type="Gradient" id="Gradient_ab2pg"]
+offsets = PackedFloat32Array(0.036144577, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g8p14"]
+gradient = SubResource("Gradient_ab2pg")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_jajrq"]
 atlas = ExtResource("4_ab2pg")
 region = Rect2(0, 22, 30, 22)
@@ -169,10 +179,20 @@ shape = SubResource("CircleShape2D_aluq5")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=577497260]
 
-[node name="Health" parent="." unique_id=1461079800 instance=ExtResource("1_6xu7i")]
+[node name="Health" parent="." unique_id=1461079800 node_paths=PackedStringArray("light", "sprite") instance=ExtResource("1_6xu7i")]
 position = Vector2(12.144504, 30.085712)
 scale = Vector2(4.104753, 0.1986599)
 baseHealth = 150.0
+light = NodePath("PointLight2D")
+sprite = NodePath("../PumpkinSprite")
+
+[node name="PointLight2D" type="PointLight2D" parent="Health" unique_id=1705308146]
+visible = false
+position = Vector2(-7.329483, 61.13214)
+rotation = -1.5707964
+scale = Vector2(6.6666665, 0.50709945)
+texture = SubResource("GradientTexture2D_g8p14")
+texture_scale = 0.72
 
 [node name="PumpkinSprite" type="AnimatedSprite2D" parent="." unique_id=1768532746]
 scale = Vector2(1.7552629, 1.1813754)

@@ -19,6 +19,9 @@ public partial class Personnage : CharacterBody2D
         TourelleSlime = 3,
     }
 
+    [Export]
+    Light2D light;
+
     public SelectTower selectTower;
 
     public static Personnage Instance { get; private set; }
@@ -60,6 +63,8 @@ public partial class Personnage : CharacterBody2D
     private float maxCarriedSalt;
     private bool isDashing = false;
     private bool canDash = true;
+
+    [Export]
     public bool iSIndoor = false;
     private Vector2 mouseDir;
 
@@ -117,7 +122,7 @@ public partial class Personnage : CharacterBody2D
     public override void _Process(double delta)
     {
         mouseDir = GetLocalMousePosition();
-        ColorisePlayerInDoor();
+        PlayerInDoor();
     }
 
     public override void _PhysicsProcess(double delta)
@@ -191,15 +196,17 @@ public partial class Personnage : CharacterBody2D
         }
     }
 
-    private void ColorisePlayerInDoor()
+    private void PlayerInDoor()
     {
         if (iSIndoor)
         {
-            anim.Modulate = Colors.Crimson;
+            light.Visible = false;
+            GD.Print($"Lejoueur iSIndoor ");
         }
         else
         {
-            anim.Modulate = Colors.White;
+            light.Visible = true;
+            GD.Print($"Lejoueur iS not Indoor ");
         }
     }
 

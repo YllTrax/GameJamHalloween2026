@@ -2,6 +2,8 @@ keys,fr,en
 HUD_WAVES,Vague {0},Wave {0}
 HUD_PAUSE,Pause {0},Pause {0}
 HUD_SCORE,Score : {0},Score: {0}
+HUD_ANNONCES,UN DEPOT DE SEL A ETE REMPLIS,A SALT BIN HAS BEEN FILLED 
+HUD_RESTART,Recommencer,Restart
 SHOP_GEMS,Gemmes : {0},Gems: {0}
 SHOP_COST,Coût : {0} gemmes,Cost: {0} gems
 SHOP_PRICE,{0} gemmes,{0} gems

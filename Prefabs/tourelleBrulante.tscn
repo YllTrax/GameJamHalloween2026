@@ -6,6 +6,16 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_p18pi"]
 radius = 277.52118
 
+[sub_resource type="Gradient" id="Gradient_vyoke"]
+offsets = PackedFloat32Array(0.036144577, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_54i4f"]
+gradient = SubResource("Gradient_vyoke")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
 [node name="TourelleBrulante" type="Area2D" unique_id=2130286474 node_paths=PackedStringArray("ammo", "tourelleBody", "firePoint")]
 scale = Vector2(0.5, 0.5)
 collision_mask = 4
@@ -39,6 +49,11 @@ polygon = PackedVector2Array(278, -1, -160, -218, -70, 1, -172, 204)
 [node name="Fire Point" type="Node2D" parent="Tower" unique_id=1082514732]
 position = Vector2(309.21802, -17.747444)
 scale = Vector2(2.103524, 8.873723)
+
+[node name="PointLight2D" type="PointLight2D" parent="Tower/Fire Point" unique_id=1478210665]
+energy = 0.75
+texture = SubResource("GradientTexture2D_54i4f")
+texture_scale = 4.27
 
 [node name="Ammo" type="Label" parent="." unique_id=1216746284]
 offset_left = -20.0

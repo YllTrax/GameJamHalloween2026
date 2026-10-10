@@ -6,17 +6,31 @@
 [ext_resource type="Script" uid="uid://dce3vcl13iokc" path="res://Scripts/Base.cs" id="4_7k2vv"]
 [ext_resource type="PackedScene" uid="uid://ci4mpugnevp18" path="res://Prefabs/boucle_de_jeu.tscn" id="6_2lsjc"]
 [ext_resource type="Texture2D" uid="uid://bv808ix3v4r7" path="res://Images/IU/salt.png" id="6_fpy4b"]
+[ext_resource type="Script" uid="uid://cu2erinb0iqua" path="res://Scripts/LabelText.cs" id="6_sitxd"]
 [ext_resource type="Script" uid="uid://bihfqj1k8j847" path="res://Scripts/SelectBuilding.cs" id="7_iyehk"]
 [ext_resource type="Texture2D" uid="uid://bebn1omcioej8" path="res://Images/Misc/CaptureTorche.png" id="7_mhhgw"]
 [ext_resource type="PackedScene" uid="uid://kntxamw5koqo" path="res://Prefabs/salt_circle.tscn" id="7_udtek"]
 [ext_resource type="Texture2D" uid="uid://cj4gvuqg2vd3h" path="res://Images/Misc/Capture d'écran Tourelle.png" id="8_dy42s"]
+[ext_resource type="Script" uid="uid://bh0wgdpimojt3" path="res://Scripts/LabelAnonce.cs" id="8_njl7p"]
 [ext_resource type="Texture2D" uid="uid://4ogxere3alqn" path="res://Images/Misc/OUtline ui.png" id="9_bc020"]
 [ext_resource type="Script" uid="uid://c5r4wf3pslsu6" path="res://Scripts/TextureRectOutLine.cs" id="9_fpy4b"]
 [ext_resource type="Texture2D" uid="uid://13ep4mxrmluj" path="res://Images/Misc/Capture d'écran TourelleBrulante.png" id="9_iyehk"]
 [ext_resource type="Texture2D" uid="uid://c84b8vq1l0e5y" path="res://Images/Misc/Capture d'écran Slime.png" id="10_bc020"]
+[ext_resource type="PackedScene" uid="uid://dev13q2rbgw5y" path="res://Prefabs/menu_langues.tscn" id="14_vi60e"]
 [ext_resource type="PackedScene" uid="uid://chhhyq1v22owf" path="res://Prefabs/salt_deposit.tscn" id="15_fpy4b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p18pi"]
+
+[sub_resource type="Gradient" id="Gradient_aa5w5"]
+offsets = PackedFloat32Array(0.036144577, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sitxd"]
+gradient = SubResource("Gradient_aa5w5")
+width = 130
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_pm2dw"]
 vertices = PackedVector2Array(666, 314, 1754.8438, 669.03125, -407.9375, 675.96094, 534, 314, 458, 314, 326, 314, -306.9375, -336.0078, 326, 182, 666, 138, 666, 6, 1739.1484, -339.97656, 534, 6, 630, 182, 630, 278, 534, 278, 458, 278, 534, 42, 362, 278, 362, 182, 458, 42, 458, 6, 326, 6, 362, 138, 362, 42, 630, 42, 630, 138, 666, 182, 326, 138)
@@ -25,6 +39,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-316, -346, 1749, -350,
 parsed_geometry_type = 1
 
 [node name="Scene de test de fin" type="Node2D" unique_id=1039877127]
+auto_translate_mode = 1
 
 [node name="Doors" type="Node2D" parent="." unique_id=1879004628]
 
@@ -53,6 +68,10 @@ scale = Vector2(0.44, 1)
 [node name="Personnage" parent="." unique_id=874529347 instance=ExtResource("3_eofuw")]
 dashSpeed = 1000.0
 
+[node name="Health" parent="Personnage" index="3" unique_id=1039052001]
+baseHealth = 2.0
+IsPlayer = true
+
 [node name="Base" type="Area2D" parent="." unique_id=2127739621]
 position = Vector2(342, 168)
 rotation = 1.5707964
@@ -64,6 +83,12 @@ script = ExtResource("4_7k2vv")
 position = Vector2(-20.454561, -156)
 scale = Vector2(32.272728, 15.96)
 shape = SubResource("RectangleShape2D_p18pi")
+
+[node name="PointLight2D" type="PointLight2D" parent="Base" unique_id=1725679249]
+position = Vector2(-18.181833, -154)
+energy = 1.05
+texture = SubResource("GradientTexture2D_sitxd")
+texture_scale = 6.14
 
 [node name="Region de Navigation of our pumpkins" type="NavigationRegion2D" parent="." unique_id=1241489902]
 z_index = -5
@@ -91,6 +116,14 @@ ammoLabel = NodePath("Gems/LabelMunitions")
 depots = [NodePath("../SaltDeposit"), NodePath("../SaltDeposit2"), NodePath("../SaltDeposit3")]
 refillLabelAnounce = NodePath("Anonces/LabelAnonce")
 refillCD = 10.0
+
+[node name="GameOver" parent="Boucle de jeu" index="0" unique_id=1837334137]
+auto_translate_mode = 1
+
+[node name="Button" parent="Boucle de jeu/GameOver" index="3" unique_id=729110539]
+text = ""
+script = ExtResource("6_sitxd")
+label = "HUD_RESTART"
 
 [node name="LabelMunitions" type="Label" parent="Boucle de jeu/Gems" parent_id_path=PackedInt32Array(260320005, 577505743) index="1" unique_id=773490740]
 anchors_preset = 1
@@ -212,6 +245,10 @@ Description = ""
 [node name="tourellemunLV5" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="29" unique_id=1056009201]
 Description = ""
 
+[node name="MenuPause" parent="Boucle de jeu" index="4" unique_id=1546097521 node_paths=PackedStringArray("languesMenu")]
+visible = false
+languesMenu = NodePath("../MenuLangue")
+
 [node name="AudioStreamPlayer2D" parent="Boucle de jeu" index="6" unique_id=332105144]
 volume_db = -12.621
 bus = &"Master"
@@ -227,8 +264,8 @@ offset_top = 208.0
 offset_right = 1512.0
 offset_bottom = 250.0
 theme_override_font_sizes/font_size = 30
-text = "A SALT BIN HAS BEEN FILLED "
 horizontal_alignment = 2
+script = ExtResource("8_njl7p")
 
 [node name="Select Building" type="CanvasLayer" parent="Boucle de jeu" unique_id=1707435433 node_paths=PackedStringArray("selectedTower")]
 script = ExtResource("7_iyehk")
@@ -326,6 +363,14 @@ scale = Vector2(0.6447752, 0.74560606)
 texture = ExtResource("9_bc020")
 expand_mode = 1
 
+[node name="MenuLangue" parent="Boucle de jeu" unique_id=472390283 node_paths=PackedStringArray("menuPause") instance=ExtResource("14_vi60e")]
+visible = false
+menuPause = NodePath("../MenuPause")
+
+[node name="Label" parent="Boucle de jeu/MenuLangue" index="4" unique_id=2127796030]
+auto_translate_mode = 1
+text = "HUD_RESTART"
+
 [node name="SaltCircle" parent="." unique_id=1691003878 instance=ExtResource("7_udtek")]
 position = Vector2(577, 87)
 
@@ -344,6 +389,12 @@ position = Vector2(464, -272)
 [node name="SaltDeposit5" parent="." unique_id=401300947 instance=ExtResource("15_fpy4b")]
 position = Vector2(1312, 520)
 
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=504761124]
+color = Color(5.2943824e-07, 0, 0.3426997, 1)
+
+[connection signal="pressed" from="Boucle de jeu/MenuLangue/VBoxContainer/FR" to="Boucle de jeu/MenuLangue" method="ChoisirLangue" binds= ["fr"]]
+[connection signal="pressed" from="Boucle de jeu/MenuLangue/VBoxContainer/EN" to="Boucle de jeu/MenuLangue" method="ChoisirLangue" binds= ["en"]]
+
 [editable path="Doors/Door"]
 [editable path="Doors/Door2"]
 [editable path="Doors/Door3"]
@@ -352,3 +403,4 @@ position = Vector2(1312, 520)
 [editable path="Boucle de jeu"]
 [editable path="Boucle de jeu/Updgrape"]
 [editable path="Boucle de jeu/MenuPause"]
+[editable path="Boucle de jeu/MenuLangue"]

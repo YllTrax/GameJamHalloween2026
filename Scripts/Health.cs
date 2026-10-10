@@ -7,6 +7,9 @@ public partial class Health : Node2D
     public float baseHealth;
 
     [Export]
+    Light2D light;
+
+    [Export]
     protected AnimatedSprite2D sprite;
 
     [Export]
@@ -54,6 +57,7 @@ public partial class Health : Node2D
         {
             WitchAttack((float)delta);
         }
+        HandleLightOnBurning();
     }
 
     public virtual void TakeDamage(float damage)
@@ -120,6 +124,21 @@ public partial class Health : Node2D
         {
             TakeDamage(witchDamage);
             deltaWitch = witchTimer;
+        }
+    }
+
+    private void HandleLightOnBurning()
+    {
+        if (IsInstanceValid(light))
+        {
+            if (isBurning)
+            {
+                light.Visible = true;
+            }
+            else
+            {
+                light.Visible = false;
+            }
         }
     }
 }
