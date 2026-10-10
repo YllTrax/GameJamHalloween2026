@@ -3,489 +3,519 @@ using Godot;
 
 public partial class BoucleDeJeu : Node2D
 {
-    // --- Spawn des citrouilles ---
-    [Export]
-    public PackedScene PumpkinScene;
+	// --- Spawn des citrouilles ---
+	[Export]
+	public PackedScene PumpkinScene;
 
-    [Export]
-    public PackedScene PumpkinLv2Scene; // Lv2
+	[Export]
+	public PackedScene PumpkinLv2Scene; // Lv2
 
-    [Export]
-    public PackedScene PumpkinLv3Scene; // Lv3
+	[Export]
+	public PackedScene PumpkinLv3Scene; // Lv3
 
-    [Export]
-    public float IntervalleSpawn = 5f; // intervalle de base (vague 1)
+	[Export]
+	public float IntervalleSpawn = 5f; // intervalle de base (vague 1)
 
-    [Export]
-    public Rect2 ZoneJeu = new Rect2(0, 0, 1152, 648); // la zone visible
+	[Export]
+	public Rect2 ZoneJeu = new Rect2(0, 0, 1152, 648); // la zone visible
 
-    [Export]
-    public float Marge = 100f; // distance en dehors de la zone
+	[Export]
+	public float Marge = 100f; // distance en dehors de la zone
 
-    // Toutes les X citrouilles Lv1, on crée une Lv2 ; toutes les X Lv2, une Lv3
-    [Export]
-    public int SeuilLv2 = 10;
+	// Toutes les X citrouilles Lv1, on crée une Lv2 ; toutes les X Lv2, une Lv3
+	[Export]
+	public int SeuilLv2 = 10;
 
-    [Export]
-    public int SeuilLv3 = 10;
+	[Export]
+	public int SeuilLv3 = 10;
 
-    // --- Vagues ---
-    [Export]
-    public float DureeVague = 180f; // secondes par vague
+	// --- Vagues ---
+	[Export]
+	public float DureeVague = 180f; // secondes par vague
 
-    [Export]
-    public float FacteurIntervalle = 0.9f; // chaque vague : intervalle x 0.9
+	[Export]
+	public float FacteurIntervalle = 0.9f; // chaque vague : intervalle x 0.9
 
-    [Export]
-    public float IntervalleMin = 0.8f; // plancher
+	[Export]
+	public float IntervalleMin = 0.8f; // plancher
 
-    [Export]
-    public float BonusVitesseParVague = 0.05f; // +5% de vitesse par vague
-
-    [Export]
-    public Label WaveLabel; // Label d'affichage (assigné dans l'inspecteur)
-
-    [Export]
-    public float DureePause = 60f; // secondes de pause entre deux vagues
-
-    [Export]
-    public Label TimerLabel; // affiche le compte à rebours
-
-    [Export]
-    public float DureePauseDebut = 30f; // pause avant la toute première vague
-
-    private bool _premierePause = true;
-
-    //Nombre de Gems
-    [Export]
-    public Label GemsLabel;
-
-    [Export]
-    public Label SaltLabel;
-    private float _ammoAffiches = -1;
-
-    [Export]
-    public Label ammoLabel;
-
-    // --- Upgrade ---
-    [Export]
-    public float DistanceInteraction = 60f; // distance max au cercle de sel pour ouvrir le menu
-
-    //GameOver
-    [Export]
-    public Label ScoreLabel;
-
-    //Sound Waves
-    [Export]
-    public AudioStreamPlayer2D SonVague;
-
-    [Export]
-    public AudioStreamPlayer2D Musique;
-
-    private bool _musiqueActive = true;
-
-    public int VagueActuelle { get; private set; } = 1;
-
-    private int _compteurLv1 = 0;
-    private int _compteurLv2 = 0;
-    private float _timerVague = 0f;
-    private float _timerSpawn = 0f;
-    private bool _enPause = false;
-    private int _secondeAffichee = -1;
-    private RandomNumberGenerator _rng = new RandomNumberGenerator();
-
-    // --- Game over ---
-    private CanvasLayer _gameOverUI;
-    private Button _boutonRejouer;
-    private bool _fini = false;
-
-    // --- Gems ---
-    private int _germsAffiches = -1;
-    private float _saltAffiches = -1;
-
-    // --- Upgrade ---
-    private CanvasLayer _upgradeUI;
-    private CanvasLayer _hudWaves;
-    private CanvasLayer _hudGems;
-
-    //--heeeu je sais pas il est tard  mais voila ---------
-    [Export]
-    Godot.Collections.Array<SaltDeposit> depots;
-
-    [Export]
-    private Label refillLabelAnounce;
-
-    public override void _Ready()
-    {
-        //  depots = FindChildren("SaltDeposits", "", true, false);
-
-        _timerFill = new Timer { WaitTime = refillCD, OneShot = false };
-        _timerFill.Timeout += DepositRandomHandler;
-        AddChild(_timerFill);
-        _timerFill.Start();
-
-        _rng.Randomize();
-        _enPause = true;
-        _timerVague = DureePauseDebut;
-        _gameOverUI = GetNode<CanvasLayer>("GameOver");
-        _boutonRejouer = GetNode<Button>("GameOver/Button");
-        _boutonRejouer.Pressed += Rejouer;
-        _upgradeUI = GetNodeOrNull<CanvasLayer>("Updgrape");
-        _hudWaves = GetNodeOrNull<CanvasLayer>("Waves");
-        _hudGems = GetNodeOrNull<CanvasLayer>("Gems");
-        MettreAJourLabel();
-
-        if (Musique != null)
-        {
-            Musique.Finished += () =>
-            {
-                if (_musiqueActive)
-                    Musique.Play();
-            };
-            Musique.Play();
-        }
-
-        // Quand l'annonce de vague est finie, la musique reprend
-        if (SonVague != null)
-            SonVague.Finished += OnSonVagueFini;
-    }
-
-    public override void _Process(double delta)
-    {
-        if (_fini)
-            return;
-
-        // Cercle de sel détruit -> défaite
-        if (SaltCircle.Instance == null || !IsInstanceValid(SaltCircle.Instance))
-        {
-            GameOver();
-            return;
-        }
-        // Personnage Mort -> défaite
-        if (Personnage.Instance == null || !IsInstanceValid(Personnage.Instance))
-        {
-            GameOver();
-            return;
-        }
-
-        MettreAJourGerms();
-        MettreAJourSalt();
-        MettreAJourMunition();
-
-        GererUpgrade();
-
-        GererVagues((float)delta);
-
-        if (!_enPause)
-            GererSpawn((float)delta);
-    }
-
-    private void GererVagues(float delta)
-    {
-        _timerVague -= delta;
-
-        if (_timerVague <= 0f)
-        {
-            if (!_enPause)
-            {
-                // Fin de la vague -> début de la pause
-                _enPause = true;
-                _timerVague = DureePause;
-                GD.Print($"Pause de {DureePause}s avant la vague {VagueActuelle + 1}");
-            }
-            else
-            {
-                // Fin de la pause -> nouvelle vague
-                _enPause = false;
-
-                if (_premierePause)
-                    _premierePause = false; // la vague 1 commence, on n'incrémente pas
-                else
-                    VagueActuelle++;
-
-                _timerVague = DureeVague;
-                _musiqueActive = false;
-                Musique?.Stop();
-                SonVague?.Play();
-                GD.Print($"Waves {VagueActuelle} ! Intervalle : {IntervalleActuel():0.00}s");
-            }
-            _secondeAffichee = -1; // force la mise à jour du texte
-        }
-
-        MettreAJourLabel();
-        MettreAJourTimer();
-    }
-
-    // Intervalle qui diminue à chaque vague, jamais sous IntervalleMin
-    private float IntervalleActuel()
-    {
-        float intervalle = IntervalleSpawn * Mathf.Pow(FacteurIntervalle, VagueActuelle - 1);
-        return Mathf.Max(intervalle, IntervalleMin);
-    }
-
-    // Rafraîchit les textes quand la langue change en cours de partie
-    public override void _Notification(int what)
-    {
-        if (what != NotificationTranslationChanged || !IsNodeReady())
-            return;
-
-        MettreAJourLabel();
-        _secondeAffichee = -1; // force le timer à se réécrire
-        if (_fini && ScoreLabel != null)
-            ScoreLabel.Text = string.Format(Tr("HUD_SCORE"), VagueActuelle);
-    }
-
-    private void MettreAJourLabel()
-    {
-        if (WaveLabel == null)
-            return;
-
-        WaveLabel.Text = string.Format(Tr("HUD_WAVES"), VagueActuelle);
-    }
-
-    private void GererSpawn(float delta)
-    {
-        if (PumpkinScene == null)
-            return;
-
-        _timerSpawn -= delta;
-        if (_timerSpawn <= 0f)
-        {
-            SpawnPumpkin();
-            _timerSpawn = IntervalleActuel();
-        }
-    }
-
-    private void SpawnPumpkin()
-    {
-        PackedScene scene;
-
-        if (_compteurLv2 >= SeuilLv3)
-        {
-            scene = PumpkinLv3Scene;
-            _compteurLv2 = 0; // on vide
-        }
-        else if (_compteurLv1 >= SeuilLv2)
-        {
-            scene = PumpkinLv2Scene;
-            _compteurLv1 = 0; // on vide
-            _compteurLv2++; // une Lv2 de plus vers la Lv3
-        }
-        else
-        {
-            scene = PumpkinScene;
-            _compteurLv1++;
-        }
-
-        if (scene == null)
-            return;
-
-        Node2D pumpkin = scene.Instantiate<Node2D>();
-
-        // Plus rapide à chaque vague
-        if (pumpkin is Pumpkin p)
-            p.Speed *= 1f + BonusVitesseParVague * (VagueActuelle - 1);
-
-        AddChild(pumpkin);
-        pumpkin.GlobalPosition = PositionHorsZone();
-    }
-
-    // Choisit un point aléatoire juste à l'extérieur de la zone, sur un des 4 côtés
-    private Vector2 PositionHorsZone()
-    {
-        float gauche = ZoneJeu.Position.X - Marge;
-        float droite = ZoneJeu.End.X + Marge;
-        float haut = ZoneJeu.Position.Y - Marge;
-        float bas = ZoneJeu.End.Y + Marge;
-
-        switch (_rng.RandiRange(0, 3))
-        {
-            case 0:
-                return new Vector2(gauche, _rng.RandfRange(haut, bas)); // gauche
-            case 1:
-                return new Vector2(droite, _rng.RandfRange(haut, bas)); // droite
-            case 2:
-                return new Vector2(_rng.RandfRange(gauche, droite), haut); // haut
-            default:
-                return new Vector2(_rng.RandfRange(gauche, droite), bas); // bas
-        }
-    }
-
-    //Mettre Le gems a jour
-    private void MettreAJourGerms()
-    {
-        if (GemsLabel == null)
-            return;
-
-        int g = Personnage.Instance.germs;
-        if (g == _germsAffiches)
-            return;
-
-        _germsAffiches = g;
-        GemsLabel.Text = $" {g}";
-    }
-
-    private void MettreAJourSalt()
-    {
-        if (SaltLabel == null)
-            return;
-
-        float g = Personnage.Instance.carriedSalt;
-        if (g == _saltAffiches)
-            return;
-
-        _saltAffiches = g;
-        SaltLabel.Text = $" {g}";
-    }
-
-    //Fenetre update
-    private void GererUpgrade()
-    {
-        if (_upgradeUI == null)
-            return;
-
-        float distance = Personnage.Instance.GlobalPosition.DistanceTo(
-            SaltCircle.Instance.GlobalPosition
-        );
-        bool proche = distance <= DistanceInteraction;
-
-        // Le joueur s'éloigne du cercle : on ferme le shop
-        if (_upgradeUI.Visible && !proche)
-        {
-            AfficherUpgrade(false);
-            return;
-        }
-
-        // E près du cercle : ouvre / ferme
-        if (proche && Input.IsActionJustPressed("Upgrade"))
-            AfficherUpgrade(!_upgradeUI.Visible);
-    }
-
-    private void AfficherUpgrade(bool afficher)
-    {
-        if (afficher)
-            UpgradeStats.PrintAll();
-        _upgradeUI.Visible = afficher;
-        if (_hudWaves != null)
-            _hudWaves.Visible = !afficher;
-        if (_hudGems != null)
-            _hudGems.Visible = !afficher;
-    }
-
-    private void MettreAJourTimer()
-    {
-        if (TimerLabel == null)
-            return;
-
-        int secondes = Mathf.CeilToInt(_timerVague);
-        if (secondes == _secondeAffichee)
-            return; // le texte ne change qu'une fois par seconde
-
-        _secondeAffichee = secondes;
-        string temps = FormatTemps(secondes);
-        TimerLabel.Text = _enPause ? string.Format(Tr("HUD_PAUSE"), temps) : temps;
-    }
-
-    private static string FormatTemps(int secondes)
-    {
-        return $"{secondes / 60}:{secondes % 60:00}";
-    }
-
-    private void OnSonVagueFini()
-    {
-        _musiqueActive = true;
-        Musique?.Play();
-    }
-
-    /// <summary>
-    ///
-    /// Boucle reset and Game Over
-    /// </summary>
-    // Boucle de jeu
-    private void GameOver()
-    {
-        ScoreLabel.Text = string.Format(Tr("HUD_SCORE"), VagueActuelle);
-        _fini = true;
-        _gameOverUI.Visible = true;
-        GetTree().Paused = true;
-        UpgradeStats.Reset();
-    }
-
-    private void Rejouer()
-    {
-        GetTree().Paused = false;
-        GetTree().ReloadCurrentScene();
-    }
-
-    private void DepositRandomHandler()
-    {
-        depots[(int)GD.RandRange(0, depots.Count - 1)].Refill();
-        TweenTraversee(refillLabelAnounce);
-    }
-
-    //---------------------------------------------------la partie tween ----------------------------------------------------------
-    private Tween _bannerTween; // je met en champs ici je susi sous anxio je relfechis doucement XD
-
-    [Export]
-    private double refillCD = 20.0;
-    private Timer _timerFill;
-
-    /// <summary>
-    /// Fait traverser l'écran à un Label de gauche à droite :
-    /// rapide à l'entrée, lent au centre, rapide à la sortie.
-    /// </summary>
-    private void TweenTraversee(
-        Label label,
-        float dureeEntree = 0.6f,
-        float pauseCentre = 0.8f,
-        float dureeSortie = 0.6f
-    )
-    {
-        _bannerTween?.Kill();
-
-        // Calcule la taille réelle du texte (sinon Size peut être faux juste après un changement de texte)
-        label.Size = label.GetCombinedMinimumSize();
-
-        Vector2 ecran = GetViewportRect().Size;
-        float y = (ecran.Y - label.Size.Y) / 2f; // centré verticalement
-
-        Vector2 depart = new Vector2(-label.Size.X, y); // hors écran à gauche
-        Vector2 centre = new Vector2((ecran.X - label.Size.X) / 2f, y); // milieu
-        Vector2 arrivee = new Vector2(ecran.X, y); // hors écran à droite
-
-        label.Position = depart;
-        label.Visible = true;
-
-        _bannerTween = CreateTween();
-
-        // Entrée : arrive vite, ralentit en approchant du centre
-        _bannerTween
-            .TweenProperty(label, "position", centre, dureeEntree)
-            .SetTrans(Tween.TransitionType.Expo)
-            .SetEase(Tween.EaseType.Out);
-
-        // Pause au centre pour laisser lire
-        _bannerTween.TweenInterval(pauseCentre);
-
-        // Sortie : démarre doucement puis accélère
-        _bannerTween
-            .TweenProperty(label, "position", arrivee, dureeSortie)
-            .SetTrans(Tween.TransitionType.Expo)
-            .SetEase(Tween.EaseType.In);
-
-        _bannerTween.TweenCallback(Callable.From(() => label.Visible = false));
-    }
-
-    private void MettreAJourMunition()
-    {
-        if (ammoLabel == null || Personnage.Instance == null)
-            return;
-
-        int g = Personnage.Instance.munitions;
-        if (g == _ammoAffiches)
-            return;
-
-        _ammoAffiches = g;
-        ammoLabel.Text = $" {g}";
-    }
+	[Export]
+	public float BonusVitesseParVague = 0.05f; // +5% de vitesse par vague
+
+	[Export]
+	public Label WaveLabel; // Label d'affichage (assigné dans l'inspecteur)
+
+	[Export]
+	public float DureePause = 60f; // secondes de pause entre deux vagues
+
+	[Export]
+	public Label TimerLabel; // affiche le compte à rebours
+
+	[Export]
+	public float DureePauseDebut = 30f; // pause avant la toute première vague
+
+	private bool _premierePause = true;
+
+	//Nombre de Gems
+	[Export]
+	public Label GemsLabel;
+
+	[Export]
+	public Label SaltLabel;
+	
+
+	[Export]
+	public Label ammoLabel;
+
+	// --- Upgrade ---
+	[Export]
+	public float DistanceInteraction = 60f; // distance max au cercle de sel pour ouvrir le menu
+
+	//GameOver
+	[Export]
+	public Label ScoreLabel;
+
+	//Sound Waves
+	[Export]
+	public AudioStreamPlayer2D SonVague;
+
+	[Export]
+	public AudioStreamPlayer2D Musique;
+
+	private bool _musiqueActive = true;
+
+	public int VagueActuelle { get; private set; } = 1;
+
+	private int _compteurLv1 = 0;
+	private int _compteurLv2 = 0;
+	private float _timerVague = 0f;
+	private float _timerSpawn = 0f;
+	private bool _enPause = false;
+	private int _secondeAffichee = -1;
+	private RandomNumberGenerator _rng = new RandomNumberGenerator();
+
+	// --- Game over ---
+	private CanvasLayer _gameOverUI;
+	private Button _boutonRejouer;
+	private bool _fini = false;
+
+	// --- Gems ---
+	private int _germsAffiches = -1;
+	private float _saltAffiches = -1;
+	private float _ammoAffiches = -1;
+
+	// --- Upgrade ---
+	private CanvasLayer _upgradeUI;
+	private CanvasLayer _hudWaves;
+	private CanvasLayer _hudGems;
+	private CanvasLayer _hudSalt;
+	private CanvasLayer _hudAmmo;
+	private CanvasLayer _hudSelect; 
+	private CanvasLayer _hudAnonces; 
+
+	//--heeeu je sais pas il est tard  mais voila ---------
+	[Export]
+	Godot.Collections.Array<SaltDeposit> depots;
+
+	[Export]
+	private Label refillLabelAnounce;
+
+	public override void _Ready()
+	{
+		// depots = FindChildren("SaltDeposits", "", true, false);
+
+		_timerFill = new Timer { WaitTime = refillCD, OneShot = false };
+		_timerFill.Timeout += DepositRandomHandler;
+		AddChild(_timerFill);
+		_timerFill.Start();
+
+		_rng.Randomize();
+		_enPause = true;
+		_timerVague = DureePauseDebut;
+		_gameOverUI = GetNode<CanvasLayer>("GameOver");
+		_boutonRejouer = GetNode<Button>("GameOver/Button");
+		_boutonRejouer.Pressed += Rejouer;
+		_upgradeUI = GetNodeOrNull<CanvasLayer>("Updgrape");
+		_hudWaves = GetNodeOrNull<CanvasLayer>("Waves");
+		_hudGems = GetNodeOrNull<CanvasLayer>("Gems");
+		_hudSalt = GetNodeOrNull<CanvasLayer>("Salt");
+		_hudAmmo = GetNodeOrNull<CanvasLayer>("Munition");
+		_hudSelect = GetNodeOrNull<CanvasLayer>("Select Building");
+		_hudAnonces = GetNodeOrNull<CanvasLayer>("Anonces");
+		MettreAJourLabel();
+
+		if (Musique != null)
+		{
+			Musique.Finished += () =>
+			{
+				if (_musiqueActive)
+					Musique.Play();
+			};
+			Musique.Play();
+		}
+
+		// Quand l'annonce de vague est finie, la musique reprend
+		if (SonVague != null)
+			SonVague.Finished += OnSonVagueFini;
+	}
+
+	public override void _Process(double delta)
+	{
+		if (_fini)
+			return;
+
+		// Cercle de sel détruit -> défaite
+		if (SaltCircle.Instance == null || !IsInstanceValid(SaltCircle.Instance))
+		{
+			GameOver();
+			return;
+		}
+		// Personnage Mort -> défaite
+		if (Personnage.Instance == null || !IsInstanceValid(Personnage.Instance))
+		{
+			GameOver();
+			return;
+		}
+
+		MettreAJourGerms();
+		MettreAJourSalt();
+		MettreAJourMunition();
+
+		GererUpgrade();
+
+		GererVagues((float)delta);
+
+		if (!_enPause)
+			GererSpawn((float)delta);
+	}
+
+	private void GererVagues(float delta)
+	{
+		_timerVague -= delta;
+
+		if (_timerVague <= 0f)
+		{
+			if (!_enPause)
+			{
+				// Fin de la vague -> début de la pause
+				_enPause = true;
+				_timerVague = DureePause;
+				GD.Print($"Pause de {DureePause}s avant la vague {VagueActuelle + 1}");
+			}
+			else
+			{
+				// Fin de la pause -> nouvelle vague
+				_enPause = false;
+
+				if (_premierePause)
+					_premierePause = false; // la vague 1 commence, on n'incrémente pas
+				else
+					VagueActuelle++;
+
+				_timerVague = DureeVague;
+				_musiqueActive = false;
+				Musique?.Stop();
+				SonVague?.Play();
+				GD.Print($"Waves {VagueActuelle} ! Intervalle : {IntervalleActuel():0.00}s");
+			}
+			_secondeAffichee = -1; // force la mise à jour du texte
+		}
+
+		MettreAJourLabel();
+		MettreAJourTimer();
+	}
+
+	// Intervalle qui diminue à chaque vague, jamais sous IntervalleMin
+	private float IntervalleActuel()
+	{
+		float intervalle = IntervalleSpawn * Mathf.Pow(FacteurIntervalle, VagueActuelle - 1);
+		return Mathf.Max(intervalle, IntervalleMin);
+	}
+
+	// Rafraîchit les textes quand la langue change en cours de partie
+	public override void _Notification(int what)
+	{
+		if (what != NotificationTranslationChanged || !IsNodeReady())
+			return;
+
+		MettreAJourLabel();
+		_secondeAffichee = -1; // force le timer à se réécrire
+		if (_fini && ScoreLabel != null)
+			ScoreLabel.Text = string.Format(Tr("HUD_SCORE"), VagueActuelle);
+	}
+
+	private void MettreAJourLabel()
+	{
+		if (WaveLabel == null)
+			return;
+
+		WaveLabel.Text = string.Format(Tr("HUD_WAVES"), VagueActuelle);
+	}
+
+	private void GererSpawn(float delta)
+	{
+		if (PumpkinScene == null)
+			return;
+
+		_timerSpawn -= delta;
+		if (_timerSpawn <= 0f)
+		{
+			SpawnPumpkin();
+			_timerSpawn = IntervalleActuel();
+		}
+	}
+
+	private void SpawnPumpkin()
+	{
+		PackedScene scene;
+
+		if (_compteurLv2 >= SeuilLv3)
+		{
+			scene = PumpkinLv3Scene;
+			_compteurLv2 = 0; // on vide
+		}
+		else if (_compteurLv1 >= SeuilLv2)
+		{
+			scene = PumpkinLv2Scene;
+			_compteurLv1 = 0; // on vide
+			_compteurLv2++; // une Lv2 de plus vers la Lv3
+		}
+		else
+		{
+			scene = PumpkinScene;
+			_compteurLv1++;
+		}
+
+		if (scene == null)
+			return;
+
+		Node2D pumpkin = scene.Instantiate<Node2D>();
+
+		// Plus rapide à chaque vague
+		if (pumpkin is Pumpkin p)
+			p.Speed *= 1f + BonusVitesseParVague * (VagueActuelle - 1);
+
+		AddChild(pumpkin);
+		pumpkin.GlobalPosition = PositionHorsZone();
+	}
+
+	// Choisit un point aléatoire juste à l'extérieur de la zone, sur un des 4 côtés
+	private Vector2 PositionHorsZone()
+	{
+		float gauche = ZoneJeu.Position.X - Marge;
+		float droite = ZoneJeu.End.X + Marge;
+		float haut = ZoneJeu.Position.Y - Marge;
+		float bas = ZoneJeu.End.Y + Marge;
+
+		switch (_rng.RandiRange(0, 3))
+		{
+			case 0:
+				return new Vector2(gauche, _rng.RandfRange(haut, bas)); // gauche
+			case 1:
+				return new Vector2(droite, _rng.RandfRange(haut, bas)); // droite
+			case 2:
+				return new Vector2(_rng.RandfRange(gauche, droite), haut); // haut
+			default:
+				return new Vector2(_rng.RandfRange(gauche, droite), bas); // bas
+		}
+	}
+
+	//Mettre Le gems a jour
+	private void MettreAJourGerms()
+	{
+		if (GemsLabel == null)
+			return;
+
+		int g = Personnage.Instance.germs;
+		if (g == _germsAffiches)
+			return;
+
+		_germsAffiches = g;
+		GemsLabel.Text = $" {g}";
+	}
+
+	private void MettreAJourSalt()
+	{
+		if (SaltLabel == null)
+			return;
+
+		float g = Personnage.Instance.carriedSalt;
+		if (g == _saltAffiches)
+			return;
+
+		_saltAffiches = g;
+		SaltLabel.Text = $" {g}";
+	}
+
+	// private void MettreAJourAmmo()
+	// {
+	// 	if (ammoLabel == null)
+	// 		return;
+
+	// 	float g = Personnage.Instance.carriedAmmo;
+	// 	if (g == ammoLabel)
+	// 		return;
+
+	// 	_ammoAffiches = g;
+	// 	ammoLabel.Text = $" {g}";
+	// }
+
+
+	//Fenetre update
+	private void GererUpgrade()
+	{
+		if (_upgradeUI == null)
+			return;
+
+		float distance = Personnage.Instance.GlobalPosition.DistanceTo(
+			SaltCircle.Instance.GlobalPosition
+		);
+		bool proche = distance <= DistanceInteraction;
+
+		// Le joueur s'éloigne du cercle : on ferme le shop
+		if (_upgradeUI.Visible && !proche)
+		{
+			AfficherUpgrade(false);
+			return;
+		}
+
+		// E près du cercle : ouvre / ferme
+		if (proche && Input.IsActionJustPressed("Upgrade"))
+			AfficherUpgrade(!_upgradeUI.Visible);
+	}
+
+	private void AfficherUpgrade(bool afficher)
+	{
+		if (afficher)
+			UpgradeStats.PrintAll();
+		_upgradeUI.Visible = afficher;
+		if (_hudWaves != null)
+			_hudWaves.Visible = !afficher;
+		if (_hudGems != null)
+			_hudGems.Visible = !afficher;
+	}
+
+	private void MettreAJourTimer()
+	{
+		if (TimerLabel == null)
+			return;
+
+		int secondes = Mathf.CeilToInt(_timerVague);
+		if (secondes == _secondeAffichee)
+			return; // le texte ne change qu'une fois par seconde
+
+		_secondeAffichee = secondes;
+		string temps = FormatTemps(secondes);
+		TimerLabel.Text = _enPause ? string.Format(Tr("HUD_PAUSE"), temps) : temps;
+	}
+
+	private static string FormatTemps(int secondes)
+	{
+		return $"{secondes / 60}:{secondes % 60:00}";
+	}
+
+	private void OnSonVagueFini()
+	{
+		_musiqueActive = true;
+		Musique?.Play();
+	}
+
+	/// <summary>
+	///
+	/// Boucle reset and Game Over
+	/// </summary>
+	// Boucle de jeu
+	private void GameOver()
+	{
+		ScoreLabel.Text = string.Format(Tr("HUD_SCORE"), VagueActuelle);
+		_fini = true;
+		_upgradeUI.Visible = false;
+		_hudWaves.Visible = false;
+		_hudGems.Visible = false;
+		_hudAmmo.Visible = false;
+		_hudSalt.Visible = false;
+		_hudSelect.Visible = false;
+		_hudAnonces.Visible = false;
+		_gameOverUI.Visible = true;
+		GetTree().Paused = true;
+		UpgradeStats.Reset();
+	}
+
+	private void Rejouer()
+	{
+		GetTree().Paused = false;
+		GetTree().ReloadCurrentScene();
+	}
+
+	private void DepositRandomHandler()
+	{
+		depots[(int)GD.RandRange(0, depots.Count - 1)].Refill();
+		TweenTraversee(refillLabelAnounce);
+	}
+
+	//---------------------------------------------------la partie tween ----------------------------------------------------------
+	private Tween _bannerTween; // je met en champs ici je susi sous anxio je relfechis doucement XD
+
+	[Export]
+	private double refillCD = 20.0;
+	private Timer _timerFill;
+
+	/// <summary>
+	/// Fait traverser l'écran à un Label de gauche à droite :
+	/// rapide à l'entrée, lent au centre, rapide à la sortie.
+	/// </summary>
+	private void TweenTraversee(
+		Label label,
+		float dureeEntree = 0.6f,
+		float pauseCentre = 0.8f,
+		float dureeSortie = 0.6f
+	)
+	{
+		_bannerTween?.Kill();
+
+		// Calcule la taille réelle du texte (sinon Size peut être faux juste après un changement de texte)
+		label.Size = label.GetCombinedMinimumSize();
+
+		Vector2 ecran = GetViewportRect().Size;
+		float y = (ecran.Y - label.Size.Y) / 2f; // centré verticalement
+
+		Vector2 depart = new Vector2(-label.Size.X, y); // hors écran à gauche
+		Vector2 centre = new Vector2((ecran.X - label.Size.X) / 2f, y); // milieu
+		Vector2 arrivee = new Vector2(ecran.X, y); // hors écran à droite
+
+		label.Position = depart;
+		label.Visible = true;
+
+		_bannerTween = CreateTween();
+
+		// Entrée : arrive vite, ralentit en approchant du centre
+		_bannerTween
+			.TweenProperty(label, "position", centre, dureeEntree)
+			.SetTrans(Tween.TransitionType.Expo)
+			.SetEase(Tween.EaseType.Out);
+
+		// Pause au centre pour laisser lire
+		_bannerTween.TweenInterval(pauseCentre);
+
+		// Sortie : démarre doucement puis accélère
+		_bannerTween
+			.TweenProperty(label, "position", arrivee, dureeSortie)
+			.SetTrans(Tween.TransitionType.Expo)
+			.SetEase(Tween.EaseType.In);
+
+		_bannerTween.TweenCallback(Callable.From(() => label.Visible = false));
+	}
+
+	private void MettreAJourMunition()
+	{
+		if (ammoLabel == null || Personnage.Instance == null)
+			return;
+
+		int g = Personnage.Instance.munitions;
+		if (g == _ammoAffiches)
+			return;
+
+		_ammoAffiches = g;
+		ammoLabel.Text = $" {g}";
+	}
 }
