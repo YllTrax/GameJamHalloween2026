@@ -15,10 +15,12 @@
 [ext_resource type="Script" uid="uid://c5r4wf3pslsu6" path="res://Scripts/TextureRectOutLine.cs" id="9_fpy4b"]
 [ext_resource type="Texture2D" uid="uid://13ep4mxrmluj" path="res://Images/Misc/Capture d'écran TourelleBrulante.png" id="9_iyehk"]
 [ext_resource type="Texture2D" uid="uid://c84b8vq1l0e5y" path="res://Images/Misc/Capture d'écran Slime.png" id="10_bc020"]
+[ext_resource type="Texture2D" uid="uid://c3knd1tnwnxu" path="res://Images/IU/gems.png" id="12_6gpw0"]
 [ext_resource type="PackedScene" uid="uid://dev13q2rbgw5y" path="res://Prefabs/menu_langues.tscn" id="14_vi60e"]
 [ext_resource type="PackedScene" uid="uid://chhhyq1v22owf" path="res://Prefabs/salt_deposit.tscn" id="15_fpy4b"]
 [ext_resource type="Shader" uid="uid://bwb07gi4wkwju" path="res://texture/boucle_de_jeu.gdshader" id="16_sitxd"]
 [ext_resource type="Texture2D" uid="uid://bpsmckp47r5f2" path="res://Images/IU/btn_x.png" id="17_njl7p"]
+[ext_resource type="Texture2D" uid="uid://04o2upm12wli" path="res://Images/IU/Yellow cube.png" id="17_s5sqb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p18pi"]
 
@@ -134,10 +136,6 @@ languesMenu = NodePath("../MenuLangue")
 
 [node name="AudioStreamPlayer2D" parent="Boucle de jeu" index="8" unique_id=332105144]
 volume_db = -12.621
-bus = &"Master"
-
-[node name="Ambiant" parent="Boucle de jeu" index="9" unique_id=988011409]
-bus = &"Master"
 
 [node name="Anonces" type="CanvasLayer" parent="Boucle de jeu" unique_id=1545708900]
 
@@ -155,15 +153,32 @@ script = ExtResource("7_iyehk")
 selectedTower = [NodePath("Torche0"), NodePath("Tourelle1"), NodePath("TourelleBrulante2"), NodePath("TourelleSlime3")]
 
 [node name="TourelleSlime3" type="TextureRect" parent="Boucle de jeu/Select Building" unique_id=337963515 node_paths=PackedStringArray("outline")]
-offset_left = 8.0
-offset_top = 328.0
-offset_right = 29.0
-offset_bottom = 351.0
+offset_left = 414.0
+offset_top = 586.0
+offset_right = 435.0
+offset_bottom = 609.0
 scale = Vector2(3.4087884, 2.1924431)
 texture = ExtResource("10_bc020")
 expand_mode = 1
 script = ExtResource("9_fpy4b")
 outline = NodePath("TextureRect")
+
+[node name="Label" type="Label" parent="Boucle de jeu/Select Building/TourelleSlime3" unique_id=538128690]
+layout_mode = 0
+offset_left = -0.5867171
+offset_top = -15.051703
+offset_right = 39.413284
+offset_bottom = 7.9482965
+scale = Vector2(0.3767306, 0.3767306)
+text = "10"
+
+[node name="Polygon2D" type="Polygon2D" parent="Boucle de jeu/Select Building/TourelleSlime3/Label" unique_id=1606727274]
+position = Vector2(18.5658, 1.8041201)
+scale = Vector2(0.22738828, 0.32042792)
+color = Color(0.725, 0.012, 1.362, 1)
+texture = ExtResource("12_6gpw0")
+polygon = PackedVector2Array(3.600006, 6, 36.400024, -2, 61.200012, 11.599998, 64.400024, 34.799995, 42.799988, 57.999992, 8.399994, 51.6, -13.199982, 21.199997)
+uv = PackedVector2Array(3.600006, 6, 36.400024, -2, 61.200012, 11.599998, 64.400024, 34.799995, 42.799988, 57.999992, 8.399994, 51.6, -13.199982, 21.199997)
 
 [node name="TextureRect" type="TextureRect" parent="Boucle de jeu/Select Building/TourelleSlime3" unique_id=965679994]
 visible = false
@@ -178,18 +193,34 @@ texture = ExtResource("9_bc020")
 expand_mode = 1
 
 [node name="Torche0" type="TextureRect" parent="Boucle de jeu/Select Building" unique_id=1806651485 node_paths=PackedStringArray("outline")]
-offset_left = 8.0
-offset_top = 392.0
-offset_right = 29.0
-offset_bottom = 415.0
+offset_left = 499.0
+offset_top = 587.0
+offset_right = 520.0
+offset_bottom = 610.0
 scale = Vector2(3.4087884, 2.1924431)
 texture = ExtResource("7_mhhgw")
 expand_mode = 1
 script = ExtResource("9_fpy4b")
 outline = NodePath("TextureRect")
 
+[node name="Label2" type="Label" parent="Boucle de jeu/Select Building/Torche0" unique_id=807541446]
+layout_mode = 0
+offset_left = -2.0535157
+offset_top = -15.507816
+offset_right = 37.946484
+offset_bottom = 7.4921837
+scale = Vector2(0.3690886, 0.3690886)
+text = "10"
+
+[node name="Polygon2D" type="Polygon2D" parent="Boucle de jeu/Select Building/Torche0/Label2" unique_id=174766151]
+position = Vector2(18.5658, 1.8041201)
+scale = Vector2(0.22738828, 0.32042792)
+color = Color(0.725, 0.012, 1.362, 1)
+texture = ExtResource("12_6gpw0")
+polygon = PackedVector2Array(3.600006, 6, 36.400024, -2, 61.200012, 11.599998, 64.400024, 34.799995, 42.799988, 57.999992, 8.399994, 51.6, -13.199982, 21.199997)
+uv = PackedVector2Array(3.600006, 6, 36.400024, -2, 61.200012, 11.599998, 64.400024, 34.799995, 42.799988, 57.999992, 8.399994, 51.6, -13.199982, 21.199997)
+
 [node name="TextureRect" type="TextureRect" parent="Boucle de jeu/Select Building/Torche0" unique_id=682196334]
-visible = false
 z_index = -1
 layout_mode = 0
 offset_left = -2.3468747
@@ -201,33 +232,50 @@ texture = ExtResource("9_bc020")
 expand_mode = 1
 
 [node name="Tourelle1" type="TextureRect" parent="Boucle de jeu/Select Building" unique_id=1543070657 node_paths=PackedStringArray("outline")]
-offset_left = 8.0
-offset_top = 456.0
-offset_right = 29.0
-offset_bottom = 479.0
+offset_left = 588.0
+offset_top = 586.0
+offset_right = 609.0
+offset_bottom = 609.0
 scale = Vector2(3.4087884, 2.1924431)
 texture = ExtResource("8_dy42s")
 expand_mode = 1
 script = ExtResource("9_fpy4b")
 outline = NodePath("TextureRect")
 
+[node name="Label3" type="Label" parent="Boucle de jeu/Select Building/Tourelle1" unique_id=1964201052]
+layout_mode = 0
+offset_left = -1.1734345
+offset_top = -14.595583
+offset_right = 38.826565
+offset_bottom = 8.404417
+scale = Vector2(0.4129377, 0.4129377)
+text = "10"
+
+[node name="Polygon2D" type="Polygon2D" parent="Boucle de jeu/Select Building/Tourelle1/Label3" unique_id=374334213]
+position = Vector2(18.5658, 1.8041201)
+scale = Vector2(0.22738828, 0.32042792)
+color = Color(0.725, 0.012, 1.362, 1)
+texture = ExtResource("12_6gpw0")
+polygon = PackedVector2Array(3.600006, 6, 36.400024, -2, 61.200012, 11.599998, 64.400024, 34.799995, 42.799988, 57.999992, 8.399994, 51.6, -13.199982, 21.199997)
+uv = PackedVector2Array(3.600006, 6, 36.400024, -2, 61.200012, 11.599998, 64.400024, 34.799995, 42.799988, 57.999992, 8.399994, 51.6, -13.199982, 21.199997)
+
 [node name="TextureRect" type="TextureRect" parent="Boucle de jeu/Select Building/Tourelle1" unique_id=1166023596]
 visible = false
 z_index = -1
 layout_mode = 0
-offset_left = -2.3468747
-offset_top = -3.648898
-offset_right = 37.653126
-offset_bottom = 36.3511
+offset_left = -2.346878
+offset_top = -3.6488953
+offset_right = 37.653122
+offset_bottom = 36.351105
 scale = Vector2(0.6447752, 0.74560606)
 texture = ExtResource("9_bc020")
 expand_mode = 1
 
 [node name="TourelleBrulante2" type="TextureRect" parent="Boucle de jeu/Select Building" unique_id=145234617 node_paths=PackedStringArray("outline")]
-offset_left = 8.0
-offset_top = 520.0
-offset_right = 29.0
-offset_bottom = 543.0
+offset_left = 671.0
+offset_top = 588.0
+offset_right = 692.0
+offset_bottom = 611.0
 scale = Vector2(3.4087884, 2.1924431)
 texture = ExtResource("9_iyehk")
 expand_mode = 1
@@ -246,11 +294,35 @@ scale = Vector2(0.6447752, 0.74560606)
 texture = ExtResource("9_bc020")
 expand_mode = 1
 
+[node name="Label4" type="Label" parent="Boucle de jeu/Select Building/TourelleBrulante2" unique_id=1300791931]
+layout_mode = 0
+offset_left = -0.5867184
+offset_top = -15.507813
+offset_right = 39.41328
+offset_bottom = 7.4921865
+scale = Vector2(0.3377207, 0.3734972)
+text = "10"
+
+[node name="Polygon2D" type="Polygon2D" parent="Boucle de jeu/Select Building/TourelleBrulante2/Label4" unique_id=1818380730]
+position = Vector2(18.5658, 1.8041201)
+scale = Vector2(0.22738828, 0.32042792)
+color = Color(0.725, 0.012, 1.362, 1)
+texture = ExtResource("12_6gpw0")
+polygon = PackedVector2Array(3.600006, 6, 36.400024, -2, 61.200012, 11.599998, 64.400024, 34.799995, 42.799988, 57.999992, 8.399994, 51.6, -13.199982, 21.199997)
+uv = PackedVector2Array(3.600006, 6, 36.400024, -2, 61.200012, 11.599998, 64.400024, 34.799995, 42.799988, 57.999992, 8.399994, 51.6, -13.199982, 21.199997)
+
 [node name="MenuLangue" parent="Boucle de jeu" unique_id=472390283 node_paths=PackedStringArray("menuPause") instance=ExtResource("14_vi60e")]
+visible = false
 menuPause = NodePath("../MenuPause")
 
 [node name="ColorRect" parent="Boucle de jeu/MenuLangue" index="0" unique_id=2059550338]
 material = SubResource("ShaderMaterial_7851t")
+
+[node name="Polygon2D" parent="Boucle de jeu/MenuLangue" index="1" unique_id=1339284458]
+position = Vector2(434, 230.00002)
+scale = Vector2(1.095214, 0.88269883)
+texture = ExtResource("17_s5sqb")
+polygon = PackedVector2Array(68.451996, -29.774002, 196.452, -29.774002, 260.452, 34.225998, 260.452, 162.226, 196.452, 226.226, 68.451996, 226.226, 4.451996, 162.226, 4.451996, 34.225998, 68.451996, -29.774002)
 
 [node name="return" parent="Boucle de jeu/MenuLangue" index="3" unique_id=691854666]
 offset_top = 429.99997
@@ -282,6 +354,9 @@ position = Vector2(1312, 520)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=504761124]
 color = Color(5.2943824e-07, 0, 0.3426997, 1)
+
+[connection signal="pressed" from="Boucle de jeu/MenuLangue/VBoxContainer/FR" to="Boucle de jeu/MenuLangue" method="ChoisirLangue" binds= ["fr"]]
+[connection signal="pressed" from="Boucle de jeu/MenuLangue/VBoxContainer/EN" to="Boucle de jeu/MenuLangue" method="ChoisirLangue" binds= ["en"]]
 
 [editable path="Doors/Door"]
 [editable path="Doors/Door2"]

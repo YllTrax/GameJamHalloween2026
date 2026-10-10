@@ -195,7 +195,7 @@ horizontal_alignment = 2
 [node name="Polygon2D" type="Polygon2D" parent="Gems/Label" unique_id=742555328]
 position = Vector2(163.00012, 11)
 scale = Vector2(0.4173388, 0.4173388)
-color = Color(0.7247748, 0.011716183, 1.3620833, 1)
+color = Color(0.725, 0.012, 1.362, 1)
 texture = ExtResource("5_bx1aj")
 polygon = PackedVector2Array(35.200012, 0.40000153, 0, 8.400002, 0, 31.599998, 11.200012, 45.200005, 28, 62.799995, 45.599976, 53.999992, 61.599976, 33.999992, 63.200012, 18)
 uv = PackedVector2Array(35.200012, 0.40000153, 0, 8.400002, 0, 31.599998, 11.200012, 45.200005, 28, 62.799995, 45.599976, 53.999992, 61.599976, 33.999992, 63.200012, 18)
