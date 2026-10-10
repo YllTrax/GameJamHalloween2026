@@ -39,6 +39,8 @@ public partial class Tourelle : Area2D, IBuildable
     private List<Node2D> bodies = new();
     private Timer _timerTarget;
     private Timer _timerFire;
+    private int MaxAmmo => Mathf.RoundToInt(munitionMax * UpgradeStats.TurretAmmoMult);
+    private int _lastShown = -1;
 
     [Export]
     private bool shouldFireInArc;
@@ -64,6 +66,7 @@ public partial class Tourelle : Area2D, IBuildable
 
     public override void _Process(double delta)
     {
+        UpdateLabel();
         if (!IsInstanceValid(target))
         {
             target = null;
@@ -150,18 +153,21 @@ public partial class Tourelle : Area2D, IBuildable
 
     public void Reload()
     {
-        int diff = Personnage.Instance.munitions - munitionMax;
-        if (diff <= 0)
-        {
-            munitions += Personnage.Instance.munitions;
-            Personnage.Instance.munitions = 0;
-            ammo.Text = munitions.ToString();
-        }
-        else
-        {
-            munitions = munitionMax;
-            Personnage.Instance.munitions -= diff;
-            ammo.Text = munitions.ToString();
-        }
+        var p = Personnage.Instance;
+        int space = MaxAmmo - munitions;
+        if (space <= 0 || p.munitions <= 0)
+            return;
+
+        int transfer = Mathf.Min(space, p.munitions);
+        munitions += transfer;
+        p.munitions -= transfer;
+    }
+
+    private void UpdateLabel()
+    {
+        int shown = munitions * 1000 + MaxAmmo; // détecte un changement de l'un ou l'autre
+        if (shown == _lastShown) return;
+        _lastShown = shown;
+        ammo.Text = $"{munitions}/{MaxAmmo}";
     }
 }
