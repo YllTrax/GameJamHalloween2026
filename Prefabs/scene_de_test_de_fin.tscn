@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://bht4lcjhamjlq" path="res://Prefabs/personnage.tscn" id="3_eofuw"]
 [ext_resource type="Script" uid="uid://dce3vcl13iokc" path="res://Scripts/Base.cs" id="4_7k2vv"]
 [ext_resource type="PackedScene" uid="uid://ci4mpugnevp18" path="res://Prefabs/boucle_de_jeu.tscn" id="6_2lsjc"]
-[ext_resource type="Texture2D" uid="uid://bv808ix3v4r7" path="res://Images/IU/salt.png" id="6_fpy4b"]
 [ext_resource type="Script" uid="uid://cu2erinb0iqua" path="res://Scripts/LabelText.cs" id="6_sitxd"]
 [ext_resource type="Script" uid="uid://bihfqj1k8j847" path="res://Scripts/SelectBuilding.cs" id="7_iyehk"]
 [ext_resource type="Texture2D" uid="uid://bebn1omcioej8" path="res://Images/Misc/CaptureTorche.png" id="7_mhhgw"]
@@ -18,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://c84b8vq1l0e5y" path="res://Images/Misc/Capture d'écran Slime.png" id="10_bc020"]
 [ext_resource type="PackedScene" uid="uid://dev13q2rbgw5y" path="res://Prefabs/menu_langues.tscn" id="14_vi60e"]
 [ext_resource type="PackedScene" uid="uid://chhhyq1v22owf" path="res://Prefabs/salt_deposit.tscn" id="15_fpy4b"]
+[ext_resource type="Shader" uid="uid://bwb07gi4wkwju" path="res://texture/boucle_de_jeu.gdshader" id="16_sitxd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p18pi"]
 
@@ -37,6 +37,11 @@ vertices = PackedVector2Array(666, 314, 1754.8438, 669.03125, -407.9375, 675.960
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 3, 2), PackedInt32Array(5, 4, 2), PackedInt32Array(5, 2, 6, 7), PackedInt32Array(8, 9, 10, 1), PackedInt32Array(6, 10, 9, 11), PackedInt32Array(12, 13, 14), PackedInt32Array(14, 3, 4, 15), PackedInt32Array(16, 15, 17, 18, 19, 11), PackedInt32Array(11, 19, 20), PackedInt32Array(6, 11, 20), PackedInt32Array(6, 20, 21), PackedInt32Array(22, 23, 19), PackedInt32Array(16, 24, 25, 14, 15), PackedInt32Array(1, 0, 26), PackedInt32Array(8, 1, 26), PackedInt32Array(8, 26, 12, 25), PackedInt32Array(6, 21, 27), PackedInt32Array(7, 6, 27, 18), PackedInt32Array(18, 27, 22), PackedInt32Array(25, 12, 14), PackedInt32Array(19, 18, 22)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-316, -346, 1749, -350, 1765, 679, -419, 686)])
 parsed_geometry_type = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7851t"]
+shader = ExtResource("16_sitxd")
+shader_parameter/blur = 2.0
+shader_parameter/tint = Color(0, 0, 0, 0.35)
 
 [node name="Scene de test de fin" type="Node2D" unique_id=1039877127]
 auto_translate_mode = 1
@@ -111,8 +116,8 @@ tile_set = ExtResource("1_vayox")
 
 [node name="Boucle de jeu" parent="." unique_id=260320005 node_paths=PackedStringArray("SaltLabel", "ammoLabel", "depots", "refillLabelAnounce") instance=ExtResource("6_2lsjc")]
 position = Vector2(496, -88)
-SaltLabel = NodePath("Gems/labelSel")
-ammoLabel = NodePath("Gems/LabelMunitions")
+SaltLabel = NodePath("")
+ammoLabel = NodePath("")
 depots = [NodePath("../SaltDeposit"), NodePath("../SaltDeposit2"), NodePath("../SaltDeposit3")]
 refillLabelAnounce = NodePath("Anonces/LabelAnonce")
 refillCD = 10.0
@@ -125,135 +130,14 @@ text = ""
 script = ExtResource("6_sitxd")
 label = "HUD_RESTART"
 
-[node name="LabelMunitions" type="Label" parent="Boucle de jeu/Gems" parent_id_path=PackedInt32Array(260320005, 577505743) index="1" unique_id=773490740]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -192.0
-offset_top = 120.0
-offset_right = -35.0
-offset_bottom = 162.0
-grow_horizontal = 0
-theme_override_font_sizes/font_size = 30
-text = " 100"
-horizontal_alignment = 2
-
-[node name="labelSel" type="Label" parent="Boucle de jeu/Gems" parent_id_path=PackedInt32Array(260320005, 577505743) index="2" unique_id=871860546]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -198.0
-offset_top = 603.0
-offset_right = -41.0
-offset_bottom = 645.0
-grow_horizontal = 0
-theme_override_font_sizes/font_size = 30
-text = "100"
-horizontal_alignment = 2
-
-[node name="Polygon2D" type="Polygon2D" parent="Boucle de jeu/Gems/labelSel" unique_id=1615535638]
-position = Vector2(166, 9)
-scale = Vector2(0.40750694, 0.40750694)
-texture = ExtResource("6_fpy4b")
-polygon = PackedVector2Array(-20, 6.800003, 12.799988, -5.199997, 56.799988, -2.7999954, 66.400024, 31.599998, 75.20001, 64.4, 28.799988, 66.799995, -17.599976, 56.4, -0.7999878, 24.400002)
-uv = PackedVector2Array(-20, 6.800003, 12.799988, -5.199997, 56.799988, -2.7999954, 66.400024, 31.599998, 75.20001, 64.4, 28.799988, 66.799995, -17.599976, 56.4, -0.7999878, 24.400002)
-
-[node name="SaltLV1" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="1" unique_id=671295746]
-Description = ""
-
-[node name="SaltLv2" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="2" unique_id=1672204850]
-Description = ""
-
-[node name="SaltLV3" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="3" unique_id=1422713667]
-Description = ""
-
-[node name="SaltLV4" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="4" unique_id=1839303887]
-Description = ""
-
-[node name="SaltLV5" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="5" unique_id=659913627]
-Description = ""
-
-[node name="SaltLV6" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="6" unique_id=1727829882]
-Description = ""
-
-[node name="SaltLV7" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="7" unique_id=1027207873]
-Description = ""
-
-[node name="SaltLV8" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="8" unique_id=1675579668]
-Description = ""
-
-[node name="SaltLV9" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="9" unique_id=1096216664]
-Description = ""
-
-[node name="SaltLV10" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="10" unique_id=729280575]
-Description = ""
-
-[node name="DoorLV1" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="11" unique_id=602421811]
-Description = ""
-
-[node name="DoorLV2" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="12" unique_id=56945982]
-Description = ""
-
-[node name="DoorLV3" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="13" unique_id=434563538]
-Description = ""
-
-[node name="DoorLV4" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="14" unique_id=1412595026]
-Description = ""
-
-[node name="tourelledegLV1" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="15" unique_id=1280955673]
-Description = ""
-
-[node name="tourelledegLV2" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="16" unique_id=1579296378]
-Description = ""
-
-[node name="tourelledegLV3" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="17" unique_id=1386406131]
-Description = ""
-
-[node name="tourelledegLV4" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="18" unique_id=632302163]
-Description = ""
-
-[node name="tourelledegLV5" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="19" unique_id=830313031]
-Description = ""
-
-[node name="tourelledegLV6" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="20" unique_id=888279891]
-Description = ""
-
-[node name="tourelledegLV7" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="21" unique_id=951432166]
-Description = ""
-
-[node name="tourelledegLV8" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="22" unique_id=494548927]
-Description = ""
-
-[node name="tourelledegLV9" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="23" unique_id=987959165]
-Description = ""
-
-[node name="tourelledegLV10" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="24" unique_id=1693703418]
-Description = ""
-
-[node name="tourellemunLV1" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="25" unique_id=1146145132]
-Description = ""
-
-[node name="tourellemunLV2" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="26" unique_id=229946910]
-Description = ""
-
-[node name="tourellemunLV3" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="27" unique_id=95481707]
-Description = ""
-
-[node name="tourellemunLV4" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="28" unique_id=1136965571]
-Description = ""
-
-[node name="tourellemunLV5" parent="Boucle de jeu/Updgrape" parent_id_path=PackedInt32Array(260320005, 387195760) index="29" unique_id=1056009201]
-Description = ""
-
-[node name="MenuPause" parent="Boucle de jeu" index="4" unique_id=1546097521 node_paths=PackedStringArray("languesMenu")]
-visible = false
+[node name="MenuPause" parent="Boucle de jeu" index="6" unique_id=1546097521 node_paths=PackedStringArray("languesMenu")]
 languesMenu = NodePath("../MenuLangue")
 
-[node name="AudioStreamPlayer2D" parent="Boucle de jeu" index="6" unique_id=332105144]
+[node name="AudioStreamPlayer2D" parent="Boucle de jeu" index="8" unique_id=332105144]
 volume_db = -12.621
 bus = &"Master"
 
-[node name="Ambiant" parent="Boucle de jeu" index="7" unique_id=988011409]
+[node name="Ambiant" parent="Boucle de jeu" index="9" unique_id=988011409]
 bus = &"Master"
 
 [node name="Anonces" type="CanvasLayer" parent="Boucle de jeu" unique_id=1545708900]
@@ -364,8 +248,10 @@ texture = ExtResource("9_bc020")
 expand_mode = 1
 
 [node name="MenuLangue" parent="Boucle de jeu" unique_id=472390283 node_paths=PackedStringArray("menuPause") instance=ExtResource("14_vi60e")]
-visible = false
 menuPause = NodePath("../MenuPause")
+
+[node name="ColorRect" parent="Boucle de jeu/MenuLangue" index="0" unique_id=2059550338]
+material = SubResource("ShaderMaterial_7851t")
 
 [node name="Label" parent="Boucle de jeu/MenuLangue" index="4" unique_id=2127796030]
 auto_translate_mode = 1
@@ -392,14 +278,12 @@ position = Vector2(1312, 520)
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=504761124]
 color = Color(5.2943824e-07, 0, 0.3426997, 1)
 
-[connection signal="pressed" from="Boucle de jeu/MenuLangue/VBoxContainer/FR" to="Boucle de jeu/MenuLangue" method="ChoisirLangue" binds= ["fr"]]
-[connection signal="pressed" from="Boucle de jeu/MenuLangue/VBoxContainer/EN" to="Boucle de jeu/MenuLangue" method="ChoisirLangue" binds= ["en"]]
-
 [editable path="Doors/Door"]
 [editable path="Doors/Door2"]
 [editable path="Doors/Door3"]
 [editable path="Doors/Door4"]
 [editable path="Personnage"]
+[editable path="Personnage/Health"]
 [editable path="Boucle de jeu"]
 [editable path="Boucle de jeu/Updgrape"]
 [editable path="Boucle de jeu/MenuPause"]
