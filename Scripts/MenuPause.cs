@@ -32,7 +32,6 @@ public partial class MenuPause : CanvasLayer
 		Connecter("Play", Reprendre);
 		Connecter("BtnQuitter", Quitter);
 		Connecter("BtnReglages", OuvrirReglages);
-		Connecter("BtnLangue", ChangerLangue);
 		Connecter("BtnLangue", OuvrirLangues);
 	}
 
@@ -51,15 +50,19 @@ public partial class MenuPause : CanvasLayer
 	public override void _UnhandledInput(InputEvent @event)
 	{
 		if (!@event.IsActionPressed("ui_cancel"))
-			return; // Échap par défaut
+			return;
 
 		// Les réglages sont ouverts : c'est eux qui gèrent Échap
 		if (_menuSetting != null && _menuSetting.Visible)
 			return;
 
+		// Le menu langues est ouvert : c'est lui qui gère Échap
+		if (languesMenu != null && languesMenu.Visible)
+			return;
+
 		if (_ouvert)
 			Reprendre();
-		else if (!GetTree().Paused) // évite d'ouvrir le menu sur l'écran Game Over
+		else if (!GetTree().Paused)
 			MettreEnPause();
 		else
 			return;

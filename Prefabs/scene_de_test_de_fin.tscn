@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dev13q2rbgw5y" path="res://Prefabs/menu_langues.tscn" id="14_vi60e"]
 [ext_resource type="PackedScene" uid="uid://chhhyq1v22owf" path="res://Prefabs/salt_deposit.tscn" id="15_fpy4b"]
 [ext_resource type="Shader" uid="uid://bwb07gi4wkwju" path="res://texture/boucle_de_jeu.gdshader" id="16_sitxd"]
+[ext_resource type="Texture2D" uid="uid://bpsmckp47r5f2" path="res://Images/IU/btn_x.png" id="17_njl7p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p18pi"]
 
@@ -250,6 +251,12 @@ menuPause = NodePath("../MenuPause")
 
 [node name="ColorRect" parent="Boucle de jeu/MenuLangue" index="0" unique_id=2059550338]
 material = SubResource("ShaderMaterial_7851t")
+
+[node name="return" parent="Boucle de jeu/MenuLangue" index="3" unique_id=691854666]
+offset_top = 429.99997
+offset_bottom = 1068.0
+icon = ExtResource("17_njl7p")
+expand_icon = true
 
 [node name="Label" parent="Boucle de jeu/MenuLangue" index="4" unique_id=2127796030]
 auto_translate_mode = 1

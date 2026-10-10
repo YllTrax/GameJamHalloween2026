@@ -17,6 +17,18 @@ public partial class MenuLangues : CanvasLayer
 			btnRetour.Pressed += Retour;
 	}
 
+	public override void _UnhandledInput(InputEvent @event)
+	{
+		if (!Visible)
+			return;
+
+		if (@event.IsActionPressed("ui_cancel"))
+		{
+			Retour();
+			GetViewport().SetInputAsHandled();
+		}
+	}
+
 	public void ChoisirLangue(string locale)
 	{
 		TranslationServer.SetLocale(locale);
