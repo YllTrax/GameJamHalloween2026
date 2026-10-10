@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cmxuwdqywcyyp" path="res://Scripts/FireZone.cs" id="1_fdq8s"]
 [ext_resource type="Script" uid="uid://5jc7g665kx0p" path="res://Scripts/DamageSource.cs" id="2_fdq8s"]
 [ext_resource type="PackedScene" uid="uid://ud26c53gxr53" path="res://Prefabs/Munition.tscn" id="2_hncgi"]
+[ext_resource type="Texture2D" uid="uid://jekysykxw3k4" path="res://Images/Misc/fire_circles_50x50px.png" id="4_hpb4c"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p18pi"]
 radius = 37.01351
@@ -17,6 +18,63 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2b3o"]
+atlas = ExtResource("4_hpb4c")
+region = Rect2(350, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhorg"]
+atlas = ExtResource("4_hpb4c")
+region = Rect2(350, 50, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rwpj6"]
+atlas = ExtResource("4_hpb4c")
+region = Rect2(350, 100, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jrkbx"]
+atlas = ExtResource("4_hpb4c")
+region = Rect2(350, 150, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4t76b"]
+atlas = ExtResource("4_hpb4c")
+region = Rect2(350, 200, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ecsw6"]
+atlas = ExtResource("4_hpb4c")
+region = Rect2(350, 250, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vbaar"]
+atlas = ExtResource("4_hpb4c")
+region = Rect2(350, 300, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p18pi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q2b3o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fhorg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rwpj6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jrkbx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4t76b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ecsw6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vbaar")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 30.0
+}]
+
 [node name="FireZone" type="Area2D" unique_id=744168898 node_paths=PackedStringArray("damageSource")]
 z_index = -1
 scale = Vector2(0.84000045, 0.8684328)
@@ -30,6 +88,7 @@ munition = ExtResource("2_hncgi")
 shape = SubResource("CircleShape2D_p18pi")
 
 [node name="FireZone" type="Polygon2D" parent="." unique_id=1724462170]
+visible = false
 position = Vector2(-0.43055177, -0.5000024)
 scale = Vector2(3.9569442, 3.85)
 color = Color(0.7583462, 0.046795122, 0.33979514, 1)
@@ -45,3 +104,14 @@ shape = SubResource("CircleShape2D_p18pi")
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1880811879]
 texture = SubResource("GradientTexture2D_hpb4c")
 texture_scale = 3.8
+
+[node name="CharacterBody2D" type="AnimatedSprite2D" parent="." unique_id=1385141585]
+scale = Vector2(2.061, 2.061)
+sprite_frames = SubResource("SpriteFrames_p18pi")
+frame_progress = 0.45199645
+
+[node name="CharacterBody2D2" type="AnimatedSprite2D" parent="." unique_id=507570772]
+rotation = 3.0027866
+scale = Vector2(2.446, 1.92)
+sprite_frames = SubResource("SpriteFrames_p18pi")
+frame_progress = 0.45199645

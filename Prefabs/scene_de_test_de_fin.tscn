@@ -332,6 +332,10 @@ expand_icon = true
 
 [node name="Label" parent="Boucle de jeu/MenuLangue" index="4" unique_id=2127796030]
 auto_translate_mode = 1
+offset_left = -176.0
+offset_top = 16.0
+offset_right = 165.0
+offset_bottom = 85.0
 text = "HUD_RESTART"
 
 [node name="SaltCircle" parent="." unique_id=1691003878 instance=ExtResource("7_udtek")]
@@ -355,6 +359,7 @@ position = Vector2(1312, 520)
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=504761124]
 color = Color(5.2943824e-07, 0, 0.3426997, 1)
 
+[connection signal="pressed" from="Boucle de jeu/Updgrape/SaltLV1" to="Boucle de jeu/MenuLangue" method="ChoisirLangue" binds= ["fr"]]
 [connection signal="pressed" from="Boucle de jeu/MenuLangue/VBoxContainer/FR" to="Boucle de jeu/MenuLangue" method="ChoisirLangue" binds= ["fr"]]
 [connection signal="pressed" from="Boucle de jeu/MenuLangue/VBoxContainer/EN" to="Boucle de jeu/MenuLangue" method="ChoisirLangue" binds= ["en"]]
 
