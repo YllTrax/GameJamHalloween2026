@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://degp10odkikud" path="res://Images/Sprites/outdoor-tile-spritesheet.png" id="1_h0xeq"]
 [ext_resource type="PackedScene" uid="uid://yvs1si47j7pf" path="res://Prefabs/build_slot.tscn" id="2_y2kkm"]
 [ext_resource type="Texture2D" uid="uid://bxrclbnyk5ual" path="res://Images/Sprites/Tileset-Base.png" id="3_ciicb"]
+[ext_resource type="PackedScene" uid="uid://b283ingrjasog" path="res://Prefabs/limitTile.tscn" id="4_ipl26"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y2kkm"]
 texture = ExtResource("1_h0xeq")
@@ -125,6 +126,7 @@ texture = ExtResource("1_h0xeq")
 6:10/0 = 0
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ciicb"]
+resource_name = "BuildSlots"
 scenes/1/scene = ExtResource("2_y2kkm")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ipl26"]
@@ -351,7 +353,9 @@ texture = ExtResource("3_ciicb")
 26:9/0/custom_data_0 = true
 28:9/0 = 0
 31:9/0 = 0
+31:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 32:9/0 = 0
+32:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 35:9/0 = 0
 1:10/0 = 0
 1:10/0/custom_data_0 = true
@@ -405,7 +409,9 @@ texture = ExtResource("3_ciicb")
 26:10/0/custom_data_0 = true
 28:10/0 = 0
 31:10/0 = 0
+31:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 32:10/0 = 0
+32:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 35:10/0 = 0
 1:11/0 = 0
 1:11/0/custom_data_0 = true
@@ -747,6 +753,9 @@ texture = ExtResource("3_ciicb")
 25:18/0/custom_data_0 = true
 10:14/0 = 0
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_h7qcf"]
+scenes/1/scene = ExtResource("4_ipl26")
+
 [resource]
 physics_layer_0/collision_layer = 1
 custom_data_layer_0/name = "Walkable"
@@ -756,3 +765,4 @@ custom_data_layer_1/type = 1
 sources/0 = SubResource("TileSetAtlasSource_y2kkm")
 sources/1 = SubResource("TileSetScenesCollectionSource_ciicb")
 sources/2 = SubResource("TileSetAtlasSource_ipl26")
+sources/3 = SubResource("TileSetScenesCollectionSource_h7qcf")

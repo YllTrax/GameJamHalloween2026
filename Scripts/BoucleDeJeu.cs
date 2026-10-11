@@ -517,19 +517,15 @@ public partial class BoucleDeJeu : Node2D
         ammoLabel.Text = $" {g}";
     }
 
-    //------------------------------ a voir si  on veux rendre le sel aleatoire en position en tre els vagues
-    private void MethodeHyperPasOptiPourLaBlagueDesDeposits()
-    {
-        foreach (SaltDeposit depot in depots)
-        {
-            depot.Visible = false;
-        }
+    //------------------------------ a voir si  on veux rendre le sel aleatoire en position en tre els vagues avec  un fhisher yates
 
-        int premier = GD.RandRange(1, depots.Count);
-        int second = GD.RandRange(premier, depots.Count - 1);
-        int troisime = GD.RandRange(0, second);
-        depots[premier].Visible = true;
-        depots[second].Visible = true;
-        depots[troisime].Visible = true;
-    }
+    // private void MethodeHyperPasOptiPourLaBlagueDesDeposits()
+    // {
+    //     foreach (SaltDeposit depot in depots)
+    //     {
+    //         depot.Visible = false;
+
+    //         Godot.Collections.Array<SaltDeposit> TempDepots;
+    //     }
+    // }
 }

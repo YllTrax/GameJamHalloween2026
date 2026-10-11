@@ -163,6 +163,7 @@ fill_to = Vector2(0.5, 0)
 [node name="Personnage" type="CharacterBody2D" unique_id=874529347 node_paths=PackedStringArray("light", "anim")]
 z_index = 2
 collision_layer = 2
+collision_mask = 129
 script = ExtResource("1_ydahe")
 light = NodePath("PointLight2D")
 anim = NodePath("AnimatorPersonnage")

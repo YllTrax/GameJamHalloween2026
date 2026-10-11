@@ -9,6 +9,8 @@ height = 143.2507
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wer7p"]
 load_path = "res://.godot/imported/gems.png-af72bbf4a82776733bb492f7c5728509.ctex"
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_wer7p"]
+
 [node name="Germs" type="Area2D" unique_id=105507298]
 scale = Vector2(1.91, 1.91)
 collision_layer = 32
@@ -28,3 +30,9 @@ scale = Vector2(0.1081118, 0.1081118)
 color = Color(0.55107576, 0.23165588, 1.208705, 1)
 texture = SubResource("CompressedTexture2D_wer7p")
 polygon = PackedVector2Array(-1.6972198, 24.335342, 13.416077, 6.4461355, 47.652313, 5.520832, 63.99936, 23.41004, 31.305283, 60.422195)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=1721496659]
+collision_mask = 129
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=1858493077]
+shape = SubResource("CircleShape2D_wer7p")

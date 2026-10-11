@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://b283ingrjasog"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p18pi"]
+size = Vector2(16, 16)
+
+[node name="Limit" type="Node2D" unique_id=1274842449]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1315487570]
+
+[node name="Interactable" type="StaticBody2D" parent="." unique_id=1100071439]
+collision_layer = 128
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable" unique_id=1759402318]
+z_index = 1
+shape = SubResource("RectangleShape2D_p18pi")
+
+[node name="outline" type="Polygon2D" parent="Interactable" unique_id=1104475471]
+visible = false
+scale = Vector2(1.2149154, 1.2000006)
+color = Color(0.98785406, 0.9776042, 0.99999994, 1)
+polygon = PackedVector2Array(8.556922, -8, 8.556922, 8, -8.556922, 8, -8.556922, -8)
