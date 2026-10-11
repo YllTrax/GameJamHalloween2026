@@ -53,6 +53,7 @@ public partial class SlimeZone : Area2D
     private void OnLanded()
     {
         Monitoring = true;
+        anim.Play("Idle");
 
         Vector2 baseScale = Scale;
         Scale = baseScale * 0.5f;
@@ -88,6 +89,7 @@ public partial class SlimeZone : Area2D
     {
         Monitoring = false;
         BodyEntered += OnBodyEntered;
+        anim.Play("IdleAir");
 
         // BodyExited -= OnBodyExited;
     }

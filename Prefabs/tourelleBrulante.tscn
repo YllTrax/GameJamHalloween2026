@@ -164,7 +164,7 @@ animations = [{
 z_as_relative = false
 collision_mask = 4
 script = ExtResource("1_vyoke")
-attackCD = 1.0
+attackCD = 1.5
 munitions = 50
 ammo = NodePath("Ammo")
 munitionMax = 50
@@ -194,8 +194,6 @@ offset_left = -20.0
 offset_top = -90.0
 offset_right = 20.0
 offset_bottom = -67.0
-text = "100
-"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=939892514]
 sprite_frames = SubResource("SpriteFrames_p18pi")

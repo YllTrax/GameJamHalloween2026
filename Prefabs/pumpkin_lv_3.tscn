@@ -224,6 +224,7 @@ color = Color(1, 0.3529412, 0.19215687, 0.6862745)
 polygon = PackedVector2Array(0, -24, 8, -24, 16, -16, 16, -8, 16, 0, 16, 8, 16, 16, 8, 24, 0, 24, -8, 24, -16, 16, -16, 8, -16, 0, -16, -8, -16, -16, -8, -24)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=819773907]
+scale = Vector2(0.9, 0.9)
 shape = SubResource("CapsuleShape2D_aluq5")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=396197460]

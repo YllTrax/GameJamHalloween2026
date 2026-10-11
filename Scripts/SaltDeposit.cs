@@ -2,23 +2,25 @@ using Godot;
 
 public partial class SaltDeposit : Node2D, IInteractable
 {
-	[Export]
-	private float baseSaltAmount = 10f;
+    [Export]
+    private float baseSaltAmount = 10f;
 
-	private float saltAmount;
-	private Tween _pulseTween;
-	private Vector2 _baseScale;
+    private float saltAmount;
+    private Tween _pulseTween;
+    private Vector2 _baseScale;
 
-	public override void _Ready()
-	{
-		_baseScale = Scale; // indispensable pour le Pulse sinon ca disparait c'est relou
+    public override void _Ready()
+    {
+        _baseScale = Scale; // indispensable pour le Pulse sinon ca disparait c'est relou
         saltAmount = 0;
     }
 
     public void Refill()
     {
         saltAmount = baseSaltAmount * UpgradeStats.SaltMult;
-        GD.Print($"[Sel] Dépôt rechargé : base {baseSaltAmount} x{UpgradeStats.SaltMult:0.00} = {saltAmount}");
+        GD.Print(
+            $"[Sel] Dépôt rechargé : base {baseSaltAmount} x{UpgradeStats.SaltMult:0.00} = {saltAmount}"
+        );
         Pulse();
     }
 
@@ -43,7 +45,13 @@ public partial class SaltDeposit : Node2D, IInteractable
         _pulseTween.TweenProperty(this, "scale", _baseScale, 0.15f);
     }
 
-    public void InteractRightclick() { }
+    public void InteractRightclick()
+    {
+        return;
+    }
 
-    public void InteractMiddleButton() { }
+    public void InteractMiddleButton()
+    {
+        return;
+    }
 }

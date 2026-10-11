@@ -48,7 +48,7 @@ animations = [{
 collision_layer = 64
 collision_mask = 4
 script = ExtResource("1_0oen4")
-moveSpeed = 200.0
+moveSpeed = 400.0
 munition = ExtResource("3_tuf4i")
 damageSource = NodePath("Damage Source")
 lifeTime = 1.0
@@ -67,6 +67,7 @@ scale = Vector2(0.77048576, 0.78595865)
 collision_mask = 5
 script = ExtResource("2_m4f65")
 targetMode = 1
+Damage = 20.0
 shouldSelfDestroy = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Damage Source" unique_id=52376558]

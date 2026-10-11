@@ -91,11 +91,13 @@ position = Vector2(0, -2)
 [node name="Health" parent="Personnage" index="3" unique_id=1039052001]
 z_index = -1
 position = Vector2(12, 14.999997)
-baseHealth = 20.0
 IsPlayer = true
 
 [node name="PointLight2D" parent="Personnage" index="4" unique_id=5315970]
 position = Vector2(0, 0)
+
+[node name="Node2D" parent="Personnage" index="5" unique_id=579741019]
+position = Vector2(5, -10)
 
 [node name="Base" type="Area2D" parent="." unique_id=2127739621]
 position = Vector2(342, 168)

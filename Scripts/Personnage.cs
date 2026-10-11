@@ -44,6 +44,7 @@ public partial class Personnage : CharacterBody2D
 
     [Export]
     private float dashSpeed = 2000f;
+    public event Action PlayerDash;
 
     [ExportGroup("Inventaire")]
     [Export]
@@ -64,7 +65,7 @@ public partial class Personnage : CharacterBody2D
 
     [ExportGroup("")] // fin des groupes
     private float maxCarriedSalt;
-    private bool isDashing = false;
+    public bool isDashing = false;
     private bool canDash = true;
 
     [Export]
@@ -188,6 +189,7 @@ public partial class Personnage : CharacterBody2D
     {
         if (!isDashing && canDash)
         {
+            PlayerDash?.Invoke();
             isDashing = true;
             canDash = false;
             moveSpeed = dashSpeed;

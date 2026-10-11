@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c5if4hmvt8jl" path="res://SlimeZone.cs" id="1_h4oqd"]
 [ext_resource type="PackedScene" uid="uid://ud26c53gxr53" path="res://Prefabs/Munition.tscn" id="2_dwnsy"]
+[ext_resource type="Texture2D" uid="uid://doyrkty60h007" path="res://Images/Sprites/slime.png" id="3_6nvx2"]
 [ext_resource type="Texture2D" uid="uid://dsfbhiojy6o7a" path="res://Images/Sprites/zone-slime.png" id="3_10ym2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p18pi"]
@@ -23,6 +24,22 @@ region = Rect2(64, 0, 32, 32)
 atlas = ExtResource("3_10ym2")
 region = Rect2(96, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_nr51t"]
+atlas = ExtResource("3_6nvx2")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7s7ic"]
+atlas = ExtResource("3_6nvx2")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u552a"]
+atlas = ExtResource("3_6nvx2")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84vhp"]
+atlas = ExtResource("3_6nvx2")
+region = Rect2(24, 0, 8, 8)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_p18pi"]
 animations = [{
 "frames": [{
@@ -41,6 +58,23 @@ animations = [{
 "loop": 1,
 "name": &"Idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nr51t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7s7ic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u552a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84vhp")
+}],
+"loop": 1,
+"name": &"IdleAir",
+"speed": 12.0
 }]
 
 [node name="SlimeZone" type="Area2D" unique_id=744168898 node_paths=PackedStringArray("anim")]
@@ -66,6 +100,5 @@ polygon = PackedVector2Array(0, -10, 7, -7, 9.459459, 4.172325e-07, 7, 7, 0, 10,
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1940075777]
 scale = Vector2(2.2631578, 2.5)
 sprite_frames = SubResource("SpriteFrames_p18pi")
-animation = &"Idle"
-frame = 2
-frame_progress = 0.84999806
+animation = &"IdleAir"
+frame_progress = 0.38439763

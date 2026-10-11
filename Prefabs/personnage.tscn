@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://b0rl0evdo4tvh" path="res://Scripts/Personnage.cs" id="1_ydahe"]
 [ext_resource type="Texture2D" uid="uid://jnr58eamhc28" path="res://Images/Sprites/hero-idle.png" id="2_ydahe"]
+[ext_resource type="Texture2D" uid="uid://bc6tocouc4urm" path="res://Images/Misc/progress_green.png" id="4_alkmp"]
 [ext_resource type="PackedScene" uid="uid://wj1whgh7v5c" path="res://Prefabs/health.tscn" id="4_ydahe"]
+[ext_resource type="Script" uid="uid://d28hoqehi5q4h" path="res://Scripts/Endurance.cs" id="5_vwe7n"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xqjxd"]
 radius = 3.998806
@@ -164,6 +166,7 @@ collision_layer = 2
 script = ExtResource("1_ydahe")
 light = NodePath("PointLight2D")
 anim = NodePath("AnimatorPersonnage")
+startSpeed = 250.0
 dashTimer = 0.15
 dashSpeed = 500.0
 germs = 40
@@ -186,9 +189,9 @@ animation = &"IdleEast"
 offset = Vector2(0, -11.5)
 
 [node name="Health" parent="." unique_id=1039052001 node_paths=PackedStringArray("sprite") instance=ExtResource("4_ydahe")]
-position = Vector2(12, 14.500004)
+position = Vector2(12, 8)
 scale = Vector2(3.2592623, 0.1881498)
-baseHealth = 1000.0
+baseHealth = 20.0
 sprite = NodePath("../AnimatorPersonnage")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=5315970]
@@ -196,5 +199,22 @@ position = Vector2(0, -11.5)
 energy = 1.5
 texture = SubResource("GradientTexture2D_p18pi")
 texture_scale = 4.27
+
+[node name="Node2D" type="Node2D" parent="." unique_id=579741019]
+position = Vector2(5, -15)
+rotation = 1.5707964
+scale = Vector2(1, 0.0800001)
+
+[node name="Endurance" type="TextureProgressBar" parent="Node2D" unique_id=775480382]
+offset_left = -16.0
+offset_top = -46.000004
+offset_right = 24.0
+offset_bottom = 17.999996
+scale = Vector2(0.10845214, 3.5842392)
+value = 100.0
+fill_mode = 3
+texture_progress = ExtResource("4_alkmp")
+tint_progress = Color(1, 1, 0.07058824, 1)
+script = ExtResource("5_vwe7n")
 
 [editable path="Health"]
