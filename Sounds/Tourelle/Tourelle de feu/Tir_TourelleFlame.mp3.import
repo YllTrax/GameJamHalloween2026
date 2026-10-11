@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://1vdf62xg7btn"
+path="res://.godot/imported/Tir_TourelleFlame.mp3-9a8d7c3aa4a9b949d594713633f94a1b.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Tourelle/Tourelle de feu/Tir_TourelleFlame.mp3"
+dest_files=["res://.godot/imported/Tir_TourelleFlame.mp3-9a8d7c3aa4a9b949d594713633f94a1b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cbbudjdfi75rt"
+path="res://.godot/imported/submority-traimory-mega-horn-angry-siren-f-cinematic-trailer-sound-effects-193408(1).mp3-1edef5a19249b0667beca4a0c35e91c9.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Vague/Début de vague/submority-traimory-mega-horn-angry-siren-f-cinematic-trailer-sound-effects-193408(1).mp3"
+dest_files=["res://.godot/imported/submority-traimory-mega-horn-angry-siren-f-cinematic-trailer-sound-effects-193408(1).mp3-1edef5a19249b0667beca4a0c35e91c9.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
