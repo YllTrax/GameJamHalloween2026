@@ -138,7 +138,6 @@ tile_set = ExtResource("1_vayox")
 
 [node name="Boucle de jeu" parent="." unique_id=260320005 node_paths=PackedStringArray("SonFinVague", "MusiqueExterieure", "depots", "refillLabelAnounce") instance=ExtResource("6_2lsjc")]
 position = Vector2(496, -88)
-DureeVague = 30.0
 SonFinVague = NodePath("finWaves")
 MusiqueExterieure = NodePath("MusiqueExt")
 depots = [NodePath("../SaltDeposit"), NodePath("../SaltDeposit2"), NodePath("../SaltDeposit3")]
@@ -378,20 +377,25 @@ text = "HUD_RESTART"
 [node name="SaltCircle" parent="." unique_id=1691003878 instance=ExtResource("7_udtek")]
 position = Vector2(577, 87)
 
-[node name="SaltDeposit" parent="." unique_id=418339320 instance=ExtResource("15_fpy4b")]
+[node name="SaltDeposit" parent="." unique_id=418339320 node_paths=PackedStringArray("areas") instance=ExtResource("15_fpy4b")]
 position = Vector2(-288, -40)
+areas = []
 
-[node name="SaltDeposit2" parent="." unique_id=848901830 instance=ExtResource("15_fpy4b")]
+[node name="SaltDeposit2" parent="." unique_id=848901830 node_paths=PackedStringArray("areas") instance=ExtResource("15_fpy4b")]
 position = Vector2(8, 624)
+areas = []
 
-[node name="SaltDeposit3" parent="." unique_id=1619518873 instance=ExtResource("15_fpy4b")]
+[node name="SaltDeposit3" parent="." unique_id=1619518873 node_paths=PackedStringArray("areas") instance=ExtResource("15_fpy4b")]
 position = Vector2(1144, -200)
+areas = []
 
-[node name="SaltDeposit4" parent="." unique_id=514277618 instance=ExtResource("15_fpy4b")]
+[node name="SaltDeposit4" parent="." unique_id=514277618 node_paths=PackedStringArray("areas") instance=ExtResource("15_fpy4b")]
 position = Vector2(464, -272)
+areas = []
 
-[node name="SaltDeposit5" parent="." unique_id=401300947 instance=ExtResource("15_fpy4b")]
+[node name="SaltDeposit5" parent="." unique_id=401300947 node_paths=PackedStringArray("areas") instance=ExtResource("15_fpy4b")]
 position = Vector2(1312, 520)
+areas = []
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=504761124]
 color = Color(0.000763089, 0.06698845, 0.3768583, 0.6745098)
