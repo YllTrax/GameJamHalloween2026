@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ud26c53gxr53"]
 
 [ext_resource type="Script" uid="uid://c1gps46of4u80" path="res://Scripts/Munition.cs" id="1_o5qqn"]
+[ext_resource type="Texture2D" uid="uid://cuoo48gmtjfrd" path="res://Images/Sprites/collectible-mana.png" id="2_nojnd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ngk0e"]
 radius = 35.812675
@@ -10,6 +11,21 @@ height = 143.2507
 load_path = "res://.godot/imported/gems.png-af72bbf4a82776733bb492f7c5728509.ctex"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p18pi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ia0j"]
+atlas = ExtResource("2_nojnd")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p18pi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ia0j")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Ammo" type="Area2D" unique_id=105507298]
 scale = Vector2(1.91, 1.91)
@@ -36,3 +52,6 @@ collision_mask = 129
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=663917189]
 shape = SubResource("CircleShape2D_p18pi")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=448374264]
+sprite_frames = SubResource("SpriteFrames_p18pi")

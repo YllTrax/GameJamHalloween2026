@@ -2,32 +2,73 @@
 
 [ext_resource type="Script" uid="uid://dml0tmi8g5jwu" path="res://Scripts/SaltCircle.cs" id="1_wone6"]
 [ext_resource type="PackedScene" uid="uid://wj1whgh7v5c" path="res://Prefabs/health.tscn" id="2_6l6rw"]
+[ext_resource type="Texture2D" uid="uid://dvn631q1gwqhb" path="res://Images/Sprites/sorciere.png" id="2_gyekt"]
 [ext_resource type="Script" uid="uid://bvmd4oammh5b" path="res://Scripts/Interactable.cs" id="3_q1oiw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p18pi"]
+radius = 26.476404
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qle6y"]
+atlas = ExtResource("2_gyekt")
+region = Rect2(0, 0, 62, 53)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7i0us"]
+atlas = ExtResource("2_gyekt")
+region = Rect2(62, 0, 62, 53)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrfhh"]
+atlas = ExtResource("2_gyekt")
+region = Rect2(124, 0, 62, 53)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8dwuy"]
+atlas = ExtResource("2_gyekt")
+region = Rect2(186, 0, 62, 53)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p18pi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qle6y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7i0us")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qrfhh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8dwuy")
+}],
+"loop": 1,
+"name": &"Idle",
+"speed": 7.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gyekt"]
-radius = 13.038404
+radius = 25.079872
 
-[node name="SaltCircle" type="Area2D" unique_id=1691003878 node_paths=PackedStringArray("health") groups=["Salts"]]
-collision_layer = 8
-collision_mask = 0
+[node name="SaltCircle" type="Area2D" unique_id=1691003878 node_paths=PackedStringArray("health", "anim") groups=["Salts"]]
+collision_layer = 9
+collision_mask = 2
 script = ExtResource("1_wone6")
 health = NodePath("Health")
+anim = NodePath("AnimatedSprite2D")
 
 [node name="ShapeDuSel" type="CollisionShape2D" parent="." unique_id=1886151530]
+position = Vector2(-1, 10)
 shape = SubResource("CircleShape2D_p18pi")
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=1478869536]
+visible = false
 polygon = PackedVector2Array(0, -10, 4, -9, 8, -6, 10, -2, 9, 5, 2, 10, -8, 6, -9, -4, -1, -10)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=109317]
 sprite_frames = SubResource("SpriteFrames_p18pi")
+animation = &"Idle"
+frame_progress = 0.8471737
 
 [node name="Health" parent="." unique_id=1461079800 node_paths=PackedStringArray("sprite") instance=ExtResource("2_6l6rw")]
-position = Vector2(20, 36)
+position = Vector2(23.000002, 22)
 baseHealth = 100.0
 sprite = NodePath("../AnimatedSprite2D")
 IsSaltCircle = true
@@ -41,13 +82,20 @@ outline = NodePath("../Outline")
 range = 50.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable" unique_id=1318684797]
+position = Vector2(0, 8)
 shape = SubResource("CircleShape2D_gyekt")
 
 [node name="Outline" type="Polygon2D" parent="." unique_id=591998334]
 visible = false
 z_index = -34
 scale = Vector2(1.12, 1.12)
-color = Color(0.84483373, 0.5213544, 0.850883, 1)
+color = Color(0.84313726, 0.52156866, 0.8509804, 0)
 polygon = PackedVector2Array(1, -13, 18, -7, 11, 15, -9, 13, -16, -4)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=145678013]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=245600137]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_gyekt")
 
 [editable path="Health"]
