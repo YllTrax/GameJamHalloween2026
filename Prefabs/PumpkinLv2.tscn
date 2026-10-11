@@ -156,6 +156,9 @@ animations = [{
 }]
 
 [node name="PumpkinLv2" type="CharacterBody2D" unique_id=1031295454 node_paths=PackedStringArray("anim")]
+z_index = 2
+z_as_relative = false
+y_sort_enabled = true
 scale = Vector2(1.482152, 1.2298197)
 collision_layer = 4
 collision_mask = 11
@@ -164,7 +167,6 @@ Damage = 10.0
 GermsDrop = 4.0
 GermsScene = ExtResource("2_jd27u")
 anim = NodePath("PumpkinSprite")
-isEastOriented = true
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=949483054]
 visible = false

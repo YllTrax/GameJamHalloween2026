@@ -23,10 +23,13 @@ public partial class Tourelle : Area2D, IBuildable
     private int munitionMax;
 
     [Export]
-    private Polygon2D tourelleBody;
+    private TowerType towerType;
 
     [Export]
-    private TowerType towerType;
+    private AnimatedSprite2D animatedSprite2D;
+
+    [Export]
+    private AnimatedSprite2D fireSprite;
 
     [Export]
     private PackedScene bulletPrefab;
@@ -60,6 +63,8 @@ public partial class Tourelle : Area2D, IBuildable
         _timerFire.Timeout += Fire;
         AddChild(_timerFire);
         _timerFire.Start();
+
+        animatedSprite2D.Play("Idle");
     }
 
     public override void _Process(double delta)
@@ -69,7 +74,7 @@ public partial class Tourelle : Area2D, IBuildable
             target = null;
             return;
         }
-        tourelleBody.LookAt(target.GlobalPosition);
+        // tourelleBody.LookAt(target.GlobalPosition);
 
         ammo.Text = munitions.ToString();
     }
@@ -86,6 +91,7 @@ public partial class Tourelle : Area2D, IBuildable
 
         if (!shouldFireInArc)
         {
+            fireSprite.Play("Fire");
             var bullet = bulletPrefab.Instantiate<Bullet>();
             bullet.Damage *= dmgMult;
             GD.Print($"[Tourelle] Bullet : x{dmgMult:0.00} -> dégâts {bullet.Damage}");
@@ -99,6 +105,7 @@ public partial class Tourelle : Area2D, IBuildable
             switch (towerType)
             {
                 case TowerType.Fire:
+                    fireSprite.Play("Fire");
                     var zone = bulletPrefab.Instantiate<FireZone>();
                     zone.Damage *= dmgMult;
                     GD.Print($"[Tourelle] FireZone : x{dmgMult:0.00} -> dégâts {zone.Damage}");
@@ -107,6 +114,7 @@ public partial class Tourelle : Area2D, IBuildable
                     munitions--;
                     break;
                 case TowerType.Slime:
+                    fireSprite.Play("Fire");
                     var zoneSlime = bulletPrefab.Instantiate<SlimeZone>();
                     GetTree().CurrentScene.AddChild(zoneSlime);
                     zoneSlime.Launch(firePoint.GlobalPosition, target.GlobalPosition);

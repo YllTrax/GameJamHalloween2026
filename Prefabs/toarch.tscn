@@ -69,6 +69,7 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 
 [node name="Toarch" type="Node2D" unique_id=798553879 node_paths=PackedStringArray("areaOfEffect", "anim")]
+z_index = 2
 script = ExtResource("1_6t5l3")
 areaOfEffect = NodePath("Damage AoE")
 anim = NodePath("AnimatedSprite2D")

@@ -2,45 +2,204 @@
 
 [ext_resource type="Script" uid="uid://cyng3vadk3c4c" path="res://Scripts/Tourelle.cs" id="1_dv6em"]
 [ext_resource type="PackedScene" uid="uid://b3ljysu34c1i7" path="res://Prefabs/slime_zone.tscn" id="2_dv6em"]
+[ext_resource type="Texture2D" uid="uid://cclsuhrpjfphh" path="res://Images/Sprites/tourelle-slime.png" id="3_pnamf"]
+[ext_resource type="Texture2D" uid="uid://bbuvnlejsf4pf" path="res://Images/Sprites/tir.png" id="4_0lohu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p18pi"]
 radius = 277.52118
 
-[node name="TourelleDeSlime" type="Area2D" unique_id=2130286474 node_paths=PackedStringArray("ammo", "tourelleBody", "firePoint")]
-scale = Vector2(0.5, 0.5)
+[sub_resource type="AtlasTexture" id="AtlasTexture_0lohu"]
+atlas = ExtResource("3_pnamf")
+region = Rect2(0, 0, 20, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ibils"]
+atlas = ExtResource("3_pnamf")
+region = Rect2(20, 0, 20, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7t4s"]
+atlas = ExtResource("3_pnamf")
+region = Rect2(40, 0, 20, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vawhm"]
+atlas = ExtResource("3_pnamf")
+region = Rect2(60, 0, 20, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3kjar"]
+atlas = ExtResource("3_pnamf")
+region = Rect2(80, 0, 20, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nwsd2"]
+atlas = ExtResource("3_pnamf")
+region = Rect2(100, 0, 20, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3ep2"]
+atlas = ExtResource("3_pnamf")
+region = Rect2(120, 0, 20, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phed3"]
+atlas = ExtResource("3_pnamf")
+region = Rect2(140, 0, 20, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gv2it"]
+atlas = ExtResource("3_pnamf")
+region = Rect2(160, 0, 20, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khk5j"]
+atlas = ExtResource("3_pnamf")
+region = Rect2(180, 0, 20, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0yary"]
+atlas = ExtResource("3_pnamf")
+region = Rect2(200, 0, 20, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7mcrm"]
+atlas = ExtResource("3_pnamf")
+region = Rect2(220, 0, 20, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_od5bx"]
+atlas = ExtResource("3_pnamf")
+region = Rect2(240, 0, 20, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qabiw"]
+atlas = ExtResource("3_pnamf")
+region = Rect2(260, 0, 20, 43)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p18pi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0lohu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ibils")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7t4s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vawhm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3kjar")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nwsd2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3ep2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_phed3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gv2it")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_khk5j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0yary")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7mcrm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_od5bx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qabiw")
+}],
+"loop": 1,
+"name": &"Idle",
+"speed": 10.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k3gbf"]
+atlas = ExtResource("4_0lohu")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulcjn"]
+atlas = ExtResource("4_0lohu")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ey1qf"]
+atlas = ExtResource("4_0lohu")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7d40c"]
+atlas = ExtResource("4_0lohu")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ibils"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k3gbf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ulcjn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ey1qf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7d40c")
+}],
+"loop": 0,
+"name": &"Fire",
+"speed": 10.0
+}]
+
+[node name="TourelleDeSlime" type="Area2D" unique_id=2130286474 node_paths=PackedStringArray("ammo", "animatedSprite2D", "fireSprite", "firePoint")]
+z_as_relative = false
 collision_mask = 4
 script = ExtResource("1_dv6em")
 attackCD = 6.45
 munitions = 50
 ammo = NodePath("Ammo")
 munitionMax = 50
-tourelleBody = NodePath("Tower")
+animatedSprite2D = NodePath("AnimatedSprite2D")
+fireSprite = NodePath("Fire Point/FireSprite")
 bulletPrefab = ExtResource("2_dv6em")
-firePoint = NodePath("Tower/Fire Point")
+firePoint = NodePath("Fire Point")
 shouldFireInArc = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1717542044]
 visible = false
-scale = Vector2(2.155, 2.155)
+scale = Vector2(1.5, 1.5)
 shape = SubResource("CircleShape2D_p18pi")
 
 [node name="range" type="Polygon2D" parent="." unique_id=749667653]
 visible = false
-scale = Vector2(2.155, 2.155)
+scale = Vector2(1.5, 1.5)
 color = Color(0.27445602, 0.56899005, 0, 0.2627451)
 polygon = PackedVector2Array(-2, -274, 198, -199, 277, -4, 208, 183, 7, 282, -210, 185, -280, -1, -199, -199)
 
 [node name="Tower" type="Polygon2D" parent="." unique_id=1532867960]
+visible = false
 scale = Vector2(0.22, 0.061)
 color = Color(1.2273341e-06, 0.47494733, 0.21618715, 1)
 polygon = PackedVector2Array(278, -1, -160, -218, -70, 1, -172, 204)
-
-[node name="Fire Point" type="Node2D" parent="Tower" unique_id=1082514732]
-position = Vector2(309.21802, -17.747444)
-scale = Vector2(2.103524, 8.873723)
 
 [node name="Ammo" type="Label" parent="." unique_id=1057946959]
 offset_left = -20.0
 offset_top = -90.0
 offset_right = 20.0
 offset_bottom = -67.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1549154433]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_p18pi")
+animation = &"Idle"
+
+[node name="Fire Point" type="Node2D" parent="." unique_id=1082514732]
+position = Vector2(-2.7105054e-20, -48.000004)
+scale = Vector2(0.46277526, 0.54129714)
+
+[node name="FireSprite" type="AnimatedSprite2D" parent="Fire Point" unique_id=367485430]
+position = Vector2(-4.5474735e-13, -3.8146973e-06)
+scale = Vector2(2.1608763, 1.8474143)
+sprite_frames = SubResource("SpriteFrames_ibils")
+animation = &"Fire"
+frame = 3
+frame_progress = 1.0

@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bht4lcjhamjlq"]
+[gd_scene format=3 uid="uid://c44o0u3soyxq2"]
 
 [ext_resource type="Script" uid="uid://b0rl0evdo4tvh" path="res://Scripts/Personnage.cs" id="1_ydahe"]
 [ext_resource type="Texture2D" uid="uid://jnr58eamhc28" path="res://Images/Sprites/hero-idle.png" id="2_ydahe"]
@@ -164,30 +164,35 @@ collision_layer = 2
 script = ExtResource("1_ydahe")
 light = NodePath("PointLight2D")
 anim = NodePath("AnimatorPersonnage")
+dashTimer = 0.15
+dashSpeed = 500.0
 germs = 40
 munitions = 10
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1401489096]
+position = Vector2(0, -11.5)
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2064703525]
 z_index = 15
-position = Vector2(0, -2)
+position = Vector2(0, -5)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_xqjxd")
 
 [node name="AnimatorPersonnage" type="AnimatedSprite2D" parent="." unique_id=1503814213]
 sprite_frames = SubResource("SpriteFrames_0k2he")
 animation = &"IdleEast"
+offset = Vector2(0, -11.5)
 
 [node name="Health" parent="." unique_id=1039052001 node_paths=PackedStringArray("sprite") instance=ExtResource("4_ydahe")]
-position = Vector2(12, 26.000004)
+position = Vector2(12, 14.500004)
 scale = Vector2(3.2592623, 0.1881498)
 baseHealth = 1000.0
 sprite = NodePath("../AnimatorPersonnage")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=5315970]
+position = Vector2(0, -11.5)
 energy = 1.5
 texture = SubResource("GradientTexture2D_p18pi")
 texture_scale = 4.27

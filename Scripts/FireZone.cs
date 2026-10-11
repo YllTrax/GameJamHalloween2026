@@ -10,6 +10,9 @@ public partial class FireZone : Area2D
     [Export]
     private float arcHeight = 60f;
 
+    [Export]
+    private AnimatedSprite2D anim;
+
     //--------------a terre--------------
     [Export]
     private float lifeTime = 3f;
@@ -24,6 +27,13 @@ public partial class FireZone : Area2D
     {
         get => damageSource.Damage;
         set => damageSource.Damage = value;
+    }
+
+    public override void _Ready()
+    {
+        anim.Play("default");
+        Monitoring = false;
+        BodyEntered += OnBodyEntered;
     }
 
     /// <summary>
@@ -85,12 +95,6 @@ public partial class FireZone : Area2D
             tween.TweenProperty(this, "scale", Vector2.Zero, 0.2f).SetEase(Tween.EaseType.In);
             tween.TweenCallback(Callable.From(QueueFree));
         }
-    }
-
-    public override void _Ready()
-    {
-        Monitoring = false;
-        BodyEntered += OnBodyEntered;
     }
 
     private void OnBodyEntered(Node2D body)

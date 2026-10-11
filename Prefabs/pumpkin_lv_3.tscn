@@ -144,7 +144,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"EastWest",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -173,7 +173,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"North",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -202,10 +202,13 @@ animations = [{
 }],
 "loop": 1,
 "name": &"South",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [node name="PumpkinLv3" type="CharacterBody2D" unique_id=241176503 node_paths=PackedStringArray("anim")]
+z_index = 2
+z_as_relative = false
+y_sort_enabled = true
 collision_layer = 4
 collision_mask = 11
 script = ExtResource("1_hu2pe")
@@ -213,6 +216,7 @@ Damage = 20.0
 GermsDrop = 8.0
 GermsScene = ExtResource("2_iiece")
 anim = NodePath("AnimatedSprite2D")
+isEastOriented = true
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=447942903]
 visible = false
@@ -242,5 +246,6 @@ texture_scale = 0.72
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2090792759]
 sprite_frames = SubResource("SpriteFrames_p18pi")
-animation = &"South"
-frame_progress = 0.32905254
+animation = &"North"
+frame = 7
+frame_progress = 0.16555643

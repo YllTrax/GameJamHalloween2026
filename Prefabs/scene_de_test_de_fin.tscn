@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://cfq0ohha68bj0" path="res://Images/Misc/new_tile_set.tres" id="1_vayox"]
 [ext_resource type="PackedScene" uid="uid://ci4py4rnxkffw" path="res://Prefabs/Door.tscn" id="2_eofuw"]
-[ext_resource type="PackedScene" uid="uid://bht4lcjhamjlq" path="res://Prefabs/personnage.tscn" id="3_eofuw"]
+[ext_resource type="PackedScene" uid="uid://c44o0u3soyxq2" path="res://Prefabs/personnage.tscn" id="3_eofuw"]
 [ext_resource type="Script" uid="uid://dce3vcl13iokc" path="res://Scripts/Base.cs" id="4_7k2vv"]
 [ext_resource type="PackedScene" uid="uid://ci4mpugnevp18" path="res://Prefabs/boucle_de_jeu.tscn" id="6_2lsjc"]
 [ext_resource type="Script" uid="uid://cu2erinb0iqua" path="res://Scripts/LabelText.cs" id="6_sitxd"]
@@ -36,9 +36,6 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_pm2dw"]
-vertices = PackedVector2Array(666, 314, 1754.8438, 669.03125, -407.9375, 675.96094, 534, 314, 458, 314, 326, 314, -306.9375, -336.0078, 326, 182, 666, 138, 666, 6, 1739.1484, -339.97656, 534, 6, 630, 182, 630, 278, 534, 278, 458, 278, 534, 42, 362, 278, 362, 182, 458, 42, 458, 6, 326, 6, 362, 138, 362, 42, 630, 42, 630, 138, 666, 182, 326, 138)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 3, 2), PackedInt32Array(5, 4, 2), PackedInt32Array(5, 2, 6, 7), PackedInt32Array(8, 9, 10, 1), PackedInt32Array(6, 10, 9, 11), PackedInt32Array(12, 13, 14), PackedInt32Array(14, 3, 4, 15), PackedInt32Array(16, 15, 17, 18, 19, 11), PackedInt32Array(11, 19, 20), PackedInt32Array(6, 11, 20), PackedInt32Array(6, 20, 21), PackedInt32Array(22, 23, 19), PackedInt32Array(16, 24, 25, 14, 15), PackedInt32Array(1, 0, 26), PackedInt32Array(8, 1, 26), PackedInt32Array(8, 26, 12, 25), PackedInt32Array(6, 21, 27), PackedInt32Array(7, 6, 27, 18), PackedInt32Array(18, 27, 22), PackedInt32Array(25, 12, 14), PackedInt32Array(19, 18, 22)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-316, -346, 1749, -350, 1765, 679, -419, 686)])
 parsed_geometry_type = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7851t"]
@@ -74,11 +71,25 @@ scale = Vector2(0.44, 1)
 [node name="Mobs" type="Node2D" parent="." unique_id=833900652]
 
 [node name="Personnage" parent="." unique_id=874529347 instance=ExtResource("3_eofuw")]
+z_index = 0
+z_as_relative = false
+y_sort_enabled = true
 dashSpeed = 1000.0
 
+[node name="Camera2D" parent="Personnage" index="0" unique_id=1401489096]
+position = Vector2(0, 0)
+
+[node name="CollisionShape2D" parent="Personnage" index="1" unique_id=2064703525]
+position = Vector2(0, -2)
+
 [node name="Health" parent="Personnage" index="3" unique_id=1039052001]
-baseHealth = 2.0
+z_index = -1
+position = Vector2(12, 14.999997)
+baseHealth = 20.0
 IsPlayer = true
+
+[node name="PointLight2D" parent="Personnage" index="4" unique_id=5315970]
+position = Vector2(0, 0)
 
 [node name="Base" type="Area2D" parent="." unique_id=2127739621]
 position = Vector2(342, 168)
@@ -357,7 +368,7 @@ position = Vector2(464, -272)
 position = Vector2(1312, 520)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=504761124]
-color = Color(5.2943824e-07, 0, 0.3426997, 1)
+color = Color(0.000763089, 0.06698845, 0.3768583, 0.6745098)
 
 [connection signal="pressed" from="Boucle de jeu/Updgrape/SaltLV1" to="Boucle de jeu/MenuLangue" method="ChoisirLangue" binds= ["fr"]]
 [connection signal="pressed" from="Boucle de jeu/MenuLangue/VBoxContainer/FR" to="Boucle de jeu/MenuLangue" method="ChoisirLangue" binds= ["fr"]]

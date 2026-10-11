@@ -40,6 +40,9 @@ public partial class Personnage : CharacterBody2D
 
     [ExportGroup("Dash")]
     [Export]
+    private double dashTimer;
+
+    [Export]
     private float dashSpeed = 2000f;
 
     [ExportGroup("Inventaire")]
@@ -188,7 +191,7 @@ public partial class Personnage : CharacterBody2D
             isDashing = true;
             canDash = false;
             moveSpeed = dashSpeed;
-            await ToSignal(GetTree().CreateTimer(0.5), SceneTreeTimer.SignalName.Timeout);
+            await ToSignal(GetTree().CreateTimer(dashTimer), SceneTreeTimer.SignalName.Timeout);
             moveSpeed = startSpeed;
             isDashing = false;
             await ToSignal(GetTree().CreateTimer(1.5f), SceneTreeTimer.SignalName.Timeout);

@@ -121,6 +121,8 @@ animations = [{
 }]
 
 [node name="Pumpkin" type="CharacterBody2D" unique_id=1184827937 node_paths=PackedStringArray("anim")]
+z_index = 2
+y_sort_enabled = true
 scale = Vector2(1.1936779, 0.73402935)
 collision_layer = 4
 collision_mask = 15

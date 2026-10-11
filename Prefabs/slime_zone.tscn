@@ -2,23 +2,70 @@
 
 [ext_resource type="Script" uid="uid://c5if4hmvt8jl" path="res://SlimeZone.cs" id="1_h4oqd"]
 [ext_resource type="PackedScene" uid="uid://ud26c53gxr53" path="res://Prefabs/Munition.tscn" id="2_dwnsy"]
+[ext_resource type="Texture2D" uid="uid://dsfbhiojy6o7a" path="res://Images/Sprites/zone-slime.png" id="3_10ym2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p18pi"]
 radius = 37.01351
 
-[node name="SlimeZone" type="Area2D" unique_id=744168898]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6nvx2"]
+atlas = ExtResource("3_10ym2")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7sci"]
+atlas = ExtResource("3_10ym2")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xf5vj"]
+atlas = ExtResource("3_10ym2")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jsyx5"]
+atlas = ExtResource("3_10ym2")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p18pi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6nvx2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c7sci")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xf5vj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jsyx5")
+}],
+"loop": 1,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="SlimeZone" type="Area2D" unique_id=744168898 node_paths=PackedStringArray("anim")]
 z_index = -1
 scale = Vector2(0.84000045, 0.8684328)
 collision_layer = 64
 collision_mask = 4
 script = ExtResource("1_h4oqd")
+anim = NodePath("AnimatedSprite2D")
 munition = ExtResource("2_dwnsy")
 
 [node name="Collider" type="CollisionShape2D" parent="." unique_id=885004324]
+visible = false
 shape = SubResource("CircleShape2D_p18pi")
 
 [node name="FireZone" type="Polygon2D" parent="." unique_id=1724462170]
+visible = false
 position = Vector2(-0.43055177, -0.5000024)
 scale = Vector2(3.9569442, 3.85)
 color = Color(0.17173502, 0.4968863, 3.85046e-07, 1)
 polygon = PackedVector2Array(0, -10, 7, -7, 9.459459, 4.172325e-07, 7, 7, 0, 10, -8, 6, -10, 0, -7, -6)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1940075777]
+scale = Vector2(2.2631578, 2.5)
+sprite_frames = SubResource("SpriteFrames_p18pi")
+animation = &"Idle"
+frame = 2
+frame_progress = 0.84999806

@@ -11,6 +11,9 @@ public partial class SlimeZone : Area2D
     [Export]
     private float arcHeight = 100f;
 
+    [Export]
+    private AnimatedSprite2D anim;
+
     //--------------a terre--------------
     [Export]
     private float lifeTime = 2f;
@@ -85,6 +88,7 @@ public partial class SlimeZone : Area2D
     {
         Monitoring = false;
         BodyEntered += OnBodyEntered;
+
         // BodyExited -= OnBodyExited;
     }
 
