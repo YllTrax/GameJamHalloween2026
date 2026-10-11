@@ -81,7 +81,8 @@ public partial class Tourelle : Area2D, IBuildable
             target = null;
             return;
         }
-        tourelleBody.LookAt(target.GlobalPosition);
+        //
+        //tourelleBody.LookAt(target.GlobalPosition);
         // supprime la ligne ammo.Text = munitions.ToString();
         // tourelleBody.LookAt(target.GlobalPosition);
 
@@ -180,7 +181,8 @@ public partial class Tourelle : Area2D, IBuildable
     private void UpdateLabel()
     {
         int shown = munitions * 1000 + MaxAmmo; // détecte un changement de l'un ou l'autre
-        if (shown == _lastShown) return;
+        if (shown == _lastShown)
+            return;
         _lastShown = shown;
         ammo.Text = $"{munitions}/{MaxAmmo}";
     }

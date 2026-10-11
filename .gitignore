@@ -3,5 +3,6 @@
 .mono/
 bin/
 obj/
+Build/
 *.user
 GameJaam.sln
