@@ -3,19 +3,19 @@ using Godot;
 
 public partial class SaltDeposit : Node2D, IInteractable
 {
-    [Export]
-    private float baseSaltAmount = 10f;
+	[Export]
+	private float baseSaltAmount = 10f;
 
-    private float saltAmount;
-    private Tween _pulseTween;
-    private Vector2 _baseScale;
+	private float saltAmount;
+	private Tween _pulseTween;
+	private Vector2 _baseScale;
 
-    [Export]
-    public Area2D[] areas;
+	[Export]
+	public Area2D[] areas;
 
-    public override void _Ready()
-    {
-        _baseScale = Scale; // indispensable pour le Pulse sinon ca disparait c'est relou
+	public override void _Ready()
+	{
+		_baseScale = Scale; // indispensable pour le Pulse sinon ca disparait c'est relou
         saltAmount = 0;
 
         GetRandomPos(areas[GD.RandRange(0, areas.Length - 1)]);
@@ -80,18 +80,18 @@ public partial class SaltDeposit : Node2D, IInteractable
     {
         var area = newArea.GetNode<CollisionShape2D>("CollisionShape2D");
 
-        // Rectangle local de la forme (marche pour n'importe quelle Shape2D)
-        Rect2 local = area.Shape.GetRect();
+		// Rectangle local de la forme (marche pour n'importe quelle Shape2D)
+		Rect2 local = area.Shape.GetRect();
 
-        // Passage en coordonnées globales (prend en compte position, scale, rotation)
-        Rect2 global = area.GlobalTransform * local;
+		// Passage en coordonnées globales (prend en compte position, scale, rotation)
+		Rect2 global = area.GlobalTransform * local;
 
-        Vector2 min = global.Position;
-        Vector2 max = global.End;
+		Vector2 min = global.Position;
+		Vector2 max = global.End;
 
-        GlobalPosition = new Vector2(
-            (float)GD.RandRange(min.X, max.X),
-            (float)GD.RandRange(min.Y, max.Y)
-        );
-    }
+		GlobalPosition = new Vector2(
+			(float)GD.RandRange(min.X, max.X),
+			(float)GD.RandRange(min.Y, max.Y)
+		);
+	}
 }
