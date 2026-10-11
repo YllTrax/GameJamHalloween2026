@@ -84,8 +84,14 @@ public partial class BoucleDeJeu : Node2D
 	[Export]
 	public AudioStreamPlayer2D SonVague;
 
+	[Export] 
+	public AudioStreamPlayer2D SonFinVague;
+
 	[Export]
 	public AudioStreamPlayer2D Musique;
+
+	[Export]
+	public AudioStreamPlayer2D MusiqueExterieure; // jouée quand le joueur est dehors
 
 	private bool _musiqueActive = true;
 
@@ -149,19 +155,12 @@ public partial class BoucleDeJeu : Node2D
 		_hudAnonces = GetNodeOrNull<CanvasLayer>("Anonces");
 		MettreAJourLabel();
 
-		if (Musique != null)
-		{
-			Musique.Finished += () =>
-			{
-				if (_musiqueActive)
-					Musique.Play();
-			};
-			Musique.Play();
-		}
 
 		// Quand l'annonce de vague est finie, la musique reprend
 		if (SonVague != null)
+		{
 			SonVague.Finished += OnSonVagueFini;
+		}
 	}
 
 	public override void _Process(double delta)
@@ -185,6 +184,7 @@ public partial class BoucleDeJeu : Node2D
 		MettreAJourGerms();
 		MettreAJourSalt();
 		MettreAJourMunition();
+		GererMusiqueAmbiance();
 
 		GererUpgrade();
 
@@ -203,6 +203,7 @@ public partial class BoucleDeJeu : Node2D
 			if (!_enPause)
 			{
 				// Fin de la vague -> début de la pause
+				SonFinVague.Play();
 				_enPause = true;
 				_timerVague = DureePause;
 				GD.Print($"Pause de {DureePause}s avant la vague {VagueActuelle + 1}");
@@ -220,6 +221,7 @@ public partial class BoucleDeJeu : Node2D
 				_timerVague = DureeVague;
 				_musiqueActive = false;
 				Musique?.Stop();
+				MusiqueExterieure?.Stop();
 				SonVague?.Play();
 				GD.Print($"Waves {VagueActuelle} ! Intervalle : {IntervalleActuel():0.00}s");
 			}
@@ -352,18 +354,6 @@ public partial class BoucleDeJeu : Node2D
 		SaltLabel.Text = $" {g}";
 	}
 
-	// private void MettreAJourAmmo()
-	// {
-	// 	if (ammoLabel == null)
-	// 		return;
-
-	// 	float g = Personnage.Instance.carriedAmmo;
-	// 	if (g == ammoLabel)
-	// 		return;
-
-	// 	_ammoAffiches = g;
-	// 	ammoLabel.Text = $" {g}";
-	// }
 
 
 	//Fenetre update
@@ -525,5 +515,23 @@ public partial class BoucleDeJeu : Node2D
 
 		_ammoAffiches = g;
 		ammoLabel.Text = $" {g}";
+	}
+
+	// Joue la musique intérieure ou extérieure selon où se trouve le joueur
+	private void GererMusiqueAmbiance()
+	{
+		// Pendant l'annonce de vague, aucune musique d'ambiance
+		if (!_musiqueActive)
+			return;
+
+		bool indoor = Personnage.Instance.iSIndoor;
+		AudioStreamPlayer2D voulue = indoor ? Musique : MusiqueExterieure;
+		AudioStreamPlayer2D autre = indoor ? MusiqueExterieure : Musique;
+
+		autre?.Stop();
+
+		// Si la bonne musique ne joue pas (changement de zone ou fin de piste), on la lance
+		if (voulue != null && !voulue.Playing)
+			voulue.Play();
 	}
 }

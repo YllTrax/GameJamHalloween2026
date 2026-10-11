@@ -9,6 +9,8 @@ public partial class MenuSetting : CanvasLayer
 	[Export]
 	private BaseButton btnRetour; // le bouton "Return"
 
+
+
 	// Prévenu quand on ferme les réglages (MenuPause s'y abonne)
 	public event Action Ferme;
 

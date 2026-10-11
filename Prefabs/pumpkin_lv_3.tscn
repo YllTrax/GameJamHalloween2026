@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://bbveukhsk5wtn" path="res://Scripts/Pumpkin.cs" id="1_hu2pe"]
 [ext_resource type="PackedScene" uid="uid://c1tkwc8qmv001" path="res://Prefabs/Germs.tscn" id="2_iiece"]
 [ext_resource type="Texture2D" uid="uid://ddkk8ae88a8cc" path="res://Images/Sprites/ghost.png" id="4_dmhmx"]
+[ext_resource type="AudioStream" uid="uid://x3ucr51u0h41" path="res://Sounds/Pourchasser/freesound_community-warning-75933.mp3" id="5_8hrsq"]
+[ext_resource type="AudioStream" uid="uid://c3qsrojlemuqf" path="res://Sounds/Exterieur base/ExterieurBaseSon.mp3" id="6_nnq1r"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aluq5"]
 radius = 16.0
@@ -205,7 +207,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="PumpkinLv3" type="CharacterBody2D" unique_id=241176503 node_paths=PackedStringArray("anim")]
+[node name="PumpkinLv3" type="CharacterBody2D" unique_id=241176503 node_paths=PackedStringArray("anim", "_chaseSound", "_otherSound")]
 collision_layer = 4
 collision_mask = 11
 script = ExtResource("1_hu2pe")
@@ -213,6 +215,8 @@ Damage = 20.0
 GermsDrop = 8.0
 GermsScene = ExtResource("2_iiece")
 anim = NodePath("AnimatedSprite2D")
+_chaseSound = NodePath("pourchasse")
+_otherSound = NodePath("dehors")
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=447942903]
 visible = false
@@ -244,3 +248,11 @@ texture_scale = 0.72
 sprite_frames = SubResource("SpriteFrames_p18pi")
 animation = &"South"
 frame_progress = 0.32905254
+
+[node name="pourchasse" type="AudioStreamPlayer2D" parent="." unique_id=977065660]
+stream = ExtResource("5_8hrsq")
+bus = &"Volume"
+
+[node name="dehors" type="AudioStreamPlayer2D" parent="." unique_id=853202705]
+stream = ExtResource("6_nnq1r")
+bus = &"Volume"

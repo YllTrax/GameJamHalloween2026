@@ -17,6 +17,9 @@
 [ext_resource type="Script" uid="uid://hxfo2uun6h3x" path="res://Scripts/MenuSetting.cs" id="14_c0jx8"]
 [ext_resource type="Texture2D" uid="uid://ccfvf4klbn5yb" path="res://Images/IU/btn_musique.png" id="15_ayiju"]
 [ext_resource type="AudioStream" uid="uid://cfau4a8eibq73" path="res://Sounds/ambiance.mp3" id="16_o5a3p"]
+[ext_resource type="AudioStream" uid="uid://c1ci46wdaofeq" path="res://Sounds/Interface/emilianodleon-button-ui-sound-effect-395762.mp3" id="18_7jmk1"]
+[ext_resource type="AudioStream" uid="uid://clxbi82ya0gvu" path="res://Sounds/Vague/fin de vague/VaguePasser.mp3" id="19_aqc72"]
+[ext_resource type="AudioStream" uid="uid://c3qsrojlemuqf" path="res://Sounds/Exterieur base/ExterieurBaseSon.mp3" id="20_i3x3h"]
 
 [sub_resource type="FontVariation" id="FontVariation_cus6u"]
 
@@ -375,9 +378,10 @@ stretch_mode = 0
 texture_normal = ExtResource("10_js7qi")
 stretch_mode = 0
 
-[node name="MenuPause" parent="." unique_id=1546097521 instance=ExtResource("7_cus6u")]
+[node name="MenuPause" parent="." unique_id=1546097521 node_paths=PackedStringArray("clic") instance=ExtResource("7_cus6u")]
 visible = false
 script = ExtResource("8_wghvw")
+clic = NodePath("../ClicMenu")
 
 [node name="Play" parent="MenuPause" index="0" unique_id=1705783361]
 z_index = 1
@@ -525,6 +529,17 @@ bus = &"Volume"
 process_mode = 3
 stream = SubResource("AudioStreamMP3_ayiju")
 bus = &"Volume"
+
+[node name="ClicMenu" type="AudioStreamPlayer2D" parent="." unique_id=1689259583]
+stream = ExtResource("18_7jmk1")
+bus = &"Volume"
+
+[node name="finWaves" type="AudioStreamPlayer2D" parent="." unique_id=1414071787]
+stream = ExtResource("19_aqc72")
+bus = &"Volume"
+
+[node name="MusiqueExt" type="AudioStreamPlayer2D" parent="." unique_id=307820920]
+stream = ExtResource("20_i3x3h")
 
 [editable path="Updgrape"]
 [editable path="MenuPause"]

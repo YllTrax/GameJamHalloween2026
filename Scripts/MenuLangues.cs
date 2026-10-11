@@ -8,6 +8,9 @@ public partial class MenuLangues : CanvasLayer
 	[Export]
 	private CanvasLayer menuPause;
 
+	[Export]
+	private AudioStreamPlayer2D clic;
+
 	private static readonly Color CouleurNormale = Colors.White;
 	private static readonly Color CouleurGrise = new Color(0.5f, 0.5f, 0.5f, 1f);
 
@@ -42,6 +45,7 @@ public partial class MenuLangues : CanvasLayer
 
 	public void ChoisirLangue(string locale)
 	{
+		clic?.Play();
 		TranslationServer.SetLocale(locale);
 		MettreAJourBoutons();
 	}
@@ -56,6 +60,7 @@ public partial class MenuLangues : CanvasLayer
 
 	private void Retour()
 	{
+		clic?.Play();
 		Visible = false;
 		if (menuPause != null)
 			menuPause.Visible = true;

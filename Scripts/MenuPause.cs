@@ -14,6 +14,9 @@ public partial class MenuPause : CanvasLayer
 	[Export]
 	public CanvasLayer languesMenu;
 
+	[Export]
+	private AudioStreamPlayer2D clic;
+
 	private bool _ouvert = false;
 	private MenuSetting _menuSetting;
 
@@ -45,6 +48,8 @@ public partial class MenuPause : CanvasLayer
 		}
 
 		bouton.Pressed += action;
+		
+
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
@@ -72,6 +77,7 @@ public partial class MenuPause : CanvasLayer
 
 	private void MettreEnPause()
 	{
+		clic.Play();
 		_ouvert = true;
 		Visible = true;
 		GetTree().Paused = true;
@@ -79,6 +85,7 @@ public partial class MenuPause : CanvasLayer
 
 	private void Reprendre()
 	{
+		clic.Play();
 		_ouvert = false;
 		Visible = false;
 		GetTree().Paused = false;
@@ -86,6 +93,7 @@ public partial class MenuPause : CanvasLayer
 
 	private void Quitter()
 	{
+		clic.Play();
 		GetTree().Paused = false; // toujours dépauser avant de changer de scène
 		if (!string.IsNullOrEmpty(ScenePrincipale))
 			GetTree().ChangeSceneToFile(ScenePrincipale);
@@ -95,6 +103,7 @@ public partial class MenuPause : CanvasLayer
 
 	private void OuvrirReglages()
 	{
+		clic.Play();
 		if (_menuSetting == null)
 			return;
 
@@ -104,16 +113,11 @@ public partial class MenuPause : CanvasLayer
 
 	private void OnReglagesFermes()
 	{
+		clic.Play();
 		if (_ouvert)
 			Visible = true; // retour au menu pause
 	}
 
-	private void ChangerLangue()
-	{
-		string actuelle = TranslationServer.GetLocale();
-		int i = Array.FindIndex(Langues, l => actuelle.StartsWith(l));
-		TranslationServer.SetLocale(Langues[(i + 1) % Langues.Length]);
-	}
 
 	private void OuvrirLangues()
 	{
@@ -122,7 +126,7 @@ public partial class MenuPause : CanvasLayer
 			GD.PushError("[MenuPause] languesMenu non assigné dans l'inspecteur");
 			return;
 		}
-
+		clic?.Play();
 		Visible = false; // on cache le menu pause (le jeu reste en pause)
 		languesMenu.Visible = true;
 	}

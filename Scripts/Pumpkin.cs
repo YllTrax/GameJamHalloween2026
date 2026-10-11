@@ -38,6 +38,14 @@ public partial class Pumpkin : CharacterBody2D
 	[Export]
 	private bool isEastOriented;
 
+	//--------Sound-------
+	[Export]
+	public AudioStreamPlayer2D _chaseSound;
+	[Export]
+	private AudioStreamPlayer2D _otherSound;
+	private bool? _wasChasingPlayer = null; // null = aucun son lancé encore
+
+
 	//----------navigation
 
 	private NavigationAgent2D _agent;
@@ -55,7 +63,8 @@ public partial class Pumpkin : CharacterBody2D
 	{
 		_agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
 		_pathTimer = GD.Randf() * PathUpdateInterval; // décale les recalculs entre citrouilles
-
+		_chaseSound = GetNodeOrNull<AudioStreamPlayer2D>("ChaseSound");
+		_otherSound = GetNodeOrNull<AudioStreamPlayer2D>("OtherSound");
 		// Germs
 		_health = GetNodeOrNull<Health>("Health");
 		if (_health != null)
@@ -121,6 +130,8 @@ public partial class Pumpkin : CharacterBody2D
 			_doorAssigned = false;
 			_myDoor = null;
 		}
+		// Son : poursuite du joueur (dehors) ou autre cible (porte / sel)
+		UpdateSound(!indoor);
 
 		// Recalcul du chemin seulement toutes les PathUpdateInterval secondes
 		if (_pathTimer <= 0)
@@ -304,5 +315,25 @@ public partial class Pumpkin : CharacterBody2D
 
 		if (anim.Animation != nom)
 			anim.Play(nom);
+	}
+
+	private void UpdateSound(bool chasingPlayer)
+	{
+		// On ne fait rien si l'état n'a pas changé
+		if (_wasChasingPlayer == chasingPlayer)
+			return;
+
+		_wasChasingPlayer = chasingPlayer;
+
+		if (chasingPlayer)
+		{
+			_otherSound?.Stop();
+			_chaseSound?.Play();
+		}
+		else
+		{
+			_chaseSound?.Stop();
+			_otherSound?.Play();
+		}
 	}
 }

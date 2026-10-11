@@ -42,6 +42,8 @@ public partial class Tourelle : Area2D, IBuildable
     private int MaxAmmo => Mathf.RoundToInt(munitionMax * UpgradeStats.TurretAmmoMult);
     private int _lastShown = -1;
 
+    private int _lastMax;
+
     [Export]
     private bool shouldFireInArc;
 
@@ -50,6 +52,7 @@ public partial class Tourelle : Area2D, IBuildable
 
     public override void _Ready()
     {
+        _lastMax = MaxAmmo;
         BodyEntered += OnBodyEnter;
         BodyExited += OnBodyExit;
 
@@ -66,6 +69,7 @@ public partial class Tourelle : Area2D, IBuildable
 
     public override void _Process(double delta)
     {
+        CheckCapacityUpgrade();
         UpdateLabel();
         if (!IsInstanceValid(target))
         {
@@ -73,8 +77,7 @@ public partial class Tourelle : Area2D, IBuildable
             return;
         }
         tourelleBody.LookAt(target.GlobalPosition);
-
-        ammo.Text = munitions.ToString();
+        // supprime la ligne ammo.Text = munitions.ToString();
     }
 
     private void Fire()
@@ -169,5 +172,15 @@ public partial class Tourelle : Area2D, IBuildable
         if (shown == _lastShown) return;
         _lastShown = shown;
         ammo.Text = $"{munitions}/{MaxAmmo}";
+    }
+
+    private void CheckCapacityUpgrade()
+    {
+        int max = MaxAmmo;
+
+        if (max > _lastMax)
+            munitions = Mathf.Min(munitions + (max - _lastMax), max);
+
+        _lastMax = max;
     }
 }

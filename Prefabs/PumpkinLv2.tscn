@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://bbveukhsk5wtn" path="res://Scripts/Pumpkin.cs" id="1_b5vig"]
 [ext_resource type="PackedScene" uid="uid://c1tkwc8qmv001" path="res://Prefabs/Germs.tscn" id="2_jd27u"]
 [ext_resource type="Texture2D" uid="uid://d2wvdnjb0gspc" path="res://Images/Sprites/pumpkin.png" id="4_ab2pg"]
+[ext_resource type="AudioStream" uid="uid://x3ucr51u0h41" path="res://Sounds/Pourchasser/freesound_community-warning-75933.mp3" id="5_kakmg"]
+[ext_resource type="AudioStream" uid="uid://c3qsrojlemuqf" path="res://Sounds/Exterieur base/ExterieurBaseSon.mp3" id="6_ss30b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aluq5"]
 
@@ -155,7 +157,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="PumpkinLv2" type="CharacterBody2D" unique_id=1031295454 node_paths=PackedStringArray("anim")]
+[node name="PumpkinLv2" type="CharacterBody2D" unique_id=1031295454 node_paths=PackedStringArray("anim", "_chaseSound", "_otherSound")]
 scale = Vector2(1.482152, 1.2298197)
 collision_layer = 4
 collision_mask = 11
@@ -165,6 +167,8 @@ GermsDrop = 4.0
 GermsScene = ExtResource("2_jd27u")
 anim = NodePath("PumpkinSprite")
 isEastOriented = true
+_chaseSound = NodePath("Pourchase")
+_otherSound = NodePath("dehors")
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=949483054]
 visible = false
@@ -198,3 +202,11 @@ texture_scale = 0.72
 scale = Vector2(1.7552629, 1.1813754)
 sprite_frames = SubResource("SpriteFrames_g8p14")
 animation = &"EastWest"
+
+[node name="Pourchase" type="AudioStreamPlayer2D" parent="." unique_id=1982845871]
+stream = ExtResource("5_kakmg")
+bus = &"Volume"
+
+[node name="dehors" type="AudioStreamPlayer2D" parent="." unique_id=110128879]
+stream = ExtResource("6_ss30b")
+bus = &"Volume"
