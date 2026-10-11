@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://c1uyalahh33fr"]
+[gd_scene format=3 uid="uid://dkhnjly4xpbwo"]
 
 [ext_resource type="Script" uid="uid://dce3vcl13iokc" path="res://Scripts/Base.cs" id="1_3mu0a"]
 [ext_resource type="PackedScene" uid="uid://do15h41qr01vx" path="res://Prefabs/Pumpkin.tscn" id="2_xyasb"]

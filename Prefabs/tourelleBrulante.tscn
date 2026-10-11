@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://dtmrmglybhfdq" path="res://Prefabs/fire_zone.tscn" id="2_vyoke"]
 [ext_resource type="Texture2D" uid="uid://c7hynoi863t7l" path="res://Images/Sprites/tourelle-feu.png" id="3_54i4f"]
 [ext_resource type="Texture2D" uid="uid://bbuvnlejsf4pf" path="res://Images/Sprites/tir.png" id="4_xgw48"]
+[ext_resource type="AudioStream" uid="uid://1vdf62xg7btn" path="res://Sounds/Tourelle/Tourelle de feu/Tir_TourelleFlame.mp3" id="5_odd7j"]
+[ext_resource type="AudioStream" uid="uid://de001b0ropuv4" path="res://Sounds/Tourelle/Reload Tourelle/ReloadTourelle.mp3" id="6_k1qsl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p18pi"]
 radius = 277.52118
@@ -160,7 +162,7 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="TourelleBrulante" type="Area2D" unique_id=2130286474 node_paths=PackedStringArray("ammo", "animatedSprite2D", "fireSprite", "firePoint")]
+[node name="TourelleBrulante" type="Area2D" unique_id=2130286474 node_paths=PackedStringArray("ammo", "animatedSprite2D", "fireSprite", "firePoint", "audioShoot", "audioReload")]
 z_as_relative = false
 collision_mask = 4
 script = ExtResource("1_vyoke")
@@ -174,8 +176,11 @@ fireSprite = NodePath("Fire Point/FireSprite")
 bulletPrefab = ExtResource("2_vyoke")
 firePoint = NodePath("Fire Point")
 shouldFireInArc = true
+audioShoot = NodePath("audiohsoot")
+audioReload = NodePath("audioReload")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1717542044]
+scale = Vector2(0.7, 0.7)
 shape = SubResource("CircleShape2D_p18pi")
 
 [node name="range" type="Polygon2D" parent="." unique_id=749667653]
@@ -215,3 +220,11 @@ position = Vector2(-3.637979e-12, -1.847414)
 scale = Vector2(2.1608763, 1.8474143)
 sprite_frames = SubResource("SpriteFrames_odd7j")
 animation = &"Fire"
+
+[node name="audiohsoot" type="AudioStreamPlayer2D" parent="." unique_id=530679462]
+stream = ExtResource("5_odd7j")
+max_polyphony = 5
+
+[node name="audioReload" type="AudioStreamPlayer2D" parent="." unique_id=1852856603]
+stream = ExtResource("6_k1qsl")
+max_polyphony = 5

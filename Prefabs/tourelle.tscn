@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://dcrdggw6n8n2g" path="res://Prefabs/bullet.tscn" id="2_khwrp"]
 [ext_resource type="Texture2D" uid="uid://dl24asgji7dip" path="res://Images/Sprites/tourelle-mana.png" id="3_gwx4i"]
 [ext_resource type="Texture2D" uid="uid://bbuvnlejsf4pf" path="res://Images/Sprites/tir.png" id="4_8k65s"]
+[ext_resource type="AudioStream" uid="uid://bfvfu70ay7rwu" path="res://Sounds/Tourelle/Tourelle classique/Tir_tourelle_classique.mp3" id="5_agd6m"]
+[ext_resource type="AudioStream" uid="uid://de001b0ropuv4" path="res://Sounds/Tourelle/Reload Tourelle/ReloadTourelle.mp3" id="6_ulqhm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p18pi"]
 radius = 277.52118
@@ -150,7 +152,7 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Tourelle" type="Area2D" unique_id=2130286474 node_paths=PackedStringArray("ammo", "animatedSprite2D", "fireSprite", "firePoint")]
+[node name="Tourelle" type="Area2D" unique_id=2130286474 node_paths=PackedStringArray("ammo", "animatedSprite2D", "fireSprite", "firePoint", "audioShoot", "audioReload")]
 z_as_relative = false
 collision_mask = 4
 script = ExtResource("1_ch13l")
@@ -162,10 +164,11 @@ animatedSprite2D = NodePath("AnimatedSprite2D")
 fireSprite = NodePath("Fire Point/FireSprite")
 bulletPrefab = ExtResource("2_khwrp")
 firePoint = NodePath("Fire Point")
+audioShoot = NodePath("audiohsoot")
+audioReload = NodePath("audioReload")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1717542044]
-visible = false
-scale = Vector2(1.335, 1.335)
+scale = Vector2(0.7, 0.7)
 shape = SubResource("CircleShape2D_p18pi")
 
 [node name="range" type="Polygon2D" parent="." unique_id=749667653]
@@ -200,3 +203,11 @@ position = Vector2(-1.8189894e-12, -3.8146973e-06)
 scale = Vector2(2.1608763, 1.8474143)
 sprite_frames = SubResource("SpriteFrames_w83i5")
 animation = &"Fire"
+
+[node name="audiohsoot" type="AudioStreamPlayer2D" parent="." unique_id=1523159185]
+stream = ExtResource("5_agd6m")
+max_polyphony = 5
+
+[node name="audioReload" type="AudioStreamPlayer2D" parent="." unique_id=1113724317]
+stream = ExtResource("6_ulqhm")
+max_polyphony = 5

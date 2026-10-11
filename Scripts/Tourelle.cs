@@ -51,6 +51,12 @@ public partial class Tourelle : Area2D, IBuildable
     private bool shouldFireInArc;
 
     [Export]
+    private AudioStreamPlayer2D audioShoot;
+
+    [Export]
+    private AudioStreamPlayer2D audioReload;
+
+    [Export]
     public int Cost { get; set; } = 10;
 
     public override void _Ready()
@@ -109,6 +115,7 @@ public partial class Tourelle : Area2D, IBuildable
             bullet.GlobalPosition = firePoint.GlobalPosition;
             bullet.dir = (target.GlobalPosition - firePoint.GlobalPosition).Normalized();
             munitions--;
+            audioShoot.Play();
         }
         else
         {
@@ -122,6 +129,7 @@ public partial class Tourelle : Area2D, IBuildable
                     GetTree().CurrentScene.AddChild(zone);
                     zone.Launch(firePoint.GlobalPosition, target.GlobalPosition);
                     munitions--;
+                    audioShoot.Play();
                     break;
                 case TowerType.Slime:
                     fireSprite.Play("Fire");
@@ -129,6 +137,7 @@ public partial class Tourelle : Area2D, IBuildable
                     GetTree().CurrentScene.AddChild(zoneSlime);
                     zoneSlime.Launch(firePoint.GlobalPosition, target.GlobalPosition);
                     munitions--;
+                    audioShoot.Play();
                     break;
             }
         }
@@ -176,6 +185,7 @@ public partial class Tourelle : Area2D, IBuildable
         int transfer = Mathf.Min(space, p.munitions);
         munitions += transfer;
         p.munitions -= transfer;
+        audioReload.Play();
     }
 
     private void UpdateLabel()
