@@ -11,6 +11,9 @@ public partial class SlimeZone : Area2D
     [Export]
     private float arcHeight = 100f;
 
+    [Export]
+    private AnimatedSprite2D anim;
+
     //--------------a terre--------------
     [Export]
     private float lifeTime = 2f;
@@ -50,6 +53,7 @@ public partial class SlimeZone : Area2D
     private void OnLanded()
     {
         Monitoring = true;
+        anim.Play("Idle");
 
         Vector2 baseScale = Scale;
         Scale = baseScale * 0.5f;
@@ -85,6 +89,8 @@ public partial class SlimeZone : Area2D
     {
         Monitoring = false;
         BodyEntered += OnBodyEntered;
+        anim.Play("IdleAir");
+
         // BodyExited -= OnBodyExited;
     }
 

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GameJaam"
-run/main_scene="uid://cd825jbjhb8m8"
+run/main_scene="uid://bmneal2qnclc4"
 config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -74,6 +74,7 @@ locale/translations=PackedStringArray("res://Scripts/textes.en.translation", "re
 2d_physics/layer_5="DamagesSources"
 2d_physics/layer_6="Grems"
 2d_physics/layer_7="Projectiles"
+2d_physics/layer_8="LimitSeulementPourLePersonnage"
 
 [physics]
 

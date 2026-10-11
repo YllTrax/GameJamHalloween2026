@@ -146,7 +146,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"EastWest",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -175,7 +175,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"North",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -204,10 +204,13 @@ animations = [{
 }],
 "loop": 1,
 "name": &"South",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [node name="PumpkinLv3" type="CharacterBody2D" unique_id=241176503 node_paths=PackedStringArray("anim", "_chaseSound", "_otherSound")]
+z_index = 2
+z_as_relative = false
+y_sort_enabled = true
 collision_layer = 4
 collision_mask = 11
 script = ExtResource("1_hu2pe")
@@ -217,6 +220,7 @@ GermsScene = ExtResource("2_iiece")
 anim = NodePath("AnimatedSprite2D")
 _chaseSound = NodePath("pourchasse")
 _otherSound = NodePath("dehors")
+isEastOriented = true
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=447942903]
 visible = false
@@ -224,6 +228,7 @@ color = Color(1, 0.3529412, 0.19215687, 0.6862745)
 polygon = PackedVector2Array(0, -24, 8, -24, 16, -16, 16, -8, 16, 0, 16, 8, 16, 16, 8, 24, 0, 24, -8, 24, -16, 16, -16, 8, -16, 0, -16, -8, -16, -16, -8, -24)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=819773907]
+scale = Vector2(0.9, 0.9)
 shape = SubResource("CapsuleShape2D_aluq5")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=396197460]
@@ -246,9 +251,6 @@ texture_scale = 0.72
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2090792759]
 sprite_frames = SubResource("SpriteFrames_p18pi")
-animation = &"South"
-frame_progress = 0.32905254
-
 [node name="pourchasse" type="AudioStreamPlayer2D" parent="." unique_id=977065660]
 stream = ExtResource("5_8hrsq")
 bus = &"Volume"
@@ -256,3 +258,6 @@ bus = &"Volume"
 [node name="dehors" type="AudioStreamPlayer2D" parent="." unique_id=853202705]
 stream = ExtResource("6_nnq1r")
 bus = &"Volume"
+animation = &"North"
+frame = 7
+frame_progress = 0.16555643
