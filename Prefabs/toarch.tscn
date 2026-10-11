@@ -2,56 +2,41 @@
 
 [ext_resource type="Script" uid="uid://dlwfhym7ilgxj" path="res://Scripts/Toarch.cs" id="1_6t5l3"]
 [ext_resource type="Script" uid="uid://5jc7g665kx0p" path="res://Scripts/DamageSource.cs" id="2_uud27"]
-[ext_resource type="Texture2D" uid="uid://c5cu5rwynm7te" path="res://Images/Sprites/Torch_Sheet.png" id="2_xwcd1"]
-[ext_resource type="Texture2D" uid="uid://cuymepe2ryunr" path="res://Images/Sprites/TorchBase.png" id="3_uud27"]
+[ext_resource type="Texture2D" uid="uid://rpkgysrhvayx" path="res://Images/Sprites/torche.png" id="3_6t5l3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p18pi"]
 radius = 17.492855
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwcd1"]
+atlas = ExtResource("3_6t5l3")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uud27"]
+atlas = ExtResource("3_6t5l3")
+region = Rect2(16, 0, 16, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_r88rq"]
-atlas = ExtResource("2_xwcd1")
-region = Rect2(0, 0, 32, 32)
+atlas = ExtResource("3_6t5l3")
+region = Rect2(32, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_345t5"]
-atlas = ExtResource("2_xwcd1")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5q3tl"]
-atlas = ExtResource("2_xwcd1")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y26ym"]
-atlas = ExtResource("2_xwcd1")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j2mnl"]
-atlas = ExtResource("2_xwcd1")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_03t5s"]
-atlas = ExtResource("2_xwcd1")
-region = Rect2(160, 0, 32, 32)
+atlas = ExtResource("3_6t5l3")
+region = Rect2(48, 0, 16, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p18pi"]
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_xwcd1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uud27")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_r88rq")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_345t5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5q3tl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_y26ym")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j2mnl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_03t5s")
 }],
 "loop": 1,
 "name": &"Idle",
@@ -92,17 +77,13 @@ color = Color(0.8646886, 0.34557757, 0.27964398, 1)
 polygon = PackedVector2Array(0, -18, 9, -15, 15, -8, 17, 0, 15, 9, 9, 15, 0, 17, -10, 14, -16, 7, -18, 0, -15, -9, -7, -16)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=731540658]
+z_as_relative = false
 y_sort_enabled = true
 scale = Vector2(1.355, 1.355)
 sprite_frames = SubResource("SpriteFrames_p18pi")
 animation = &"Idle"
 frame_progress = 0.26284423
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=586923703]
-y_sort_enabled = true
-position = Vector2(0, 2.54)
-scale = Vector2(1.64, 1.64)
-texture = ExtResource("3_uud27")
+offset = Vector2(0, -15.94)
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=218690670]
 energy = 1.5
