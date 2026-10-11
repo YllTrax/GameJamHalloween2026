@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bedeertq1b35h"]
+
+[ext_resource type="Script" uid="uid://c41frclcdkna4" path="res://Scripts/Trailer.cs" id="1_s1u16"]
+
+[sub_resource type="VideoStreamTheora" id="VideoStreamTheora_bmo41"]
+file = "res://Video/trailer.ogv"
+
+[node name="Trailer" type="Control" unique_id=1238727120]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s1u16")
+ScenePrincipale = "uid://bmneal2qnclc4"
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=397384838]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = SubResource("VideoStreamTheora_bmo41")
+autoplay = true
+bus = &"Volume"

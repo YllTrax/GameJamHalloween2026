@@ -139,6 +139,8 @@ areas = [NodePath("../SaltArea"), NodePath("../SaltArea2"), NodePath("../SaltAre
 
 [node name="SaltCircle" parent="." unique_id=1691003878 instance=ExtResource("20_f65hf")]
 position = Vector2(456, 176)
+collision_layer = 8
+collision_mask = 0
 
 [node name="Boucle de jeu" parent="." unique_id=260320005 node_paths=PackedStringArray("depots", "refillLabelAnounce") instance=ExtResource("5_o1tfn")]
 position = Vector2(496, -88)
