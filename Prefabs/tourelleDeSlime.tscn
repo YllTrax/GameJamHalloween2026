@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://b3ljysu34c1i7" path="res://Prefabs/slime_zone.tscn" id="2_dv6em"]
 [ext_resource type="Texture2D" uid="uid://cclsuhrpjfphh" path="res://Images/Sprites/tourelle-slime.png" id="3_pnamf"]
 [ext_resource type="Texture2D" uid="uid://bbuvnlejsf4pf" path="res://Images/Sprites/tir.png" id="4_0lohu"]
+[ext_resource type="AudioStream" uid="uid://bhwglkubuxrho" path="res://Sounds/Tourelle/Tourelle slime/TourelleSlimeShoot.mp3" id="5_j7t4s"]
+[ext_resource type="AudioStream" uid="uid://de001b0ropuv4" path="res://Sounds/Tourelle/Reload Tourelle/ReloadTourelle.mp3" id="6_vawhm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p18pi"]
 radius = 277.52118
@@ -150,7 +152,7 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="TourelleDeSlime" type="Area2D" unique_id=2130286474 node_paths=PackedStringArray("ammo", "animatedSprite2D", "fireSprite", "firePoint")]
+[node name="TourelleDeSlime" type="Area2D" unique_id=2130286474 node_paths=PackedStringArray("ammo", "animatedSprite2D", "fireSprite", "firePoint", "audioShoot", "audioReload")]
 z_as_relative = false
 collision_mask = 4
 script = ExtResource("1_dv6em")
@@ -163,6 +165,8 @@ fireSprite = NodePath("Fire Point/FireSprite")
 bulletPrefab = ExtResource("2_dv6em")
 firePoint = NodePath("Fire Point")
 shouldFireInArc = true
+audioShoot = NodePath("audiohsoot")
+audioReload = NodePath("audioReload")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1717542044]
 visible = false
@@ -203,3 +207,11 @@ sprite_frames = SubResource("SpriteFrames_ibils")
 animation = &"Fire"
 frame = 3
 frame_progress = 1.0
+
+[node name="audiohsoot" type="AudioStreamPlayer2D" parent="." unique_id=579842561]
+stream = ExtResource("5_j7t4s")
+max_polyphony = 5
+
+[node name="audioReload" type="AudioStreamPlayer2D" parent="." unique_id=808317252]
+stream = ExtResource("6_vawhm")
+max_polyphony = 5

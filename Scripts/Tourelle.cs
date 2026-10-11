@@ -50,8 +50,14 @@ public partial class Tourelle : Area2D, IBuildable
 	[Export]
 	private bool shouldFireInArc;
 
-	[Export]
-	public int Cost { get; set; } = 10;
+    [Export]
+    private AudioStreamPlayer2D audioShoot;
+
+    [Export]
+    private AudioStreamPlayer2D audioReload;
+
+    [Export]
+    public int Cost { get; set; } = 10;
 
 	public override void _Ready()
 	{
@@ -72,18 +78,19 @@ public partial class Tourelle : Area2D, IBuildable
 		animatedSprite2D.Play("Idle");
 	}
 
-	public override void _Process(double delta)
-	{
-		CheckCapacityUpgrade();
-		UpdateLabel();
-		if (!IsInstanceValid(target))
-		{
-			target = null;
-			return;
-		}
-	   
-		// supprime la ligne ammo.Text = munitions.ToString();
-		// tourelleBody.LookAt(target.GlobalPosition);
+    public override void _Process(double delta)
+    {
+        CheckCapacityUpgrade();
+        UpdateLabel();
+        if (!IsInstanceValid(target))
+        {
+            target = null;
+            return;
+        }
+        //
+        //tourelleBody.LookAt(target.GlobalPosition);
+        // supprime la ligne ammo.Text = munitions.ToString();
+        // tourelleBody.LookAt(target.GlobalPosition);
 
 		ammo.Text = munitions.ToString();
 	}
@@ -98,40 +105,43 @@ public partial class Tourelle : Area2D, IBuildable
 
 		float dmgMult = UpgradeStats.TurretDamageMult;
 
-		if (!shouldFireInArc)
-		{
-			fireSprite.Play("Fire");
-			var bullet = bulletPrefab.Instantiate<Bullet>();
-			bullet.Damage *= dmgMult;
-			GD.Print($"[Tourelle] Bullet : x{dmgMult:0.00} -> dégâts {bullet.Damage}");
-			GetTree().CurrentScene.AddChild(bullet);
-			bullet.GlobalPosition = firePoint.GlobalPosition;
-			bullet.dir = (target.GlobalPosition - firePoint.GlobalPosition).Normalized();
-			munitions--;
-		}
-		else
-		{
-			switch (towerType)
-			{
-				case TowerType.Fire:
-					fireSprite.Play("Fire");
-					var zone = bulletPrefab.Instantiate<FireZone>();
-					zone.Damage *= dmgMult;
-					GD.Print($"[Tourelle] FireZone : x{dmgMult:0.00} -> dégâts {zone.Damage}");
-					GetTree().CurrentScene.AddChild(zone);
-					zone.Launch(firePoint.GlobalPosition, target.GlobalPosition);
-					munitions--;
-					break;
-				case TowerType.Slime:
-					fireSprite.Play("Fire");
-					var zoneSlime = bulletPrefab.Instantiate<SlimeZone>();
-					GetTree().CurrentScene.AddChild(zoneSlime);
-					zoneSlime.Launch(firePoint.GlobalPosition, target.GlobalPosition);
-					munitions--;
-					break;
-			}
-		}
-	}
+        if (!shouldFireInArc)
+        {
+            fireSprite.Play("Fire");
+            var bullet = bulletPrefab.Instantiate<Bullet>();
+            bullet.Damage *= dmgMult;
+            GD.Print($"[Tourelle] Bullet : x{dmgMult:0.00} -> dégâts {bullet.Damage}");
+            GetTree().CurrentScene.AddChild(bullet);
+            bullet.GlobalPosition = firePoint.GlobalPosition;
+            bullet.dir = (target.GlobalPosition - firePoint.GlobalPosition).Normalized();
+            munitions--;
+            audioShoot.Play();
+        }
+        else
+        {
+            switch (towerType)
+            {
+                case TowerType.Fire:
+                    fireSprite.Play("Fire");
+                    var zone = bulletPrefab.Instantiate<FireZone>();
+                    zone.Damage *= dmgMult;
+                    GD.Print($"[Tourelle] FireZone : x{dmgMult:0.00} -> dégâts {zone.Damage}");
+                    GetTree().CurrentScene.AddChild(zone);
+                    zone.Launch(firePoint.GlobalPosition, target.GlobalPosition);
+                    munitions--;
+                    audioShoot.Play();
+                    break;
+                case TowerType.Slime:
+                    fireSprite.Play("Fire");
+                    var zoneSlime = bulletPrefab.Instantiate<SlimeZone>();
+                    GetTree().CurrentScene.AddChild(zoneSlime);
+                    zoneSlime.Launch(firePoint.GlobalPosition, target.GlobalPosition);
+                    munitions--;
+                    audioShoot.Play();
+                    break;
+            }
+        }
+    }
 
 	private void OnBodyEnter(Node2D body)
 	{
@@ -172,18 +182,20 @@ public partial class Tourelle : Area2D, IBuildable
 		if (space <= 0 || p.munitions <= 0)
 			return;
 
-		int transfer = Mathf.Min(space, p.munitions);
-		munitions += transfer;
-		p.munitions -= transfer;
-	}
+        int transfer = Mathf.Min(space, p.munitions);
+        munitions += transfer;
+        p.munitions -= transfer;
+        audioReload.Play();
+    }
 
-	private void UpdateLabel()
-	{
-		int shown = munitions * 1000 + MaxAmmo; // détecte un changement de l'un ou l'autre
-		if (shown == _lastShown) return;
-		_lastShown = shown;
-		ammo.Text = $"{munitions}/{MaxAmmo}";
-	}
+    private void UpdateLabel()
+    {
+        int shown = munitions * 1000 + MaxAmmo; // détecte un changement de l'un ou l'autre
+        if (shown == _lastShown)
+            return;
+        _lastShown = shown;
+        ammo.Text = $"{munitions}/{MaxAmmo}";
+    }
 
 	private void CheckCapacityUpgrade()
 	{

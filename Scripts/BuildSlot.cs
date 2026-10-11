@@ -11,6 +11,9 @@ public partial class BuildSlot : Node2D, IInteractable
 
     private bool isBuilt;
 
+    [Export]
+    private AudioStreamPlayer2D audio;
+
     public void Interact()
     {
         if (isBuilt)
@@ -29,6 +32,7 @@ public partial class BuildSlot : Node2D, IInteractable
             building.GlobalPosition = GlobalPosition;
             PayTheCost(cost);
             isBuilt = true;
+            audio.Play();
         }
         else
         {
@@ -37,6 +41,7 @@ public partial class BuildSlot : Node2D, IInteractable
             GetTree().CurrentScene.AddChild(building);
             building.GlobalPosition = GlobalPosition;
             isBuilt = true;
+            audio.Play();
             PayTheCost(cost);
         }
     }
