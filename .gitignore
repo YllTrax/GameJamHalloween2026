@@ -4,5 +4,6 @@
 bin/
 obj/
 Build/
+BuildVieuxProcesseur/
 *.user
 GameJaam.sln

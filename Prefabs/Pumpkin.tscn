@@ -125,7 +125,6 @@ animations = [{
 [node name="Pumpkin" type="CharacterBody2D" unique_id=1184827937 node_paths=PackedStringArray("anim", "_chaseSound", "_otherSound")]
 z_index = 2
 y_sort_enabled = true
-scale = Vector2(1.1508776, 1.2241727)
 collision_layer = 4
 collision_mask = 15
 script = ExtResource("1_jxr30")

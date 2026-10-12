@@ -1,31 +1,23 @@
 [gd_scene format=3 uid="uid://ci4py4rnxkffw"]
 
-[ext_resource type="Texture2D" uid="uid://dbjf0e4m078rr" path="res://Images/Sprites/porte.png" id="1_3kr4k"]
+[ext_resource type="Texture2D" uid="uid://cvl4ltuugl6fc" path="res://Images/Sprites/porte-idle.png" id="1_3kr4k"]
 [ext_resource type="PackedScene" uid="uid://wj1whgh7v5c" path="res://Prefabs/health.tscn" id="1_ugn3q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_enifj"]
 atlas = ExtResource("1_3kr4k")
-region = Rect2(0, 0, 53, 48)
+region = Rect2(0, 0, 80, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0nao1"]
 atlas = ExtResource("1_3kr4k")
-region = Rect2(53, 0, 53, 48)
+region = Rect2(80, 0, 80, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fhsds"]
 atlas = ExtResource("1_3kr4k")
-region = Rect2(106, 0, 53, 48)
+region = Rect2(160, 0, 80, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ifnrn"]
 atlas = ExtResource("1_3kr4k")
-region = Rect2(159, 0, 53, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rvwyr"]
-atlas = ExtResource("1_3kr4k")
-region = Rect2(212, 0, 53, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t0yl6"]
-atlas = ExtResource("1_3kr4k")
-region = Rect2(265, 0, 53, 48)
+region = Rect2(240, 0, 80, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ugn3q"]
 animations = [{
@@ -41,12 +33,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ifnrn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rvwyr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_t0yl6")
 }],
 "loop": 1,
 "name": &"Idle",
@@ -62,10 +48,14 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1677703996]
-rotation = -1.5479114
+position = Vector2(-2.0751805, 60.046326)
+rotation = 0.0085276365
 sprite_frames = SubResource("SpriteFrames_ugn3q")
 animation = &"Idle"
 autoplay = "Idle"
+frame = 3
+frame_progress = 0.56230354
+offset = Vector2(2.533553, -63.525936)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1866701577]
 position = Vector2(-0.7500076, 4.0316467)
