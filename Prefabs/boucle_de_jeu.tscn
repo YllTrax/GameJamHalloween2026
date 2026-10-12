@@ -9,6 +9,7 @@
 [ext_resource type="Shader" uid="uid://bwb07gi4wkwju" path="res://texture/boucle_de_jeu.gdshader" id="6_ofaj1"]
 [ext_resource type="Texture2D" uid="uid://bv808ix3v4r7" path="res://Images/IU/salt.png" id="7_adu7k"]
 [ext_resource type="PackedScene" uid="uid://cyp88m5vfn78k" path="res://Prefabs/menu_pause.tscn" id="7_cus6u"]
+[ext_resource type="Texture2D" uid="uid://cuoo48gmtjfrd" path="res://Images/Sprites/collectible-mana.png" id="7_lxxk2"]
 [ext_resource type="Texture2D" uid="uid://c2jes3ly67w3g" path="res://Images/IU/door.png" id="8_krvl4"]
 [ext_resource type="Script" uid="uid://cf40tm6ubl1qi" path="res://Scripts/MenuPause.cs" id="8_wghvw"]
 [ext_resource type="Texture2D" uid="uid://bebn1omcioej8" path="res://Images/Misc/CaptureTorche.png" id="9_krvl4"]
@@ -220,18 +221,18 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -76.0
-offset_top = -48.0
-offset_right = -36.0
-offset_bottom = -6.0
+offset_left = -86.0
+offset_top = -51.0
+offset_right = -46.0
+offset_bottom = -9.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 30
-text = "00"
+text = "000"
 horizontal_alignment = 2
 
 [node name="Polygon2D" type="Polygon2D" parent="Salt/Label" unique_id=1479779146]
-position = Vector2(43, 11)
+position = Vector2(58, 11)
 scale = Vector2(0.41404995, 0.41404995)
 texture = ExtResource("7_adu7k")
 polygon = PackedVector2Array(7.920044, 6.0000076, 24.640015, -1.9199982, 45.76001, 0.7200012, 58.960022, 16.560005, 59.840027, 45.600006, 61.600037, 61.440002, 41.360046, 64.08, 14.080017, 64.08, -1.7600098, 55.280014, -7.039978, 31.520004, -7.039978, 18.320007)
@@ -245,15 +246,15 @@ offset_top = 603.0
 offset_right = 76.0
 offset_bottom = 645.0
 theme_override_font_sizes/font_size = 30
-text = "i"
+text = "i§II"
 horizontal_alignment = 2
 
 [node name="Polygon2D" type="Polygon2D" parent="Munition" unique_id=780924034]
-position = Vector2(64.00001, 608)
-scale = Vector2(3.1449075, 1.7752751)
-texture = ExtResource("10_js7qi")
-polygon = PackedVector2Array(-2.4000244, 8.400002, 9.599976, 0.40000153, 21.599976, 6, 16.799988, 17.199997, 4, 22.800003)
-uv = PackedVector2Array(-2.4000244, 8.400002, 9.599976, 0.40000153, 21.599976, 6, 16.799988, 17.199997, 4, 22.800003)
+position = Vector2(75, 590.00006)
+scale = Vector2(3.4196148, 3.1044092)
+texture = ExtResource("7_lxxk2")
+polygon = PackedVector2Array(5.9845657, -1.0280025, 10.208565, -1.7320024, 13.259232, 2.1399972, 15.840569, 7.302664, 14.784569, 13.286664, 10.325905, 17.275997, 3.1685715, 16.923996, 0.0005722046, 10.353331, -0.23410034, 4.838664)
+uv = PackedVector2Array(5.9845657, -1.0280025, 10.208565, -1.7320024, 13.259232, 2.1399972, 15.840569, 7.302664, 14.784569, 13.286664, 10.325905, 17.275997, 3.1685715, 16.923996, 0.0005722046, 10.353331, -0.23410034, 4.838664)
 
 [node name="Updgrape" parent="." unique_id=387195760 instance=ExtResource("5_x56rw")]
 visible = false
@@ -544,6 +545,7 @@ bus = &"Volume"
 
 [node name="Audio_mort_pp" type="AudioStreamPlayer2D" parent="." unique_id=1831983445]
 process_mode = 3
+position = Vector2(1, -1)
 stream = SubResource("AudioStreamMP3_7jmk1")
 volume_db = -2.867
 bus = &"Volume"

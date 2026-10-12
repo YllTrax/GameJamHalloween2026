@@ -280,7 +280,7 @@ offset_top = -14.595583
 offset_right = 38.826565
 offset_bottom = 8.404417
 scale = Vector2(0.4129377, 0.4129377)
-text = "10"
+text = "25"
 
 [node name="Polygon2D" type="Polygon2D" parent="Boucle de jeu/Select Building/Tourelle1/Label3" unique_id=374334213]
 position = Vector2(18.5658, 1.8041201)
@@ -332,7 +332,7 @@ offset_top = -15.507813
 offset_right = 39.41328
 offset_bottom = 7.4921865
 scale = Vector2(0.3377207, 0.3734972)
-text = "10"
+text = "25"
 
 [node name="Polygon2D" type="Polygon2D" parent="Boucle de jeu/Select Building/TourelleBrulante2/Label4" unique_id=1818380730]
 position = Vector2(18.5658, 1.8041201)
@@ -374,8 +374,6 @@ z_index = 0
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(488, 128)
-dashTimer = 1.0
-dashSpeed = 1000.0
 
 [node name="Camera2D" parent="Personnage" index="0" unique_id=1401489096]
 position = Vector2(0, 0)
@@ -386,7 +384,6 @@ position = Vector2(0, -2)
 [node name="Health" parent="Personnage" index="3" unique_id=1039052001]
 z_index = -1
 position = Vector2(12, 14.999997)
-baseHealth = 50.0
 IsPlayer = true
 
 [node name="PointLight2D" parent="Personnage" index="4" unique_id=5315970]
