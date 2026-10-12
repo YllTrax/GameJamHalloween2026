@@ -390,6 +390,7 @@ position = Vector2(1144, -200)
 areas = []
 
 [node name="SaltDeposit4" parent="." unique_id=514277618 node_paths=PackedStringArray("areas") instance=ExtResource("15_fpy4b")]
+visibility_layer = 65
 position = Vector2(464, -272)
 areas = []
 

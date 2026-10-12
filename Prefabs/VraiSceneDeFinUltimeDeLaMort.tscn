@@ -241,7 +241,7 @@ offset_top = -15.507816
 offset_right = 37.946484
 offset_bottom = 7.4921837
 scale = Vector2(0.3690886, 0.3690886)
-text = "10"
+text = "5"
 
 [node name="Polygon2D" type="Polygon2D" parent="Boucle de jeu/Select Building/Torche0/Label2" unique_id=174766151]
 position = Vector2(18.5658, 1.8041201)
@@ -374,6 +374,7 @@ z_index = 0
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(488, 128)
+germs = 6
 
 [node name="Camera2D" parent="Personnage" index="0" unique_id=1401489096]
 position = Vector2(0, 0)
