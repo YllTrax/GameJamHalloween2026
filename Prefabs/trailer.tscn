@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://bedeertq1b35h"]
 
 [ext_resource type="Script" uid="uid://c41frclcdkna4" path="res://Scripts/Trailer.cs" id="1_s1u16"]
+[ext_resource type="Texture2D" uid="uid://dmlk0i6he877w" path="res://Images/tuto_en.png" id="2_veb73"]
+[ext_resource type="Texture2D" uid="uid://mn6d32xf3yqa" path="res://Images/tuto_fr.png" id="3_wmhj0"]
 
 [sub_resource type="VideoStreamTheora" id="VideoStreamTheora_bmo41"]
 file = "res://Video/trailer.ogv"
@@ -23,7 +25,58 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 stream = SubResource("VideoStreamTheora_bmo41")
-volume_db = -15.529999
+volume_db = -15.529998
 autoplay = true
 expand = true
 bus = &"Volume"
+
+[node name="tuto_eng" type="TextureRect" parent="." unique_id=2126863003]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_veb73")
+expand_mode = 1
+
+[node name="tuto_fr" type="TextureRect" parent="." unique_id=1441791042]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_wmhj0")
+expand_mode = 1
+
+[node name="BoutonLangue" type="Button" parent="." unique_id=1835438760]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -96.0
+offset_top = 32.0
+offset_right = -13.0
+offset_bottom = 63.0
+grow_horizontal = 0
+text = "Language"
+
+[node name="BoutonJouer" type="Button" parent="." unique_id=943553331]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -115.0
+offset_top = -63.0
+offset_right = -23.0
+offset_bottom = -32.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Play/ Jouer"
