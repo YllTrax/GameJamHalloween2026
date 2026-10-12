@@ -109,18 +109,7 @@ color = Color(0.000763089, 0.06698845, 0.3768583, 0.6745098)
 position = Vector2(480, -248)
 areas = [NodePath("../SaltArea"), NodePath("../SaltArea2"), NodePath("../SaltArea3"), NodePath("../SaltArea4")]
 
-[node name="SaltDeposit6" parent="." unique_id=418339320 node_paths=PackedStringArray("areas") instance=ExtResource("21_7h5kg")]
-visible = false
-position = Vector2(280, 160)
-areas = [NodePath("../SaltArea"), NodePath("../SaltArea2"), NodePath("../SaltArea3"), NodePath("../SaltArea4")]
-
-[node name="SaltDeposit7" parent="." unique_id=987371567 node_paths=PackedStringArray("areas") instance=ExtResource("21_7h5kg")]
-visible = false
-position = Vector2(280, 160)
-areas = [NodePath("../SaltArea"), NodePath("../SaltArea2"), NodePath("../SaltArea3"), NodePath("../SaltArea4")]
-
 [node name="SaltDeposit5" parent="." unique_id=401300947 node_paths=PackedStringArray("areas") instance=ExtResource("21_7h5kg")]
-visible = false
 position = Vector2(912, 376)
 areas = [NodePath("../SaltArea"), NodePath("../SaltArea2"), NodePath("../SaltArea3"), NodePath("../SaltArea4")]
 
@@ -129,7 +118,6 @@ position = Vector2(72, 584)
 areas = [NodePath("../SaltArea"), NodePath("../SaltArea2"), NodePath("../SaltArea3"), NodePath("../SaltArea4")]
 
 [node name="SaltDeposit2" parent="." unique_id=848901830 node_paths=PackedStringArray("areas") instance=ExtResource("21_7h5kg")]
-visible = false
 position = Vector2(72, -248)
 areas = [NodePath("../SaltArea"), NodePath("../SaltArea2"), NodePath("../SaltArea3"), NodePath("../SaltArea4")]
 
@@ -142,10 +130,12 @@ position = Vector2(456, 176)
 collision_layer = 8
 collision_mask = 0
 
-[node name="Boucle de jeu" parent="." unique_id=260320005 node_paths=PackedStringArray("depots", "refillLabelAnounce") instance=ExtResource("5_o1tfn")]
+[node name="Boucle de jeu" parent="." unique_id=260320005 node_paths=PackedStringArray("SonFinVague", "MusiqueExterieure", "depots", "refillLabelAnounce") instance=ExtResource("5_o1tfn")]
 position = Vector2(496, -88)
 ZoneJeu = Rect2(0, 0, 1151.115, 648)
-depots = [NodePath("../SaltDeposit"), NodePath("../SaltDeposit2"), NodePath("../SaltDeposit3"), NodePath("../SaltDeposit4"), NodePath("../SaltDeposit5"), NodePath("../SaltDeposit6"), NodePath("../SaltDeposit7")]
+SonFinVague = NodePath("finWaves")
+MusiqueExterieure = NodePath("MusiqueExt")
+depots = [NodePath("../SaltDeposit"), NodePath("../SaltDeposit2"), NodePath("../SaltDeposit3"), NodePath("../SaltDeposit4"), NodePath("../SaltDeposit5")]
 refillLabelAnounce = NodePath("Anonces/LabelAnonce")
 refillCD = 10.0
 
@@ -369,7 +359,6 @@ z_index = 0
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(488, 128)
-dashSpeed = 1000.0
 
 [node name="Camera2D" parent="Personnage" index="0" unique_id=1401489096]
 position = Vector2(0, 0)
