@@ -122,7 +122,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Pumpkin" type="CharacterBody2D" unique_id=1184827937 node_paths=PackedStringArray("anim","_chaseSound", "_otherSound")]
+[node name="Pumpkin" type="CharacterBody2D" unique_id=1184827937 node_paths=PackedStringArray("anim", "_chaseSound", "_otherSound")]
 z_index = 2
 y_sort_enabled = true
 scale = Vector2(0.7, 0.7)
@@ -168,10 +168,12 @@ offset = Vector2(0, -9)
 
 [node name="ChaseSound" type="AudioStreamPlayer2D" parent="." unique_id=790695761]
 stream = ExtResource("5_hktuj")
+volume_db = -4.333
 bus = &"Volume"
 
 [node name="OtherSound" type="AudioStreamPlayer2D" parent="." unique_id=616874145]
 stream = ExtResource("6_nsewi")
+volume_db = 7.222
 bus = &"Volume"
 
 [editable path="Health"]

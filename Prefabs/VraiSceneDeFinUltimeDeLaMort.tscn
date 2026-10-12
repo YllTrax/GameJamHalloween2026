@@ -142,9 +142,11 @@ position = Vector2(456, 176)
 collision_layer = 8
 collision_mask = 0
 
-[node name="Boucle de jeu" parent="." unique_id=260320005 node_paths=PackedStringArray("depots", "refillLabelAnounce") instance=ExtResource("5_o1tfn")]
+[node name="Boucle de jeu" parent="." unique_id=260320005 node_paths=PackedStringArray("SonFinVague", "MusiqueExterieure", "depots", "refillLabelAnounce") instance=ExtResource("5_o1tfn")]
 position = Vector2(496, -88)
 ZoneJeu = Rect2(0, 0, 1151.115, 648)
+SonFinVague = NodePath("finWaves")
+MusiqueExterieure = NodePath("MusiqueExt")
 depots = [NodePath("../SaltDeposit"), NodePath("../SaltDeposit2"), NodePath("../SaltDeposit3"), NodePath("../SaltDeposit4"), NodePath("../SaltDeposit5"), NodePath("../SaltDeposit6"), NodePath("../SaltDeposit7")]
 refillLabelAnounce = NodePath("Anonces/LabelAnonce")
 refillCD = 10.0
@@ -160,8 +162,8 @@ label = "HUD_RESTART"
 [node name="MenuPause" parent="Boucle de jeu" index="6" unique_id=1546097521 node_paths=PackedStringArray("languesMenu")]
 languesMenu = NodePath("../MenuLangue")
 
-[node name="AudioStreamPlayer2D" parent="Boucle de jeu" index="8" unique_id=332105144]
-volume_db = -12.621
+[node name="MusiqueExt" parent="Boucle de jeu" index="14" unique_id=307820920]
+bus = &"Volume"
 
 [node name="Anonces" type="CanvasLayer" parent="Boucle de jeu" unique_id=1545708900]
 

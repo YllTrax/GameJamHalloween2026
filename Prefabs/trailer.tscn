@@ -23,5 +23,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 stream = SubResource("VideoStreamTheora_bmo41")
+volume_db = -15.529999
 autoplay = true
 bus = &"Volume"

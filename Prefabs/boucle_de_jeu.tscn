@@ -512,34 +512,39 @@ text = "Setting"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=332105144]
 stream = SubResource("AudioStreamMP3_c0jx8")
-volume_db = -11.107
+volume_db = -21.94
 bus = &"Volume"
 
 [node name="Ambiant" type="AudioStreamPlayer2D" parent="." unique_id=988011409]
 stream = ExtResource("16_o5a3p")
-volume_db = -12.621
+volume_db = -26.705
 bus = &"Volume"
 
 [node name="Audio_mort_pp" type="AudioStreamPlayer2D" parent="." unique_id=1831983445]
 process_mode = 3
 stream = SubResource("AudioStreamMP3_7jmk1")
+volume_db = -15.993
 bus = &"Volume"
 
 [node name="Audio_mort_sel" type="AudioStreamPlayer2D" parent="." unique_id=1122998317]
 process_mode = 3
 stream = SubResource("AudioStreamMP3_ayiju")
+volume_db = -7.583
 bus = &"Volume"
 
 [node name="ClicMenu" type="AudioStreamPlayer2D" parent="." unique_id=1689259583]
 stream = ExtResource("18_7jmk1")
+volume_db = -7.583
 bus = &"Volume"
 
 [node name="finWaves" type="AudioStreamPlayer2D" parent="." unique_id=1414071787]
 stream = ExtResource("19_aqc72")
+volume_db = 10.111
 bus = &"Volume"
 
 [node name="MusiqueExt" type="AudioStreamPlayer2D" parent="." unique_id=307820920]
 stream = ExtResource("20_i3x3h")
+volume_db = 9.75
 
 [editable path="Updgrape"]
 [editable path="MenuPause"]
