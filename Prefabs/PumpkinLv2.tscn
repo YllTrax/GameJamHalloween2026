@@ -176,11 +176,6 @@ isEastOriented = true
 _chaseSound = NodePath("Pourchase")
 _otherSound = NodePath("dehors")
 
-[node name="Polygon2D" type="Polygon2D" parent="." unique_id=949483054]
-visible = false
-color = Color(1, 0.45490196, 0.2901961, 1)
-polygon = PackedVector2Array(-16, 0, -16, -8, -8, -16, 0, -16, 8, -16, 16, -8, 16, 0, 16, 8, 8, 16, 0, 16, -8, 16, -16, 8)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1493893514]
 scale = Vector2(3.3185515, 1.9235424)
 shape = SubResource("CircleShape2D_aluq5")
@@ -205,7 +200,7 @@ texture = SubResource("GradientTexture2D_g8p14")
 texture_scale = 0.72
 
 [node name="PumpkinSprite" type="AnimatedSprite2D" parent="." unique_id=1768532746]
-scale = Vector2(3.560879, 1.58249)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_g8p14")
 animation = &"EastWest"
 

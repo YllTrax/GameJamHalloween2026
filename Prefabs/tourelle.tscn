@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cyng3vadk3c4c" path="res://Scripts/Tourelle.cs" id="1_ch13l"]
 [ext_resource type="PackedScene" uid="uid://dcrdggw6n8n2g" path="res://Prefabs/bullet.tscn" id="2_khwrp"]
 [ext_resource type="Texture2D" uid="uid://dl24asgji7dip" path="res://Images/Sprites/tourelle-mana.png" id="3_gwx4i"]
+[ext_resource type="Texture2D" uid="uid://cskd0wetaisuq" path="res://Images/Sprites/tourelle-inactive.png" id="4_0v1li"]
 [ext_resource type="Texture2D" uid="uid://bbuvnlejsf4pf" path="res://Images/Sprites/tir.png" id="4_8k65s"]
 [ext_resource type="AudioStream" uid="uid://bfvfu70ay7rwu" path="res://Sounds/Tourelle/Tourelle classique/Tir_tourelle_classique.mp3" id="5_agd6m"]
 [ext_resource type="AudioStream" uid="uid://de001b0ropuv4" path="res://Sounds/Tourelle/Reload Tourelle/ReloadTourelle.mp3" id="6_ulqhm"]
@@ -66,6 +67,10 @@ region = Rect2(240, 0, 20, 43)
 atlas = ExtResource("3_gwx4i")
 region = Rect2(260, 0, 20, 43)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_u02ug"]
+atlas = ExtResource("4_0v1li")
+region = Rect2(0, 0, 20, 43)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_p18pi"]
 animations = [{
 "frames": [{
@@ -114,6 +119,14 @@ animations = [{
 "loop": 1,
 "name": &"Idle",
 "speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u02ug")
+}],
+"loop": 1,
+"name": &"Inactive",
+"speed": 5.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k3gbf"]
@@ -191,8 +204,7 @@ offset_bottom = -67.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2024397478]
 sprite_frames = SubResource("SpriteFrames_p18pi")
-animation = &"Idle"
-frame_progress = 0.8406296
+animation = &"Inactive"
 offset = Vector2(0, -16)
 
 [node name="Fire Point" type="Node2D" parent="." unique_id=1082514732]
