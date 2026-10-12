@@ -34,7 +34,7 @@ collision_mask = 2
 linear_damp = 6.0
 angular_damp = 6.0
 script = ExtResource("1_o5qqn")
-dropDuration = 0.5
+dropDuration = 0.1
 duration = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=414513924]

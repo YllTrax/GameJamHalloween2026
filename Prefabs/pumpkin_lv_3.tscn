@@ -252,7 +252,7 @@ texture = SubResource("GradientTexture2D_dmhmx")
 texture_scale = 0.72
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2090792759]
-scale = Vector2(2.478287, 1.0402168)
+scale = Vector2(1.665, 1.665)
 sprite_frames = SubResource("SpriteFrames_p18pi")
 animation = &"EastWest"
 
