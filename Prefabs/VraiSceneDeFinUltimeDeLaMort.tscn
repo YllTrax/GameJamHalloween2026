@@ -48,7 +48,7 @@ shader_parameter/blur = 2.0
 shader_parameter/tint = Color(0, 0, 0, 0.35)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w83i5"]
-size = Vector2(622.3946, 74.145035)
+size = Vector2(646.71423, 74.145035)
 
 [node name="Scene de test de fin" type="Node2D" unique_id=1039877127]
 auto_translate_mode = 1
@@ -109,7 +109,18 @@ color = Color(0.000763089, 0.06698845, 0.3768583, 0.6745098)
 position = Vector2(480, -248)
 areas = [NodePath("../SaltArea"), NodePath("../SaltArea2"), NodePath("../SaltArea3"), NodePath("../SaltArea4")]
 
+[node name="SaltDeposit6" parent="." unique_id=418339320 node_paths=PackedStringArray("areas") instance=ExtResource("21_7h5kg")]
+visible = false
+position = Vector2(280, 160)
+areas = [NodePath("../SaltArea"), NodePath("../SaltArea2"), NodePath("../SaltArea3"), NodePath("../SaltArea4")]
+
+[node name="SaltDeposit7" parent="." unique_id=987371567 node_paths=PackedStringArray("areas") instance=ExtResource("21_7h5kg")]
+visible = false
+position = Vector2(280, 160)
+areas = [NodePath("../SaltArea"), NodePath("../SaltArea2"), NodePath("../SaltArea3"), NodePath("../SaltArea4")]
+
 [node name="SaltDeposit5" parent="." unique_id=401300947 node_paths=PackedStringArray("areas") instance=ExtResource("21_7h5kg")]
+visible = false
 position = Vector2(912, 376)
 areas = [NodePath("../SaltArea"), NodePath("../SaltArea2"), NodePath("../SaltArea3"), NodePath("../SaltArea4")]
 
@@ -118,6 +129,7 @@ position = Vector2(72, 584)
 areas = [NodePath("../SaltArea"), NodePath("../SaltArea2"), NodePath("../SaltArea3"), NodePath("../SaltArea4")]
 
 [node name="SaltDeposit2" parent="." unique_id=848901830 node_paths=PackedStringArray("areas") instance=ExtResource("21_7h5kg")]
+visible = false
 position = Vector2(72, -248)
 areas = [NodePath("../SaltArea"), NodePath("../SaltArea2"), NodePath("../SaltArea3"), NodePath("../SaltArea4")]
 
@@ -132,10 +144,13 @@ collision_mask = 0
 
 [node name="Boucle de jeu" parent="." unique_id=260320005 node_paths=PackedStringArray("SonFinVague", "MusiqueExterieure", "depots", "refillLabelAnounce") instance=ExtResource("5_o1tfn")]
 position = Vector2(496, -88)
+scale = Vector2(0.34343895, 0.947759)
 ZoneJeu = Rect2(0, 0, 1151.115, 648)
+DureeVague = 90.0
+DureePause = 20.0
 SonFinVague = NodePath("finWaves")
 MusiqueExterieure = NodePath("MusiqueExt")
-depots = [NodePath("../SaltDeposit"), NodePath("../SaltDeposit2"), NodePath("../SaltDeposit3"), NodePath("../SaltDeposit4"), NodePath("../SaltDeposit5")]
+depots = [NodePath("../SaltDeposit"), NodePath("../SaltDeposit2"), NodePath("../SaltDeposit3"), NodePath("../SaltDeposit4"), NodePath("../SaltDeposit5"), NodePath("../SaltDeposit6"), NodePath("../SaltDeposit7")]
 refillLabelAnounce = NodePath("Anonces/LabelAnonce")
 refillCD = 10.0
 
@@ -150,8 +165,8 @@ label = "HUD_RESTART"
 [node name="MenuPause" parent="Boucle de jeu" index="6" unique_id=1546097521 node_paths=PackedStringArray("languesMenu")]
 languesMenu = NodePath("../MenuLangue")
 
-[node name="AudioStreamPlayer2D" parent="Boucle de jeu" index="8" unique_id=332105144]
-volume_db = -12.621
+[node name="MusiqueExt" parent="Boucle de jeu" index="14" unique_id=307820920]
+bus = &"Volume"
 
 [node name="Anonces" type="CanvasLayer" parent="Boucle de jeu" unique_id=1545708900]
 
@@ -359,6 +374,8 @@ z_index = 0
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(488, 128)
+dashTimer = 1.0
+dashSpeed = 1000.0
 
 [node name="Camera2D" parent="Personnage" index="0" unique_id=1401489096]
 position = Vector2(0, 0)
@@ -392,22 +409,69 @@ IsPlayer = true
 [node name="Doors" type="Node2D" parent="." unique_id=1879004628]
 
 [node name="Door" parent="Doors" unique_id=848685947 instance=ExtResource("1_2ktxt")]
-position = Vector2(488, 31)
-scale = Vector2(0.56, 1)
+position = Vector2(450.00003, 4)
+scale = Vector2(0.5323991, 0.9685961)
+
+[node name="AnimatedSprite2D" parent="Doors/Door" index="0" unique_id=1677703996]
+position = Vector2(86.40129, 49.55626)
+rotation = -1.562393
+scale = Vector2(0.40939277, 3.7239914)
+
+[node name="CollisionShape2D" parent="Doors/Door" index="1" unique_id=1866701577]
+position = Vector2(93.91442, 49.556255)
+rotation = 3.1313608
+scale = Vector2(43.99992, 0.59891534)
+
+[node name="Health" parent="Doors/Door" index="2" unique_id=1461079800]
+position = Vector2(118.3322, 81.56134)
 
 [node name="Door2" parent="Doors" unique_id=840666638 instance=ExtResource("1_2ktxt")]
 position = Vector2(497, 292)
 scale = Vector2(0.52, 1)
+
+[node name="AnimatedSprite2D" parent="Doors/Door2" index="0" unique_id=1677703996]
+position = Vector2(-63.461544, 19)
+scale = Vector2(0.3161119, 3.0097706)
+
+[node name="CollisionShape2D" parent="Doors/Door2" index="1" unique_id=1866701577]
+position = Vector2(-65.3846, 20)
+rotation = -3.1176453
+scale = Vector2(26.862886, -0.49643788)
+
+[node name="Health" parent="Doors/Door2" index="2" unique_id=1461079800]
+position = Vector2(13.461533, 43.999996)
 
 [node name="Door3" parent="Doors" unique_id=1270672065 instance=ExtResource("1_2ktxt")]
 position = Vector2(657, 181)
 rotation = 1.5707964
 scale = Vector2(0.56, 1)
 
+[node name="AnimatedSprite2D" parent="Doors/Door3" index="0" unique_id=1677703996]
+position = Vector2(-41.071434, 27)
+rotation = -1.55532
+scale = Vector2(0.26835227, 1.4135232)
+
+[node name="CollisionShape2D" parent="Doors/Door3" index="1" unique_id=1866701577]
+position = Vector2(-42.857155, 27.999973)
+rotation = 1.5839354
+scale = Vector2(3.514793, 1.7704484)
+
+[node name="Health" parent="Doors/Door3" index="2" unique_id=1461079800]
+position = Vector2(39.28573, 28.000027)
+
 [node name="Door4" parent="Doors" unique_id=2028135749 instance=ExtResource("1_2ktxt")]
 position = Vector2(342, 168)
 rotation = 1.5707964
 scale = Vector2(0.44, 1)
+
+[node name="AnimatedSprite2D" parent="Doors/Door4" index="0" unique_id=1677703996]
+position = Vector2(-29.545454, -4.999999)
+scale = Vector2(0.40353042, 1.975262)
+
+[node name="CollisionShape2D" parent="Doors/Door4" index="1" unique_id=1866701577]
+position = Vector2(-27.27273, -4.000001)
+rotation = 1.5870878
+scale = Vector2(4.1621623, 2.1506672)
 
 [node name="SaltArea" type="Area2D" parent="." unique_id=1098991420]
 position = Vector2(366.99997, -50)
@@ -441,8 +505,8 @@ rotation = 1.5715933
 scale = Vector2(0.7471426, 0.8761764)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SaltArea4" unique_id=1287129943]
-position = Vector2(383.239, -147.48328)
-scale = Vector2(1.8088319, 0.6763486)
+position = Vector2(361.24408, -147.4834)
+scale = Vector2(1.808832, 0.6763486)
 shape = SubResource("RectangleShape2D_w83i5")
 
 [connection signal="pressed" from="Boucle de jeu/Updgrape/SaltLV1" to="Boucle de jeu/MenuLangue" method="ChoisirLangue" binds= ["fr"]]

@@ -3,170 +3,172 @@ using Godot;
 
 public partial class BoucleDeJeu : Node2D
 {
-    // --- Spawn des citrouilles ---
-    [Export]
-    public PackedScene PumpkinScene;
+	// --- Spawn des citrouilles ---
+	[Export]
+	public PackedScene PumpkinScene;
 
-    [Export]
-    public PackedScene PumpkinLv2Scene; // Lv2
+	[Export]
+	public PackedScene PumpkinLv2Scene; // Lv2
 
-    [Export]
-    public PackedScene PumpkinLv3Scene; // Lv3
+	[Export]
+	public PackedScene PumpkinLv3Scene; // Lv3
 
-    [Export]
-    public float IntervalleSpawn = 5f; // intervalle de base (vague 1)
+	[Export]
+	public float IntervalleSpawn = 5f; // intervalle de base (vague 1)
 
-    [Export]
-    public Rect2 ZoneJeu = new Rect2(0, 0, 1152, 648); // la zone visible
+	[Export]
+	public Rect2 ZoneJeu = new Rect2(0, 0, 1152, 648); // la zone visible
 
-    [Export]
-    public float Marge = 100f; // distance en dehors de la zone
+	[Export]
+	public float Marge = 100f; // distance en dehors de la zone
 
-    // Toutes les X citrouilles Lv1, on crée une Lv2 ; toutes les X Lv2, une Lv3
-    [Export]
-    public int SeuilLv2 = 10;
+	// Toutes les X citrouilles Lv1, on crée une Lv2 ; toutes les X Lv2, une Lv3
+	[Export]
+	public int SeuilLv2 = 10;
 
-    [Export]
-    public int SeuilLv3 = 10;
+	[Export]
+	public int SeuilLv3 = 10;
 
-    // --- Vagues ---
-    [Export]
-    public float DureeVague = 180f; // secondes par vague
+	// --- Vagues ---
+	[Export]
+	public float DureeVague = 180f; // secondes par vague
 
-    [Export]
-    public float FacteurIntervalle = 0.9f; // chaque vague : intervalle x 0.9
+	[Export]
+	public float FacteurIntervalle = 0.9f; // chaque vague : intervalle x 0.9
 
-    [Export]
-    public float IntervalleMin = 0.8f; // plancher
+	[Export]
+	public float IntervalleMin = 0.8f; // plancher
 
-    [Export]
-    public float BonusVitesseParVague = 0.05f; // +5% de vitesse par vague
+	[Export]
+	public float BonusVitesseParVague = 0.05f; // +5% de vitesse par vague
 
-    [Export]
-    public Label WaveLabel; // Label d'affichage (assigné dans l'inspecteur)
+	[Export]
+	public Label WaveLabel; // Label d'affichage (assigné dans l'inspecteur)
 
-    [Export]
-    public float DureePause = 60f; // secondes de pause entre deux vagues
+	[Export]
+	public float DureePause = 60f; // secondes de pause entre deux vagues
 
-    [Export]
-    public Label TimerLabel; // affiche le compte à rebours
+	[Export]
+	public Label TimerLabel; // affiche le compte à rebours
 
-    [Export]
-    public float DureePauseDebut = 30f; // pause avant la toute première vague
+	[Export]
+	public float DureePauseDebut = 30f; // pause avant la toute première vague
 
-    private bool _premierePause = true;
+	private bool _premierePause = true;
 
-    //Nombre de Gems
-    [Export]
-    public Label GemsLabel;
+	//Nombre de Gems
+	[Export]
+	public Label GemsLabel;
 
-    [Export]
-    public Label SaltLabel;
+	[Export]
+	public Label SaltLabel;
 
-    [Export]
-    public Label ammoLabel;
+	[Export]
+	public Label ammoLabel;
 
-    // --- Upgrade ---
-    [Export]
-    public float DistanceInteraction = 60f; // distance max au cercle de sel pour ouvrir le menu
+	// --- Upgrade ---
+	[Export]
+	public float DistanceInteraction = 60f; // distance max au cercle de sel pour ouvrir le menu
 
-    //GameOver
-    [Export]
-    public Label ScoreLabel;
+	//GameOver
+	[Export]
+	public Label ScoreLabel;
+	// Sons de défaite
+	[Export]
+	public AudioStreamPlayer2D SonMortPerso;
 
-    // Sons de défaite
-    [Export]
-    public AudioStreamPlayer2D SonMortPerso;
+	[Export]
+	public AudioStreamPlayer2D SonMortSel;
 
-    [Export]
-    public AudioStreamPlayer2D SonMortSel;
 
-    //Sound Waves
-    [Export]
-    public AudioStreamPlayer2D SonVague;
+	//Sound Waves
+	[Export]
+	public AudioStreamPlayer2D SonVague;
 
-    [Export]
-    public AudioStreamPlayer2D SonFinVague;
+	[Export] 
+	public AudioStreamPlayer2D SonFinVague;
 
-    [Export]
-    public AudioStreamPlayer2D Musique;
+	[Export]
+	public AudioStreamPlayer2D Musique;
 
-    [Export]
-    public AudioStreamPlayer2D MusiqueExterieure; // jouée quand le joueur est dehors
+	[Export]
+	public AudioStreamPlayer2D MusiqueExterieure; // jouée quand le joueur est dehors
 
-    private bool _musiqueActive = true;
+	private bool _musiqueActive = true;
 
-    public int VagueActuelle { get; private set; } = 1;
+	public int VagueActuelle { get; private set; } = 1;
 
-    private int _compteurLv1 = 0;
-    private int _compteurLv2 = 0;
-    private float _timerVague = 0f;
-    private float _timerSpawn = 0f;
-    private bool _enPause = false;
-    private int _secondeAffichee = -1;
-    private RandomNumberGenerator _rng = new RandomNumberGenerator();
+	private int _compteurLv1 = 0;
+	private int _compteurLv2 = 0;
+	private float _timerVague = 0f;
+	private float _timerSpawn = 0f;
+	private bool _enPause = false;
+	private int _secondeAffichee = -1;
+	private RandomNumberGenerator _rng = new RandomNumberGenerator();
 
-    // --- Game over ---
-    private CanvasLayer _gameOverUI;
-    private Button _boutonRejouer;
-    private bool _fini = false;
+	// --- Game over ---
+	private CanvasLayer _gameOverUI;
+	private Button _boutonRejouer;
+	private bool _fini = false;
 
-    // --- Gems ---
-    private int _germsAffiches = -1;
-    private float _saltAffiches = -1;
-    private float _ammoAffiches = -1;
+	// --- Gems ---
+	private int _germsAffiches = -1;
+	private float _saltAffiches = -1;
+	private float _ammoAffiches = -1;
 
-    // --- Upgrade ---
-    private CanvasLayer _upgradeUI;
-    private CanvasLayer _hudWaves;
-    private CanvasLayer _hudGems;
-    private CanvasLayer _hudSalt;
-    private CanvasLayer _hudAmmo;
-    private CanvasLayer _hudSelect;
-    private CanvasLayer _hudAnonces;
+	// --- Upgrade ---
+	private CanvasLayer _upgradeUI;
+	private CanvasLayer _hudWaves;
+	private CanvasLayer _hudGems;
+	private CanvasLayer _hudSalt;
+	private CanvasLayer _hudAmmo;
+	private CanvasLayer _hudSelect;
+	private CanvasLayer _hudAnonces;
+	private CanvasLayer _building;
 
-    //--heeeu je sais pas il est tard  mais voila ---------
-    [Export]
-    Godot.Collections.Array<SaltDeposit> depots;
+	//--heeeu je sais pas il est tard  mais voila ---------
+	[Export]
+	Godot.Collections.Array<SaltDeposit> depots;
 
-    [Export]
-    private Label refillLabelAnounce;
+	[Export]
+	private Label refillLabelAnounce;
 
-    public override void _Ready()
-    {
-        // depots = FindChildren("SaltDeposits", "", true, false);
+	public override void _Ready()
+	{
+		// depots = FindChildren("SaltDeposits", "", true, false);
 
-        _timerFill = new Timer { WaitTime = refillCD, OneShot = false };
-        _timerFill.Timeout += DepositRandomHandler;
-        AddChild(_timerFill);
-        _timerFill.Start();
+		_timerFill = new Timer { WaitTime = refillCD, OneShot = false };
+		_timerFill.Timeout += DepositRandomHandler;
+		AddChild(_timerFill);
+		_timerFill.Start();
 
-        _rng.Randomize();
-        _enPause = true;
-        _timerVague = DureePauseDebut;
-        _gameOverUI = GetNode<CanvasLayer>("GameOver");
-        _boutonRejouer = GetNode<Button>("GameOver/Button");
-        _boutonRejouer.Pressed += Rejouer;
-        _upgradeUI = GetNodeOrNull<CanvasLayer>("Updgrape");
-        _hudWaves = GetNodeOrNull<CanvasLayer>("Waves");
-        _hudGems = GetNodeOrNull<CanvasLayer>("Gems");
-        _hudSalt = GetNodeOrNull<CanvasLayer>("Salt");
-        _hudAmmo = GetNodeOrNull<CanvasLayer>("Munition");
-        _hudSelect = GetNodeOrNull<CanvasLayer>("Select Building");
-        _hudAnonces = GetNodeOrNull<CanvasLayer>("Anonces");
-        MettreAJourLabel();
+		_rng.Randomize();
+		_enPause = true;
+		_timerVague = DureePauseDebut;
+		_gameOverUI = GetNode<CanvasLayer>("GameOver");
+		_boutonRejouer = GetNode<Button>("GameOver/Button");
+		_boutonRejouer.Pressed += Rejouer;
+		_upgradeUI = GetNodeOrNull<CanvasLayer>("Updgrape");
+		_hudWaves = GetNodeOrNull<CanvasLayer>("Waves");
+		_hudGems = GetNodeOrNull<CanvasLayer>("Gems");
+		_hudSalt = GetNodeOrNull<CanvasLayer>("Salt");
+		_hudAmmo = GetNodeOrNull<CanvasLayer>("Munition");
+		_hudSelect = GetNodeOrNull<CanvasLayer>("Select Building");
+		_hudAnonces = GetNodeOrNull<CanvasLayer>("Anonces");
+		_building = GetNodeOrNull<CanvasLayer>("Select Building");
+		MettreAJourLabel();
 
-        if (Musique != null)
-        {
-            Musique.Finished += () =>
-            {
-                if (_musiqueActive)
-                    Musique.Play();
-            };
-            Musique.Play();
-        }
+		if (Musique != null)
+		{
+			Musique.Finished += () =>
+			{
+				if (_musiqueActive)
+					Musique.Play();
+			};
+			Musique.Play();
+		}
 
-        // Quand l'annonce de vague est finie, la musique reprend
+		// Quand l'annonce de vague est finie, la musique reprend
         if (SonVague != null)
             SonVague.Finished += OnSonVagueFini;
     }
@@ -192,7 +194,7 @@ public partial class BoucleDeJeu : Node2D
         MettreAJourGerms();
         MettreAJourSalt();
         MettreAJourMunition();
-        GererMusiqueAmbiance();
+		GererMusiqueAmbiance();
 
         GererUpgrade();
 
@@ -211,7 +213,7 @@ public partial class BoucleDeJeu : Node2D
             if (!_enPause)
             {
                 // Fin de la vague -> début de la pause
-                SonFinVague.Play();
+				SonFinVague.Play();
                 _enPause = true;
                 _timerVague = DureePause;
                 GD.Print($"Pause de {DureePause}s avant la vague {VagueActuelle + 1}");
@@ -222,99 +224,99 @@ public partial class BoucleDeJeu : Node2D
                 _enPause = false;
 
                 if (_premierePause)
-                    _premierePause = false; // la vague 1 commence, on n'incrémente pas
-                else
-                    VagueActuelle++;
+					_premierePause = false; // la vague 1 commence, on n'incrémente pas
+				else
+					VagueActuelle++;
 
-                _timerVague = DureeVague;
-                _musiqueActive = false;
-                Musique?.Stop();
-                MusiqueExterieure?.Stop();
-                SonVague?.Play();
-                GD.Print($"Waves {VagueActuelle} ! Intervalle : {IntervalleActuel():0.00}s");
-            }
-            _secondeAffichee = -1; // force la mise à jour du texte
-        }
+				_timerVague = DureeVague;
+				_musiqueActive = false;
+				Musique?.Stop();
+				MusiqueExterieure?.Stop();
+				SonVague?.Play();
+				GD.Print($"Waves {VagueActuelle} ! Intervalle : {IntervalleActuel():0.00}s");
+			}
+			_secondeAffichee = -1; // force la mise à jour du texte
+		}
 
-        MettreAJourLabel();
-        MettreAJourTimer();
-    }
+		MettreAJourLabel();
+		MettreAJourTimer();
+	}
 
-    // Intervalle qui diminue à chaque vague, jamais sous IntervalleMin
-    private float IntervalleActuel()
-    {
-        float intervalle = IntervalleSpawn * Mathf.Pow(FacteurIntervalle, VagueActuelle - 1);
-        return Mathf.Max(intervalle, IntervalleMin);
-    }
+	// Intervalle qui diminue à chaque vague, jamais sous IntervalleMin
+	private float IntervalleActuel()
+	{
+		float intervalle = IntervalleSpawn * Mathf.Pow(FacteurIntervalle, VagueActuelle - 1);
+		return Mathf.Max(intervalle, IntervalleMin);
+	}
 
-    // Rafraîchit les textes quand la langue change en cours de partie
-    public override void _Notification(int what)
-    {
-        if (what != NotificationTranslationChanged || !IsNodeReady())
-            return;
+	// Rafraîchit les textes quand la langue change en cours de partie
+	public override void _Notification(int what)
+	{
+		if (what != NotificationTranslationChanged || !IsNodeReady())
+			return;
 
-        MettreAJourLabel();
-        _secondeAffichee = -1; // force le timer à se réécrire
-        if (_fini && ScoreLabel != null)
-            ScoreLabel.Text = string.Format(Tr("HUD_SCORE"), VagueActuelle);
-    }
+		MettreAJourLabel();
+		_secondeAffichee = -1; // force le timer à se réécrire
+		if (_fini && ScoreLabel != null)
+			ScoreLabel.Text = string.Format(Tr("HUD_SCORE"), VagueActuelle);
+	}
 
-    private void MettreAJourLabel()
-    {
-        if (WaveLabel == null)
-            return;
+	private void MettreAJourLabel()
+	{
+		if (WaveLabel == null)
+			return;
 
-        WaveLabel.Text = string.Format(Tr("HUD_WAVES"), VagueActuelle);
-    }
+		WaveLabel.Text = string.Format(Tr("HUD_WAVES"), VagueActuelle);
+	}
 
-    private void GererSpawn(float delta)
-    {
-        if (PumpkinScene == null)
-            return;
+	private void GererSpawn(float delta)
+	{
+		if (PumpkinScene == null)
+			return;
 
-        _timerSpawn -= delta;
-        if (_timerSpawn <= 0f)
-        {
-            SpawnPumpkin();
-            _timerSpawn = IntervalleActuel();
-        }
-    }
+		_timerSpawn -= delta;
+		if (_timerSpawn <= 0f)
+		{
+			SpawnPumpkin();
+			_timerSpawn = IntervalleActuel();
+		}
+	}
 
-    private void SpawnPumpkin()
-    {
-        PackedScene scene;
+	private void SpawnPumpkin()
+	{
+		PackedScene scene;
 
-        if (_compteurLv2 >= SeuilLv3)
-        {
-            scene = PumpkinLv3Scene;
-            _compteurLv2 = 0; // on vide
-        }
-        else if (_compteurLv1 >= SeuilLv2)
-        {
-            scene = PumpkinLv2Scene;
-            _compteurLv1 = 0; // on vide
-            _compteurLv2++; // une Lv2 de plus vers la Lv3
-        }
-        else
-        {
-            scene = PumpkinScene;
-            _compteurLv1++;
-        }
+		if (_compteurLv2 >= SeuilLv3)
+		{
+			scene = PumpkinLv3Scene;
+			_compteurLv2 = 0; // on vide
+		}
+		else if (_compteurLv1 >= SeuilLv2)
+		{
+			scene = PumpkinLv2Scene;
+			_compteurLv1 = 0; // on vide
+			_compteurLv2++; // une Lv2 de plus vers la Lv3
+		}
+		else
+		{
+			scene = PumpkinScene;
+			_compteurLv1++;
+		}
 
-        if (scene == null)
-            return;
+		if (scene == null)
+			return;
 
-        Node2D pumpkin = scene.Instantiate<Node2D>();
+		Node2D pumpkin = scene.Instantiate<Node2D>();
 
-        // Plus rapide à chaque vague
-        if (pumpkin is Pumpkin p)
-            p.Speed *= 1f + BonusVitesseParVague * (VagueActuelle - 1);
+		// Plus rapide à chaque vague
+		if (pumpkin is Pumpkin p)
+			p.Speed *= 1f + BonusVitesseParVague * (VagueActuelle - 1);
 
-        AddChild(pumpkin);
-        pumpkin.GlobalPosition = PositionHorsZone();
-    }
+		AddChild(pumpkin);
+		pumpkin.GlobalPosition = PositionHorsZone();
+	}
 
-    // Choisit un point aléatoire juste à l'extérieur de la zone, sur un des 4 côtés
+	// Choisit un point aléatoire juste à l'extérieur de la zone, sur un des 4 côtés
     private Vector2 PositionHorsZone()
     {
         float gauche = ZoneJeu.Position.X - Marge;
@@ -372,37 +374,37 @@ public partial class BoucleDeJeu : Node2D
         );
         bool proche = distance <= DistanceInteraction;
 
-        // Le joueur s'éloigne du cercle : on ferme le shop
-        if (_upgradeUI.Visible && !proche)
-        {
-            AfficherUpgrade(false);
-            return;
-        }
+		// Le joueur s'éloigne du cercle : on ferme le shop
+		if (_upgradeUI.Visible && !proche)
+		{
+			AfficherUpgrade(false);
+			return;
+		}
 
-        // E près du cercle : ouvre / ferme
-        if (proche && Input.IsActionJustPressed("Upgrade"))
-            AfficherUpgrade(!_upgradeUI.Visible);
-    }
+		// E près du cercle : ouvre / ferme
+		if (proche && Input.IsActionJustPressed("Upgrade"))
+			AfficherUpgrade(!_upgradeUI.Visible);
+	}
 
-    private void AfficherUpgrade(bool afficher)
-    {
-        if (afficher)
-            UpgradeStats.PrintAll();
-        _upgradeUI.Visible = afficher;
-        if (_hudWaves != null)
-            _hudWaves.Visible = !afficher;
-        if (_hudGems != null)
-            _hudGems.Visible = !afficher;
-    }
+	private void AfficherUpgrade(bool afficher)
+	{
+		if (afficher)
+			UpgradeStats.PrintAll();
+		_upgradeUI.Visible = afficher;
+		if (_hudWaves != null)
+			_hudWaves.Visible = !afficher;
+		if (_hudGems != null)
+			_hudGems.Visible = !afficher;
+	}
 
-    private void MettreAJourTimer()
-    {
-        if (TimerLabel == null)
-            return;
+	private void MettreAJourTimer()
+	{
+		if (TimerLabel == null)
+			return;
 
-        int secondes = Mathf.CeilToInt(_timerVague);
-        if (secondes == _secondeAffichee)
-            return; // le texte ne change qu'une fois par seconde
+		int secondes = Mathf.CeilToInt(_timerVague);
+		if (secondes == _secondeAffichee)
+			return; // le texte ne change qu'une fois par seconde
 
         _secondeAffichee = secondes;
         string temps = FormatTemps(secondes);
@@ -437,8 +439,9 @@ public partial class BoucleDeJeu : Node2D
         _hudSelect.Visible = false;
         _hudAnonces.Visible = false;
         _gameOverUI.Visible = true;
+		_building.Visible = false;
         GetTree().Paused = true;
-        Music.Play();
+		Music.Play();
         UpgradeStats.Reset();
     }
 
@@ -454,23 +457,23 @@ public partial class BoucleDeJeu : Node2D
         TweenTraversee(refillLabelAnounce);
     }
 
-    // Joue la musique intérieure ou extérieure selon où se trouve le joueur
-    private void GererMusiqueAmbiance()
-    {
-        // Pendant l'annonce de vague, aucune musique d'ambiance
-        if (!_musiqueActive)
-            return;
+	// Joue la musique intérieure ou extérieure selon où se trouve le joueur
+	private void GererMusiqueAmbiance()
+	{
+		// Pendant l'annonce de vague, aucune musique d'ambiance
+		if (!_musiqueActive)
+			return;
 
-        bool indoor = Personnage.Instance.iSIndoor;
-        AudioStreamPlayer2D voulue = indoor ? Musique : MusiqueExterieure;
-        AudioStreamPlayer2D autre = indoor ? MusiqueExterieure : Musique;
+		bool indoor = Personnage.Instance.iSIndoor;
+		AudioStreamPlayer2D voulue = indoor ? Musique : MusiqueExterieure;
+		AudioStreamPlayer2D autre = indoor ? MusiqueExterieure : Musique;
 
-        autre?.Stop();
+		autre?.Stop();
 
-        // Si la bonne musique ne joue pas (changement de zone ou fin de piste), on la lance
-        if (voulue != null && !voulue.Playing)
-            voulue.Play();
-    }
+		// Si la bonne musique ne joue pas (changement de zone ou fin de piste), on la lance
+		if (voulue != null && !voulue.Playing)
+			voulue.Play();
+	}
 
     //---------------------------------------------------la partie tween ----------------------------------------------------------
     private Tween _bannerTween; // je met en champs ici je susi sous anxio je relfechis doucement XD
@@ -480,8 +483,8 @@ public partial class BoucleDeJeu : Node2D
     private Timer _timerFill;
 
     /// <summary>
-    /// Fait traverser l'écran à un Label de gauche à droite :
-    /// rapide à l'entrée, lent au centre, rapide à la sortie.
+	/// Fait traverser l'écran à un Label de gauche à droite :
+	/// rapide à l'entrée, lent au centre, rapide à la sortie.
     /// </summary>
     private void TweenTraversee(
         Label label,

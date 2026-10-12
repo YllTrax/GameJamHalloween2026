@@ -35,4 +35,5 @@ polygon = PackedVector2Array(8.556922, -8, 8.556922, 8, -8.556922, 8, -8.556922,
 
 [node name="audioBuild" type="AudioStreamPlayer2D" parent="." unique_id=2123093273]
 stream = ExtResource("7_gwmii")
+volume_db = -12.621
 max_polyphony = 5

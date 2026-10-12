@@ -215,12 +215,13 @@ collision_layer = 4
 collision_mask = 11
 script = ExtResource("1_hu2pe")
 Damage = 20.0
+AggroRadius = 50.0
 GermsDrop = 8.0
 GermsScene = ExtResource("2_iiece")
 anim = NodePath("AnimatedSprite2D")
+isEastOriented = true
 _chaseSound = NodePath("pourchasse")
 _otherSound = NodePath("dehors")
-isEastOriented = true
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=447942903]
 visible = false
@@ -237,6 +238,7 @@ shape = SubResource("CapsuleShape2D_aluq5")
 
 [node name="Health" parent="." unique_id=1461079800 node_paths=PackedStringArray("light", "sprite") instance=ExtResource("1_bbe1r")]
 position = Vector2(20, 22)
+scale = Vector2(4.024798, 0.44955087)
 baseHealth = 350.0
 light = NodePath("PointLight2D")
 sprite = NodePath("../AnimatedSprite2D")
@@ -250,14 +252,16 @@ texture = SubResource("GradientTexture2D_dmhmx")
 texture_scale = 0.72
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2090792759]
+scale = Vector2(2.478287, 1.0402168)
 sprite_frames = SubResource("SpriteFrames_p18pi")
+animation = &"EastWest"
+
 [node name="pourchasse" type="AudioStreamPlayer2D" parent="." unique_id=977065660]
 stream = ExtResource("5_8hrsq")
+volume_db = -4.333
 bus = &"Volume"
 
 [node name="dehors" type="AudioStreamPlayer2D" parent="." unique_id=853202705]
 stream = ExtResource("6_nnq1r")
+volume_db = 7.222
 bus = &"Volume"
-animation = &"North"
-frame = 7
-frame_progress = 0.16555643
