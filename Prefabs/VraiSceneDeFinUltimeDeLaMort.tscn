@@ -403,18 +403,18 @@ IsPlayer = true
 [node name="Doors" type="Node2D" parent="." unique_id=1879004628]
 
 [node name="Door" parent="Doors" unique_id=848685947 instance=ExtResource("1_2ktxt")]
-position = Vector2(450.00003, 4)
+position = Vector2(454.00003, 1)
 scale = Vector2(0.5323991, 0.9685961)
 
 [node name="AnimatedSprite2D" parent="Doors/Door" index="0" unique_id=1677703996]
-position = Vector2(86.40129, 49.55626)
-rotation = -1.562393
-scale = Vector2(0.40939277, 3.7239914)
+position = Vector2(80.76642, 52.653526)
+rotation = -0.0016384276
+scale = Vector2(2.4727893, 1.7386172)
 
 [node name="CollisionShape2D" parent="Doors/Door" index="1" unique_id=1866701577]
 position = Vector2(93.91442, 49.556255)
 rotation = 3.1313608
-scale = Vector2(43.99992, 0.59891534)
+scale = Vector2(12.676867, 0.59891534)
 
 [node name="Health" parent="Doors/Door" index="2" unique_id=1461079800]
 position = Vector2(118.3322, 81.56134)
@@ -425,7 +425,7 @@ scale = Vector2(0.52, 1)
 
 [node name="AnimatedSprite2D" parent="Doors/Door2" index="0" unique_id=1677703996]
 position = Vector2(-63.461544, 19)
-scale = Vector2(0.3161119, 3.0097706)
+scale = Vector2(1.463498, 1.6453662)
 
 [node name="CollisionShape2D" parent="Doors/Door2" index="1" unique_id=1866701577]
 position = Vector2(-65.3846, 20)
@@ -442,8 +442,8 @@ scale = Vector2(0.56, 1)
 
 [node name="AnimatedSprite2D" parent="Doors/Door3" index="0" unique_id=1677703996]
 position = Vector2(-41.071434, 27)
-rotation = -1.55532
-scale = Vector2(0.26835227, 1.4135232)
+rotation = 0.0192132
+scale = Vector2(1.3357565, 1.7322166)
 
 [node name="CollisionShape2D" parent="Doors/Door3" index="1" unique_id=1866701577]
 position = Vector2(-42.857155, 27.999973)
@@ -460,7 +460,7 @@ scale = Vector2(0.44, 1)
 
 [node name="AnimatedSprite2D" parent="Doors/Door4" index="0" unique_id=1677703996]
 position = Vector2(-29.545454, -4.999999)
-scale = Vector2(0.40353042, 1.975262)
+scale = Vector2(1.2092221, 1.975262)
 
 [node name="CollisionShape2D" parent="Doors/Door4" index="1" unique_id=1866701577]
 position = Vector2(-27.27273, -4.000001)

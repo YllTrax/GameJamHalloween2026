@@ -40,7 +40,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aluq5"]
-size = Vector2(4.989496, 44.92405)
+size = Vector2(17.962185, 44.92405)
 
 [node name="Door" type="CharacterBody2D" unique_id=685161063 groups=["Doors"]]
 scale = Vector2(1, 0.8681319)
@@ -48,22 +48,20 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1677703996]
-position = Vector2(-2.0751805, 60.046326)
 rotation = 0.0085276365
+scale = Vector2(2.0974689, 1)
 sprite_frames = SubResource("SpriteFrames_ugn3q")
 animation = &"Idle"
 autoplay = "Idle"
 frame = 3
 frame_progress = 0.56230354
-offset = Vector2(2.533553, -63.525936)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1866701577]
-position = Vector2(-0.7500076, 4.0316467)
 scale = Vector2(9.52, 1)
 shape = SubResource("RectangleShape2D_aluq5")
 
 [node name="Health" parent="." unique_id=1461079800 node_paths=PackedStringArray("sprite") instance=ExtResource("1_ugn3q")]
-position = Vector2(47, 29.949368)
+position = Vector2(47, 3.3395509e-13)
 scale = Vector2(4.062008, 0.7229754)
 baseHealth = 1000.0
 sprite = NodePath("../AnimatedSprite2D")
