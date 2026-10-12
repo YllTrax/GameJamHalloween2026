@@ -25,13 +25,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 stream = SubResource("VideoStreamTheora_bmo41")
-volume_db = -15.529998
+volume_db = -15.529997
 autoplay = true
 expand = true
 bus = &"Volume"
 
 [node name="tuto_eng" type="TextureRect" parent="." unique_id=2126863003]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
