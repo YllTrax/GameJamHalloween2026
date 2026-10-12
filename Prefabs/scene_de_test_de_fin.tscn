@@ -81,6 +81,7 @@ z_index = 0
 z_as_relative = false
 y_sort_enabled = true
 dashSpeed = 1000.0
+germs = 15
 
 [node name="Camera2D" parent="Personnage" index="0" unique_id=1401489096]
 position = Vector2(0, 0)

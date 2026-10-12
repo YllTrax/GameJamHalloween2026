@@ -58,7 +58,7 @@ z_index = 2
 script = ExtResource("1_6t5l3")
 areaOfEffect = NodePath("Damage AoE")
 anim = NodePath("AnimatedSprite2D")
-attackCD = 1.0
+attackCD = 5.0
 Cost = 5
 
 [node name="Damage AoE" type="Area2D" parent="." unique_id=1052212185]

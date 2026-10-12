@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_02iq8")
 Name = "Torche"
-Cost = 10
+Cost = 5
 Icon = ExtResource("1_cxrgp")
 Scene = ExtResource("2_5evbh")
 metadata/_custom_type_script = "uid://bkvkrin7i42hp"

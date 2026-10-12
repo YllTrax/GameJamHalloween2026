@@ -374,7 +374,7 @@ z_index = 0
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(488, 128)
-germs = 6
+germs = 25
 
 [node name="Camera2D" parent="Personnage" index="0" unique_id=1401489096]
 position = Vector2(0, 0)
