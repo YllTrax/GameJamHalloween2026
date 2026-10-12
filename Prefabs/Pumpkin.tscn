@@ -170,7 +170,6 @@ texture = SubResource("GradientTexture2D_hktuj")
 texture_scale = 0.72
 
 [node name="PumpkinSprite" type="AnimatedSprite2D" parent="." unique_id=1687177670]
-scale = Vector2(0.86998206, 0.7876293)
 sprite_frames = SubResource("SpriteFrames_p18pi")
 animation = &"EastWest"
 offset = Vector2(0, -9)

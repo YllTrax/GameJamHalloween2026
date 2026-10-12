@@ -110,17 +110,14 @@ position = Vector2(480, -248)
 areas = [NodePath("../SaltArea"), NodePath("../SaltArea2"), NodePath("../SaltArea3"), NodePath("../SaltArea4")]
 
 [node name="SaltDeposit6" parent="." unique_id=418339320 node_paths=PackedStringArray("areas") instance=ExtResource("21_7h5kg")]
-visible = false
 position = Vector2(280, 160)
 areas = [NodePath("../SaltArea"), NodePath("../SaltArea2"), NodePath("../SaltArea3"), NodePath("../SaltArea4")]
 
 [node name="SaltDeposit7" parent="." unique_id=987371567 node_paths=PackedStringArray("areas") instance=ExtResource("21_7h5kg")]
-visible = false
 position = Vector2(280, 160)
 areas = [NodePath("../SaltArea"), NodePath("../SaltArea2"), NodePath("../SaltArea3"), NodePath("../SaltArea4")]
 
 [node name="SaltDeposit5" parent="." unique_id=401300947 node_paths=PackedStringArray("areas") instance=ExtResource("21_7h5kg")]
-visible = false
 position = Vector2(912, 376)
 areas = [NodePath("../SaltArea"), NodePath("../SaltArea2"), NodePath("../SaltArea3"), NodePath("../SaltArea4")]
 
@@ -129,7 +126,6 @@ position = Vector2(72, 584)
 areas = [NodePath("../SaltArea"), NodePath("../SaltArea2"), NodePath("../SaltArea3"), NodePath("../SaltArea4")]
 
 [node name="SaltDeposit2" parent="." unique_id=848901830 node_paths=PackedStringArray("areas") instance=ExtResource("21_7h5kg")]
-visible = false
 position = Vector2(72, -248)
 areas = [NodePath("../SaltArea"), NodePath("../SaltArea2"), NodePath("../SaltArea3"), NodePath("../SaltArea4")]
 
@@ -146,7 +142,7 @@ collision_mask = 0
 position = Vector2(496, -88)
 scale = Vector2(0.34343895, 0.947759)
 ZoneJeu = Rect2(0, 0, 1151.115, 648)
-DureeVague = 90.0
+DureeVague = 20.0
 DureePause = 20.0
 SonFinVague = NodePath("finWaves")
 MusiqueExterieure = NodePath("MusiqueExt")

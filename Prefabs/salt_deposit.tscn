@@ -6,13 +6,23 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p18pi"]
 
-[node name="SaltDeposit" type="Node2D" unique_id=418339320]
+[node name="SaltDeposit" type="Node2D" unique_id=418339320 node_paths=PackedStringArray("outLine", "areas")]
 script = ExtResource("1_yunmi")
 baseSaltAmount = 50.0
+outLine = NodePath("Polygon2D2")
+areas = []
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=1478869536]
 position = Vector2(-9.999999, -10.999999)
 scale = Vector2(0.32824594, 0.32824594)
+texture = ExtResource("2_536d0")
+polygon = PackedVector2Array(20.199999, 0.5999994, 53.599976, 13.200005, 65.599976, 63.6, -4.799988, 63.6, 3.1999998, 9.599999)
+
+[node name="Polygon2D2" type="Polygon2D" parent="." unique_id=1808568678]
+z_index = -1
+position = Vector2(-13, -13)
+scale = Vector2(0.41775018, 0.40073305)
+color = Color(0, 0, 0, 1)
 texture = ExtResource("2_536d0")
 polygon = PackedVector2Array(20.199999, 0.5999994, 53.599976, 13.200005, 65.599976, 63.6, -4.799988, 63.6, 3.1999998, 9.599999)
 
