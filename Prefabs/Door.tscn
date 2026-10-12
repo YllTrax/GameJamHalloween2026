@@ -61,12 +61,11 @@ scale = Vector2(1, 0.8681319)
 collision_layer = 8
 collision_mask = 0
 
-[node name="DoorSprite" type="AnimatedSprite2D" parent="." unique_id=1677703996]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1677703996]
 rotation = -1.5479114
 sprite_frames = SubResource("SpriteFrames_ugn3q")
 animation = &"Idle"
 autoplay = "Idle"
-frame_progress = 0.6805673
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1866701577]
 position = Vector2(-0.7500076, 4.0316467)
@@ -77,4 +76,4 @@ shape = SubResource("RectangleShape2D_aluq5")
 position = Vector2(47, 29.949368)
 scale = Vector2(4.062008, 0.7229754)
 baseHealth = 1000.0
-sprite = NodePath("../DoorSprite")
+sprite = NodePath("../AnimatedSprite2D")

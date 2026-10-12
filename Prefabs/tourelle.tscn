@@ -179,6 +179,7 @@ bulletPrefab = ExtResource("2_khwrp")
 firePoint = NodePath("Fire Point")
 audioShoot = NodePath("audiohsoot")
 audioReload = NodePath("audioReload")
+Cost = 25
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1717542044]
 scale = Vector2(0.7, 0.7)

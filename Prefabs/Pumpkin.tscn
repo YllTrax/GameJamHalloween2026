@@ -125,6 +125,7 @@ animations = [{
 [node name="Pumpkin" type="CharacterBody2D" unique_id=1184827937 node_paths=PackedStringArray("anim", "_chaseSound", "_otherSound")]
 z_index = 2
 y_sort_enabled = true
+scale = Vector2(1.1508776, 1.2241727)
 collision_layer = 4
 collision_mask = 15
 script = ExtResource("1_jxr30")
@@ -145,8 +146,8 @@ shape = SubResource("RectangleShape2D_aluq5")
 avoidance_enabled = true
 
 [node name="Health" parent="." unique_id=1039052001 node_paths=PackedStringArray("light", "sprite") instance=ExtResource("2_nf54d")]
-position = Vector2(10.000001, 7.1428604)
-scale = Vector2(1.972, 0.15)
+position = Vector2(3.4756083, 8.985661)
+scale = Vector2(1.972, 0.051974893)
 baseHealth = 50.0
 light = NodePath("PointLight2D")
 sprite = NodePath("../PumpkinSprite")
@@ -169,6 +170,7 @@ texture = SubResource("GradientTexture2D_hktuj")
 texture_scale = 0.72
 
 [node name="PumpkinSprite" type="AnimatedSprite2D" parent="." unique_id=1687177670]
+scale = Vector2(0.86998206, 0.7876293)
 sprite_frames = SubResource("SpriteFrames_p18pi")
 animation = &"EastWest"
 offset = Vector2(0, -9)
