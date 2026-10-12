@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_f7btd")
 Name = "TourelledeFeu"
-Cost = 10
+Cost = 25
 Icon = ExtResource("1_511kn")
 Scene = ExtResource("2_duch3")
 metadata/_custom_type_script = "uid://bkvkrin7i42hp"
