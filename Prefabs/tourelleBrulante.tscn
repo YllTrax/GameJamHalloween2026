@@ -223,12 +223,12 @@ animation = &"Fire"
 
 [node name="audiohsoot" type="AudioStreamPlayer2D" parent="." unique_id=530679462]
 stream = ExtResource("5_odd7j")
-volume_db = 5.056
+volume_db = 2.0
 max_polyphony = 5
 bus = &"Volume"
 
 [node name="audioReload" type="AudioStreamPlayer2D" parent="." unique_id=1852856603]
 stream = ExtResource("6_k1qsl")
-volume_db = -12.278
+volume_db = -8.0
 max_polyphony = 5
 bus = &"Volume"

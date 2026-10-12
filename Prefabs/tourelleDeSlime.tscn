@@ -210,12 +210,12 @@ frame_progress = 1.0
 
 [node name="audiohsoot" type="AudioStreamPlayer2D" parent="." unique_id=579842561]
 stream = ExtResource("5_j7t4s")
-volume_db = -5.778
+volume_db = 2.0
 max_polyphony = 5
 bus = &"Volume"
 
 [node name="audioReload" type="AudioStreamPlayer2D" parent="." unique_id=808317252]
 stream = ExtResource("6_vawhm")
-volume_db = -12.278
+volume_db = -8.0
 max_polyphony = 5
 bus = &"Volume"

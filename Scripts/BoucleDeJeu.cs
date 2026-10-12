@@ -124,6 +124,7 @@ public partial class BoucleDeJeu : Node2D
 	private CanvasLayer _hudAmmo;
 	private CanvasLayer _hudSelect;
 	private CanvasLayer _hudAnonces;
+	private CanvasLayer _building;
 
 	//--heeeu je sais pas il est tard  mais voila ---------
 	[Export]
@@ -154,6 +155,7 @@ public partial class BoucleDeJeu : Node2D
 		_hudAmmo = GetNodeOrNull<CanvasLayer>("Munition");
 		_hudSelect = GetNodeOrNull<CanvasLayer>("Select Building");
 		_hudAnonces = GetNodeOrNull<CanvasLayer>("Anonces");
+		_building = GetNodeOrNull<CanvasLayer>("Select Building");
 		MettreAJourLabel();
 
 		if (Musique != null)
@@ -437,6 +439,7 @@ public partial class BoucleDeJeu : Node2D
         _hudSelect.Visible = false;
         _hudAnonces.Visible = false;
         _gameOverUI.Visible = true;
+		_building.Visible = false;
         GetTree().Paused = true;
 		Music.Play();
         UpgradeStats.Reset();

@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://c3qsrojlemuqf" path="res://Sounds/Exterieur base/ExterieurBaseSon.mp3" id="6_nsewi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aluq5"]
-size = Vector2(25.649376, 22.861393)
+size = Vector2(48.3563, 24.151188)
 
 [sub_resource type="Gradient" id="Gradient_jajrq"]
 offsets = PackedFloat32Array(0.036144577, 1)
@@ -125,10 +125,11 @@ animations = [{
 [node name="Pumpkin" type="CharacterBody2D" unique_id=1184827937 node_paths=PackedStringArray("anim", "_chaseSound", "_otherSound")]
 z_index = 2
 y_sort_enabled = true
-scale = Vector2(0.7, 0.7)
+scale = Vector2(1.1508776, 1.2241727)
 collision_layer = 4
 collision_mask = 15
 script = ExtResource("1_jxr30")
+AggroRadius = 50.0
 GermsScene = ExtResource("2_n42on")
 anim = NodePath("PumpkinSprite")
 _chaseSound = NodePath("ChaseSound")
@@ -137,7 +138,7 @@ _otherSound = NodePath("OtherSound")
 [node name="Marker2D" type="Marker2D" parent="." unique_id=554359095]
 
 [node name="PumpkinCollision" type="CollisionShape2D" parent="." unique_id=1484324618]
-position = Vector2(0, -6.5726485)
+position = Vector2(-0.8689022, -6.9434648)
 scale = Vector2(0.57499987, 0.57499987)
 shape = SubResource("RectangleShape2D_aluq5")
 
@@ -152,6 +153,13 @@ light = NodePath("PointLight2D")
 sprite = NodePath("../PumpkinSprite")
 burnPercentPerSecond = 20.0
 
+[node name="TextureProgressBar" parent="Health" index="0" unique_id=1667778802]
+offset_left = -16.87777
+offset_top = -222.96735
+offset_right = 23.12223
+offset_bottom = -158.96735
+scale = Vector2(0.13002145, 8.827184)
+
 [node name="PointLight2D" type="PointLight2D" parent="Health" unique_id=767465653]
 visible = false
 position = Vector2(9.220003, 45.454605)
@@ -162,6 +170,7 @@ texture = SubResource("GradientTexture2D_hktuj")
 texture_scale = 0.72
 
 [node name="PumpkinSprite" type="AnimatedSprite2D" parent="." unique_id=1687177670]
+scale = Vector2(1.8616762, 0.75157243)
 sprite_frames = SubResource("SpriteFrames_p18pi")
 animation = &"EastWest"
 offset = Vector2(0, -9)

@@ -168,6 +168,7 @@ collision_layer = 4
 collision_mask = 11
 script = ExtResource("1_b5vig")
 Damage = 10.0
+AggroRadius = 50.0
 GermsDrop = 4.0
 GermsScene = ExtResource("2_jd27u")
 anim = NodePath("PumpkinSprite")
@@ -181,7 +182,7 @@ color = Color(1, 0.45490196, 0.2901961, 1)
 polygon = PackedVector2Array(-16, 0, -16, -8, -8, -16, 0, -16, 8, -16, 16, -8, 16, 0, 16, 8, 8, 16, 0, 16, -8, 16, -16, 8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1493893514]
-scale = Vector2(1.5564272, 1.5999997)
+scale = Vector2(3.3185515, 1.9235424)
 shape = SubResource("CircleShape2D_aluq5")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=2145298688]
@@ -189,8 +190,8 @@ shape = SubResource("CircleShape2D_aluq5")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=577497260]
 
 [node name="Health" parent="." unique_id=1461079800 node_paths=PackedStringArray("light", "sprite") instance=ExtResource("1_6xu7i")]
-position = Vector2(12.144504, 30.085712)
-scale = Vector2(4.104753, 0.1986599)
+position = Vector2(21.333334, 31.999998)
+scale = Vector2(4.104753, 0.31268436)
 baseHealth = 150.0
 light = NodePath("PointLight2D")
 sprite = NodePath("../PumpkinSprite")
@@ -204,7 +205,7 @@ texture = SubResource("GradientTexture2D_g8p14")
 texture_scale = 0.72
 
 [node name="PumpkinSprite" type="AnimatedSprite2D" parent="." unique_id=1768532746]
-scale = Vector2(1.7552629, 1.1813754)
+scale = Vector2(3.560879, 1.58249)
 sprite_frames = SubResource("SpriteFrames_g8p14")
 animation = &"EastWest"
 

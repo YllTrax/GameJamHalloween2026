@@ -25,4 +25,5 @@ grow_vertical = 2
 stream = SubResource("VideoStreamTheora_bmo41")
 volume_db = -15.529999
 autoplay = true
+expand = true
 bus = &"Volume"

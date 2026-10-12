@@ -230,8 +230,8 @@ theme_override_font_sizes/font_size = 30
 text = "00"
 horizontal_alignment = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Salt" unique_id=1479779146]
-position = Vector2(1119, 611)
+[node name="Polygon2D" type="Polygon2D" parent="Salt/Label" unique_id=1479779146]
+position = Vector2(43, 11)
 scale = Vector2(0.41404995, 0.41404995)
 texture = ExtResource("7_adu7k")
 polygon = PackedVector2Array(7.920044, 6.0000076, 24.640015, -1.9199982, 45.76001, 0.7200012, 58.960022, 16.560005, 59.840027, 45.600006, 61.600037, 61.440002, 41.360046, 64.08, 14.080017, 64.08, -1.7600098, 55.280014, -7.039978, 31.520004, -7.039978, 18.320007)
@@ -385,10 +385,14 @@ clic = NodePath("../ClicMenu")
 
 [node name="Play" parent="MenuPause" index="0" unique_id=1705783361]
 z_index = 1
-offset_left = 440.0
-offset_top = 120.0
-offset_right = 2488.0
-offset_bottom = 723.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -136.0
+offset_top = 99.0
+offset_right = 1912.0
+offset_bottom = 702.0
+grow_horizontal = 2
 scale = Vector2(0.13577844, 0.13577844)
 ignore_texture_size = true
 stretch_mode = 0
@@ -396,30 +400,48 @@ stretch_mode = 0
 [node name="BtnQuitter" parent="MenuPause" index="1" unique_id=993648113]
 visibility_layer = 3
 z_index = 1
-offset_left = 440.0
-offset_top = 424.0
-offset_right = 2488.0
-offset_bottom = 1424.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -146.0
+offset_top = -206.0
+offset_right = 1902.0
+offset_bottom = 794.0
+grow_horizontal = 2
+grow_vertical = 0
 scale = Vector2(0.13995239, 0.13995239)
 ignore_texture_size = true
 stretch_mode = 5
 
 [node name="BtnReglages" parent="MenuPause" index="2" unique_id=1421724480]
 z_index = 1
-offset_left = 607.00006
-offset_top = 66.0
-offset_right = 1361.0001
-offset_bottom = 2114.0
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -548.0
+offset_top = -254.0
+offset_right = 206.0
+offset_bottom = 1794.0
+grow_horizontal = 0
+grow_vertical = 2
 scale = Vector2(0.25475767, 0.25475767)
 ignore_texture_size = true
 stretch_mode = 5
 
 [node name="BtnLangue" parent="MenuPause" index="3" unique_id=612639627]
 z_index = 1
-offset_left = 343.0
-offset_top = 185.0
-offset_right = 1090.0
-offset_bottom = 2233.0
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 319.0
+offset_top = -139.00002
+offset_right = 1066.0
+offset_bottom = 1909.0
+grow_vertical = 2
 scale = Vector2(0.13980593, 0.13980593)
 ignore_texture_size = true
 stretch_mode = 5
@@ -523,7 +545,7 @@ bus = &"Volume"
 [node name="Audio_mort_pp" type="AudioStreamPlayer2D" parent="." unique_id=1831983445]
 process_mode = 3
 stream = SubResource("AudioStreamMP3_7jmk1")
-volume_db = -15.993
+volume_db = -2.867
 bus = &"Volume"
 
 [node name="Audio_mort_sel" type="AudioStreamPlayer2D" parent="." unique_id=1122998317]

@@ -1,11 +1,60 @@
 [gd_scene format=3 uid="uid://ci4py4rnxkffw"]
 
+[ext_resource type="Texture2D" uid="uid://dbjf0e4m078rr" path="res://Images/Sprites/porte.png" id="1_3kr4k"]
 [ext_resource type="PackedScene" uid="uid://wj1whgh7v5c" path="res://Prefabs/health.tscn" id="1_ugn3q"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_enifj"]
+atlas = ExtResource("1_3kr4k")
+region = Rect2(0, 0, 53, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0nao1"]
+atlas = ExtResource("1_3kr4k")
+region = Rect2(53, 0, 53, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhsds"]
+atlas = ExtResource("1_3kr4k")
+region = Rect2(106, 0, 53, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ifnrn"]
+atlas = ExtResource("1_3kr4k")
+region = Rect2(159, 0, 53, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvwyr"]
+atlas = ExtResource("1_3kr4k")
+region = Rect2(212, 0, 53, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0yl6"]
+atlas = ExtResource("1_3kr4k")
+region = Rect2(265, 0, 53, 48)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_ugn3q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_enifj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0nao1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fhsds")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ifnrn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvwyr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t0yl6")
+}],
+"loop": 1,
+"name": &"Idle",
+"speed": 10.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aluq5"]
-size = Vector2(20.903362, 34.55696)
+size = Vector2(4.989496, 44.92405)
 
 [node name="Door" type="CharacterBody2D" unique_id=685161063 groups=["Doors"]]
 scale = Vector2(1, 0.8681319)
@@ -13,15 +62,16 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1677703996]
+rotation = -1.5479114
 sprite_frames = SubResource("SpriteFrames_ugn3q")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.7170985
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1866701577]
-position = Vector2(0.5000019, 0)
+position = Vector2(-0.7500076, 4.0316467)
 scale = Vector2(9.52, 1)
 shape = SubResource("RectangleShape2D_aluq5")
-
-[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1531543225]
-polygon = PackedVector2Array(-97, -10, 95, -10, 96, 11, -95, 11)
 
 [node name="Health" parent="." unique_id=1461079800 node_paths=PackedStringArray("sprite") instance=ExtResource("1_ugn3q")]
 position = Vector2(47, 29.949368)

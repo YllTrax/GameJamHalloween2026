@@ -20,10 +20,13 @@ public partial class MenuPause : CanvasLayer
 	private bool _ouvert = false;
 	private MenuSetting _menuSetting;
 
+	private CanvasLayer _building;
+
 	public override void _Ready()
 	{
 		ProcessMode = ProcessModeEnum.Always;
 		Visible = false;
+		_building = GetNodeOrNull<CanvasLayer>("../Select Building");
 
 		// MenuSetting est le nœud voisin de MenuPause dans la scène
 		_menuSetting = GetNodeOrNull<MenuSetting>("../MenuSetting");
@@ -79,6 +82,7 @@ public partial class MenuPause : CanvasLayer
 	{
 		clic.Play();
 		_ouvert = true;
+		_building.Visible= false;
 		Visible = true;
 		GetTree().Paused = true;
 	}
@@ -88,6 +92,8 @@ public partial class MenuPause : CanvasLayer
 		clic.Play();
 		_ouvert = false;
 		Visible = false;
+		_building.Visible= true;
+
 		GetTree().Paused = false;
 	}
 
