@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c44o0u3soyxq2"]
 
 [ext_resource type="Script" uid="uid://b0rl0evdo4tvh" path="res://Scripts/Personnage.cs" id="1_ydahe"]
+[ext_resource type="Script" uid="uid://ba0xnl8cvc4x0" path="res://Scripts/CameraShake.cs" id="2_vwe7n"]
 [ext_resource type="Texture2D" uid="uid://jnr58eamhc28" path="res://Images/Sprites/hero-idle.png" id="2_ydahe"]
 [ext_resource type="Texture2D" uid="uid://bc6tocouc4urm" path="res://Images/Misc/progress_green.png" id="4_alkmp"]
 [ext_resource type="PackedScene" uid="uid://wj1whgh7v5c" path="res://Prefabs/health.tscn" id="4_ydahe"]
@@ -177,6 +178,7 @@ munitions = 10
 position = Vector2(0, -11.5)
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
+script = ExtResource("2_vwe7n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2064703525]
 z_index = 15

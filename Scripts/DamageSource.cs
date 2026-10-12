@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -8,6 +9,10 @@ public partial class DamageSource : Area2D
         All,
         NotPersonnage,
     }
+
+    [Export]
+    private Bullet bullet;
+    public event Action AmmoInstanciate;
 
     [Export]
     private TargetMode targetMode = TargetMode.All;
@@ -56,6 +61,8 @@ public partial class DamageSource : Area2D
         if (shouldSelfDestroy)
         {
             _used = true;
+
+            bullet.Drop();
 
             GetParent().QueueFree();
         }

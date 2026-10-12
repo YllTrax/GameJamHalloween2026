@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://boyphangxh0qc"]
+
+[ext_resource type="Script" uid="uid://cwngyu3y8140l" path="res://Scripts/SaltyIcone.cs" id="1_xeicd"]
+[ext_resource type="Texture2D" uid="uid://3yewb1c31jax" path="res://Images/IU/icone-sel.png" id="2_kfxp0"]
+
+[node name="SaltyIcone" type="Control" unique_id=83889893]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_xeicd")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=245118374]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_kfxp0")
