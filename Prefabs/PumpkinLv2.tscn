@@ -172,7 +172,6 @@ AggroRadius = 50.0
 GermsDrop = 4.0
 GermsScene = ExtResource("2_jd27u")
 anim = NodePath("PumpkinSprite")
-isEastOriented = true
 _chaseSound = NodePath("Pourchase")
 _otherSound = NodePath("dehors")
 
